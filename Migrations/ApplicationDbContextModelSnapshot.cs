@@ -219,6 +219,130 @@ namespace WebAdmin.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CatCodigosPostale", b =>
+                {
+                    b.Property<int>("IdCodigosPostales")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("IdCodigosPostales")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Ccp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CcveCiudad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cestado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cmnpio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Coficina")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CtipoAsenta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dasenta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dciudad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dcodigo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dcp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Destado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dmnpio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DtipoAsenta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dzona")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdAsentaCpcons")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdCodigosPostales");
+
+                    b.ToTable("CatCodigosPostales");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.FileOnDatabaseModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FilesOnDatabase");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.FileOnFileSystemModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FilesOnFileSystem");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)

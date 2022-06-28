@@ -47,6 +47,71 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CatCodigosPostales",
+                columns: table => new
+                {
+                    IdCodigosPostales = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Dcodigo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dasenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DtipoAsenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dmnpio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Destado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dcp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cestado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Coficina = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ccp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CtipoAsenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cmnpio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdAsentaCpcons = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dzona = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CcveCiudad = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatCodigosPostales", x => x.IdCodigosPostales);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FilesOnDatabase",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Data = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UploadedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FilesOnDatabase", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FilesOnFileSystem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UploadedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FilesOnFileSystem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -208,6 +273,15 @@ namespace WebAdmin.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CatCodigosPostales");
+
+            migrationBuilder.DropTable(
+                name: "FilesOnDatabase");
+
+            migrationBuilder.DropTable(
+                name: "FilesOnFileSystem");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

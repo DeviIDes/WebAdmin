@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebAdmin.Models;
 
 namespace WebAdmin.Data
 {
@@ -12,5 +13,8 @@ namespace WebAdmin.Data
             : base(options)
         {
         }
+        public DbSet<CatCodigosPostale> CatCodigosPostales { get; set; }
+        public DbSet<FileOnDatabaseModel> FilesOnDatabase { get; set; }
+        public DbSet<FileOnFileSystemModel> FilesOnFileSystem { get; set; }
     }
 }
