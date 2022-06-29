@@ -12,24 +12,36 @@ namespace WebAdmin.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid IdUsuario { get; set; }
+        [Display(Name = "Nombres")]
         public string Nombres { get; set; }
+        [Display(Name = "Apellido Paterno")]
         public string ApellidoPaterno { get; set; }
+        [Display(Name = "ApellidoMaterno")]
         public string ApellidoMaterno { get; set; }
+        [Display(Name = "Nombre Usuario")]
         public string NombreUsuario { get; set; }
         public Guid IdEmpresa { get; set; }
+        [Display(Name = "Nombre Empresa")]
         public string NombreEmpresa { get; set; }
+        [Display(Name = "Area")]
         public int IdArea { get; set; }
+        [Display(Name = "Genero")]
         public int IdGenero { get; set; }
+        [Display(Name = "Perfil")]
         public int IdPerfil { get; set; }
+        [Display(Name = "Rol")]
         public int IdRol { get; set; }
+        [Column("Fecha de Nacimiento")]
+        [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
+        [Display(Name = "Correo de Acceso")]
         public string CorreoAcceso { get; set; }
+        [Column("Fecha Registro")]
+        [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
+        [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
-        public int? IdAreaNavigationIdArea { get; set; }
-        public int? IdGeneroNavigationIdGenero { get; set; }
-        public int? IdPerfilNavigationIdPerfil { get; set; }
-        public int? IdRolNavigationIdRol { get; set; }
+
 
 
     }

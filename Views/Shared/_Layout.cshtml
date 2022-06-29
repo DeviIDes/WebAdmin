@@ -76,6 +76,7 @@
                             <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Estatus de Géneros</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatPerfiles" asp-action="Index">Perfiles</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Area</a>
                         </div>
                     </div>
                 </li>
@@ -92,7 +93,7 @@
                             <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
                             <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
                             <a class="collapse-item" asp-area="" asp-controller="" asp-action="">SubCentro</a>
-                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Area</a>
+                            
                             <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Expediente</a>
                             <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Sesion</a>
                         </div>
@@ -108,7 +109,7 @@
                     <div id="collapseUsuarios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Control:</h6>
-                            <a class="collapse-item" href="cards.html">Administradores</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Administradores</a>
                             <a class="collapse-item" href="cards.html">Supervisores</a>
                             <a class="collapse-item" href="cards.html">Operadores</a>
                         </div>
