@@ -3,9 +3,15 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h4>Cargar archivos</h4>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Sepomex</li>
+        <li class="breadcrumb-item active" aria-current="page">Cargar Codigos Postales Mexico</li>
+    </ol>
+</nav>
 <hr />
+
 @if (ViewBag.Message != null)
 {
     <div class="alert alert-success alert-dismissible" style="margin-top:20px">
@@ -48,7 +54,7 @@ else
                     <td>@file.FileType</td>
                     <td>@file.CreatedOn</td>
                     <td>
-                        <a type="button" class="btn btn-primary" asp-controller="File" asp-action="DownloadFileFromFileSystem" asp-route-id="@file.Id">Subir</a>
+                        @*<a type="button" class="btn btn-primary" asp-controller="File" asp-action="UploadToCPs" asp-route-id="@file.Id" disabled>Subir</a>*@
                         <a type="button" class="btn btn-danger" asp-controller="File" asp-action="DeleteFileFromFileSystem" asp-route-id="@file.Id">Eliminar</a>
                     </td>
                 </tr>
@@ -88,8 +94,8 @@ else
                     <td>@file.FileType</td>
                     <td>@file.CreatedOn</td>
                     <td>
-                        <a type="button" class="btn btn-primary" asp-controller="File" asp-action="DownloadFileFromDatabase" asp-route-id="@file.Id">Download</a>
-                        <a type="button" class="btn btn-danger" asp-controller="File" asp-action="DeleteFileFromDatabase" asp-route-id="@file.Id">Delete</a>
+                        @*<a type="button" class="btn btn-primary" asp-controller="File" asp-action="DownloadFileFromDatabase" asp-route-id="@file.Id">Subir</a>*@
+                        <a type="button" class="btn btn-danger" asp-controller="File" asp-action="DeleteFileFromDatabase" asp-route-id="@file.Id">Eliminar</a>
                     </td>
                 </tr>
             }

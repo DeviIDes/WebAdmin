@@ -16,7 +16,7 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Controllers
 {
-    [Authorize]
+   
     public class CatCodigosPostalesController : Controller
     {
         private readonly ILogger<HomeController> _logger;

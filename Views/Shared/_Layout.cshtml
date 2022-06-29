@@ -43,13 +43,13 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
-               @* <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>*@
+                @* <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+            <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+            </a>
+            </li>*@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
@@ -70,17 +70,14 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Control:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="File" asp-action="Index">Carga Sepomex</a>
-                            <a class="collapse-item" href="cards.html">Estatus de Registro</a>
-                            <a class="collapse-item" href="cards.html">Estatus de Material</a>
-                            <a class="collapse-item" href="cards.html">Estatus de Calidad</a>
-                            <a class="collapse-item" href="cards.html">Tipo de Error</a>
-                            <a class="collapse-item" href="cards.html">Tipo de RFC</a>
-                            <a class="collapse-item" href="buttons.html">Tipo de Juzgado</a>
-                            <a class="collapse-item" href="buttons.html">Tipo de Usuario</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Estatus de Géneros</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatPerfiles" asp-action="Index">Perfiles</a>
                         </div>
                     </div>
                 </li>
-                    <!-- Nav Item - Centros Collapse Menu -->
+                <!-- Nav Item - Centros Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCentros"
                    aria-expanded="true" aria-controls="collapseCentros">
@@ -90,13 +87,16 @@
                     <div id="collapseCentros" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Control:</h6>
-                            <a class="collapse-item" href="cards.html">Tribunal</a>
-                            <a class="collapse-item" href="cards.html">Juzgado</a>
-                            <a class="collapse-item" href="cards.html">Salas</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Centros</a>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">SubCentro</a>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Area</a>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Expediente</a>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Sesion</a>
                         </div>
                     </div>
                 </li>
-                        <!-- Nav Item - Usuarios Collapse Menu -->
+                <!-- Nav Item - Usuarios Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
                    aria-expanded="true" aria-controls="collapseUsuarios">
@@ -112,14 +112,14 @@
                         </div>
                     </div>
                 </li>
-                
+
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                     Informacion de Configuración
+                    Informacion de Configuración
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -145,36 +145,36 @@
                     </div>
                 </li>
 
-               @* <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span>
-                    </a>
-                </li>
+                @* <!-- Nav Item - Charts -->
+            <li class="nav-item">
+            <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Charts</span>
+            </a>
+            </li>
 
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span>
-                    </a>
-                </li>*@
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+            <a class="nav-link" href="tables.html">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span>
+            </a>
+            </li>*@
 
-              @*  <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
+                @*  <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
-                <!-- Sidebar Message -->
-                <div class="sidebar-card d-none d-lg-flex">
-                    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                    <a class="btn btn-success btn-sm" href="">test!</a>
-                </div>*@
+            <!-- Sidebar Message -->
+            <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="">test!</a>
+            </div>*@
 
             </ul>
             <!-- End of Sidebar -->
@@ -267,10 +267,12 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <div class="container">
-                    <main role="main" class="pb-3">
+                       <div class="container-fluid">
+                     <div class="row">
+                    <div class="col-md-12">
                         @RenderBody()
-                    </main>
+                   </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 

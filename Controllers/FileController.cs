@@ -1,12 +1,12 @@
-﻿using System;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
 
@@ -22,12 +22,14 @@ namespace FileUpload.MVC.Controllers
             _context = context;
             _notyf = notyf;
         }
+
         public async Task<IActionResult> Index()
         {
             var fileuploadViewModel = await LoadAllFiles();
             ViewBag.Message = TempData["Message"];
             return View(fileuploadViewModel);
         }
+
         [HttpPost]
         public async Task<IActionResult> UploadToFileSystem(List<IFormFile> files, string description)
         {
@@ -58,10 +60,86 @@ namespace FileUpload.MVC.Controllers
                     _context.SaveChanges();
                 }
             }
-            _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
-            TempData["Message"] = "File successfully uploaded to File System.";
+            _notyf.Information("Archivo subido con éxito al sistema de archivos", 5);
+            //TempData["Message"] = "File successfully uploaded to File System.";
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> UploadToCPs(int id)
+        {
+            TempData["Message"] = "Favor de esperar ya que se insertaran al rededor de 150,000 registros";
+            var BDfilePath = await _context.FilesOnFileSystem
+              .FirstOrDefaultAsync(m => m.Id == id);
+
+            var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
+            bool basePathExists = System.IO.Directory.Exists(basePath);
+            var fileName = BDfilePath.Name;
+            var filePath = BDfilePath.FilePath;
+            var extension = BDfilePath.Extension;
+
+            if (extension == ".txt")
+            {
+                bool HRData = false;
+                bool HRsplit = false;
+                string[] columns = null;
+                int Idcontrol = 0;
+                using (StreamReader sr = new StreamReader(filePath, System.Text.Encoding.Latin1))
+                {
+                    string line = string.Empty;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (!HRData)
+                        {
+                            if (line == "El Catálogo Nacional de Códigos Postales, es elaborado por Correos de México y se proporciona en forma gratuita para uso particular, no estando permitida su comercialización, total o parcial, ni su distribución a terceros bajo ningún concepto.")
+                            {
+                                HRData = true;
+                                continue;
+                            }
+                        }
+                        else if (!HRsplit)
+                        {
+                            if (line == "d_codigo|d_asenta|d_tipo_asenta|D_mnpio|d_estado|d_ciudad|d_CP|c_estado|c_oficina|c_CP|c_tipo_asenta|c_mnpio|id_asenta_cpcons|d_zona|c_cve_ciudad")
+                            {
+                                HRsplit = true;
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            columns = line.Split("|");
+                            HRsplit = true;
+
+                            CatCodigosPostale CPs;
+                            CPs = _context.CatCodigosPostales.Where(s => s.Dcodigo == columns[0].ToString()).FirstOrDefault();
+
+                            if (CPs == null)
+                            {
+                                CPs = new CatCodigosPostale();
+                            }
+
+                            Idcontrol = Idcontrol + 1;
+
+
+
+                            CPs.IdCodigosPostales = Idcontrol;
+                            CPs.Dcodigo = columns[0].ToString();
+                            CPs.Dasenta = columns[1].ToString();
+                            CPs.DtipoAsenta = columns[2].ToString();
+
+                            _context.CatCodigosPostales.Add(CPs);
+                            //_context.SaveChanges();
+                          
+
+
+
+                        }
+                    }
+                    _notyf.Information("Archivo subido con éxito al sistema", 5);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public async Task<IActionResult> UploadToDatabase(List<IFormFile> files, string description)
         {
@@ -85,7 +163,7 @@ namespace FileUpload.MVC.Controllers
                 _context.FilesOnDatabase.Add(fileModel);
                 _context.SaveChanges();
             }
-            TempData["Message"] = "File successfully uploaded to Database";
+
             return RedirectToAction("Index");
         }
 
@@ -99,14 +177,13 @@ namespace FileUpload.MVC.Controllers
 
         public async Task<IActionResult> DownloadFileFromDatabase(int id)
         {
-
             var file = await _context.FilesOnDatabase.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (file == null) return null;
             return File(file.Data, file.FileType, file.Name + file.Extension);
         }
+
         public async Task<IActionResult> DownloadFileFromFileSystem(int id)
         {
-
             var file = await _context.FilesOnDatabase.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (file == null) return null;
             var memory = new MemoryStream();
@@ -117,9 +194,9 @@ namespace FileUpload.MVC.Controllers
             memory.Position = 0;
             return File(memory, file.FileType, file.Name + file.Extension);
         }
+
         public async Task<IActionResult> DeleteFileFromFileSystem(int id)
         {
-
             var file = await _context.FilesOnFileSystem.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (file == null) return null;
             if (System.IO.File.Exists(file.FilePath))
@@ -128,16 +205,18 @@ namespace FileUpload.MVC.Controllers
             }
             _context.FilesOnFileSystem.Remove(file);
             _context.SaveChanges();
-            TempData["Message"] = $"Removed {file.Name + file.Extension} successfully from File System.";
+            _notyf.Warning($"{file.Name + file.Extension} eliminado con éxito desde el sistema de archivos", 5);
+            //TempData["Message"] = $"Removed {file.Name + file.Extension} successfully from File System.";
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> DeleteFileFromDatabase(int id)
         {
-
             var file = await _context.FilesOnDatabase.Where(x => x.Id == id).FirstOrDefaultAsync();
             _context.FilesOnDatabase.Remove(file);
             _context.SaveChanges();
-            TempData["Message"] = $"Removed {file.Name + file.Extension} successfully from Database.";
+            _notyf.Warning($"{file.Name + file.Extension} eliminado con éxito desde el sistema de archivos", 5);
+            //TempData["Message"] = $"Removed {file.Name + file.Extension} successfully from Database.";
             return RedirectToAction("Index");
         }
     }
