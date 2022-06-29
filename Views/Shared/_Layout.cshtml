@@ -15,6 +15,8 @@
     <title>Admin</title>
 
     <!-- Custom fonts for this template-->
+    <link href="@Url.Content("~/lib/bootstrap/dist/css/bootstrap.css")" rel="stylesheet" type="text/css" />
+    @*<link href="@Url.Content("~/lib/fontawesome-free-5.15.4-web/css/all.css")" rel="stylesheet" type="text/css" />*@
     <link href="@Url.Content("~/plantilla/vendor/fontawesome-free/css/all.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i")" rel="stylesheet" type="text/css" />
 
@@ -88,7 +90,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Control:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
-                            <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Centros</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
                             <a class="collapse-item" asp-area="" asp-controller="" asp-action="">SubCentro</a>
                             <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Area</a>
                             <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Expediente</a>
@@ -161,18 +163,20 @@
             </a>
             </li>*@
 
-                @*  <!-- Divider -->
+                  <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            <!-- sidebar toggler (sidebar) -->
+          
+                <button id="sidebarToggleTop" class="btn btn-link mr-3">
+                        <i class="fa fa-chevron-left"></i>
+                    </button>
+        
 
-            <!-- Sidebar Message -->
+       @*     <!-- sidebar message -->
             <div class="sidebar-card d-none d-lg-flex">
             <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+            <p class="text-center mb-2"><strong>sb admin pro</strong> is packed with premium features, components, and more!</p>
             <a class="btn btn-success btn-sm" href="">test!</a>
             </div>*@
 
@@ -267,11 +271,11 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                       <div class="container-fluid">
-                     <div class="row">
-                    <div class="col-md-12">
-                        @RenderBody()
-                   </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

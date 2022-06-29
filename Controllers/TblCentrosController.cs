@@ -10,12 +10,12 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Controllers
 {
-    public class TblCentroController : Controller
+    public class TblCentrosController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly INotyfService _notyf;
 
-        public TblCentroController(ApplicationDbContext context, INotyfService notyf)
+        public TblCentrosController(ApplicationDbContext context, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;
@@ -88,7 +88,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEmpresaFiscales,NombreFiscal,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono")] TblCentros tblCentros)
+        public async Task<IActionResult> Create([Bind("IdEmpresaFiscales,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono")] TblCentros tblCentros)
         {
             if (ModelState.IsValid)
             {
@@ -149,7 +149,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdEmpresaFiscales,NombreFiscal,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdEstatusRegistro,IdEmpresa")] TblCentros tblCentros)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdEmpresaFiscales,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdEstatusRegistro,IdEmpresa")] TblCentros tblCentros)
         {
             if (id != tblCentros.IdCentro)
             {

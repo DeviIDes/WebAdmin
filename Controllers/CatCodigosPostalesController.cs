@@ -37,7 +37,23 @@ namespace WebAdmin.Controllers
         {
             return View(await _context.CatCodigosPostales.ToListAsync());
         }
+        [HttpGet]
+        public ActionResult FiltroColonia(string id, string idC)
+        {
+            var fcatColonias = (from ta in _context.CatCodigosPostales
+                                where ta.Dcodigo == id
+                                where ta.IdAsentaCpcons == idC
+                                select ta).Distinct().ToList();
 
+            return Json(fcatColonias);
+        }
+        [HttpGet]
+        public ActionResult FiltroCodigosPostales(string id)
+        {
+            var fcatCodigosPostales = _context.CatCodigosPostales
+                       .Where(s => s.Dcodigo == id).Distinct().ToList();
+            return Json(fcatCodigosPostales);
+        }
         // GET: CatCodigosPostales/Details/5
         public async Task<IActionResult> Details(int? id)
         {
