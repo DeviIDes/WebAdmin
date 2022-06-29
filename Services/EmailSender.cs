@@ -23,7 +23,7 @@ public class EmailSender : IEmailSender
 
     public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        Options.SendGridKey = "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";
+        
         if (string.IsNullOrEmpty(Options.SendGridKey))
         {
             throw new Exception("Null SendGridKey");
