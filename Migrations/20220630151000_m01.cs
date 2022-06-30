@@ -47,6 +47,21 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CatCategorias",
+                columns: table => new
+                {
+                    IdCategoria = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoriaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatCategorias", x => x.IdCategoria);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CatCodigosPostales",
                 columns: table => new
                 {
@@ -133,6 +148,21 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CatTipoCentros",
+                columns: table => new
+                {
+                    IdTipoCentro = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoCentroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoCentros", x => x.IdTipoCentro);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CatTipoDirecciones",
                 columns: table => new
                 {
@@ -186,27 +216,37 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TblCentros",
+                name: "TblClientes",
                 columns: table => new
                 {
-                    IdCentro = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreCentro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NombreCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TblCentros", x => x.IdCentro);
+                    table.PrimaryKey("PK_TblClientes", x => x.IdCliente);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblProveedores",
+                columns: table => new
+                {
+                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NombreProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblProveedores", x => x.IdProveedor);
                 });
 
             migrationBuilder.CreateTable(
@@ -316,25 +356,34 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TblClientes",
+                name: "CatProductos",
                 columns: table => new
                 {
-                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdProducto = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodigoInterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoExterno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdMarca = table.Column<int>(type: "int", nullable: false),
+                    IdCategoria = table.Column<int>(type: "int", nullable: false),
+                    DescProducto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CantidadMinima = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    ProductoPrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PorcentajePrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubCosto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro1 = table.Column<int>(type: "int", nullable: true)
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
+                    CatCategoriaIdCategoria = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TblClientes", x => x.IdCliente);
+                    table.PrimaryKey("PK_CatProductos", x => x.IdProducto);
                     table.ForeignKey(
-                        name: "FK_TblClientes_CatEstatus_IdEstatusRegistro1",
-                        column: x => x.IdEstatusRegistro1,
-                        principalTable: "CatEstatus",
-                        principalColumn: "IdEstatusRegistro",
+                        name: "FK_CatProductos_CatCategorias_CatCategoriaIdCategoria",
+                        column: x => x.CatCategoriaIdCategoria,
+                        principalTable: "CatCategorias",
+                        principalColumn: "IdCategoria",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -371,25 +420,35 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TblProveedores",
+                name: "TblCentros",
                 columns: table => new
                 {
-                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCentro = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdTipoLicencia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdTipoCentro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NombreCentro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro1 = table.Column<int>(type: "int", nullable: true)
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
+                    CatTipoCentroIdTipoCentro = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TblProveedores", x => x.IdProveedor);
+                    table.PrimaryKey("PK_TblCentros", x => x.IdCentro);
                     table.ForeignKey(
-                        name: "FK_TblProveedores_CatEstatus_IdEstatusRegistro1",
-                        column: x => x.IdEstatusRegistro1,
-                        principalTable: "CatEstatus",
-                        principalColumn: "IdEstatusRegistro",
+                        name: "FK_TblCentros_CatTipoCentros_CatTipoCentroIdTipoCentro",
+                        column: x => x.CatTipoCentroIdTipoCentro,
+                        principalTable: "CatTipoCentros",
+                        principalColumn: "IdTipoCentro",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -406,18 +465,12 @@ namespace WebAdmin.Migrations
                     TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro1 = table.Column<int>(type: "int", nullable: true),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblClienteIdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblClienteContactos", x => x.IdClienteContacto);
-                    table.ForeignKey(
-                        name: "FK_TblClienteContactos_CatEstatus_IdEstatusRegistro1",
-                        column: x => x.IdEstatusRegistro1,
-                        principalTable: "CatEstatus",
-                        principalColumn: "IdEstatusRegistro",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TblClienteContactos_TblClientes_TblClienteIdCliente",
                         column: x => x.TblClienteIdCliente,
@@ -444,19 +497,13 @@ namespace WebAdmin.Migrations
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro1 = table.Column<int>(type: "int", nullable: true),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     CatTipoDireccionIdTipoDireccion = table.Column<int>(type: "int", nullable: true),
                     TblClienteIdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblClienteDirecciones", x => x.IdClienteDirecciones);
-                    table.ForeignKey(
-                        name: "FK_TblClienteDirecciones_CatEstatus_IdEstatusRegistro1",
-                        column: x => x.IdEstatusRegistro1,
-                        principalTable: "CatEstatus",
-                        principalColumn: "IdEstatusRegistro",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TblClienteDirecciones_CatTipoDirecciones_CatTipoDireccionIdTipoDireccion",
                         column: x => x.CatTipoDireccionIdTipoDireccion,
@@ -468,29 +515,6 @@ namespace WebAdmin.Migrations
                         column: x => x.TblClienteIdCliente,
                         principalTable: "TblClientes",
                         principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatAreas",
-                columns: table => new
-                {
-                    IdArea = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AreaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    IdEmpresaNavigationIdEmpresaNavigationIdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatAreas", x => x.IdArea);
-                    table.ForeignKey(
-                        name: "FK_CatAreas_TblEmpresa_IdEmpresaNavigationIdEmpresaNavigationIdEmpresa",
-                        column: x => x.IdEmpresaNavigationIdEmpresaNavigationIdEmpresa,
-                        principalTable: "TblEmpresa",
-                        principalColumn: "IdEmpresa",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -507,18 +531,12 @@ namespace WebAdmin.Migrations
                     TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro1 = table.Column<int>(type: "int", nullable: true),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblProveedorIdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblProveedorContactos", x => x.IdProveedorContacto);
-                    table.ForeignKey(
-                        name: "FK_TblProveedorContactos_CatEstatus_IdEstatusRegistro1",
-                        column: x => x.IdEstatusRegistro1,
-                        principalTable: "CatEstatus",
-                        principalColumn: "IdEstatusRegistro",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TblProveedorContactos_TblProveedores_TblProveedorIdProveedor",
                         column: x => x.TblProveedorIdProveedor,
@@ -545,23 +563,40 @@ namespace WebAdmin.Migrations
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro1 = table.Column<int>(type: "int", nullable: true),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblProveedorIdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblProveedorDirecciones", x => x.IdProveedorDirecciones);
                     table.ForeignKey(
-                        name: "FK_TblProveedorDirecciones_CatEstatus_IdEstatusRegistro1",
-                        column: x => x.IdEstatusRegistro1,
-                        principalTable: "CatEstatus",
-                        principalColumn: "IdEstatusRegistro",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_TblProveedorDirecciones_TblProveedores_TblProveedorIdProveedor",
                         column: x => x.TblProveedorIdProveedor,
                         principalTable: "TblProveedores",
                         principalColumn: "IdProveedor",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatAreas",
+                columns: table => new
+                {
+                    IdArea = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AreaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
+                    IdEmpresaNavigationIdEmpresaNavigationIdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatAreas", x => x.IdArea);
+                    table.ForeignKey(
+                        name: "FK_CatAreas_TblEmpresa_IdEmpresaNavigationIdEmpresaNavigationIdEmpresa",
+                        column: x => x.IdEmpresaNavigationIdEmpresaNavigationIdEmpresa,
+                        principalTable: "TblEmpresa",
+                        principalColumn: "IdEmpresa",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -663,9 +698,14 @@ namespace WebAdmin.Migrations
                 column: "IdEmpresaNavigationIdEmpresaNavigationIdEmpresa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TblClienteContactos_IdEstatusRegistro1",
-                table: "TblClienteContactos",
-                column: "IdEstatusRegistro1");
+                name: "IX_CatProductos_CatCategoriaIdCategoria",
+                table: "CatProductos",
+                column: "CatCategoriaIdCategoria");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TblCentros_CatTipoCentroIdTipoCentro",
+                table: "TblCentros",
+                column: "CatTipoCentroIdTipoCentro");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblClienteContactos_TblClienteIdCliente",
@@ -678,19 +718,9 @@ namespace WebAdmin.Migrations
                 column: "CatTipoDireccionIdTipoDireccion");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TblClienteDirecciones_IdEstatusRegistro1",
-                table: "TblClienteDirecciones",
-                column: "IdEstatusRegistro1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TblClienteDirecciones_TblClienteIdCliente",
                 table: "TblClienteDirecciones",
                 column: "TblClienteIdCliente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblClientes_IdEstatusRegistro1",
-                table: "TblClientes",
-                column: "IdEstatusRegistro1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblEmpresa_CatEstatusIdEstatusRegistro",
@@ -698,29 +728,14 @@ namespace WebAdmin.Migrations
                 column: "CatEstatusIdEstatusRegistro");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TblProveedorContactos_IdEstatusRegistro1",
-                table: "TblProveedorContactos",
-                column: "IdEstatusRegistro1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TblProveedorContactos_TblProveedorIdProveedor",
                 table: "TblProveedorContactos",
                 column: "TblProveedorIdProveedor");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TblProveedorDirecciones_IdEstatusRegistro1",
-                table: "TblProveedorDirecciones",
-                column: "IdEstatusRegistro1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TblProveedorDirecciones_TblProveedorIdProveedor",
                 table: "TblProveedorDirecciones",
                 column: "TblProveedorIdProveedor");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblProveedores_IdEstatusRegistro1",
-                table: "TblProveedores",
-                column: "IdEstatusRegistro1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblUsuarios_CatAreaIdArea",
@@ -764,6 +779,9 @@ namespace WebAdmin.Migrations
                 name: "CatCodigosPostales");
 
             migrationBuilder.DropTable(
+                name: "CatProductos");
+
+            migrationBuilder.DropTable(
                 name: "FilesOnDatabase");
 
             migrationBuilder.DropTable(
@@ -792,6 +810,12 @@ namespace WebAdmin.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "CatCategorias");
+
+            migrationBuilder.DropTable(
+                name: "CatTipoCentros");
 
             migrationBuilder.DropTable(
                 name: "CatTipoDirecciones");

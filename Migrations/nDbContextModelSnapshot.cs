@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAdmin.Data;
 
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    [Migration("20220630025806_m01")]
-    partial class m01
+    partial class nDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,7 +250,30 @@ namespace WebAdmin.Migrations
                     b.ToTable("CatAreas");
                 });
 
-            modelBuilder.Entity("WebAdmin.Models.CatCodigosPostale", b =>
+            modelBuilder.Entity("WebAdmin.Models.CatCategoria", b =>
+                {
+                    b.Property<int>("IdCategoria")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoriaDesc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdCategoria");
+
+                    b.ToTable("CatCategorias");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatCodigosPostal", b =>
                 {
                     b.Property<int>("IdCodigosPostales")
                         .ValueGeneratedOnAdd()
@@ -376,6 +397,64 @@ namespace WebAdmin.Migrations
                     b.ToTable("CatPerfiles");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CatProducto", b =>
+                {
+                    b.Property<int>("IdProducto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CantidadMinima")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CatCategoriaIdCategoria")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodigoExterno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoInterno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Costo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("DescProducto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdCategoria")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdMarca")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PorcentajePrecioUno")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ProductoPrecioUno")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SubCosto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdProducto");
+
+                    b.HasIndex("CatCategoriaIdCategoria");
+
+                    b.ToTable("CatProductos");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.CatRole", b =>
                 {
                     b.Property<int>("IdRol")
@@ -397,6 +476,29 @@ namespace WebAdmin.Migrations
                     b.HasKey("IdRol");
 
                     b.ToTable("CatRoles");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatTipoCentro", b =>
+                {
+                    b.Property<int>("IdTipoCentro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoCentroDesc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdTipoCentro");
+
+                    b.ToTable("CatTipoCentros");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoDireccion", b =>
@@ -497,6 +599,9 @@ namespace WebAdmin.Migrations
                     b.Property<string>("Calle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CatTipoCentroIdTipoCentro")
+                        .HasColumnType("int");
+
                     b.Property<string>("Ciudad")
                         .HasColumnType("nvarchar(max)");
 
@@ -526,6 +631,14 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<string>("IdTipoCentro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdTipoLicencia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
 
@@ -537,6 +650,8 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCentro");
+
+                    b.HasIndex("CatTipoCentroIdTipoCentro");
 
                     b.ToTable("TblCentros");
                 });
@@ -557,7 +672,7 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdEmpresa")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("IdEstatusRegistro1")
+                    b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreCliente")
@@ -568,8 +683,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCliente");
-
-                    b.HasIndex("IdEstatusRegistro1");
 
                     b.ToTable("TblClientes");
                 });
@@ -592,7 +705,7 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdCliente")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("IdEstatusRegistro1")
+                    b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
                     b.Property<int>("IdPerfil")
@@ -612,8 +725,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdClienteContacto");
-
-                    b.HasIndex("IdEstatusRegistro1");
 
                     b.HasIndex("TblClienteIdCliente");
 
@@ -660,7 +771,7 @@ namespace WebAdmin.Migrations
                     b.Property<string>("IdColonia")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IdEstatusRegistro1")
+                    b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
                     b.Property<int>("IdTipoDireccion")
@@ -678,8 +789,6 @@ namespace WebAdmin.Migrations
                     b.HasKey("IdClienteDirecciones");
 
                     b.HasIndex("CatTipoDireccionIdTipoDireccion");
-
-                    b.HasIndex("IdEstatusRegistro1");
 
                     b.HasIndex("TblClienteIdCliente");
 
@@ -763,7 +872,7 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdEmpresa")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("IdEstatusRegistro1")
+                    b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreProveedor")
@@ -774,8 +883,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProveedor");
-
-                    b.HasIndex("IdEstatusRegistro1");
 
                     b.ToTable("TblProveedores");
                 });
@@ -795,7 +902,7 @@ namespace WebAdmin.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("FechaRegistro");
 
-                    b.Property<int?>("IdEstatusRegistro1")
+                    b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
                     b.Property<int>("IdPerfil")
@@ -818,8 +925,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProveedorContacto");
-
-                    b.HasIndex("IdEstatusRegistro1");
 
                     b.HasIndex("TblProveedorIdProveedor");
 
@@ -859,7 +964,7 @@ namespace WebAdmin.Migrations
                     b.Property<string>("IdColonia")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IdEstatusRegistro1")
+                    b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
                     b.Property<Guid>("IdProveedor")
@@ -878,8 +983,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProveedorDirecciones");
-
-                    b.HasIndex("IdEstatusRegistro1");
 
                     b.HasIndex("TblProveedorIdProveedor");
 
@@ -1021,26 +1124,25 @@ namespace WebAdmin.Migrations
                     b.Navigation("IdEmpresaNavigationIdEmpresaNavigation");
                 });
 
-            modelBuilder.Entity("WebAdmin.Models.TblCliente", b =>
+            modelBuilder.Entity("WebAdmin.Models.CatProducto", b =>
                 {
-                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
-                        .WithMany()
-                        .HasForeignKey("IdEstatusRegistro1");
+                    b.HasOne("WebAdmin.Models.CatCategoria", null)
+                        .WithMany("CatProductos")
+                        .HasForeignKey("CatCategoriaIdCategoria");
+                });
 
-                    b.Navigation("IdEstatusRegistro");
+            modelBuilder.Entity("WebAdmin.Models.TblCentro", b =>
+                {
+                    b.HasOne("WebAdmin.Models.CatTipoCentro", null)
+                        .WithMany("TblCentros")
+                        .HasForeignKey("CatTipoCentroIdTipoCentro");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblClienteContacto", b =>
                 {
-                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
-                        .WithMany()
-                        .HasForeignKey("IdEstatusRegistro1");
-
                     b.HasOne("WebAdmin.Models.TblCliente", null)
                         .WithMany("TblClienteContactos")
                         .HasForeignKey("TblClienteIdCliente");
-
-                    b.Navigation("IdEstatusRegistro");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblClienteDireccion", b =>
@@ -1049,15 +1151,9 @@ namespace WebAdmin.Migrations
                         .WithMany("TblClienteDireccion")
                         .HasForeignKey("CatTipoDireccionIdTipoDireccion");
 
-                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
-                        .WithMany()
-                        .HasForeignKey("IdEstatusRegistro1");
-
                     b.HasOne("WebAdmin.Models.TblCliente", null)
                         .WithMany("TblClienteDireccion")
                         .HasForeignKey("TblClienteIdCliente");
-
-                    b.Navigation("IdEstatusRegistro");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblEmpresa", b =>
@@ -1067,39 +1163,18 @@ namespace WebAdmin.Migrations
                         .HasForeignKey("CatEstatusIdEstatusRegistro");
                 });
 
-            modelBuilder.Entity("WebAdmin.Models.TblProveedor", b =>
-                {
-                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
-                        .WithMany()
-                        .HasForeignKey("IdEstatusRegistro1");
-
-                    b.Navigation("IdEstatusRegistro");
-                });
-
             modelBuilder.Entity("WebAdmin.Models.TblProveedorContacto", b =>
                 {
-                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
-                        .WithMany()
-                        .HasForeignKey("IdEstatusRegistro1");
-
                     b.HasOne("WebAdmin.Models.TblProveedor", null)
                         .WithMany("TblProveedorContactos")
                         .HasForeignKey("TblProveedorIdProveedor");
-
-                    b.Navigation("IdEstatusRegistro");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblProveedorDireccion", b =>
                 {
-                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
-                        .WithMany()
-                        .HasForeignKey("IdEstatusRegistro1");
-
                     b.HasOne("WebAdmin.Models.TblProveedor", null)
                         .WithMany("TblProveedorDireccion")
                         .HasForeignKey("TblProveedorIdProveedor");
-
-                    b.Navigation("IdEstatusRegistro");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblUsuario", b =>
@@ -1126,6 +1201,11 @@ namespace WebAdmin.Migrations
                     b.Navigation("TblUsuarios");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CatCategoria", b =>
+                {
+                    b.Navigation("CatProductos");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.CatEstatus", b =>
                 {
                     b.Navigation("TblEmpresas");
@@ -1144,6 +1224,11 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("WebAdmin.Models.CatRole", b =>
                 {
                     b.Navigation("TblUsuarios");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatTipoCentro", b =>
+                {
+                    b.Navigation("TblCentros");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoDireccion", b =>

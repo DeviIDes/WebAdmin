@@ -62,28 +62,28 @@
             </div>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" asp-controller="Home" asp-action="Index">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Resumen</span>
                 </a>
             </li>
-            <!-- Nav Item - Catalogos Collapse Menu -->
+            <!-- Nav Item - Catálogos Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatalogos"
-                   aria-expanded="true" aria-controls="collapseCatalogos">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatálogos"
+                   aria-expanded="true" aria-controls="collapseCatálogos">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Catalogos</span>
+                    <span>Catálogos</span>
                 </a>
-                <div id="collapseCatalogos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseCatálogos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Géneros</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatPerfiles" asp-action="Index">Perfiles</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Area</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Áreas</a>
                         <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Licencias</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Tipos de Dirrecciones</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Tipos de Direcciones</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Tipos de Centro</a>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                 </a>
                 <div id="collapseCentros" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Administracion:</h6>
+                        <h6 class="collapse-header">Administración:</h6>
                         <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
                         <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Corporativo</a>
                         <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Centros</a>
@@ -138,8 +138,8 @@
                         <a class="collapse-item" href="#">Servicios</a>
                         <h6 class="collapse-header">Finanzas:</h6>
                         <a class="collapse-item" href="#">Bancos</a>
-                        <a class="collapse-item" href="#">Nomina</a>
-                        <a class="collapse-item" href="#">Prestamos</a>
+                        <a class="collapse-item" href="#">Nómina</a>
+                        <a class="collapse-item" href="#">Préstamos</a>
                         <a class="collapse-item" asp-area="" asp-controller="File" asp-action="Index">Carga Archivos</a>
                     </div>
                 </div>
