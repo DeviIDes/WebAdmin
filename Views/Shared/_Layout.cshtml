@@ -32,156 +32,154 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">transcript <sup></sup></div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                @* <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
             </a>
-            </li>*@
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Informacion de Control
-                </div>
+            @* <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+        </a>
+        </li>*@
 
-                <!-- Nav Item - Catalogos Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatalogos"
-                   aria-expanded="true" aria-controls="collapseCatalogos">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Catalogos</span>
-                    </a>
-                    <div id="collapseCatalogos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Control:</h6>
-                            <a class="collapse-item" asp-area="" asp-controller="File" asp-action="Index">Carga Sepomex</a>
-                            <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
-                            <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Estatus de Géneros</a>
-                            <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
-                            <a class="collapse-item" asp-area="" asp-controller="CatPerfiles" asp-action="Index">Perfiles</a>
-                            <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Area</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Nav Item - Centros Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCentros"
-                   aria-expanded="true" aria-controls="collapseCentros">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Centros</span>
-                    </a>
-                    <div id="collapseCentros" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Control:</h6>
-                            <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
-                            <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
-                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">SubCentro</a>
-                            
-                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Expediente</a>
-                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Sesion</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Nav Item - Usuarios Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
-                   aria-expanded="true" aria-controls="collapseUsuarios">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Usuarios</span>
-                    </a>
-                    <div id="collapseUsuarios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Control:</h6>
-                            <a class="collapse-item" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Administradores</a>
-                            <a class="collapse-item" href="cards.html">Supervisores</a>
-                            <a class="collapse-item" href="cards.html">Operadores</a>
-                        </div>
-                    </div>
-                </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Informacion de Configuración
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                   aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Configuración</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Login Screens:</h6>
-                            <a class="collapse-item" href="login.html">Carga de Videos</a>
-                            <a class="collapse-item" href="register.html">Respaldo de Videos</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Consultas:</h6>
-                            <a class="collapse-item" href="404.html">Estatus Carga de Videos</a>
-                            <a class="collapse-item" href="blank.html">Consulta de Salas</a>
-                            <h6 class="collapse-header">Resumen:</h6>
-                            <a class="collapse-item" href="404.html">Visualización</a>
-                            <a class="collapse-item" href="blank.html">Resumen</a>
-                        </div>
-                    </div>
-                </li>
-
-                @* <!-- Nav Item - Charts -->
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Corporativo
+            </div>
+            <!-- Nav Item - Charts -->
             <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span>
-            </a>
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Resumen</span>
+                </a>
+            </li>
+            <!-- Nav Item - Catalogos Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatalogos"
+                   aria-expanded="true" aria-controls="collapseCatalogos">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Catalogos</span>
+                </a>
+                <div id="collapseCatalogos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Géneros</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatPerfiles" asp-action="Index">Perfiles</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Area</a>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Licencias</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Tipos de Dirrecciones</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Tipos de Centro</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Centros Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCentros"
+                   aria-expanded="true" aria-controls="collapseCentros">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Corporativo</span>
+                </a>
+                <div id="collapseCentros" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Administracion:</h6>
+                        <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
+                        <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Corporativo</a>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Centros</a>
+                        <h6 class="collapse-header">Usuarios:</h6>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Usuarios</a>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Centros</a>
+                        <h6 class="collapse-header">Inventario:</h6>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Categorias</a>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Productos</a>
+                    </div>
+                </div>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span>
-            </a>
-            </li>*@
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-                  <!-- Divider -->
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Informacion de Centros
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Centros</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Escolares:</h6>
+                        <a class="collapse-item" href="login.html">Prospectos</a>
+                        <a class="collapse-item" href="register.html">Alumnos</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">transacción:</h6>
+                        <a class="collapse-item" href="404.html">Ventas</a>
+                        <a class="collapse-item" href="blank.html">Compras</a>
+                        <a class="collapse-item" href="blank.html">Servicios</a>
+                        <h6 class="collapse-header">Finanzas:</h6>
+                        <a class="collapse-item" href="404.html">Bancos</a>
+                        <a class="collapse-item" href="blank.html">Nomina</a>
+                        <a class="collapse-item" href="blank.html">Prestamos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="File" asp-action="Index">Carga Archivos</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Centros Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConsultas"
+                   aria-expanded="true" aria-controls="collapseConsultas">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Consultas</span>
+                </a>
+                <div id="collapseConsultas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Finanzas:</h6>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Inversiones</a>
+                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Estados de Cuenta</a>
+          
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- sidebar toggler (sidebar) -->
-          
-                <button id="sidebarToggleTop" class="btn btn-link mr-3">
-                        <i class="fa fa-chevron-left"></i>
-                    </button>
-        
 
-       @*     <!-- sidebar message -->
-            <div class="sidebar-card d-none d-lg-flex">
-            <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-            <p class="text-center mb-2"><strong>sb admin pro</strong> is packed with premium features, components, and more!</p>
-            <a class="btn btn-success btn-sm" href="">test!</a>
-            </div>*@
+            <button id="sidebarToggleTop" class="btn btn-link mr-3">
+                <i class="fa fa-chevron-left"></i>
+            </button>
 
-            </ul>
+
+            @*     <!-- sidebar message -->
+        <div class="sidebar-card d-none d-lg-flex">
+        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+        <p class="text-center mb-2"><strong>sb admin pro</strong> is packed with premium features, components, and more!</p>
+        <a class="btn btn-success btn-sm" href="">test!</a>
+        </div>*@
+
+        </ul>
             <!-- End of Sidebar -->
         }
         <!-- Content Wrapper -->
