@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+#nullable disable
+
+namespace WebAdmin.Models
+{
+    public partial class TblCliente
+    {
+        public TblCliente()
+        {
+            TblClienteContactos = new HashSet<TblClienteContacto>();
+            TblClienteDireccion = new HashSet<TblClienteDireccion>();
+        }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid IdCliente { get; set; }
+        [Display(Name = "Nombre Cliente")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string NombreCliente { get; set; }
+        [Display(Name = "RFC")]
+
+        public string Rfc { get; set; }
+        [Display(Name = "Giro Comercial")]
+
+        public string GiroComercial { get; set; }
+        [ForeignKey("TblEmpresa")]
+        [Display(Name = "Empresa")]
+        public Guid IdEmpresa { get; set; }
+        [Column("FechaRegistro")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha Registro")]
+        public DateTime FechaRegistro { get; set; }
+        [Display(Name = "Estatus")]
+
+        public CatEstatus IdEstatusRegistro { get; set; }
+        public virtual ICollection<TblClienteContacto> TblClienteContactos { get; set; }
+        public virtual ICollection<TblClienteDireccion> TblClienteDireccion { get; set; }
+    }
+}

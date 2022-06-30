@@ -25,5 +25,16 @@ namespace WebAdmin.Data
         public DbSet<TblEmpresa> TblEmpresa { get; set; }
         public DbSet<TblCentros> TblCentros { get; set; }
         public DbSet<TblUsuario> TblUsuarios { get; set; }
+
+        public DbSet<CatTipoDireccion> CatTipoDirecciones { get; set; }
+
+        public DbSet<TblCliente> TblClientes { get; set; }
+        public DbSet<TblClienteContacto> TblClienteContactos { get; set; }
+        public DbSet<TblClienteDireccion> TblClienteDirecciones { get; set; }
+
+        public DbSet<TblEmpresa> TblEmpresas { get; set; }
+        public DbSet<TblProveedor> TblProveedores { get; set; }
+        public DbSet<TblProveedorContacto> TblProveedorContactos { get; set; }
+        public DbSet<TblProveedorDireccion> TblProveedorDirecciones { get; set; }
     }
 }

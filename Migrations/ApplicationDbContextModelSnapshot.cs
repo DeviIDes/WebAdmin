@@ -397,6 +397,29 @@ namespace WebAdmin.Migrations
                     b.ToTable("CatRoles");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CatTipoDireccion", b =>
+                {
+                    b.Property<int>("IdTipoDireccion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoDireccionDesc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdTipoDireccion");
+
+                    b.ToTable("CatTipoDirecciones");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.FileOnDatabaseModel", b =>
                 {
                     b.Property<int>("Id")
@@ -516,6 +539,151 @@ namespace WebAdmin.Migrations
                     b.ToTable("TblCentros");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.TblCliente", b =>
+                {
+                    b.Property<Guid>("IdCliente")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<string>("GiroComercial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("IdEmpresa")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("IdEstatusRegistro1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreCliente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rfc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdCliente");
+
+                    b.HasIndex("IdEstatusRegistro1");
+
+                    b.ToTable("TblClientes");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblClienteContacto", b =>
+                {
+                    b.Property<int>("IdClienteContacto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<Guid>("IdCliente")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("IdEstatusRegistro1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPerfil")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreClienteContacto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TblClienteIdCliente")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonoMovil")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdClienteContacto");
+
+                    b.HasIndex("IdEstatusRegistro1");
+
+                    b.HasIndex("TblClienteIdCliente");
+
+                    b.ToTable("TblClienteContactos");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblClienteDireccion", b =>
+                {
+                    b.Property<int>("IdClienteDirecciones")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Calle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CatTipoDireccionIdTipoDireccion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ciudad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoPostal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Colonia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<Guid>("IdCliente")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("IdColonia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("IdEstatusRegistro1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTipoDireccion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocalidadMunicipio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TblClienteIdCliente")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdClienteDirecciones");
+
+                    b.HasIndex("CatTipoDireccionIdTipoDireccion");
+
+                    b.HasIndex("IdEstatusRegistro1");
+
+                    b.HasIndex("TblClienteIdCliente");
+
+                    b.ToTable("TblClienteDirecciones");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.TblEmpresa", b =>
                 {
                     b.Property<Guid>("IdEmpresa")
@@ -575,6 +743,145 @@ namespace WebAdmin.Migrations
                     b.HasIndex("CatEstatusIdEstatusRegistro");
 
                     b.ToTable("TblEmpresa");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblProveedor", b =>
+                {
+                    b.Property<Guid>("IdProveedor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<string>("GiroComercial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("IdEmpresa")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("IdEstatusRegistro1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreProveedor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rfc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdProveedor");
+
+                    b.HasIndex("IdEstatusRegistro1");
+
+                    b.ToTable("TblProveedores");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblProveedorContacto", b =>
+                {
+                    b.Property<int>("IdProveedorContacto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int?>("IdEstatusRegistro1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPerfil")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("IdProveedor")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NombreProveedorContacto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TblProveedorIdProveedor")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonoMovil")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdProveedorContacto");
+
+                    b.HasIndex("IdEstatusRegistro1");
+
+                    b.HasIndex("TblProveedorIdProveedor");
+
+                    b.ToTable("TblProveedorContactos");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblProveedorDireccion", b =>
+                {
+                    b.Property<int>("IdProveedorDirecciones")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Calle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ciudad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoPostal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Colonia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorreoElectronico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<string>("IdColonia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("IdEstatusRegistro1")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("IdProveedor")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("IdTipoDireccion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocalidadMunicipio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TblProveedorIdProveedor")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdProveedorDirecciones");
+
+                    b.HasIndex("IdEstatusRegistro1");
+
+                    b.HasIndex("TblProveedorIdProveedor");
+
+                    b.ToTable("TblProveedorDirecciones");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblUsuario", b =>
@@ -712,11 +1019,85 @@ namespace WebAdmin.Migrations
                     b.Navigation("IdEmpresaNavigationIdEmpresaNavigation");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.TblCliente", b =>
+                {
+                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
+                        .WithMany()
+                        .HasForeignKey("IdEstatusRegistro1");
+
+                    b.Navigation("IdEstatusRegistro");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblClienteContacto", b =>
+                {
+                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
+                        .WithMany()
+                        .HasForeignKey("IdEstatusRegistro1");
+
+                    b.HasOne("WebAdmin.Models.TblCliente", null)
+                        .WithMany("TblClienteContactos")
+                        .HasForeignKey("TblClienteIdCliente");
+
+                    b.Navigation("IdEstatusRegistro");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblClienteDireccion", b =>
+                {
+                    b.HasOne("WebAdmin.Models.CatTipoDireccion", null)
+                        .WithMany("TblClienteDireccion")
+                        .HasForeignKey("CatTipoDireccionIdTipoDireccion");
+
+                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
+                        .WithMany()
+                        .HasForeignKey("IdEstatusRegistro1");
+
+                    b.HasOne("WebAdmin.Models.TblCliente", null)
+                        .WithMany("TblClienteDireccion")
+                        .HasForeignKey("TblClienteIdCliente");
+
+                    b.Navigation("IdEstatusRegistro");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.TblEmpresa", b =>
                 {
                     b.HasOne("WebAdmin.Models.CatEstatus", null)
                         .WithMany("TblEmpresas")
                         .HasForeignKey("CatEstatusIdEstatusRegistro");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblProveedor", b =>
+                {
+                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
+                        .WithMany()
+                        .HasForeignKey("IdEstatusRegistro1");
+
+                    b.Navigation("IdEstatusRegistro");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblProveedorContacto", b =>
+                {
+                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
+                        .WithMany()
+                        .HasForeignKey("IdEstatusRegistro1");
+
+                    b.HasOne("WebAdmin.Models.TblProveedor", null)
+                        .WithMany("TblProveedorContactos")
+                        .HasForeignKey("TblProveedorIdProveedor");
+
+                    b.Navigation("IdEstatusRegistro");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblProveedorDireccion", b =>
+                {
+                    b.HasOne("WebAdmin.Models.CatEstatus", "IdEstatusRegistro")
+                        .WithMany()
+                        .HasForeignKey("IdEstatusRegistro1");
+
+                    b.HasOne("WebAdmin.Models.TblProveedor", null)
+                        .WithMany("TblProveedorDireccion")
+                        .HasForeignKey("TblProveedorIdProveedor");
+
+                    b.Navigation("IdEstatusRegistro");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.TblUsuario", b =>
@@ -761,6 +1142,25 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("WebAdmin.Models.CatRole", b =>
                 {
                     b.Navigation("TblUsuarios");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatTipoDireccion", b =>
+                {
+                    b.Navigation("TblClienteDireccion");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblCliente", b =>
+                {
+                    b.Navigation("TblClienteContactos");
+
+                    b.Navigation("TblClienteDireccion");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.TblProveedor", b =>
+                {
+                    b.Navigation("TblProveedorContactos");
+
+                    b.Navigation("TblProveedorDireccion");
                 });
 #pragma warning restore 612, 618
         }
