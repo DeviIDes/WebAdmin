@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public partial class CatCodigosPostale
+    public partial class CatCodigosPostal
 
     {
         [Key]

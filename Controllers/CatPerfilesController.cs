@@ -12,10 +12,10 @@ namespace WebAdmin.Controllers
 {
     public class CatPerfilesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly nDbContext _context;
         private readonly INotyfService _notyf;
 
-        public CatPerfilesController(ApplicationDbContext context, INotyfService notyf)
+        public CatPerfilesController(nDbContext context, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;

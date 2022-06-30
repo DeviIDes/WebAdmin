@@ -12,10 +12,10 @@ namespace WebAdmin.Controllers
 {
     public class CatGeneroesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly nDbContext _context;
         private readonly INotyfService _notyf;
 
-        public CatGeneroesController(ApplicationDbContext context, INotyfService notyf)
+        public CatGeneroesController(nDbContext context, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;

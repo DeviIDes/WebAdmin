@@ -14,10 +14,10 @@ namespace FileUpload.MVC.Controllers
 {
     public class FileController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly nDbContext _context;
         private readonly INotyfService _notyf;
 
-        public FileController(ApplicationDbContext context, INotyfService notyf)
+        public FileController(nDbContext context, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;
@@ -109,12 +109,12 @@ namespace FileUpload.MVC.Controllers
                             columns = line.Split("|");
                             HRsplit = true;
 
-                            CatCodigosPostale CPs;
+                            CatCodigosPostal CPs;
                             CPs = _context.CatCodigosPostales.Where(s => s.Dcodigo == columns[0].ToString()).FirstOrDefault();
 
                             if (CPs == null)
                             {
-                                CPs = new CatCodigosPostale();
+                                CPs = new CatCodigosPostal();
                             }
 
                             Idcontrol = Idcontrol + 1;

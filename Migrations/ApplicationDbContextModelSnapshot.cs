@@ -8,7 +8,7 @@ using WebAdmin.Data;
 
 namespace WebAdmin.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(nDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -486,7 +486,7 @@ namespace WebAdmin.Migrations
                     b.ToTable("FilesOnFileSystem");
                 });
 
-            modelBuilder.Entity("WebAdmin.Models.TblCentros", b =>
+            modelBuilder.Entity("WebAdmin.Models.TblCentro", b =>
                 {
                     b.Property<Guid>("IdCentro")
                         .ValueGeneratedOnAdd()

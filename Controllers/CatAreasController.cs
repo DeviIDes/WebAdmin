@@ -12,10 +12,10 @@ namespace WebAdmin.Controllers
 {
     public class CatAreasController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly nDbContext _context;
         private readonly INotyfService _notyf;
 
-        public CatAreasController(ApplicationDbContext context, INotyfService notyf)
+        public CatAreasController(nDbContext context, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;

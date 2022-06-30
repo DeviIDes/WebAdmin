@@ -37,7 +37,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
         [Display(Name = "Estatus")]
 
-        public CatEstatus IdEstatusRegistro { get; set; }
+        public int IdEstatusRegistro { get; set; }
 
         //public virtual ICollection<CatMarca> CatMarcas { get; set; }
         public virtual ICollection<TblProveedorContacto> TblProveedorContactos { get; set; }

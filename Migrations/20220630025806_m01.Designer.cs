@@ -9,7 +9,7 @@ using WebAdmin.Data;
 
 namespace WebAdmin.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(nDbContext))]
     [Migration("20220630025806_m01")]
     partial class m01
     {
@@ -488,7 +488,7 @@ namespace WebAdmin.Migrations
                     b.ToTable("FilesOnFileSystem");
                 });
 
-            modelBuilder.Entity("WebAdmin.Models.TblCentros", b =>
+            modelBuilder.Entity("WebAdmin.Models.TblCentro", b =>
                 {
                     b.Property<Guid>("IdCentro")
                         .ValueGeneratedOnAdd()

@@ -1,7 +1,7 @@
-﻿@model WebAdmin.Models.TblCentros
+﻿@model WebAdmin.Models.TblCentro
 
 @{
-    ViewData["Title"] = "Crear Fiscales";
+    ViewData["Title"] = "Editar Fiscales";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -10,32 +10,34 @@
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Empresa</li>
         <li class="breadcrumb-item">Control de Empresa</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Empresa</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Fiscales</li>
     </ol>
 </nav>
 <hr />
 
-<form asp-action="Create">
+<form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IdCentro" />
+    <input type="hidden" asp-for="IdEmpresa" />
+    <input type="hidden" asp-for="IdColonia" />
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="NombreCentro" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="NombreCentro" class="form-control" />
-                <span asp-validation-for="NombreCentro" class="text-danger"></span>
-            </div>
-
-        </div>
         <div class="col-md-3">
             <div class="form-group">
+                <label asp-for="NombreCentro" class="control-label"></label>
+                <input asp-for="NombreCentro" class="form-control" />
+                <span asp-validation-for="NombreCentro" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="form-group">
                 <label asp-for="Calle" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="Calle" class="form-control" />
+                <input asp-for="Calle" class="form-control" />
                 <span asp-validation-for="Calle" class="text-danger"></span>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-2">
             <div class="form-group">
@@ -54,7 +56,7 @@
             <div class="form-group">
                 <label asp-for="Colonia" class="control-label"></label>
                 <select id="drpColonias" class="form-select" asp-for="Colonia">
-                    <option value="">SELECCIONAR</option>
+                    @*<option value="">Seleccionar Estatus</option>*@
                 </select>
                 <span asp-validation-for="Colonia" class="text-danger"></span>
             </div>
@@ -82,7 +84,6 @@
         </div>
     </div>
     <div class="row">
-
         <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="CorreoElectronico" class="control-label"></label>
@@ -97,13 +98,21 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
         </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="IdEstatusRegistro" class="control-label"></label>
+                <select id="idEstatusLista" class="form-select" asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
+                    <option value="">Seleccionar Estatus</option>
+                </select>
+                <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
+            </div>
+        </div>
     </div>
     <br />
     <div class="form-group">
-        <input type="submit" value="Crear" class="btn btn-success" />
+        <input type="submit" value="Actualizar" class="btn btn-warning" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </div>
-    <label id="lbl_estatus" class="control-label"></label>
 </form>
 
 
@@ -111,13 +120,13 @@
     @{
 
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-            }
-<script type="text/javascript">
-        function validaRFC() {
-        let pattern = /^[a-zA-Z]{3,4}(\d{6})((\D|\d){2,3})?$/;
-        let rfc = document.getElementById("iRFC").value;
-        document.getElementById("estatus").innerHTML = pattern.test(rfc);
     }
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        filtro_colonias();
+    });
+
     function filtro_cp() {
 
         var valor_cp = document.getElementById("iCodigoPostal").value;
@@ -133,15 +142,15 @@
                 $("#drpColonias").empty();
 
                 if (list.length == 0) {
-                    $select_colonias.append('<option value="">Seleccionar Colonia</option>');
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
                     document.getElementById("idLocalidadMunicipio").value = null;
                     document.getElementById("idCiudad").value = null;
                     document.getElementById("idEstados").value = null;
                 }
                 else {
-                    $select_colonias.append('<option value="">Seleccionar Colonia</option>');
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
                     for (var i = 0, len = list.length; i < len; i++) {
-                        $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                   $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
                         document.getElementById("idLocalidadMunicipio").setAttribute('value',list[i].dmnpio);
                         document.getElementById("idCiudad").setAttribute('value',list[i].dciudad);
                         document.getElementById("idEstados").setAttribute('value',list[i].destado);
@@ -152,7 +161,35 @@
                 alert("Error!!")
             }
         });
-
     }
+    function filtro_colonias() {
+
+        var valor_col = document.getElementById("IdColonia").value;
+        var valor_cp = document.getElementById("iCodigoPostal").value;
+        $.ajax({
+            type: "GET",
+            url: "/CatCodigosPostales/FiltroColonia/",
+            data: { id: valor_cp, idC:valor_col  },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $select_colonias = $('#drpColonias');
+                $("#drpColonias").empty();
+                if (list.length == 0) {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
+                }
+                else {
+
+                    for (var i = 0, len = list.length; i < len; i++) {
+                         $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                    }
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+    }
+
 </script>
 }

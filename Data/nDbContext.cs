@@ -4,14 +4,14 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class nDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public nDbContext(DbContextOptions<nDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<CatCodigosPostale> CatCodigosPostales { get; set; }
+        public DbSet<CatCodigosPostal> CatCodigosPostales { get; set; }
         public DbSet<FileOnDatabaseModel> FilesOnDatabase { get; set; }
         public DbSet<FileOnFileSystemModel> FilesOnFileSystem { get; set; }
 
@@ -23,7 +23,7 @@ namespace WebAdmin.Data
 
         public DbSet<CatGenero> CatGeneros { get; set; }
         public DbSet<TblEmpresa> TblEmpresa { get; set; }
-        public DbSet<TblCentros> TblCentros { get; set; }
+        public DbSet<TblCentro> TblCentros { get; set; }
         public DbSet<TblUsuario> TblUsuarios { get; set; }
 
         public DbSet<CatTipoDireccion> CatTipoDirecciones { get; set; }
@@ -36,5 +36,10 @@ namespace WebAdmin.Data
         public DbSet<TblProveedor> TblProveedores { get; set; }
         public DbSet<TblProveedorContacto> TblProveedorContactos { get; set; }
         public DbSet<TblProveedorDireccion> TblProveedorDirecciones { get; set; }
+
+        public DbSet<CatCategoria> CatCategorias { get; set; }
+        public DbSet<CatProducto> CatProductos { get; set; }
+        public DbSet<CatTipoCentro> CatTipoCentros { get; set; }
+        
     }
 }

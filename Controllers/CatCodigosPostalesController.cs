@@ -20,11 +20,11 @@ namespace WebAdmin.Controllers
     public class CatCodigosPostalesController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
+        private readonly nDbContext _context;
       
 
       
-        public CatCodigosPostalesController(ILogger<HomeController> logger,ApplicationDbContext context)
+        public CatCodigosPostalesController(ILogger<HomeController> logger,nDbContext context)
         {
             _context = context;
             _logger = logger;
@@ -83,7 +83,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCodigosPostales,Dcodigo,Dasenta,DtipoAsenta,Dmnpio,Destado,Dciudad,Dcp,Cestado,Coficina,Ccp,CtipoAsenta,Cmnpio,IdAsentaCpcons,Dzona,CcveCiudad")] CatCodigosPostale catCodigosPostale)
+        public async Task<IActionResult> Create([Bind("IdCodigosPostales,Dcodigo,Dasenta,DtipoAsenta,Dmnpio,Destado,Dciudad,Dcp,Cestado,Coficina,Ccp,CtipoAsenta,Cmnpio,IdAsentaCpcons,Dzona,CcveCiudad")] CatCodigosPostal catCodigosPostale)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCodigosPostales,Dcodigo,Dasenta,DtipoAsenta,Dmnpio,Destado,Dciudad,Dcp,Cestado,Coficina,Ccp,CtipoAsenta,Cmnpio,IdAsentaCpcons,Dzona,CcveCiudad")] CatCodigosPostale catCodigosPostale)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCodigosPostales,Dcodigo,Dasenta,DtipoAsenta,Dmnpio,Destado,Dciudad,Dcp,Cestado,Coficina,Ccp,CtipoAsenta,Cmnpio,IdAsentaCpcons,Dzona,CcveCiudad")] CatCodigosPostal catCodigosPostale)
         {
             if (id != catCodigosPostale.IdCodigosPostales)
             {

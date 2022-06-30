@@ -62,6 +62,6 @@ namespace WebAdmin.Models
 
         [Display(Name = "Estatus")]
 
-        public CatEstatus IdEstatusRegistro { get; set; }
+        public int IdEstatusRegistro { get; set; }
     }
 }
