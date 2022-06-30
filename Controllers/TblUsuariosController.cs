@@ -153,11 +153,11 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
-                    var idEmpresa = _context.TblEmpresa.FirstOrDefault();
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
-                    tblUsuario.IdEmpresa = idEmpresa.IdEmpresa;
-                    tblUsuario.NombreEmpresa = idEmpresa.NombreEmpresa;
+                    tblUsuario.IdCorporativo = idCorporativos.IdCorporativo;
+                    tblUsuario.NombreEmpresa = idCorporativos.NombreCorporativo;
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
@@ -228,11 +228,11 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var idEmpresa = _context.TblEmpresa.FirstOrDefault();
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
-                    tblUsuario.IdEmpresa = idEmpresa.IdEmpresa;
-                    tblUsuario.NombreEmpresa = idEmpresa.NombreEmpresa;
+                    tblUsuario.IdCorporativo = idCorporativos.IdCorporativo;
+                    tblUsuario.NombreEmpresa = idCorporativos.NombreCorporativo;
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();

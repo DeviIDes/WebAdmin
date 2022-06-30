@@ -52,8 +52,8 @@ namespace WebAdmin.Models
         public string Telefono { get; set; }
 
 
-        [ForeignKey("TblEmpresa")]
-        public Guid IdEmpresa { get; set; }
+        [ForeignKey("TblCorporativo")]
+        public Guid IdCorporativo { get; set; }
 
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]

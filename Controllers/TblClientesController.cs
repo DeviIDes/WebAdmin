@@ -113,12 +113,12 @@ namespace WebAdmin.Controllers
 
                 if (DuplicadosEstatus.Count == 0)
                 {
-                    var vEmpresa = _context.TblEmpresas.ToList();
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCliente.FechaRegistro = DateTime.Now;
                     tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
                     tblCliente.GiroComercial = !string.IsNullOrEmpty(tblCliente.GiroComercial) ? tblCliente.GiroComercial.ToUpper() : tblCliente.GiroComercial;
                     tblCliente.Rfc = !string.IsNullOrEmpty(tblCliente.Rfc) ? tblCliente.Rfc.ToUpper() : tblCliente.Rfc;
-                    tblCliente.IdEmpresa = vEmpresa[0].IdEmpresa;
+                    tblCliente.IdCorporativo = idCorporativos.IdCorporativo;
                     tblCliente.IdEstatusRegistro = 1;
 
                     _context.SaveChanges();
@@ -171,12 +171,12 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
-                    var vEmpresa = _context.TblEmpresas.ToList();
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCliente.FechaRegistro = DateTime.Now;
                     tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
                     tblCliente.GiroComercial = !string.IsNullOrEmpty(tblCliente.GiroComercial) ? tblCliente.GiroComercial.ToUpper() : tblCliente.GiroComercial;
                     tblCliente.Rfc = !string.IsNullOrEmpty(tblCliente.Rfc) ? tblCliente.Rfc.ToUpper() : tblCliente.Rfc;
-                    tblCliente.IdEmpresa = vEmpresa[0].IdEmpresa;
+                    tblCliente.IdCorporativo = idCorporativos.IdCorporativo;
 
                     _context.Update(tblCliente);
                     await _context.SaveChangesAsync();

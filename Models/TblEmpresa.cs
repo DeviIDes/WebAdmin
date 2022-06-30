@@ -49,12 +49,20 @@ namespace WebAdmin.Models
         [Display(Name = "Telefono")]
 
         public string Telefono { get; set; }
-        [Column("Fecha Registro")]
+        [Column("FechaRegistro")]
         [DataType(DataType.Date)]
 
         public DateTime FechaRegistro { get; set; }
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
+
+        public TblEmpresa()
+        {
+            TblCorporativos = new HashSet<TblCorporativo>();
+
+        }
+
+        public virtual ICollection<TblCorporativo> TblCorporativos { get; set; }
 
 
     }

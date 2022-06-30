@@ -10,7 +10,7 @@ namespace WebAdmin.Models
 
         public CatTipoCentro()
         {
-            TblCentros = new HashSet<TblCentro>();
+            TblCorporativos = new HashSet<TblCorporativo>(); ;
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,6 +27,6 @@ namespace WebAdmin.Models
         public int IdEstatusRegistro { get; set; }
 
 
-        public virtual ICollection<TblCentro> TblCentros { get; set; }
+        public virtual ICollection<TblCorporativo> TblCorporativos { get; set; }
     }
 }

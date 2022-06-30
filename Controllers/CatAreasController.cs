@@ -88,8 +88,8 @@ namespace WebAdmin.Controllers
 
                 if (DuplicadosEstatus.Count == 0)
                 {
-                    var idEmpresa = _context.TblEmpresa.FirstOrDefault();
-                    catArea.IdEmpresa = idEmpresa.IdEmpresa;
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
+                    catArea.IdCorporativo = idCorporativos.IdCorporativo;
                     catArea.FechaRegistro = DateTime.Now;
                     catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
                     catArea.IdEstatusRegistro = 1;

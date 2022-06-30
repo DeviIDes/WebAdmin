@@ -20,7 +20,8 @@ namespace WebAdmin.Models
         public string ApellidoMaterno { get; set; }
         [Display(Name = "Nombre Usuario")]
         public string NombreUsuario { get; set; }
-        public Guid IdEmpresa { get; set; }
+        [ForeignKey("TblCorporativo")]
+        public Guid IdCorporativo { get; set; }
         [Display(Name = "Nombre Empresa")]
         public string NombreEmpresa { get; set; }
         [Display(Name = "Area")]
@@ -36,7 +37,7 @@ namespace WebAdmin.Models
         public DateTime FechaNacimiento { get; set; }
         [Display(Name = "Correo de Acceso")]
         public string CorreoAcceso { get; set; }
-        [Column("Fecha Registro")]
+        [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
         [Display(Name = "Estatus")]

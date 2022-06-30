@@ -98,7 +98,7 @@ namespace WebAdmin.Controllers
 
                 if (DuplicadosEstatus.Count == 0)
                 {
-                    var idEmpresa = _context.TblEmpresa.FirstOrDefault();
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCentros.FechaRegistro = DateTime.Now;
                     tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
                     tblCentros.IdEstatusRegistro = 1;
@@ -109,7 +109,7 @@ namespace WebAdmin.Controllers
                     tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
                     tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
                     tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
-                    tblCentros.IdEmpresa = idEmpresa.IdEmpresa;
+                    tblCentros.IdCorporativo = idCorporativos.IdCorporativo;
                     _context.SaveChanges();
                     _context.Add(tblCentros);
                     await _context.SaveChangesAsync();

@@ -24,6 +24,8 @@ namespace WebAdmin.Data
         public DbSet<CatGenero> CatGeneros { get; set; }
         public DbSet<TblEmpresa> TblEmpresa { get; set; }
         public DbSet<TblCentro> TblCentros { get; set; }
+
+        public DbSet<TblCorporativo> TblCorporativos { get; set; }
         public DbSet<TblUsuario> TblUsuarios { get; set; }
 
         public DbSet<CatTipoDireccion> CatTipoDirecciones { get; set; }

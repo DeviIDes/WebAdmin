@@ -88,13 +88,13 @@ namespace WebAdminHecsa.Controllers
 
                 if (DuplicadosEstatus.Count == 0)
                 {
-                    var idEmpresa = _context.TblEmpresas.FirstOrDefault();
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
                     tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper();
                     tblProveedor.GiroComercial = !string.IsNullOrEmpty(tblProveedor.GiroComercial) ? tblProveedor.GiroComercial.ToUpper() : tblProveedor.GiroComercial;
                     tblProveedor.Rfc = !string.IsNullOrEmpty(tblProveedor.Rfc) ? tblProveedor.Rfc.ToUpper() : tblProveedor.Rfc;
                     tblProveedor.IdEstatusRegistro = 1;
-                    tblProveedor.IdEmpresa = idEmpresa.IdEmpresa;
+                    tblProveedor.IdCorporativo = idCorporativos.IdCorporativo;
 
                     _context.SaveChanges();
                     _context.Add(tblProveedor);
@@ -145,13 +145,13 @@ namespace WebAdminHecsa.Controllers
             {
                 try
                 {
-                    var idEmpresa = _context.TblEmpresas.FirstOrDefault();
+                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
                     tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper();
                     tblProveedor.GiroComercial = !string.IsNullOrEmpty(tblProveedor.GiroComercial) ? tblProveedor.GiroComercial.ToUpper() : tblProveedor.GiroComercial;
                     tblProveedor.Rfc = !string.IsNullOrEmpty(tblProveedor.Rfc) ? tblProveedor.Rfc.ToUpper() : tblProveedor.Rfc;
                     tblProveedor.IdEstatusRegistro = 1;
-                    tblProveedor.IdEmpresa = idEmpresa.IdEmpresa;
+                    tblProveedor.IdCorporativo = idCorporativos.IdCorporativo;
 
                     _context.Update(tblProveedor);
                     await _context.SaveChangesAsync();

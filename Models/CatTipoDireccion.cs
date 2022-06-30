@@ -9,10 +9,7 @@ namespace WebAdmin.Models
 {
     public partial class CatTipoDireccion
     {
-        public CatTipoDireccion()
-        {
-            TblClienteDireccion = new HashSet<TblClienteDireccion>();
-        }
+   
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTipoDireccion { get; set; }
@@ -26,8 +23,5 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
-
-
-        public virtual ICollection<TblClienteDireccion> TblClienteDireccion { get; set; }
     }
 }
