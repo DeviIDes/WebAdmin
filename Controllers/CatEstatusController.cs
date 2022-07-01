@@ -71,27 +71,35 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var vDuplicados = _context.CatEstatus
-                       .Where(s => s.EstatusDesc == CatEstatus.EstatusDesc)
-                       .ToList();
-
-                if (vDuplicados.Count == 0)
+                var vEstatus = _context.CatEstatus.ToList();
+                if (vEstatus.Count == 2)
                 {
-                    CatEstatus.FechaRegistro = DateTime.Now;
-                    CatEstatus.EstatusDesc = CatEstatus.EstatusDesc.ToString().ToUpper();
-
-                    _context.SaveChanges();
-
-                    _context.Add(CatEstatus);
-                    await _context.SaveChangesAsync();
-                    _notyf.Success("Registro creado con éxito", 5);
+                    _notyf.Error("Solo se permite crear 2 Estatus", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
-                    _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
+                    var vDuplicados = _context.CatEstatus
+                        .Where(s => s.EstatusDesc == CatEstatus.EstatusDesc)
+                        .ToList();
+
+                    if (vDuplicados.Count == 0)
+                    {
+                        CatEstatus.FechaRegistro = DateTime.Now;
+                        CatEstatus.EstatusDesc = CatEstatus.EstatusDesc.ToString().ToUpper();
+
+                        _context.SaveChanges();
+
+                        _context.Add(CatEstatus);
+                        await _context.SaveChangesAsync();
+                        _notyf.Success("Registro creado con éxito", 5);
+                    }
+                    else
+                    {
+                        //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
+                        _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
+                    }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
             }
 
             return View(CatEstatus);

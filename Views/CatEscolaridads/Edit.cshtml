@@ -1,4 +1,4 @@
-﻿@model WebAdmin.Models.CatArea
+﻿@model WebAdmin.Models.CatEscolaridad
 
 
 @{
@@ -10,8 +10,8 @@
 
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Área</li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Área</li>
+        <li class="breadcrumb-item">Escolaridad</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Escolaridad</li>
     </ol>
 </nav>
 <hr />
@@ -19,11 +19,11 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input style="text-transform:uppercase" type="hidden" asp-for="IdArea" id="IdEstatus" />
+            <input style="text-transform:uppercase" type="hidden" asp-for="IdEscolaridad" id="IdEstatus" />
             <div class="form-group">
-                <label asp-for="AreaDesc" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="AreaDesc" class="form-control" />
-                <span asp-validation-for="AreaDesc" class="text-danger"></span>
+                <label asp-for="EscolaridadDesc" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="EscolaridadDesc" class="form-control" />
+                <span asp-validation-for="EscolaridadDesc" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>

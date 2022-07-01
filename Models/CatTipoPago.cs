@@ -14,11 +14,11 @@ namespace WebAdmin.Models
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdTipoCentro { get; set; }
+        public int IdTipoPago { get; set; }
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]
-        public string TipoCentroDesc { get; set; }
+        public string TipoPagoDesc { get; set; }
 
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]

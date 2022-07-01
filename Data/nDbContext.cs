@@ -42,6 +42,13 @@ namespace WebAdmin.Data
         public DbSet<CatCategoria> CatCategorias { get; set; }
         public DbSet<CatProducto> CatProductos { get; set; }
         public DbSet<CatTipoCentro> CatTipoCentros { get; set; }
+        public DbSet<WebAdmin.Models.CatEscolaridad> CatEscolaridad { get; set; }
+        public DbSet<WebAdmin.Models.CatNivelEscolar> CatNivelEscolar { get; set; }
+        public DbSet<WebAdmin.Models.CatTipoAlumno> CatTipoAlumno { get; set; }
+        public DbSet<WebAdmin.Models.CatTipoContratacion> CatTipoContratacion { get; set; }
+        public DbSet<WebAdmin.Models.CatTipoPago> CatTipoPago { get; set; }
+        public DbSet<WebAdmin.Models.CatTipoPrestamo> CatTipoPrestamo { get; set; }
+        public DbSet<WebAdmin.Models.CatTipoServicio> CatTipoServicio { get; set; }
         
     }
 }

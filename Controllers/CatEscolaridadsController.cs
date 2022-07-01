@@ -1,0 +1,153 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using WebAdmin.Data;
+using WebAdmin.Models;
+
+namespace WebAdmin.Controllers
+{
+    public class CatEscolaridadsController : Controller
+    {
+        private readonly nDbContext _context;
+
+        public CatEscolaridadsController(nDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: CatEscolaridads
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.CatEscolaridad.ToListAsync());
+        }
+
+        // GET: CatEscolaridads/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var catEscolaridad = await _context.CatEscolaridad
+                .FirstOrDefaultAsync(m => m.IdEscolaridad == id);
+            if (catEscolaridad == null)
+            {
+                return NotFound();
+            }
+
+            return View(catEscolaridad);
+        }
+
+        // GET: CatEscolaridads/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: CatEscolaridads/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("IdEscolaridad,EscolaridadDesc,FechaRegistro,IdEstatusRegistro")] CatEscolaridad catEscolaridad)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(catEscolaridad);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(catEscolaridad);
+        }
+
+        // GET: CatEscolaridads/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var catEscolaridad = await _context.CatEscolaridad.FindAsync(id);
+            if (catEscolaridad == null)
+            {
+                return NotFound();
+            }
+            return View(catEscolaridad);
+        }
+
+        // POST: CatEscolaridads/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("IdEscolaridad,EscolaridadDesc,FechaRegistro,IdEstatusRegistro")] CatEscolaridad catEscolaridad)
+        {
+            if (id != catEscolaridad.IdEscolaridad)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(catEscolaridad);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CatEscolaridadExists(catEscolaridad.IdEscolaridad))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(catEscolaridad);
+        }
+
+        // GET: CatEscolaridads/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var catEscolaridad = await _context.CatEscolaridad
+                .FirstOrDefaultAsync(m => m.IdEscolaridad == id);
+            if (catEscolaridad == null)
+            {
+                return NotFound();
+            }
+
+            return View(catEscolaridad);
+        }
+
+        // POST: CatEscolaridads/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var catEscolaridad = await _context.CatEscolaridad.FindAsync(id);
+            _context.CatEscolaridad.Remove(catEscolaridad);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CatEscolaridadExists(int id)
+        {
+            return _context.CatEscolaridad.Any(e => e.IdEscolaridad == id);
+        }
+    }
+}

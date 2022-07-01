@@ -1,15 +1,16 @@
-﻿@model IEnumerable<WebAdmin.Models.CatArea>
+﻿@model IEnumerable<WebAdmin.Models.CatTipoContratacion>
 
 @{
-    ViewData["Title"] = "Áreas";
+    ViewData["Title"] = "Géneros";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
+
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Áreas</li>
-        <li class="breadcrumb-item active" aria-current="page">Control de Áreas</li>
+        <li class="breadcrumb-item">Tipo Contratacion</li>
+        <li class="breadcrumb-item active" aria-current="page">Control de Tipo Contratacion</li>
     </ol>
 </nav>
 <p>
@@ -19,7 +20,7 @@
     <thead>
         <tr>
             <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.AreaDesc)
+                @Html.DisplayNameFor(model => model.TipoContratacionDesc)
             </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -35,13 +36,13 @@
         {
             <tr>
                  <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.AreaDesc)
+                    @Html.DisplayFor(modelItem => item.TipoContratacionDesc)
                 </td>
                  <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.FechaRegistro)
                 </td>
                  <td style="text-align:center">
-                         @if (item.IdEstatusRegistro == 1)
+                           @if (item.IdEstatusRegistro == 1)
                     {
                         <i class="fas fa-check-circle" style="font-size: 1em; color: green;"></i>
                     }
@@ -51,9 +52,9 @@
                     }
                 </td>
                  <td style="text-align:center">
-                    <a asp-action="Edit" asp-route-id="@item.IdArea" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
-                    <a asp-action="Details" asp-route-id="@item.IdArea" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.IdArea" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.IdTipoContratacion" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.IdTipoContratacion" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.IdTipoContratacion" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
                 </td>
             </tr>
         }
