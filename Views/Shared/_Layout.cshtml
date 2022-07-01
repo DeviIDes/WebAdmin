@@ -23,6 +23,8 @@
     <!-- Custom styles for this template-->
     <link href="@Url.Content("~/plantilla/css/sb-admin-2.min.css")" rel="stylesheet" type="text/css" />
 
+<!-- Custom styles for this page -->
+<link href="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.css")" rel="stylesheet" type="text/css" />
 </head>
 
 <body id="page-top">
@@ -110,7 +112,6 @@
                         <a class="collapse-item" asp-area="" asp-controller="CatTipoServicios" asp-action="Index">Tipos de Servicios</a>
                         <h6 class="collapse-header">Usuarios:</h6>
                         <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Usuarios</a>
-                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Centros</a>
                         <h6 class="collapse-header">Inventario:</h6>
                         <a class="collapse-item" asp-area="" asp-controller="CatCategorias" asp-action="Index">Categorias</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatProductos" asp-action="Index">Productos</a>
@@ -341,6 +342,10 @@
 
     <!-- Custom scripts for all pages-->
     <script type="text/javascript" src="@Url.Content("~/plantilla/js/sb-admin-2.min.js")"></script>
+
+        <!-- Page level plugins -->
+        <script type="text/javascript" src="@Url.Content("~/plantilla/vendor/datatables/jquery.dataTables.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.js")"></script>
 
     @await Component.InvokeAsync("Notyf");
     @await RenderSectionAsync("Scripts", required: false)

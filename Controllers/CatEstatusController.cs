@@ -1,8 +1,10 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using iText.Html2pdf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
@@ -20,7 +22,15 @@ namespace WebAdmin.Controllers
             _context = context;
             _notyf = notyf;
         }
-
+        [HttpPost]
+        public IActionResult Export(string GridHtml)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                HtmlConverter.ConvertToPdf(GridHtml, stream);
+                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+            }
+        }
         // GET: CatEstatus
         public async Task<IActionResult> Index()
         {

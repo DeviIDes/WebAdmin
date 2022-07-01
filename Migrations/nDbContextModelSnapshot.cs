@@ -1081,14 +1081,6 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdTipoCorporativo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdTipoLicencia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
 

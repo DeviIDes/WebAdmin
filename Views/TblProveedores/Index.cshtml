@@ -14,7 +14,7 @@
     </ol>
 </nav>
 <p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus"></i> Nuevo</a>
+    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus" hidden></i> Nuevo</a>
 </p>
 <table class="table" id="tblProveedores">
     <thead>
@@ -73,14 +73,17 @@
         }
     </tbody>
 </table>
-<script type="text/javascript">
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    <script type="text/javascript">
     $(document).ready(function() {
 
         $('#tblProductos').DataTable();
 
            var vEstatusFlag = '@ViewBag.EstatusFlag'
            var vEmpresaFlag = '@ViewBag.EmpresaFlag'
-           var CorporativoFlag = '@ViewBag.CorporativoFlag'
+           var vCorporativo = '@ViewBag.CorporativoFlag'
 
 
          if (vEstatusFlag == 0)
@@ -95,7 +98,7 @@
              }
              else
              {
-                 if (CorporativoFlag == 0)
+                 if (vCorporativo == 0)
                  {
                  document.getElementById("iNuevo").style.visibility="hidden";
                  }
@@ -107,3 +110,6 @@
          }
        });
 </script>
+}
+}
+

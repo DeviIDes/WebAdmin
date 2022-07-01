@@ -63,16 +63,39 @@
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script type="text/javascript">
-          $(document).ready(function() {
-              var v = '@ViewBag.EstatusFlag'
-              if (v == 1) {
-       document.getElementById("iNuevo").style.visibility="visible";
-    } else {
-       document.getElementById("iNuevo").style.visibility="hidden";
-    }
-          });
+    <script type="text/javascript">
+    $(document).ready(function() {
 
+        $('#tblProductos').DataTable();
+
+           var vEstatusFlag = '@ViewBag.EstatusFlag'
+           var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+           var vCorporativo = '@ViewBag.CorporativoFlag'
+
+
+         if (vEstatusFlag == 0)
+         {
+         document.getElementById("iNuevo").style.visibility="hidden";
+         }
+         else
+         {
+             if (vEmpresaFlag == 0)
+             {
+             document.getElementById("iNuevo").style.visibility="hidden";
+             }
+             else
+             {
+                 if (vCorporativo == 0)
+                 {
+                 document.getElementById("iNuevo").style.visibility="hidden";
+                 }
+                 else
+                 {
+                 document.getElementById("iNuevo").style.visibility="visible";
+                 }
+             }
+         }
+       });
 </script>
+}
 }

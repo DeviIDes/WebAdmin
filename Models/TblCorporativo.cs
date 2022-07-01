@@ -13,14 +13,6 @@ namespace WebAdmin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid IdCorporativo { get; set; }
 
-        [Display(Name = "Tipo de Licencia")]
-        [Required(ErrorMessage = "Campo Requerido")]
-        public string IdTipoLicencia { get; set; }
-
-        [Display(Name = "Tipo de Corporativo")]
-        [Required(ErrorMessage = "Campo Requerido")]
-        public string IdTipoCorporativo { get; set; }
-
         [Display(Name = "Nombre de Corporativo")]
         [Required(ErrorMessage = "Campo Requerido")]
         public string NombreCorporativo { get; set; }

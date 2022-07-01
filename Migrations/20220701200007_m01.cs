@@ -321,8 +321,6 @@ namespace WebAdmin.Migrations
                 columns: table => new
                 {
                     IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdTipoLicencia = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdTipoCorporativo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NombreCorporativo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),

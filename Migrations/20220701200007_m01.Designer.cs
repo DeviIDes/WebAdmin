@@ -10,7 +10,7 @@ using WebAdmin.Data;
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    [Migration("20220701162508_m01")]
+    [Migration("20220701200007_m01")]
     partial class m01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1082,14 +1082,6 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
-
-                    b.Property<string>("IdTipoCorporativo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdTipoLicencia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
