@@ -34,11 +34,11 @@ namespace WebAdminHecsa.Controllers
                 if (ValidaEmpresa.Count == 1)
                 {
                     ViewBag.EmpresaFlag = 1;
-                    var ValidaProveedor = _context.TblProveedores.ToList();
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
 
-                    if (ValidaProveedor.Count >= 1)
+                    if (ValidaCorporativo.Count >= 1)
                     {
-                        ViewBag.ProveedorFlag = 1;
+                        ViewBag.CorporativoFlag = 1;
                         var ValidaCategoria = _context.CatCategorias.ToList();
 
                         if (ValidaCategoria.Count >= 1)
@@ -53,8 +53,8 @@ namespace WebAdminHecsa.Controllers
                     }
                     else
                     {
-                        ViewBag.ProveedorFlag = 0;
-                        _notyf.Information("Favor de registrar los datos de Proveedores para la Aplicación", 5);
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
                     }
                 }
                 else
@@ -92,7 +92,7 @@ namespace WebAdminHecsa.Controllers
         public ActionResult FiltroProductos(int idA, int idB)
         {
             var fProductos = _context.CatProductos
-                       .Where(s => s.IdMarca == idA && s.IdCategoria == idB).Distinct().ToList();
+                       .Where(s =>  s.IdCategoria == idB).Distinct().ToList();
             return Json(fProductos);
         }
 
@@ -137,12 +137,12 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProducto,CodigoExterno,IdMarca,IdCategoria,DescProducto")] CatProducto catProductos)
+        public async Task<IActionResult> Create([Bind("IdProducto,CodigoExterno,IdCategoria,DescProducto")] CatProducto catProductos)
         {
             if (ModelState.IsValid)
             {
                 var DuplicadosEstatus = _context.CatProductos
-               .Where(s => s.IdCategoria == catProductos.IdMarca && s.IdCategoria == catProductos.IdCategoria && s.DescProducto == catProductos.DescProducto)
+               .Where(s =>  s.IdCategoria == catProductos.IdCategoria && s.DescProducto == catProductos.DescProducto)
                .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
@@ -203,7 +203,7 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,CodigoInterno,CodigoExterno,IdMarca,IdCategoria,DescProducto,CantidadMinima,Cantidad,ProductoPrecioUno,PorcentajePrecioUno,ProductoPrecioDos,PorcentajePrecioDos,ProductoPrecioTres,PorcentajePrecioTres,ProductoPrecioCuatro,PorcentajePrecioCuatro,SubCosto,Costo,IdEstatusRegistro")] CatProducto catProductos)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,CodigoInterno,CodigoExterno,IdCategoria,DescProducto,CantidadMinima,Cantidad,ProductoPrecioUno,PorcentajePrecioUno,ProductoPrecioDos,PorcentajePrecioDos,ProductoPrecioTres,PorcentajePrecioTres,ProductoPrecioCuatro,PorcentajePrecioCuatro,SubCosto,Costo,IdEstatusRegistro")] CatProducto catProductos)
         {
             if (id != catProductos.IdProducto)
             {

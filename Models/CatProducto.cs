@@ -20,12 +20,6 @@ namespace WebAdmin.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string CodigoExterno { get; set; }
 
-        [Display(Name = "Marca")]
-        [Required(ErrorMessage = "Campo Requerido")]
-        public int IdMarca { get; set; }
-        [Display(Name = "Marca")]
-        [NotMapped]
-        public string MarcaDesc { get; set; }
         [Display(Name = "Categoria")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdCategoria { get; set; }

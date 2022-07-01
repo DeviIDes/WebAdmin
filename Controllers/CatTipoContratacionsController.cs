@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,15 +14,28 @@ namespace WebAdmin.Controllers
     public class CatTipoContratacionsController : Controller
     {
         private readonly nDbContext _context;
+        private readonly INotyfService _notyf;
 
-        public CatTipoContratacionsController(nDbContext context)
+        public CatTipoContratacionsController(nDbContext context, INotyfService notyf)
         {
             _context = context;
-        }
+            _notyf = notyf;
 
+        }
         // GET: CatTipoContratacions
         public async Task<IActionResult> Index()
         {
+            var ValidaEstatus = _context.CatEstatus.ToList();
+
+            if (ValidaEstatus.Count == 2)
+            {
+                ViewBag.EstatusFlag = 1;
+            }
+            else
+            {
+                ViewBag.EstatusFlag = 0;
+                _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
+            }
             return View(await _context.CatTipoContratacion.ToListAsync());
         }
 
@@ -58,8 +72,28 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(catTipoContratacion);
-                await _context.SaveChangesAsync();
+
+                var DuplicadosEstatus = _context.CatTipoContratacion
+                       .Where(s => s.TipoContratacionDesc == catTipoContratacion.TipoContratacionDesc)
+                       .ToList();
+
+                if (DuplicadosEstatus.Count == 0)
+                {
+
+                    catTipoContratacion.FechaRegistro = DateTime.Now;
+                    catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper();
+                    catTipoContratacion.IdEstatusRegistro = 1;
+                    _context.SaveChanges();
+
+                    _context.Add(catTipoContratacion);
+                    await _context.SaveChangesAsync();
+                    _notyf.Success("Registro creado con éxito", 5);
+                }
+                else
+                {
+                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
+                    _notyf.Information("Favor de validar, existe una Estatus con el mismo nombre", 5);
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(catTipoContratacion);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,15 +14,28 @@ namespace WebAdmin.Controllers
     public class CatTipoAlumnoesController : Controller
     {
         private readonly nDbContext _context;
+        private readonly INotyfService _notyf;
 
-        public CatTipoAlumnoesController(nDbContext context)
+        public CatTipoAlumnoesController(nDbContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         // GET: CatTipoAlumnoes
         public async Task<IActionResult> Index()
         {
+            var ValidaEstatus = _context.CatEstatus.ToList();
+
+            if (ValidaEstatus.Count == 2)
+            {
+                ViewBag.EstatusFlag = 1;
+            }
+            else
+            {
+                ViewBag.EstatusFlag = 0;
+                _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
+            }
             return View(await _context.CatTipoAlumno.ToListAsync());
         }
 
@@ -58,8 +72,28 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(catTipoAlumno);
-                await _context.SaveChangesAsync();
+
+                var DuplicadosEstatus = _context.CatTipoAlumno
+                       .Where(s => s.TipoAlumnoDesc == catTipoAlumno.TipoAlumnoDesc)
+                       .ToList();
+
+                if (DuplicadosEstatus.Count == 0)
+                {
+
+                    catTipoAlumno.FechaRegistro = DateTime.Now;
+                    catTipoAlumno.TipoAlumnoDesc = catTipoAlumno.TipoAlumnoDesc.ToString().ToUpper();
+                    catTipoAlumno.IdEstatusRegistro = 1;
+                    _context.SaveChanges();
+
+                    _context.Add(catTipoAlumno);
+                    await _context.SaveChangesAsync();
+                    _notyf.Success("Registro creado con éxito", 5);
+                }
+                else
+                {
+                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
+                    _notyf.Information("Favor de validar, existe una Estatus con el mismo nombre", 5);
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(catTipoAlumno);

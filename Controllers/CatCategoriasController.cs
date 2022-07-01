@@ -35,17 +35,17 @@ namespace WebAdminHecsa.Controllers
                 if (ValidaEmpresa.Count == 1)
                 {
                     ViewBag.EmpresaFlag = 1;
-                    var ValidaProveedor = _context.TblProveedores.ToList();
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
 
-                    if (ValidaProveedor.Count >= 1)
+                    if (ValidaCorporativo.Count >= 1)
                     {
-                        ViewBag.ProveedorFlag = 1;
+                        ViewBag.CorporativoFlag = 1;
  
                     }
                     else
                     {
-                        ViewBag.ProveedorFlag = 0;
-                        _notyf.Information("Favor de registrar los datos de Proveedores para la Aplicación", 5);
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
                     }
                 }
                 else

@@ -8,10 +8,7 @@ namespace WebAdmin.Models
     public class CatTipoPrestamo
     {
 
-        public CatTipoPrestamo()
-        {
-            TblCentros = new HashSet<TblCentro>();
-        }
+  
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTipoPrestamo { get; set; }
@@ -27,6 +24,5 @@ namespace WebAdmin.Models
         public int IdEstatusRegistro { get; set; }
 
 
-        public virtual ICollection<TblCentro> TblCentros { get; set; }
     }
 }

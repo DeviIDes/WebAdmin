@@ -6,7 +6,7 @@
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        
+
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Productos</li>
         <li class="breadcrumb-item active" aria-current="page">Control de Productos</li>
@@ -25,9 +25,6 @@
                 @Html.DisplayNameFor(model => model.CodigoExterno)
             </th>
 
-            <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.MarcaDesc)
-            </th>
 
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.CategoriaDesc)
@@ -56,9 +53,7 @@
                     @Html.DisplayFor(modelItem => item.CodigoExterno)
                 </td>
 
-                <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.MarcaDesc)
-                </td>
+
 
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.CategoriaDesc)
@@ -90,62 +85,43 @@
 </table>
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script type="text/javascript">
-    $(document).ready(function() {
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        $(document).ready(function() {
 
-        $('#tblProductos').DataTable();
+            $('#tblProductos').DataTable();
 
-           var vEstatusFlag = '@ViewBag.EstatusFlag'
-           var vEmpresaFlag = '@ViewBag.EmpresaFlag'
-           var vProveedorFlag = '@ViewBag.ProveedorFlag'
-           var vMarcaFlag = '@ViewBag.MarcaFlag'
-           var vCategoriaFlag = '@ViewBag.CategoriaFlag'
+            var vEstatusFlag = '@ViewBag.EstatusFlag'
+            var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+            var CorporativoFlag = '@ViewBag.CorporativoFlag'
+            var vCategoriaFlag = '@ViewBag.CategoriaFlag'
 
-         if (vEstatusFlag == 0)
-         {
-         document.getElementById("iNuevo").style.visibility="hidden";
-         }
-         else
-         {
-             if (vEmpresaFlag == 0)
-             {
-             document.getElementById("iNuevo").style.visibility="hidden";
-             }
-             else
-             {
-                 if (vProveedorFlag == 0)
-                 {
-                 document.getElementById("iNuevo").style.visibility="hidden";
-                 }
-                 else
-                 {
-                     if (vPerfilFlag == 0)
-                     {
-                     document.getElementById("iNuevo").style.visibility="hidden";
-                     }
-                     else
-                     {
-                         if (vMarcaFlag == 0)
-                         {
-                         document.getElementById("iNuevo").style.visibility="hidden";
-                         }
-                         else
-                         {
-                             if (vCategoriaFlag == 0)
-                             {
-                             document.getElementById("iNuevo").style.visibility="hidden";
-                             }
-                             else
-                             {
-                             document.getElementById("iNuevo").style.visibility="visible";
-                             }
-                         }
-                     }
-                 }
-             }
-         }
-       });
-</script>
+            if (vEstatusFlag == 0) {
+                document.getElementById("iNuevo").style.visibility = "hidden";
+            }
+            else {
+                if (vEmpresaFlag == 0) {
+                    document.getElementById("iNuevo").style.visibility = "hidden";
+                }
+                else {
+                    if (CorporativoFlag == 0) {
+                        document.getElementById("iNuevo").style.visibility = "hidden";
+                    }
+                    else {
+
+
+                        if (vCategoriaFlag == 0) {
+                            document.getElementById("iNuevo").style.visibility = "hidden";
+                        }
+                        else {
+                            document.getElementById("iNuevo").style.visibility = "visible";
+                        }
+
+
+                    }
+                }
+            }
+        });
+    </script>
 }

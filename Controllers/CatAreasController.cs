@@ -29,17 +29,6 @@ namespace WebAdmin.Controllers
             if (ValidaEstatus.Count == 2)
             {
                 ViewBag.EstatusFlag = 1;
-                var ValidaEmpresa = _context.TblEmpresa.ToList();
-
-                if (ValidaEmpresa.Count == 1)
-                {
-                    ViewBag.EmpresaFlag = 1;
-                }
-                else
-                {
-                    ViewBag.EmpresaFlag = 0;
-                    _notyf.Information("Favor de registrar los datos de la Empresa para la Aplicación", 5);
-                }
             }
             else
             {
@@ -88,8 +77,7 @@ namespace WebAdmin.Controllers
 
                 if (DuplicadosEstatus.Count == 0)
                 {
-                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
-                    catArea.IdCorporativo = idCorporativos.IdCorporativo;
+                    
                     catArea.FechaRegistro = DateTime.Now;
                     catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
                     catArea.IdEstatusRegistro = 1;

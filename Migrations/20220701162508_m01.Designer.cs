@@ -10,7 +10,7 @@ using WebAdmin.Data;
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    [Migration("20220630214822_m01")]
+    [Migration("20220701162508_m01")]
     partial class m01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -529,9 +529,6 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdMarca")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("PorcentajePrecioUno")
                         .HasColumnType("decimal(18,2)");
 
@@ -685,7 +682,7 @@ namespace WebAdmin.Migrations
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoPago", b =>
                 {
-                    b.Property<int>("IdTipoCentro")
+                    b.Property<int>("IdTipoPago")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -700,11 +697,11 @@ namespace WebAdmin.Migrations
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("TipoCentroDesc")
+                    b.Property<string>("TipoPagoDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdTipoCentro");
+                    b.HasKey("IdTipoPago");
 
                     b.HasIndex("TblCorporativoIdCorporativo");
 
@@ -842,10 +839,7 @@ namespace WebAdmin.Migrations
                     b.Property<string>("Calle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CatTipoPagoIdTipoCentro")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatTipoPrestamoIdTipoPrestamo")
+                    b.Property<int?>("CatTipoPagoIdTipoPago")
                         .HasColumnType("int");
 
                     b.Property<int?>("CatTipoServicioIdTipoServicio")
@@ -903,9 +897,7 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdCentro");
 
-                    b.HasIndex("CatTipoPagoIdTipoCentro");
-
-                    b.HasIndex("CatTipoPrestamoIdTipoPrestamo");
+                    b.HasIndex("CatTipoPagoIdTipoPago");
 
                     b.HasIndex("CatTipoServicioIdTipoServicio");
 
@@ -1588,11 +1580,7 @@ namespace WebAdmin.Migrations
                 {
                     b.HasOne("WebAdmin.Models.CatTipoPago", null)
                         .WithMany("TblCentros")
-                        .HasForeignKey("CatTipoPagoIdTipoCentro");
-
-                    b.HasOne("WebAdmin.Models.CatTipoPrestamo", null)
-                        .WithMany("TblCentros")
-                        .HasForeignKey("CatTipoPrestamoIdTipoPrestamo");
+                        .HasForeignKey("CatTipoPagoIdTipoPago");
 
                     b.HasOne("WebAdmin.Models.CatTipoServicio", null)
                         .WithMany("TblCentros")
@@ -1745,11 +1733,6 @@ namespace WebAdmin.Migrations
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoPago", b =>
-                {
-                    b.Navigation("TblCentros");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoPrestamo", b =>
                 {
                     b.Navigation("TblCentros");
                 });

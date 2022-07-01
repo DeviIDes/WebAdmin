@@ -89,7 +89,6 @@
                         <a class="collapse-item" asp-area="" asp-controller="CatTipoPagoes" asp-action="Index">Tipo de Pago</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatEscolaridads" asp-action="Index">Escolaridad</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatNivelEscolars" asp-action="Index">Nivel Escolar</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoServicios" asp-action="Index">Tipos de Servicios</a>
                         <a class="collapse-item" asp-area="" asp-controller="CatTipoAlumnoes" asp-action="Index">Tipos de Alumno</a>
                     </div>
                 </div>
@@ -107,12 +106,14 @@
                         <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
                         <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Corporativo</a>
                         <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Centros</a>
+                        <a class="collapse-item" asp-area="" asp-controller="TblProveedores" asp-action="">Proveedores</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatTipoServicios" asp-action="Index">Tipos de Servicios</a>
                         <h6 class="collapse-header">Usuarios:</h6>
                         <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Usuarios</a>
                         <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Centros</a>
                         <h6 class="collapse-header">Inventario:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Categorias</a>
-                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Productos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatCategorias" asp-action="Index">Categorias</a>
+                        <a class="collapse-item" asp-area="" asp-controller="CatProductos" asp-action="Index">Productos</a>
                     </div>
                 </div>
             </li>
@@ -135,8 +136,8 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Escolares:</h6>
-                        <a class="collapse-item" href="#">Prospectos</a>
-                        <a class="collapse-item" href="#">Alumnos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Prospectos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Alumnos</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">transacción:</h6>
                         <a class="collapse-item" href="#">Ventas</a>

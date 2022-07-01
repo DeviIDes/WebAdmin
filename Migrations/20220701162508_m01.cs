@@ -273,7 +273,6 @@ namespace WebAdmin.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodigoInterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CodigoExterno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdMarca = table.Column<int>(type: "int", nullable: false),
                     IdCategoria = table.Column<int>(type: "int", nullable: false),
                     DescProducto = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CantidadMinima = table.Column<int>(type: "int", nullable: false),
@@ -620,16 +619,16 @@ namespace WebAdmin.Migrations
                 name: "CatTipoPago",
                 columns: table => new
                 {
-                    IdTipoCentro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoPago = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoCentroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoPagoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CatTipoPago", x => x.IdTipoCentro);
+                    table.PrimaryKey("PK_CatTipoPago", x => x.IdTipoPago);
                     table.ForeignKey(
                         name: "FK_CatTipoPago_TblCorporativos_TblCorporativoIdCorporativo",
                         column: x => x.TblCorporativoIdCorporativo,
@@ -750,8 +749,7 @@ namespace WebAdmin.Migrations
                     IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    CatTipoPagoIdTipoCentro = table.Column<int>(type: "int", nullable: true),
-                    CatTipoPrestamoIdTipoPrestamo = table.Column<int>(type: "int", nullable: true),
+                    CatTipoPagoIdTipoPago = table.Column<int>(type: "int", nullable: true),
                     CatTipoServicioIdTipoServicio = table.Column<int>(type: "int", nullable: true),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -759,16 +757,10 @@ namespace WebAdmin.Migrations
                 {
                     table.PrimaryKey("PK_TblCentros", x => x.IdCentro);
                     table.ForeignKey(
-                        name: "FK_TblCentros_CatTipoPago_CatTipoPagoIdTipoCentro",
-                        column: x => x.CatTipoPagoIdTipoCentro,
+                        name: "FK_TblCentros_CatTipoPago_CatTipoPagoIdTipoPago",
+                        column: x => x.CatTipoPagoIdTipoPago,
                         principalTable: "CatTipoPago",
-                        principalColumn: "IdTipoCentro",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TblCentros_CatTipoPrestamo_CatTipoPrestamoIdTipoPrestamo",
-                        column: x => x.CatTipoPrestamoIdTipoPrestamo,
-                        principalTable: "CatTipoPrestamo",
-                        principalColumn: "IdTipoPrestamo",
+                        principalColumn: "IdTipoPago",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TblCentros_CatTipoServicio_CatTipoServicioIdTipoServicio",
@@ -1022,14 +1014,9 @@ namespace WebAdmin.Migrations
                 column: "TblCorporativoIdCorporativo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TblCentros_CatTipoPagoIdTipoCentro",
+                name: "IX_TblCentros_CatTipoPagoIdTipoPago",
                 table: "TblCentros",
-                column: "CatTipoPagoIdTipoCentro");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblCentros_CatTipoPrestamoIdTipoPrestamo",
-                table: "TblCentros",
-                column: "CatTipoPrestamoIdTipoPrestamo");
+                column: "CatTipoPagoIdTipoPago");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblCentros_CatTipoServicioIdTipoServicio",
@@ -1236,6 +1223,9 @@ namespace WebAdmin.Migrations
                 name: "CatTipoDirecciones");
 
             migrationBuilder.DropTable(
+                name: "CatTipoPrestamo");
+
+            migrationBuilder.DropTable(
                 name: "FilesOnDatabase");
 
             migrationBuilder.DropTable(
@@ -1273,9 +1263,6 @@ namespace WebAdmin.Migrations
 
             migrationBuilder.DropTable(
                 name: "CatTipoPago");
-
-            migrationBuilder.DropTable(
-                name: "CatTipoPrestamo");
 
             migrationBuilder.DropTable(
                 name: "CatTipoServicio");
