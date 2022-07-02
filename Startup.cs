@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 
 
 using WebAdmin.Data;
+using WebAdmin.Models;
 using WebAdmin.Services;
 
 
@@ -34,8 +35,10 @@ namespace WebAdmin
                     Configuration.GetConnectionString("msql_connection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<nDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<nDbContext>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
 

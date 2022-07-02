@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebAdmin.Models;
 
@@ -42,13 +43,16 @@ namespace WebAdmin.Data
         public DbSet<CatCategoria> CatCategorias { get; set; }
         public DbSet<CatProducto> CatProductos { get; set; }
         public DbSet<CatTipoCentro> CatTipoCentros { get; set; }
-        public DbSet<WebAdmin.Models.CatEscolaridad> CatEscolaridad { get; set; }
-        public DbSet<WebAdmin.Models.CatNivelEscolar> CatNivelEscolar { get; set; }
-        public DbSet<WebAdmin.Models.CatTipoAlumno> CatTipoAlumno { get; set; }
-        public DbSet<WebAdmin.Models.CatTipoContratacion> CatTipoContratacion { get; set; }
-        public DbSet<WebAdmin.Models.CatTipoPago> CatTipoPago { get; set; }
-        public DbSet<WebAdmin.Models.CatTipoPrestamo> CatTipoPrestamo { get; set; }
-        public DbSet<WebAdmin.Models.CatTipoServicio> CatTipoServicio { get; set; }
-        
+        public DbSet<CatEscolaridad> CatEscolaridad { get; set; }
+        public DbSet<CatNivelEscolar> CatNivelEscolar { get; set; }
+        public DbSet<CatTipoAlumno> CatTipoAlumno { get; set; }
+        public DbSet<CatTipoContratacion> CatTipoContratacion { get; set; }
+        public DbSet<CatTipoPago> CatTipoPago { get; set; }
+        public DbSet<CatTipoPrestamo> CatTipoPrestamo { get; set; }
+        public DbSet<CatTipoServicio> CatTipoServicio { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+
     }
 }

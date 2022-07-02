@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 <!DOCTYPE html>
 <html lang="es-MX" xml:lang="es-MX">
 
@@ -23,8 +23,8 @@
     <!-- Custom styles for this template-->
     <link href="@Url.Content("~/plantilla/css/sb-admin-2.min.css")" rel="stylesheet" type="text/css" />
 
-<!-- Custom styles for this page -->
-<link href="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.css")" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this page -->
+    <link href="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.css")" rel="stylesheet" type="text/css" />
 </head>
 
 <body id="page-top">
@@ -34,160 +34,160 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-book-open"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Admin <sup></sup></div>
+                </a>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+
+                @* <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+            <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
             </a>
+            </li>*@
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            @* <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span>
-        </a>
-        </li>*@
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Corporativo
-            </div>
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Resumen</span>
-                </a>
-            </li>
-            <!-- Nav Item - Catálogos Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatálogos"
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Corporativo
+                </div>
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Resumen</span>
+                    </a>
+                </li>
+                <!-- Nav Item - Catálogos Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatálogos"
                    aria-expanded="true" aria-controls="collapseCatálogos">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Catálogos</span>
-                </a>
-                <div id="collapseCatálogos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoCentroes" asp-action="Index">Tipos de Centro</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoDireccions" asp-action="Index">Tipos de Direcciones</a>
-                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Licencias</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Áreas</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Géneros</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatPerfiles" asp-action="Index">Perfiles</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoPrestamoes" asp-action="Index">Tipos de Prestamo</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoContratacions" asp-action="Index">Tipos de Contratacion</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoPagoes" asp-action="Index">Tipo de Pago</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatEscolaridads" asp-action="Index">Escolaridad</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatNivelEscolars" asp-action="Index">Nivel Escolar</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoAlumnoes" asp-action="Index">Tipos de Alumno</a>
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Catálogos</span>
+                    </a>
+                    <div id="collapseCatálogos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoCentroes" asp-action="Index">Tipos de Centro</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoDireccions" asp-action="Index">Tipos de Direcciones</a>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Licencias</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Áreas</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Géneros</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatPerfiles" asp-action="Index">Perfiles</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoPrestamoes" asp-action="Index">Tipos de Prestamo</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoContratacions" asp-action="Index">Tipos de Contratacion</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoPagoes" asp-action="Index">Tipo de Pago</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatEscolaridads" asp-action="Index">Escolaridad</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatNivelEscolars" asp-action="Index">Nivel Escolar</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoAlumnoes" asp-action="Index">Tipos de Alumno</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <!-- Nav Item - Centros Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCentros"
+                </li>
+                <!-- Nav Item - Centros Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCentros"
                    aria-expanded="true" aria-controls="collapseCentros">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Corporativo</span>
-                </a>
-                <div id="collapseCentros" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Administración:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
-                        <a class="collapse-item" asp-area="" asp-controller="TblCorporativoes" asp-action="Index">Corporativo</a>
-                        <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
-                        <a class="collapse-item" asp-area="" asp-controller="TblProveedores" asp-action="Index">Proveedores</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatTipoServicios" asp-action="Index">Tipos de Servicios</a>
-                        <h6 class="collapse-header">Usuarios:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Usuarios</a>
-                        <h6 class="collapse-header">Inventario:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="CatCategorias" asp-action="Index">Categorias</a>
-                        <a class="collapse-item" asp-area="" asp-controller="CatProductos" asp-action="Index">Productos</a>
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Corporativo</span>
+                    </a>
+                    <div id="collapseCentros" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Administración:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblCorporativoes" asp-action="Index">Corporativo</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblProveedores" asp-action="Index">Proveedores</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoServicios" asp-action="Index">Tipos de Servicios</a>
+                            <h6 class="collapse-header">Usuarios:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Usuarios</a>
+                            <h6 class="collapse-header">Inventario:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="CatCategorias" asp-action="Index">Categorias</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatProductos" asp-action="Index">Productos</a>
+                        </div>
                     </div>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Informacion de Centros
                 </div>
-            </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Informacion de Centros
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Centros</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Escolares:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Prospectos</a>
-                        <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Alumnos</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">transacción:</h6>
-                        <a class="collapse-item" href="#">Ventas</a>
-                        <a class="collapse-item" href="#">Compras</a>
-                        <a class="collapse-item" href="#">Servicios</a>
-                        <h6 class="collapse-header">Finanzas:</h6>
-                        <a class="collapse-item" href="#">Bancos</a>
-                        <a class="collapse-item" href="#">Nómina</a>
-                        <a class="collapse-item" href="#">Préstamos</a>
-                        <a class="collapse-item" asp-area="" asp-controller="File" asp-action="Index">Carga Archivos</a>
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Centros</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Escolares:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Prospectos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Alumnos</a>
+                            <div class="collapse-divider"></div>
+                            <h6 class="collapse-header">transacción:</h6>
+                            <a class="collapse-item" href="#">Ventas</a>
+                            <a class="collapse-item" href="#">Compras</a>
+                            <a class="collapse-item" href="#">Servicios</a>
+                            <h6 class="collapse-header">Finanzas:</h6>
+                            <a class="collapse-item" href="#">Bancos</a>
+                            <a class="collapse-item" href="#">Nómina</a>
+                            <a class="collapse-item" href="#">Préstamos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="File" asp-action="Index">Carga Archivos</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <!-- Nav Item - Centros Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConsultas"
+                </li>
+                <!-- Nav Item - Centros Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConsultas"
                    aria-expanded="true" aria-controls="collapseConsultas">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Consultas</span>
-                </a>
-                <div id="collapseConsultas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Finanzas:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Inversiones</a>
-                        <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Estados de Cuenta</a>
-          
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Consultas</span>
+                    </a>
+                    <div id="collapseConsultas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Finanzas:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Inversiones</a>
+                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Estados de Cuenta</a>
+
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
 
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- sidebar toggler (sidebar) -->
+                <!-- sidebar toggler (sidebar) -->
 
-            <button id="sidebarToggleTop" class="btn btn-link mr-3">
-                <i class="fa fa-chevron-left"></i>
-            </button>
+                <button id="sidebarToggleTop" class="btn btn-link mr-3">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
 
 
-            @*     <!-- sidebar message -->
-        <div class="sidebar-card d-none d-lg-flex">
-        <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-        <p class="text-center mb-2"><strong>sb admin pro</strong> is packed with premium features, components, and more!</p>
-        <a class="btn btn-success btn-sm" href="">test!</a>
-        </div>*@
+                @*     <!-- sidebar message -->
+            <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+            <p class="text-center mb-2"><strong>sb admin pro</strong> is packed with premium features, components, and more!</p>
+            <a class="btn btn-success btn-sm" href="">test!</a>
+            </div>*@
 
-        </ul>
+            </ul>
             <!-- End of Sidebar -->
         }
         <!-- Content Wrapper -->
@@ -236,8 +236,16 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">@User.Identity?.Name</span>
-                                    <img class="img-profile rounded-circle"
-                                     src="/plantilla/img/undraw_profile.svg">
+                                    @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
+                                    {
+                                        <img id="profilePicture" class="img-profile rounded-circle" style="width:32px;height:32px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))">
+                                        <br>
+                                    }
+                                    else
+                                    {
+                                        <img id="profilePicture" class="img-profile rounded-circle" style="width:32px;height:32px; object-fit:cover" src="">
+                                        <br>
+                                    }
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -247,13 +255,13 @@
                                         Perfil
                                     </a>
                                     @* <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a> *@
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                                </a> *@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -343,9 +351,9 @@
     <!-- Custom scripts for all pages-->
     <script type="text/javascript" src="@Url.Content("~/plantilla/js/sb-admin-2.min.js")"></script>
 
-        <!-- Page level plugins -->
-        <script type="text/javascript" src="@Url.Content("~/plantilla/vendor/datatables/jquery.dataTables.min.js")"></script>
-        <script type="text/javascript" src="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.js")"></script>
+    <!-- Page level plugins -->
+    <script type="text/javascript" src="@Url.Content("~/plantilla/vendor/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.js")"></script>
 
     @await Component.InvokeAsync("Notyf");
     @await RenderSectionAsync("Scripts", required: false)

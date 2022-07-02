@@ -26,6 +26,10 @@ namespace WebAdmin.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UsernameChangeLimit = table.Column<int>(type: "int", nullable: false),
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -249,6 +253,7 @@ namespace WebAdmin.Migrations
                     IdRol = table.Column<int>(type: "int", nullable: false),
                     FechadeNacimiento = table.Column<DateTime>(name: "Fecha de Nacimiento", type: "datetime2", nullable: false),
                     CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagenPErfil = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     CatAreaIdArea = table.Column<int>(type: "int", nullable: true),

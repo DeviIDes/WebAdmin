@@ -36,7 +36,11 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
         [Display(Name = "Correo de Acceso")]
+        
         public string CorreoAcceso { get; set; }
+
+          [Display(Name = "Profile Picture")]
+    public byte[] ImagenPErfil { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
