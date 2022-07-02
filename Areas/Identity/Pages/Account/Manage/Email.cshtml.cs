@@ -45,7 +45,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "New email")]
+            [Display(Name = "Nuevo correo electrónico")]
             public string NewEmail { get; set; }
         }
 
@@ -104,7 +104,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account.Manage
                     "Confirm your email",
                     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = "Enlace de confirmación para cambiar el correo electrónico enviado. Por favor revise su correo electrónico.";
                 return RedirectToPage();
             }
 
@@ -140,7 +140,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account.Manage
                 "Confirm your email",
                 $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "El mensaje de verificación ha sido enviado. Por favor revise su correo electrónico.";
             return RedirectToPage();
         }
     }

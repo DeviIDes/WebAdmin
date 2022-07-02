@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebAdmin.Models.TblCentro>
 
 @{
-    ViewData["Title"] = "Crear Fiscales";
+    ViewData["Title"] = "Crear Centro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -9,8 +9,8 @@
 
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Empresa</li>
-        <li class="breadcrumb-item">Control de Fiscales</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Fiscales</li>
+        <li class="breadcrumb-item">Control de Centro</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Centro</li>
     </ol>
 </nav>
 <p>
@@ -72,28 +72,39 @@
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-<script type="text/javascript">
-          $(document).ready(function() {
-              var vEstatusFlag = '@ViewBag.EstatusFlag'
-              var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+    <script type="text/javascript">
+    $(document).ready(function() {
 
-              if (vEstatusFlag == 0) {
-       document.getElementById("iNuevo").style.visibility="hidden";
-    }
+        $('#tblProductos').DataTable();
 
-    else {
-        if (vEmpresaFlag == 0)
-    {
-        document.getElementById("iNuevo").style.visibility="hidden";
-    }
-    else
-    {
-       document.getElementById("iNuevo").style.visibility="visible";
-    }
+           var vEstatusFlag = '@ViewBag.EstatusFlag'
+           var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+           var vCorporativo = '@ViewBag.CorporativoFlag'
 
-    }
-          });
 
+         if (vEstatusFlag == 0)
+         {
+         document.getElementById("iNuevo").style.visibility="hidden";
+         }
+         else
+         {
+             if (vEmpresaFlag == 0)
+             {
+             document.getElementById("iNuevo").style.visibility="hidden";
+             }
+             else
+             {
+                 if (vCorporativo == 0)
+                 {
+                 document.getElementById("iNuevo").style.visibility="hidden";
+                 }
+                 else
+                 {
+                 document.getElementById("iNuevo").style.visibility="visible";
+                 }
+             }
+         }
+       });
 </script>
+}
 }

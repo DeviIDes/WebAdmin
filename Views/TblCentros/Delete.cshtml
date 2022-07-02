@@ -1,7 +1,7 @@
 ﻿@model WebAdmin.Models.TblCentro
 
 @{
-    ViewData["Title"] = "Detalles Fiscales";
+    ViewData["Title"] = "Desactivar Centro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -9,8 +9,8 @@
     
     <li class="breadcrumb-item">Información</li>
     <li class="breadcrumb-item">Empresa</li>
-    <li class="breadcrumb-item">Control de Empresa</li>
-    <li class="breadcrumb-item active" aria-current="page">Detalles Fiscales</li>
+    <li class="breadcrumb-item">Control de Centro</li>
+    <li class="breadcrumb-item active" aria-current="page">Desactivar Empresa Centro</li>
   </ol>
 </nav>
 <hr />
@@ -36,7 +36,6 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CodigoPostal)
         </dd>
-
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Colonia)
         </dt>
@@ -61,27 +60,24 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Estado)
         </dd>
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Telefono)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Telefono)
         </dd>
-     
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaRegistro)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEstatusRegistro)
-        </dd>
     </dl>
+    
+<form asp-action="Delete">
+        <input type="hidden" asp-for="IdCentro" />
+        <input type="submit" value="Desactivar" class="btn btn-danger" /> 
+          <a asp-action="Index" class="btn btn-secondary">Regresar</a> 
+    </form>
 </div>
-   <div class="form-group">
-        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-    </div>

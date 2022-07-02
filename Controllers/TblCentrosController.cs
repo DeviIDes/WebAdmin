@@ -24,16 +24,28 @@ namespace WebAdmin.Controllers
         // GET: tblCentros
         public async Task<IActionResult> Index()
         {
-            var ValidaEstatus = _context.CatEstatus.ToList();
+                var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
             {
                 ViewBag.EstatusFlag = 1;
-                var ValidaEmpresa = _context.TblEmpresa.ToList();
+                var ValidaEmpresa = _context.TblEmpresas.ToList();
 
                 if (ValidaEmpresa.Count == 1)
                 {
                     ViewBag.EmpresaFlag = 1;
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
+
+                    if (ValidaCorporativo.Count >= 1)
+                    {
+                        ViewBag.CorporativoFlag = 1;
+                       
+                    }
+                    else
+                    {
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
+                    }
                 }
                 else
                 {

@@ -1,24 +1,29 @@
 ﻿@model WebAdmin.Models.TblCorporativo
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Desactivar Fiscales";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    
+    <li class="breadcrumb-item">Información</li>
+    <li class="breadcrumb-item">Empresa</li>
+    <li class="breadcrumb-item">Control de Empresa</li>
+    <li class="breadcrumb-item active" aria-current="page">Desactivar Empresa Fiscales</li>
+  </ol>
+</nav>
+<hr />
 <div>
-    <h4>TblCorporativo</h4>
-    <hr />
-    <dl class="row">
 
+    <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NombreCorporativo)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NombreCorporativo)
         </dd>
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Calle)
         </dt>
@@ -30,12 +35,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CodigoPostal)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdColonia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdColonia)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Colonia)
@@ -61,12 +60,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Estado)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CorreoElectronico)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CorreoElectronico)
-        </dd>
+
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Telefono)
         </dt>
@@ -74,28 +68,16 @@
             @Html.DisplayFor(model => model.Telefono)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdEmpresa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEmpresa)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaRegistro)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdEstatusRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEstatusRegistro)
-        </dd>
     </dl>
     
-    <form asp-action="Delete">
+<form asp-action="Delete">
         <input type="hidden" asp-for="IdCorporativo" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Desactivar" class="btn btn-danger" /> 
+          <a asp-action="Index" class="btn btn-secondary">Regresar</a> 
     </form>
 </div>
