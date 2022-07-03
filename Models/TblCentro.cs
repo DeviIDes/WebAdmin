@@ -14,11 +14,11 @@ namespace WebAdmin.Models
 
         [Display(Name = "Tipo de Licencia")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public string IdTipoLicencia { get; set; }
+        public int IdTipoLicencia { get; set; }
 
         [Display(Name = "Tipo de Centro")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public string IdTipoCentro { get; set; }
+        public int IdTipoCentro { get; set; }
 
         [Display(Name = "Nombre de Centro")]
         [Required(ErrorMessage = "Campo Requerido")]

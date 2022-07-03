@@ -81,11 +81,41 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdCorporativo,IdTipoLicencia,IdTipoCorporativo,NombreCorporativo,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdEmpresa,FechaRegistro,IdEstatusRegistro")] TblCorporativo tblCorporativo)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
-                tblCorporativo.IdCorporativo = Guid.NewGuid();
-                _context.Add(tblCorporativo);
-                await _context.SaveChangesAsync();
+                var vCorporativo = _context.TblCorporativos.ToList();
+                if (vCorporativo.Count == 0)
+                {
+                    var DuplicadosEstatus = _context.TblCorporativos
+                                         .Where(s => s.NombreCorporativo == tblCorporativo.NombreCorporativo)
+                                         .ToList();
+
+                    if (DuplicadosEstatus.Count == 0)
+                    {
+                        tblCorporativo.FechaRegistro = DateTime.Now;
+                        tblCorporativo.NombreCorporativo = tblCorporativo.NombreCorporativo.ToString().ToUpper();
+                        tblCorporativo.IdEstatusRegistro = 1;
+                        var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCorporativo.Colonia).FirstOrDefault();
+                        tblCorporativo.IdColonia = !string.IsNullOrEmpty(tblCorporativo.Colonia) ? tblCorporativo.Colonia : tblCorporativo.Colonia;
+                        tblCorporativo.Colonia = !string.IsNullOrEmpty(tblCorporativo.Colonia) ? strColonia.Dasenta.ToUpper() : tblCorporativo.Colonia;
+                        tblCorporativo.Calle = !string.IsNullOrEmpty(tblCorporativo.Calle) ? tblCorporativo.Calle.ToUpper() : tblCorporativo.Calle;
+                        tblCorporativo.LocalidadMunicipio = !string.IsNullOrEmpty(tblCorporativo.LocalidadMunicipio) ? tblCorporativo.LocalidadMunicipio.ToUpper() : tblCorporativo.LocalidadMunicipio;
+                        tblCorporativo.Ciudad = !string.IsNullOrEmpty(tblCorporativo.Ciudad) ? tblCorporativo.Ciudad.ToUpper() : tblCorporativo.Ciudad;
+                        tblCorporativo.Estado = !string.IsNullOrEmpty(tblCorporativo.Estado) ? tblCorporativo.Estado.ToUpper() : tblCorporativo.Estado;
+                        _context.SaveChanges();
+                        _context.Add(tblCorporativo);
+                        await _context.SaveChangesAsync();
+                        _notyf.Success("Registro creado con éxito", 5);
+                    }
+                    else
+                    {
+                        _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
+                    }
+                }
+                else
+                {
+                    _notyf.Error("Solo se permite crear 1 Empresa", 5);
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(tblCorporativo);
@@ -94,6 +124,10 @@ namespace WebAdmin.Controllers
         // GET: TblCorporativoes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaEstatus = ListaCatEstatus;
+
             if (id == null)
             {
                 return NotFound();
@@ -123,8 +157,20 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    tblCorporativo.FechaRegistro = DateTime.Now;
+                    tblCorporativo.NombreCorporativo = tblCorporativo.NombreCorporativo.ToString().ToUpper();
+                     tblCorporativo.IdEstatusRegistro = tblCorporativo.IdEstatusRegistro;
+                    var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCorporativo.Colonia).FirstOrDefault();
+                    tblCorporativo.IdColonia = !string.IsNullOrEmpty(tblCorporativo.Colonia) ? tblCorporativo.Colonia : tblCorporativo.Colonia;
+                    tblCorporativo.Colonia = !string.IsNullOrEmpty(tblCorporativo.Colonia) ? strColonia.Dasenta.ToUpper() : tblCorporativo.Colonia;
+                    tblCorporativo.Calle = !string.IsNullOrEmpty(tblCorporativo.Calle) ? tblCorporativo.Calle.ToUpper() : tblCorporativo.Calle;
+                    tblCorporativo.LocalidadMunicipio = !string.IsNullOrEmpty(tblCorporativo.LocalidadMunicipio) ? tblCorporativo.LocalidadMunicipio.ToUpper() : tblCorporativo.LocalidadMunicipio;
+                    tblCorporativo.Ciudad = !string.IsNullOrEmpty(tblCorporativo.Ciudad) ? tblCorporativo.Ciudad.ToUpper() : tblCorporativo.Ciudad;
+                    tblCorporativo.Estado = !string.IsNullOrEmpty(tblCorporativo.Estado) ? tblCorporativo.Estado.ToUpper() : tblCorporativo.Estado;
+                    _context.SaveChanges();
                     _context.Update(tblCorporativo);
                     await _context.SaveChangesAsync();
+                    _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -145,6 +191,10 @@ namespace WebAdmin.Controllers
         // GET: TblCorporativoes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
+             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaEstatus = ListaCatEstatus;
+
             if (id == null)
             {
                 return NotFound();
@@ -165,9 +215,10 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var tblCorporativo = await _context.TblCorporativos.FindAsync(id);
-            _context.TblCorporativos.Remove(tblCorporativo);
+           var tblCorporativo = await _context.TblCorporativos.FindAsync(id);
+            tblCorporativo.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

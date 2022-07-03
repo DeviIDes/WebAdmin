@@ -149,7 +149,7 @@ namespace WebAdmin.Controllers
                     tblEmpresa.FechaRegistro = DateTime.Now;
                     tblEmpresa.NombreEmpresa = tblEmpresa.NombreEmpresa.ToString().ToUpper();
                     tblEmpresa.GiroComercial = !string.IsNullOrEmpty(tblEmpresa.GiroComercial) ? tblEmpresa.GiroComercial.ToUpper() : tblEmpresa.GiroComercial;
-                    tblEmpresa.IdEstatusRegistro = 1;
+                     tblEmpresa.IdEstatusRegistro = tblEmpresa.IdEstatusRegistro;
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblEmpresa.Colonia).FirstOrDefault();
                     tblEmpresa.IdColonia = !string.IsNullOrEmpty(tblEmpresa.Colonia) ? tblEmpresa.Colonia : tblEmpresa.Colonia;
                     tblEmpresa.Colonia = !string.IsNullOrEmpty(tblEmpresa.Colonia) ? strColonia.Dasenta.ToUpper() : tblEmpresa.Colonia;
@@ -203,7 +203,6 @@ namespace WebAdmin.Controllers
         {
             var tblEmpresa = await _context.TblEmpresa.FindAsync(id);
             tblEmpresa.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

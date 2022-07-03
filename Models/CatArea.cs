@@ -23,9 +23,7 @@ namespace WebAdmin.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string AreaDesc { get; set; }
 
-        [ForeignKey("TblCorporativo")]
-        public Guid IdCorporativo { get; set; }
-
+        
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]

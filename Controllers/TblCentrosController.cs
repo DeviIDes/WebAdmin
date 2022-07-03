@@ -92,6 +92,13 @@ namespace WebAdmin.Controllers
         // GET: tblCentros/Create
         public IActionResult Create()
         {
+            List<CatTipoCentro> ListaTipoCentro = new List<CatTipoCentro>();
+            ListaTipoCentro = (from c in _context.CatTipoCentros select c).Distinct().ToList();
+            ViewBag.ListaTipoCentro = ListaTipoCentro;
+
+               List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
+            ListaLicencia = (from c in _context.CaTipotLicencias select c).Distinct().ToList();
+            ViewBag.ListaLicencia = ListaLicencia;
             return View();
         }
 
@@ -100,7 +107,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEmpresaFiscales,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono")] TblCentro tblCentros)
+        public async Task<IActionResult> Create([Bind("IdCentro,IdTipoLicencia,IdTipoCentro,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono")] TblCentro tblCentros)
         {
             if (ModelState.IsValid)
             {
@@ -175,7 +182,7 @@ namespace WebAdmin.Controllers
                     tblCentros.FechaRegistro = DateTime.Now;
                     tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
 
-                    tblCentros.IdEstatusRegistro = 1;
+                     tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
                     tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
                     tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;

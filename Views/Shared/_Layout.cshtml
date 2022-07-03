@@ -16,8 +16,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="@Url.Content("~/lib/bootstrap/dist/css/bootstrap.css")" rel="stylesheet" type="text/css" />
-    @*<link href="@Url.Content("~/lib/fontawesome-free-5.15.4-web/css/all.css")" rel="stylesheet" type="text/css" />*@
-    <link href="@Url.Content("~/plantilla/vendor/fontawesome-free/css/all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/lib/fontawesome-free-6.1.1-web/css/all.css")" rel="stylesheet" type="text/css" />
+    @* <link href="@Url.Content("~/plantilla/vendor/fontawesome-free/css/all.min.css")" rel="stylesheet" type="text/css" /> *@
     <link href="@Url.Content("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i")" rel="stylesheet" type="text/css" />
 
     <!-- Custom styles for this template-->
@@ -59,13 +59,13 @@
                 <hr class="sidebar-divider">
 
                 <!-- Heading -->
-                <div class="sidebar-heading">
+                @* <div class="sidebar-heading">
                     Corporativo
-                </div>
+                </div> *@
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Index">
-                        <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fa-solid fa-chart-column"></i>
                         <span>Resumen</span>
                     </a>
                 </li>
@@ -73,7 +73,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatálogos"
                    aria-expanded="true" aria-controls="collapseCatálogos">
-                        <i class="fas fa-fw fa-cog"></i>
+                        <i class="fa-solid fa-gears"></i>
                         <span>Catálogos</span>
                     </a>
                     <div id="collapseCatálogos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -81,7 +81,7 @@
                             <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoCentroes" asp-action="Index">Tipos de Centro</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoDireccions" asp-action="Index">Tipos de Direcciones</a>
-                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="Index">Licencias</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoLicencias" asp-action="Index">Licencias</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Áreas</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Géneros</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
@@ -99,19 +99,19 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCentros"
                    aria-expanded="true" aria-controls="collapseCentros">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Corporativo</span>
+                        <i class="fa-solid fa-building"></i>
+                        <span>Empresa</span>
                     </a>
                     <div id="collapseCentros" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Administración:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="TblEmpresas" asp-action="Index">Empresa</a>
                             <a class="collapse-item" asp-area="" asp-controller="TblCorporativoes" asp-action="Index">Corporativo</a>
-                            <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
                             <a class="collapse-item" asp-area="" asp-controller="TblProveedores" asp-action="Index">Proveedores</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoServicios" asp-action="Index">Tipos de Servicios</a>
-                            <h6 class="collapse-header">Usuarios:</h6>
-                            <a class="collapse-item" asp-area="" asp-controller="" asp-action="">Usuarios</a>
+                            <h6 class="collapse-header">Control Centros:</h6>
+                            <a class="collapse-item" asp-area="TblClientes" asp-controller="Index" asp-action="">Usuarios</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
                             <h6 class="collapse-header">Inventario:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="CatCategorias" asp-action="Index">Categorias</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatProductos" asp-action="Index">Productos</a>
@@ -131,7 +131,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                    aria-expanded="true" aria-controls="collapsePages">
-                        <i class="fas fa-fw fa-folder"></i>
+                        <i class="fa-solid fa-house-laptop"></i>
                         <span>Centros</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -156,7 +156,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConsultas"
                    aria-expanded="true" aria-controls="collapseConsultas">
-                        <i class="fas fa-fw fa-cog"></i>
+                        <i class="fa-solid fa-gears"></i>
                         <span>Consultas</span>
                     </a>
                     <div id="collapseConsultas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
