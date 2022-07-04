@@ -81,6 +81,7 @@
                             <a class="collapse-item" asp-area="" asp-controller="CatEstatus" asp-action="Index">Estatus de Registro</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoCentroes" asp-action="Index">Tipos de Centro</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoDireccions" asp-action="Index">Tipos de Direcciones</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoClientes" asp-action="Index">Tipos de Cliente</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoLicencias" asp-action="Index">Licencias</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Áreas</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Géneros</a>
@@ -109,12 +110,14 @@
                             <a class="collapse-item" asp-area="" asp-controller="TblCorporativoes" asp-action="Index">Corporativo</a>
                             <a class="collapse-item" asp-area="" asp-controller="TblProveedores" asp-action="Index">Proveedores</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoServicios" asp-action="Index">Tipos de Servicios</a>
-                            <h6 class="collapse-header">Control Centros:</h6>
-                            <a class="collapse-item" asp-area="TblClientes" asp-controller="Index" asp-action="">Usuarios</a>
-                            <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
-                            <h6 class="collapse-header">Inventario:</h6>
+                              <a class="collapse-item" asp-area="" asp-controller="TblUsuarios" asp-action="Index">Usuarios</a>
+                                 <h6 class="collapse-header">Inventario:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="CatCategorias" asp-action="Index">Categorias</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatProductos" asp-action="Index">Productos</a>
+                            <h6 class="collapse-header">Control Centros:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="TblClientes" asp-action="Index">Clientes</a>
+                            <a class="collapse-item" asp-area="" asp-controller="TblCentros" asp-action="Index">Centros</a>
+                       
                         </div>
                     </div>
                 </li>
@@ -156,7 +159,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConsultas"
                    aria-expanded="true" aria-controls="collapseConsultas">
-                        <i class="fa-solid fa-gears"></i>
+                        <i class="fa-solid fa-list-check"></i>
                         <span>Consultas</span>
                     </a>
                     <div id="collapseConsultas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">

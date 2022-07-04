@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAdmin.Data;
 
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    partial class nDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220703195528_m02")]
+    partial class m02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29791,17 +29793,9 @@ namespace WebAdmin.Migrations
                     b.Property<int?>("CatTipoClienteIdTipoCliente")
                         .HasColumnType("int");
 
-                    b.Property<string>("ClaveAcceso")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CorreoAcceso")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("FechaAcceso")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("FechaAcceso");
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2")

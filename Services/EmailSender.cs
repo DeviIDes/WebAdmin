@@ -36,7 +36,7 @@ public class EmailSender : IEmailSender
         var client = new SendGridClient(apiKey);
         var msg = new SendGridMessage()
         {
-            From = new EmailAddress("sdkpuntocero@gmail.com", "Password"),
+            From = new EmailAddress("contacto@iides.tech", "Password"),
             Subject = subject,
             PlainTextContent = message,
             HtmlContent = message

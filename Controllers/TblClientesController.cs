@@ -59,8 +59,7 @@ namespace WebAdmin.Controllers
                             {
                                 IdCliente = a.IdCliente,
                                 NombreCliente = a.NombreCliente,
-                                RfcCliente = a.Rfc,
-                                GiroComercialCliente = a.GiroComercial,
+                       
                                 CalleCliente = b.Calle,
                                 CodigoPostalCliente = b.CodigoPostal,
                                 ColoniaCliente = b.Colonia,
@@ -95,6 +94,17 @@ namespace WebAdmin.Controllers
         // GET: TblClientes/Create
         public IActionResult Create()
         {
+              List<CatTipoCliente> ListaTipoClientes = new List<CatTipoCliente>();
+            ListaTipoClientes = (from c in _context.CatTipoClientes select c).Distinct().ToList();
+            ViewBag.ListaTipoClientes = ListaTipoClientes;
+            
+            List<CatPerfil> ListaPerfil = new List<CatPerfil>();
+            ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
+            ViewBag.ListaPerfil = ListaPerfil;
+
+            List<CatRole> ListaRol = new List<CatRole>();
+            ListaRol = (from c in _context.CatRoles select c).Distinct().ToList();
+            ViewBag.ListaRol = ListaRol;
             return View();
         }
 
@@ -116,9 +126,7 @@ namespace WebAdmin.Controllers
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCliente.FechaRegistro = DateTime.Now;
                     tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
-                    tblCliente.GiroComercial = !string.IsNullOrEmpty(tblCliente.GiroComercial) ? tblCliente.GiroComercial.ToUpper() : tblCliente.GiroComercial;
-                    tblCliente.Rfc = !string.IsNullOrEmpty(tblCliente.Rfc) ? tblCliente.Rfc.ToUpper() : tblCliente.Rfc;
-                    tblCliente.IdCorporativo = idCorporativos.IdCorporativo;
+            
                     tblCliente.IdEstatusRegistro = 1;
 
                     _context.SaveChanges();
@@ -174,9 +182,7 @@ namespace WebAdmin.Controllers
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCliente.FechaRegistro = DateTime.Now;
                     tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
-                    tblCliente.GiroComercial = !string.IsNullOrEmpty(tblCliente.GiroComercial) ? tblCliente.GiroComercial.ToUpper() : tblCliente.GiroComercial;
-                    tblCliente.Rfc = !string.IsNullOrEmpty(tblCliente.Rfc) ? tblCliente.Rfc.ToUpper() : tblCliente.Rfc;
-                    tblCliente.IdCorporativo = idCorporativos.IdCorporativo;
+            
 
                     _context.Update(tblCliente);
                     await _context.SaveChangesAsync();

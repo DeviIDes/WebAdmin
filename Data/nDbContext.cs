@@ -51,7 +51,7 @@ namespace WebAdmin.Data
         public DbSet<CatTipoPago> CatTipoPago { get; set; }
         public DbSet<CatTipoPrestamo> CatTipoPrestamo { get; set; }
         public DbSet<CatTipoServicio> CatTipoServicio { get; set; }
-
+public DbSet<CatTipoCliente> CatTipoClientes { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
