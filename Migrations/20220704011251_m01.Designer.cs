@@ -10,7 +10,7 @@ using WebAdmin.Data;
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    [Migration("20220703184721_m01")]
+    [Migration("20220704011251_m01")]
     partial class m01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29470,6 +29470,29 @@ namespace WebAdmin.Migrations
                     b.ToTable("CatTipoCentros");
                 });
 
+            modelBuilder.Entity("WebAdmin.Models.CatTipoCliente", b =>
+                {
+                    b.Property<int>("IdTipoCliente")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoClienteDesc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdTipoCliente");
+
+                    b.ToTable("CatTipoClientes");
+                });
+
             modelBuilder.Entity("WebAdmin.Models.CatTipoContratacion", b =>
                 {
                     b.Property<int>("IdTipoContratacion")
@@ -29761,30 +29784,53 @@ namespace WebAdmin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ApellidoMaterno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ApellidoPaterno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CatTipoClienteIdTipoCliente")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaveAcceso")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorreoAcceso")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaAcceso")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaAcceso");
+
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2")
                         .HasColumnName("FechaRegistro");
 
-                    b.Property<string>("GiroComercial")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("IdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPerfil")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdRol")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdTipoCliente")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreCliente")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Rfc")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdCliente");
+
+                    b.HasIndex("CatTipoClienteIdTipoCliente");
 
                     b.HasIndex("TblCorporativoIdCorporativo");
 
@@ -30253,17 +30299,51 @@ namespace WebAdmin.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("ApellidoMaterno")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("ApellidoPaterno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorreoAcceso")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaNacimiento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("FechaRegistro");
+
+                    b.Property<int>("IdArea")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEstatusRegistro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdGenero")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPerfil")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdRol")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("ImagenPErfil")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("NombreEmpresa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreUsuario")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombres")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("ProfilePicture")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<int>("UsernameChangeLimit")
-                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -30460,6 +30540,10 @@ namespace WebAdmin.Migrations
 
             modelBuilder.Entity("WebAdmin.Models.TblCliente", b =>
                 {
+                    b.HasOne("WebAdmin.Models.CatTipoCliente", null)
+                        .WithMany("TblClientes")
+                        .HasForeignKey("CatTipoClienteIdTipoCliente");
+
                     b.HasOne("WebAdmin.Models.TblCorporativo", null)
                         .WithMany("TblClientes")
                         .HasForeignKey("TblCorporativoIdCorporativo");
@@ -30597,6 +30681,11 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("WebAdmin.Models.CatTipoAlumno", b =>
                 {
                     b.Navigation("TblUsuarios");
+                });
+
+            modelBuilder.Entity("WebAdmin.Models.CatTipoCliente", b =>
+                {
+                    b.Navigation("TblClientes");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoContratacion", b =>

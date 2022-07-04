@@ -1,4 +1,4 @@
-﻿@model WebAdmin.Models.CatTipoCliente
+﻿@model WebAdmin.Models.CatTipoCentro
 
 @{
     ViewData["Title"] = "Detalles Género";
@@ -9,19 +9,18 @@
 
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Género</li>
-            <li class="breadcrumb-item">Tipo Cliente</li>
-        <li class="breadcrumb-item active" aria-current="page">Control de Tipo Cliente</li>
+            <li class="breadcrumb-item">Tipo Centro</li>
+        <li class="breadcrumb-item active" aria-current="page">Control de Tipo Centro</li>
     </ol>
 </nav>
 <hr />
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoClienteDesc)
+            @Html.DisplayNameFor(model => model.TipoCentroDesc)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TipoClienteDesc)
+            @Html.DisplayFor(model => model.TipoCentroDesc)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)

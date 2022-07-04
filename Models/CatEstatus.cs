@@ -17,6 +17,9 @@ namespace WebAdmin.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
+
+        [Display(Name = "Usuario")]
+        public Guid IdUsuario { get; set; }
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]

@@ -27,9 +27,20 @@ namespace WebAdmin.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UsernameChangeLimit = table.Column<int>(type: "int", nullable: true),
+                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApellidoPaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdArea = table.Column<int>(type: "int", nullable: true),
+                    IdGenero = table.Column<int>(type: "int", nullable: true),
+                    IdPerfil = table.Column<int>(type: "int", nullable: true),
+                    IdRol = table.Column<int>(type: "int", nullable: true),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagenPErfil = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: true),
                     ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -106,6 +117,21 @@ namespace WebAdmin.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CatTipoCentros", x => x.IdTipoCentro);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatTipoClientes",
+                columns: table => new
+                {
+                    IdTipoCliente = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoClienteDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoClientes", x => x.IdTipoCliente);
                 });
 
             migrationBuilder.CreateTable(
@@ -704,17 +730,29 @@ namespace WebAdmin.Migrations
                 columns: table => new
                 {
                     IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdTipoCliente = table.Column<int>(type: "int", nullable: false),
                     NombreCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ApellidoPaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdPerfil = table.Column<int>(type: "int", nullable: false),
+                    IdRol = table.Column<int>(type: "int", nullable: false),
+                    CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClaveAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaAcceso = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
+                    CatTipoClienteIdTipoCliente = table.Column<int>(type: "int", nullable: true),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblClientes", x => x.IdCliente);
+                    table.ForeignKey(
+                        name: "FK_TblClientes_CatTipoClientes_CatTipoClienteIdTipoCliente",
+                        column: x => x.CatTipoClienteIdTipoCliente,
+                        principalTable: "CatTipoClientes",
+                        principalColumn: "IdTipoCliente",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TblClientes_TblCorporativos_TblCorporativoIdCorporativo",
                         column: x => x.TblCorporativoIdCorporativo,
@@ -2853,6 +2891,11 @@ namespace WebAdmin.Migrations
                 column: "TblClienteIdCliente");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TblClientes_CatTipoClienteIdTipoCliente",
+                table: "TblClientes",
+                column: "CatTipoClienteIdTipoCliente");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TblClientes_TblCorporativoIdCorporativo",
                 table: "TblClientes",
                 column: "TblCorporativoIdCorporativo");
@@ -3113,6 +3156,9 @@ namespace WebAdmin.Migrations
 
             migrationBuilder.DropTable(
                 name: "CatTipoContratacion");
+
+            migrationBuilder.DropTable(
+                name: "CatTipoClientes");
 
             migrationBuilder.DropTable(
                 name: "TblCorporativos");

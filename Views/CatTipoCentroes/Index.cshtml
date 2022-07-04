@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebAdmin.Models.CatTipoCliente>
+﻿@model IEnumerable<WebAdmin.Models.CatTipoCentro>
 
 @{
     ViewData["Title"] = "Géneros";
@@ -20,7 +20,7 @@
     <thead>
         <tr>
             <th style="text-align:center">
-                @Html.DisplayNameFor(model => model.TipoClienteDesc)
+                @Html.DisplayNameFor(model => model.TipoCentroDesc)
             </th>
             <th style="text-align:center">
                 @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -36,7 +36,7 @@
         {
             <tr>
                  <td style="text-align:center">
-                    @Html.DisplayFor(modelItem => item.TipoClienteDesc)
+                    @Html.DisplayFor(modelItem => item.TipoCentroDesc)
                 </td>
                  <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.FechaRegistro)
@@ -52,9 +52,9 @@
                     }
                 </td>
                  <td style="text-align:center">
-                    <a asp-action="Edit" asp-route-id="@item.IdTipoCliente" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
-                    <a asp-action="Details" asp-route-id="@item.IdTipoCliente" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.IdTipoCliente" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.IdTipoCentro" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.IdTipoCentro" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.IdTipoCentro" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
                 </td>
             </tr>
         }

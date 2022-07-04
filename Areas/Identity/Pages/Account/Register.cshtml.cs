@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using WebAdmin.Data;
 using WebAdmin.Models;
 
 namespace WebAdmin.Areas.Identity.Pages.Account
@@ -27,18 +28,21 @@ namespace WebAdmin.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly INotyfService _notyf;
+ private readonly nDbContext _context;
+
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            
+            nDbContext context,
             IEmailSender emailSender, INotyfService notyf)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+             _context = context;
             _notyf = notyf;
         }
 
@@ -51,18 +55,21 @@ namespace WebAdmin.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [Display(Name = "First Name")]
-            public string FirstName { get; set; }
-            [Required]
-            [Display(Name = "Last Name")]
-            public string LastName { get; set; }
-            [Required]
+             [Required(ErrorMessage = "Campo Requerido")]
+            [Display(Name = "Nombres")]
+            public string Nombres { get; set; }
+             [Required(ErrorMessage = "Campo Requerido")]
+            [Display(Name = "Apellido Paterno")]
+            public string ApellidoPaterno { get; set; }
+             [Required(ErrorMessage = "Campo Requerido")]
+            [Display(Name = "Apellido Materno")]
+            public string ApellidoMaterno { get; set; }
+             [Required(ErrorMessage = "Campo Requerido")]
             [EmailAddress]
             [Display(Name = "Correo electrónico")]
             public string Email { get; set; }
 
-            [Required]
+             [Required(ErrorMessage = "Campo Requerido")]
             [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} y un máximo de {1} caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Clave")]
@@ -72,6 +79,12 @@ namespace WebAdmin.Areas.Identity.Pages.Account
             [Display(Name = "Confirmar contraseña")]
             [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coincide.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Fecha Registro")]
+            [DataType(DataType.Date)]
+            public DateTime FechaRegistro { get; set; }
+            [Display(Name = "Estatus")]
+            public int IdEstatusRegistro { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -92,10 +105,29 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                 {
                     UserName = userName,
                     Email = Input.Email,
-                    FirstName = Input.FirstName,
-                    LastName = Input.LastName
+                    Nombres = Input.Nombres.ToUpper(),
+                    ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
+                    ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                    FechaRegistro = DateTime.Now,
+                    IdEstatusRegistro = 1
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+ 
+  var addUsuarios = new TblUsuario
+                {
+                    IdUsuario = Guid.Parse(user.Id),
+                    Nombres = Input.Nombres.ToUpper(),
+                    ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
+                    ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                    CorreoAcceso = user.Email,
+                    FechaRegistro = DateTime.Now,
+                    IdEstatusRegistro = 1
+                };
+                    _context.SaveChanges();
+                    _context.Add(addUsuarios);
+                    await _context.SaveChangesAsync();
+
                 if (result.Succeeded)
                 {
                     _notyf.Success("Registro creado con éxito", 5);

@@ -53,6 +53,8 @@ namespace WebAdmin.Models
         [NotMapped]
         [Display(Name = "Nombre Cliente")]
         public string NombreCliente { get; set; }
+        [Display(Name = "Usuario")]
+        public Guid IdUsuario { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]

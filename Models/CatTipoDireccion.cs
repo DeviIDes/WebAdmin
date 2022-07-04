@@ -17,6 +17,8 @@ namespace WebAdmin.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]
         public string TipoDireccionDesc { get; set; }
+        [Display(Name = "Usuario")]
+        public Guid IdUsuario { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]

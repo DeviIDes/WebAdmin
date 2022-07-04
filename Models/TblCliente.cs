@@ -48,6 +48,8 @@ namespace WebAdmin.Models
         [Display(Name = "Clave Acceso")]
         [Required(ErrorMessage = "Campo Requerido")]
         public string ClaveAcceso {get; set;}
+        [Display(Name = "Usuario")]
+        public Guid IdUsuario { get; set; }
 
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]

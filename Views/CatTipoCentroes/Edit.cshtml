@@ -1,4 +1,4 @@
-﻿@model WebAdmin.Models.CatTipoCliente
+﻿@model WebAdmin.Models.CatTipoCentro
 
 @{
     ViewData["Title"] = "Editar Género";
@@ -9,8 +9,8 @@
 
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Catálogos</li>
-            <li class="breadcrumb-item">Tipo Cliente</li>
-        <li class="breadcrumb-item active" aria-current="page">Control de Tipo Cliente</li>
+            <li class="breadcrumb-item">Tipo Centro</li>
+        <li class="breadcrumb-item active" aria-current="page">Control de Tipo Centro</li>
     </ol>
 </nav>
 <hr />
@@ -18,11 +18,11 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input style="text-transform:uppercase" type="hidden" asp-for="IdTipoCliente" id="IdEstatus" />
+            <input style="text-transform:uppercase" type="hidden" asp-for="IdTipoCentro" id="IdEstatus" />
             <div class="form-group">
-                <label asp-for="TipoClienteDesc" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="TipoClienteDesc" class="form-control" />
-                <span asp-validation-for="TipoClienteDesc" class="text-danger"></span>
+                <label asp-for="TipoCentroDesc" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="TipoCentroDesc" class="form-control" />
+                <span asp-validation-for="TipoCentroDesc" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>

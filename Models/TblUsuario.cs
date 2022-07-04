@@ -41,6 +41,8 @@ namespace WebAdmin.Models
 
           [Display(Name = "Profile Picture")]
     public byte[] ImagenPErfil { get; set; }
+    [Display(Name = "Usuario")]
+        public Guid IdUsuarioModifico { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
