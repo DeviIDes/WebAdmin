@@ -35,8 +35,8 @@ namespace WebAdmin.Models
         
         [Display(Name = "Rol")]
         public byte[] ProfilePicture { get; set; }
-[Display(Name = "Usuario")]
-        public Guid IdUsuario { get; set; }
+[Display(Name = "Usuario Modifico")]
+        public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Fecha de Registro")]
         [DataType(DataType.Date)]

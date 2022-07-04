@@ -38,10 +38,10 @@ namespace WebAdmin.Migrations
                     IdRol = table.Column<int>(type: "int", nullable: true),
                     FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImagenPErfil = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: true),
-                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -96,6 +96,7 @@ namespace WebAdmin.Migrations
                     IdTipoLicencia = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LicenciaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
                 },
@@ -111,6 +112,7 @@ namespace WebAdmin.Migrations
                     IdTipoCentro = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoCentroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
                 },
@@ -126,6 +128,7 @@ namespace WebAdmin.Migrations
                     IdTipoCliente = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoClienteDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
                 },
@@ -296,6 +299,7 @@ namespace WebAdmin.Migrations
                     FechadeNacimiento = table.Column<DateTime>(name: "Fecha de Nacimiento", type: "datetime2", nullable: false),
                     CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagenPErfil = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     CatAreaIdArea = table.Column<int>(type: "int", nullable: true),
@@ -328,6 +332,7 @@ namespace WebAdmin.Migrations
                     PorcentajePrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubCosto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     CatCategoriaIdCategoria = table.Column<int>(type: "int", nullable: true)
@@ -354,6 +359,7 @@ namespace WebAdmin.Migrations
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     CatEstatusIdEstatusRegistro = table.Column<int>(type: "int", nullable: true)
@@ -379,6 +385,7 @@ namespace WebAdmin.Migrations
                     CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblEmpresaIdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -401,6 +408,7 @@ namespace WebAdmin.Migrations
                     IdArea = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AreaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -423,6 +431,7 @@ namespace WebAdmin.Migrations
                     IdCategoria = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoriaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -445,6 +454,7 @@ namespace WebAdmin.Migrations
                     IdEscolaridad = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EscolaridadDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -466,6 +476,7 @@ namespace WebAdmin.Migrations
                 {
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EstatusDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -488,6 +499,7 @@ namespace WebAdmin.Migrations
                     IdGenero = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GeneroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -510,6 +522,7 @@ namespace WebAdmin.Migrations
                     IdNivelEscolar = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NivelEscolarDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -532,6 +545,7 @@ namespace WebAdmin.Migrations
                     IdPerfil = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PerfilDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -554,6 +568,7 @@ namespace WebAdmin.Migrations
                     IdRol = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RolDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -576,6 +591,7 @@ namespace WebAdmin.Migrations
                     IdTipoAlumno = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoAlumnoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -622,6 +638,7 @@ namespace WebAdmin.Migrations
                     IdTipoContratacion = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoContratacionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -644,6 +661,7 @@ namespace WebAdmin.Migrations
                     IdTipoDireccion = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoDireccionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -666,6 +684,7 @@ namespace WebAdmin.Migrations
                     IdTipoPago = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoPagoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -688,6 +707,7 @@ namespace WebAdmin.Migrations
                     IdTipoPrestamo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoPrestamoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -710,6 +730,7 @@ namespace WebAdmin.Migrations
                     IdTipoServicio = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TipoServicioDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -738,6 +759,7 @@ namespace WebAdmin.Migrations
                     IdRol = table.Column<int>(type: "int", nullable: false),
                     CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClaveAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaAcceso = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
@@ -770,6 +792,7 @@ namespace WebAdmin.Migrations
                     Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -803,6 +826,8 @@ namespace WebAdmin.Migrations
                     CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioControl = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     CaTipotLicenciaIdTipoLicencia = table.Column<int>(type: "int", nullable: true),
@@ -851,6 +876,7 @@ namespace WebAdmin.Migrations
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblClienteIdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -883,6 +909,7 @@ namespace WebAdmin.Migrations
                     CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblClienteIdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -910,6 +937,7 @@ namespace WebAdmin.Migrations
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblProveedorIdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -942,6 +970,7 @@ namespace WebAdmin.Migrations
                     CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
                     TblProveedorIdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -2734,11 +2763,11 @@ namespace WebAdmin.Migrations
 
             migrationBuilder.InsertData(
                 table: "CatEstatus",
-                columns: new[] { "IdEstatusRegistro", "EstatusDesc", "FechaRegistro", "TblCorporativoIdCorporativo" },
+                columns: new[] { "IdEstatusRegistro", "EstatusDesc", "FechaRegistro", "IdUsuarioModifico", "TblCorporativoIdCorporativo" },
                 values: new object[,]
                 {
-                    { 1, "Activo", new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local), null },
-                    { 2, "Desactivo", new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local), null }
+                    { 1, "Activo", new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000"), null },
+                    { 2, "Desactivo", new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000"), null }
                 });
 
             migrationBuilder.CreateIndex(

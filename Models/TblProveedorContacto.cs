@@ -37,8 +37,8 @@ namespace WebAdmin.Models
         [NotMapped]
         [Display(Name = "Nombre Proveedor")]
         public string NombreProveedor { get; set; }
-        [Display(Name = "Usuario")]
-        public Guid IdUsuario { get; set; }
+        [Display(Name = "Usuario Modifico")]
+        public Guid IdUsuarioModifico { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]

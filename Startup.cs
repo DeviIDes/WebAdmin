@@ -44,7 +44,7 @@ namespace WebAdmin
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-
+            services.AddScoped<IUserService, UserService>();
         }
     
 

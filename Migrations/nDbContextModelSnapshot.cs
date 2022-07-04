@@ -254,6 +254,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LicenciaDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -280,6 +283,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
@@ -308,6 +314,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
@@ -29201,6 +29210,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
 
@@ -29226,6 +29238,9 @@ namespace WebAdmin.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("FechaRegistro");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
 
@@ -29240,13 +29255,15 @@ namespace WebAdmin.Migrations
                         {
                             IdEstatusRegistro = 1,
                             EstatusDesc = "Activo",
-                            FechaRegistro = new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local)
+                            FechaRegistro = new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdEstatusRegistro = 2,
                             EstatusDesc = "Desactivo",
-                            FechaRegistro = new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local)
+                            FechaRegistro = new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
 
@@ -29267,6 +29284,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
@@ -29291,6 +29311,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NivelEscolarDesc")
                         .IsRequired()
@@ -29319,6 +29342,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PerfilDesc")
                         .IsRequired()
@@ -29373,6 +29399,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("PorcentajePrecioUno")
                         .HasColumnType("decimal(18,2)");
 
@@ -29403,6 +29432,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("RolDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -29430,6 +29462,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
@@ -29459,6 +29494,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("TipoCentroDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -29482,6 +29520,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("TipoClienteDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -29504,6 +29545,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
@@ -29533,6 +29577,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
 
@@ -29560,6 +29607,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
@@ -29589,6 +29639,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
 
@@ -29616,6 +29669,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TblCorporativoIdCorporativo")
                         .HasColumnType("uniqueidentifier");
@@ -29750,6 +29806,12 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdTipoLicencia")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioControl")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
 
@@ -29819,6 +29881,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdTipoCliente")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("NombreCliente")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -29858,6 +29923,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdPerfil")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NombreClienteContacto")
                         .IsRequired()
@@ -29922,6 +29990,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdTipoDireccion")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
 
@@ -29975,6 +30046,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
@@ -30037,6 +30111,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
 
@@ -30075,6 +30152,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdEstatusRegistro")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NombreProveedor")
                         .IsRequired()
@@ -30115,6 +30195,9 @@ namespace WebAdmin.Migrations
                         .HasColumnType("int");
 
                     b.Property<Guid>("IdProveedor")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NombreProveedorContacto")
@@ -30178,6 +30261,9 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdTipoDireccion")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
@@ -30260,6 +30346,9 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdRol")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<byte[]>("ImagenPErfil")
                         .HasColumnType("varbinary(max)");
 
@@ -30310,8 +30399,7 @@ namespace WebAdmin.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("FechaRegistro");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IdArea")
                         .HasColumnType("int");
@@ -30328,8 +30416,8 @@ namespace WebAdmin.Migrations
                     b.Property<int>("IdRol")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("ImagenPErfil")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<Guid>("IdUsuarioModifico")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NombreEmpresa")
                         .HasColumnType("nvarchar(max)");

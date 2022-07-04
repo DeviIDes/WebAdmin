@@ -51,8 +51,13 @@ namespace WebAdmin.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-[Display(Name = "Usuario")]
-        public Guid IdUsuario { get; set; }
+        public Guid IdCorporativo { get; set; }
+
+        [Display(Name = "Usuario Modifico")]
+        public Guid IdUsuarioModifico { get; set; }
+
+        [Display(Name = "Usuario Control")]
+        public Guid IdUsuarioControl { get; set; }
 
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]

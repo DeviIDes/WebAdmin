@@ -30,8 +30,8 @@ namespace WebAdmin.Models
         public string GiroComercial { get; set; }
         [ForeignKey("TblCorporativo")]
         public Guid IdCorporativo { get; set; }
-        [Display(Name = "Usuario")]
-        public Guid IdUsuario { get; set; }
+        [Display(Name = "Usuario Modifico")]
+        public Guid IdUsuarioModifico { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }

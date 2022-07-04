@@ -1,5 +1,6 @@
 ﻿@model WebAdmin.Models.TblEmpresa
 
+
 @{
     ViewData["Title"] = "Crear Empresa";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,6 +19,9 @@
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="IdColonia" />
+        <input id="idUser" type="hidden" asp-validation-for="FiltroUserName" value="@User.Identity.Name" />
+       
+        
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
@@ -114,79 +118,79 @@
 
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
-            $(document).ready(function () {
-              
-            });
-
-            function filtro_cp() {
-
-                var valor_cp = document.getElementById("iCodigoPostal").value;
-
-                $.ajax({
-                    type: "GET",
-                    url: "/CatCodigosPostales/FiltroCodigosPostales/",
-                    data: { id: valor_cp },
-                    contentType: "application/json;charset=utf-8",
-                    dataType: "json",
-                    success: function (list) {
-                        var $select_colonias = $('#drpColonias');
-                        $("#drpColonias").empty();
-
-                        if (list.length == 0) {
-                            $select_colonias.append('<option value="">SELECCIONAR</option>');
-                            $select_colonias.attr('required', false);
-                            document.getElementById("idLocalidadMunicipio").value = null;
-                            document.getElementById("idCiudad").value = null;
-                            document.getElementById("idEstados").value = null;
-                        }
-                        else {
-                            $select_colonias.append('<option value="">SELECCIONAR</option>');
-                            for (var i = 0, len = list.length; i < len; i++) {
-                                $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
-                                $select_colonias.attr('required', true);
-                                document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
-                                document.getElementById("idCiudad").value = list[i].dciudad;
-                                document.getElementById("idEstados").value = list[i].destado;
-                            }
-                        }
-                    },
-                    error: function () {
-                        alert("Error!!")
-                    }
+                $(document).ready(function () {
+                  
                 });
-            }
-            function filtro_colonias() {
 
-                var valor_col = document.getElementById("idColonia").value;
-                var $select_colonias = $('#drpColonias');
+                function filtro_cp() {
 
-                $.ajax({
-                    type: "GET",
-                    url: "/CatCodigosPostales/FiltroColonia/",
-                    data: { id: valor_col },
-                    contentType: "application/json;charset=utf-8",
-                    dataType: "json",
-                    success: function (list) {
+                    var valor_cp = document.getElementById("iCodigoPostal").value;
 
-                        if (list.length == 0) {
-                            $select_colonias.append('<option value="">SELECCIONAR</option>');
-                        }
-                        else {
+                    $.ajax({
+                        type: "GET",
+                        url: "/CatCodigosPostales/FiltroCodigosPostales/",
+                        data: { id: valor_cp },
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (list) {
+                            var $select_colonias = $('#drpColonias');
+                            $("#drpColonias").empty();
 
-                            for (var i = 0, len = list.length; i < len; i++) {
-                                $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                            if (list.length == 0) {
+                                $select_colonias.append('<option value="">SELECCIONAR</option>');
+                                $select_colonias.attr('required', false);
+                                document.getElementById("idLocalidadMunicipio").value = null;
+                                document.getElementById("idCiudad").value = null;
+                                document.getElementById("idEstados").value = null;
                             }
+                            else {
+                                $select_colonias.append('<option value="">SELECCIONAR</option>');
+                                for (var i = 0, len = list.length; i < len; i++) {
+                                    $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                                    $select_colonias.attr('required', true);
+                                    document.getElementById("idLocalidadMunicipio").value = list[i].dmnpio;
+                                    document.getElementById("idCiudad").value = list[i].dciudad;
+                                    document.getElementById("idEstados").value = list[i].destado;
+                                }
+                            }
+                        },
+                        error: function () {
+                            alert("Error!!")
                         }
-                    },
-                    error: function () {
-                        alert("Error!!")
-                    }
-                });
-            }
+                    });
+                }
+                function filtro_colonias() {
 
-        </script>
+                    var valor_col = document.getElementById("idColonia").value;
+                    var $select_colonias = $('#drpColonias');
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/CatCodigosPostales/FiltroColonia/",
+                        data: { id: valor_col },
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (list) {
+
+                            if (list.length == 0) {
+                                $select_colonias.append('<option value="">SELECCIONAR</option>');
+                            }
+                            else {
+
+                                for (var i = 0, len = list.length; i < len; i++) {
+                                    $select_colonias.append('<option value=' + list[i].idAsentaCpcons + '>' + list[i].dasenta + '</option>');
+                                }
+                            }
+                        },
+                        error: function () {
+                            alert("Error!!")
+                        }
+                    });
+                }
+
+    </script>
 
     }
 }

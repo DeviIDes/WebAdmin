@@ -23,8 +23,8 @@ namespace WebAdmin.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string AreaDesc { get; set; }
 
-        [Display(Name = "Usuario")]
-        public Guid IdUsuario { get; set; }
+        [Display(Name = "Usuario Modifico")]
+        public Guid IdUsuarioModifico { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]

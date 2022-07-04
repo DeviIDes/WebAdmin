@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
@@ -14,11 +16,13 @@ namespace WebAdmin.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public TblEmpresasController(nDbContext context, INotyfService notyf)
+        public TblEmpresasController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: TblEmpresas
@@ -67,7 +71,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEmpresa,NombreEmpresa,GiroComercial,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono")] TblEmpresa tblEmpresa)
+        public async Task<IActionResult> Create([Bind("IdEmpresa,NombreEmpresa,GiroComercial,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,FiltroUserName")] TblEmpresa tblEmpresa)
         {
             if (ModelState.IsValid)
             {
@@ -80,6 +84,11 @@ namespace WebAdmin.Controllers
 
                     if (DuplicadosEstatus.Count == 0)
                     {
+
+
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
+
                         tblEmpresa.FechaRegistro = DateTime.Now;
                         tblEmpresa.NombreEmpresa = tblEmpresa.NombreEmpresa.ToString().ToUpper();
                         tblEmpresa.GiroComercial = !string.IsNullOrEmpty(tblEmpresa.GiroComercial) ? tblEmpresa.GiroComercial.ToUpper() : tblEmpresa.GiroComercial;
@@ -91,6 +100,7 @@ namespace WebAdmin.Controllers
                         tblEmpresa.LocalidadMunicipio = !string.IsNullOrEmpty(tblEmpresa.LocalidadMunicipio) ? tblEmpresa.LocalidadMunicipio.ToUpper() : tblEmpresa.LocalidadMunicipio;
                         tblEmpresa.Ciudad = !string.IsNullOrEmpty(tblEmpresa.Ciudad) ? tblEmpresa.Ciudad.ToUpper() : tblEmpresa.Ciudad;
                         tblEmpresa.Estado = !string.IsNullOrEmpty(tblEmpresa.Estado) ? tblEmpresa.Estado.ToUpper() : tblEmpresa.Estado;
+                       tblEmpresa.IdUsuarioModifico = Guid.Parse(fuser);
                         _context.SaveChanges();
                         _context.Add(tblEmpresa);
                         await _context.SaveChangesAsync();
