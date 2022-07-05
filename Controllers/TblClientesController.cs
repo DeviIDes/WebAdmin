@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblClientesController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblClientesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -62,7 +62,7 @@ namespace WebAdmin.Controllers
                             {
                                 IdCliente = a.IdCliente,
                                 NombreCliente = a.NombreCliente,
-                       
+
                                 CalleCliente = b.Calle,
                                 CodigoPostalCliente = b.CodigoPostal,
                                 ColoniaCliente = b.Colonia,
@@ -70,7 +70,6 @@ namespace WebAdmin.Controllers
                                 EstadoCliente = b.Estado,
                                 CorreoElectronicoCliente = b.CorreoElectronico,
                                 TelefonoCliente = b.Telefono
-
                             }).Distinct().ToList();
 
             return Json(fCliente);
@@ -97,10 +96,10 @@ namespace WebAdmin.Controllers
         // GET: TblClientes/Create
         public IActionResult Create()
         {
-              List<CatTipoCliente> ListaTipoClientes = new List<CatTipoCliente>();
+            List<CatTipoCliente> ListaTipoClientes = new List<CatTipoCliente>();
             ListaTipoClientes = (from c in _context.CatTipoClientes select c).Distinct().ToList();
             ViewBag.ListaTipoClientes = ListaTipoClientes;
-            
+
             List<CatPerfil> ListaPerfil = new List<CatPerfil>();
             ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
             ViewBag.ListaPerfil = ListaPerfil;
@@ -125,13 +124,14 @@ namespace WebAdmin.Controllers
                                           .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblCliente.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCliente.FechaRegistro = DateTime.Now;
                     tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
-            
+
                     tblCliente.IdEstatusRegistro = 1;
 
                     _context.SaveChanges();
@@ -184,10 +184,12 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblCliente.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCliente.FechaRegistro = DateTime.Now;
                     tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
-            
 
                     _context.Update(tblCliente);
                     await _context.SaveChangesAsync();

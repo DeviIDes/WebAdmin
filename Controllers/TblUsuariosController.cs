@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblUsuariosController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblUsuariosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -42,57 +42,56 @@ namespace WebAdmin.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
-     var ValidaGenero = _context.CatGeneros.ToList();
+                        var ValidaGenero = _context.CatGeneros.ToList();
 
-                    if (ValidaGenero.Count >= 1)
-                    {
-                        ViewBag.GeneroFlag = 1;
-                        var ValidaArea = _context.CatAreas.ToList();
-
-                        if (ValidaArea.Count >= 1)
+                        if (ValidaGenero.Count >= 1)
                         {
-                            ViewBag.AreaFlag = 1;
-                            var ValidaPerfil = _context.CatPerfiles.ToList();
+                            ViewBag.GeneroFlag = 1;
+                            var ValidaArea = _context.CatAreas.ToList();
 
-                            if (ValidaPerfil.Count >= 1)
+                            if (ValidaArea.Count >= 1)
                             {
-                                ViewBag.PerfilFlag = 1;
-                                var ValidaRol = _context.CatRoles.ToList();
+                                ViewBag.AreaFlag = 1;
+                                var ValidaPerfil = _context.CatPerfiles.ToList();
 
-                                if (ValidaRol.Count >= 1)
+                                if (ValidaPerfil.Count >= 1)
                                 {
-                                    ViewBag.RolFlag = 1;
+                                    ViewBag.PerfilFlag = 1;
+                                    var ValidaRol = _context.CatRoles.ToList();
+
+                                    if (ValidaRol.Count >= 1)
+                                    {
+                                        ViewBag.RolFlag = 1;
+                                    }
+                                    else
+                                    {
+                                        ViewBag.RolFlag = 0;
+                                        _notyf.Information("Favor de registrar los datos de Rol para la Aplicación", 5);
+                                    }
                                 }
                                 else
                                 {
-                                    ViewBag.RolFlag = 0;
-                                    _notyf.Information("Favor de registrar los datos de Rol para la Aplicación", 5);
+                                    ViewBag.PerfilFlag = 0;
+                                    _notyf.Information("Favor de registrar los datos de Perfil para la Aplicación", 5);
                                 }
                             }
                             else
                             {
-                                ViewBag.PerfilFlag = 0;
-                                _notyf.Information("Favor de registrar los datos de Perfil para la Aplicación", 5);
+                                ViewBag.AreaFlag = 0;
+                                _notyf.Information("Favor de registrar los datos de Area para la Aplicación", 5);
                             }
                         }
                         else
                         {
-                            ViewBag.AreaFlag = 0;
-                            _notyf.Information("Favor de registrar los datos de Area para la Aplicación", 5);
+                            ViewBag.vGeneroFlag = 0;
+                            _notyf.Information("Favor de registrar los datos de Genero para la Aplicación", 5);
                         }
-                    }
-                    else
-                    {
-                        ViewBag.vGeneroFlag = 0;
-                        _notyf.Information("Favor de registrar los datos de Genero para la Aplicación", 5);
-                    }
                     }
                     else
                     {
                         ViewBag.CorporativoFlag = 0;
                         _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
                     }
-                   
                 }
                 else
                 {
@@ -168,6 +167,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
@@ -243,6 +245,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblUsuario.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;

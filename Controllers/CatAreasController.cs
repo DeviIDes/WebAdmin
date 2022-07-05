@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
+
 namespace WebAdmin.Controllers
 {
     public class CatAreasController : Controller
@@ -15,7 +16,8 @@ namespace WebAdmin.Controllers
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
-        public CatAreasController(nDbContext context, INotyfService notyf,IUserService userService)
+
+        public CatAreasController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -77,12 +79,13 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
                     catArea.FechaRegistro = DateTime.Now;
                     catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
                     catArea.IdEstatusRegistro = 1;
+                    catArea.IdUsuarioModifico = Guid.Parse(fuser);
                     _context.SaveChanges();
 
                     _context.Add(catArea);
@@ -134,9 +137,13 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catArea.IdUsuarioModifico = Guid.Parse(fuser);
                     catArea.FechaRegistro = DateTime.Now;
                     catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
                     catArea.IdEstatusRegistro = catArea.IdEstatusRegistro;
+
                     _context.SaveChanges();
                     _context.Update(catArea);
                     await _context.SaveChangesAsync();

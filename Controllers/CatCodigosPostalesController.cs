@@ -1,43 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
-using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-   
     public class CatCodigosPostalesController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly nDbContext _context;
-      
 
-      
-        public CatCodigosPostalesController(ILogger<HomeController> logger,nDbContext context)
+        public CatCodigosPostalesController(ILogger<HomeController> logger, nDbContext context)
         {
             _context = context;
             _logger = logger;
         }
 
-   
         // GET: CatCodigosPostales
 
         public async Task<IActionResult> Index()
         {
             return View(await _context.CatCodigosPostales.ToListAsync());
         }
+
         [HttpGet]
         public ActionResult FiltroColonia(string id, string idC)
         {
@@ -48,6 +37,7 @@ namespace WebAdmin.Controllers
 
             return Json(fcatColonias);
         }
+
         [HttpGet]
         public ActionResult FiltroCodigosPostales(string id)
         {
@@ -55,6 +45,7 @@ namespace WebAdmin.Controllers
                        .Where(s => s.Dcodigo == id).Distinct().ToList();
             return Json(fcatCodigosPostales);
         }
+
         // GET: CatCodigosPostales/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -98,6 +89,9 @@ namespace WebAdmin.Controllers
         // GET: CatCodigosPostales/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
             if (id == null)
             {
                 return NotFound();

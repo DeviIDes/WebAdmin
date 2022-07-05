@@ -1,11 +1,10 @@
-﻿using System;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
@@ -18,13 +17,12 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatTipoCentroesController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatTipoCentroesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
-
 
         // GET: CatTipoCentroes
         public async Task<IActionResult> Index()
@@ -76,15 +74,15 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var DuplicadosEstatus = _context.CatTipoCentros
                        .Where(s => s.TipoCentroDesc == catTipoCentro.TipoCentroDesc)
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoCentro.IdUsuarioModifico = Guid.Parse(fuser);
 
                     catTipoCentro.FechaRegistro = DateTime.Now;
                     catTipoCentro.TipoCentroDesc = catTipoCentro.TipoCentroDesc.ToString().ToUpper();
@@ -108,6 +106,9 @@ namespace WebAdmin.Controllers
         // GET: CatTipoCentroes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
             if (id == null)
             {
                 return NotFound();
@@ -137,6 +138,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoCentro.IdUsuarioModifico = Guid.Parse(fuser);
                     _context.Update(catTipoCentro);
                     await _context.SaveChangesAsync();
                 }

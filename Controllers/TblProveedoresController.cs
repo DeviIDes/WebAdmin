@@ -17,7 +17,7 @@ namespace WebAdminHecsa.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblProveedoresController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblProveedoresController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -42,7 +42,6 @@ namespace WebAdminHecsa.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
-    
                     }
                     else
                     {
@@ -102,9 +101,10 @@ namespace WebAdminHecsa.Controllers
                                 .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblProveedor.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
                     tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper();
@@ -162,6 +162,9 @@ namespace WebAdminHecsa.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblProveedor.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
                     tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper();

@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblClienteContactosController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblClienteContactosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -87,6 +87,7 @@ namespace WebAdmin.Controllers
             return View(await fTblClienteContacto.ToListAsync());
             //return View(await _context.TblClienteDirecciones.ToListAsync());
         }
+
         [HttpGet]
         public ActionResult FiltroContactos(Guid id)
         {
@@ -101,25 +102,26 @@ namespace WebAdmin.Controllers
 
             return Json(fClienteContacto);
         }
+
         [HttpGet]
         public ActionResult FiltroDatosContactos(int id)
         {
             var fClienteContacto = (from a in _context.TblClienteContactos
-                            join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
-                            where a.IdClienteContacto == id
-                            select new
-                            {
-                                IdClienteContacto = a.IdClienteContacto,
-                                PerfilDesc = b.PerfilDesc,
-                                NombreClienteContacto = a.NombreClienteContacto,
-                                CorreoElectronicoClienteContacto = a.CorreoElectronico,
-                                TelefonoClienteContacto = a.Telefono,
-                                TelefonoMovilClienteContacto = a.TelefonoMovil
-
-                            }).Distinct().ToList();
+                                    join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
+                                    where a.IdClienteContacto == id
+                                    select new
+                                    {
+                                        IdClienteContacto = a.IdClienteContacto,
+                                        PerfilDesc = b.PerfilDesc,
+                                        NombreClienteContacto = a.NombreClienteContacto,
+                                        CorreoElectronicoClienteContacto = a.CorreoElectronico,
+                                        TelefonoClienteContacto = a.Telefono,
+                                        TelefonoMovilClienteContacto = a.TelefonoMovil
+                                    }).Distinct().ToList();
 
             return Json(fClienteContacto);
         }
+
         // GET: TblClienteContactoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -166,9 +168,10 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblClienteContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fCliente = (from c in _context.TblClientes where c.IdCliente == tblClienteContacto.IdCliente select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblClienteContacto.IdPerfil select c).Distinct().ToList();
                     tblClienteContacto.NombreClienteContacto = tblClienteContacto.NombreClienteContacto.ToString().ToUpper();
@@ -234,6 +237,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblClienteContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fCliente = (from c in _context.TblClientes where c.IdCliente == tblClienteContacto.IdCliente select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblClienteContacto.IdPerfil select c).Distinct().ToList();
                     tblClienteContacto.NombreClienteContacto = tblClienteContacto.NombreClienteContacto.ToString().ToUpper();

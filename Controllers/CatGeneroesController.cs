@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatGeneroesController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatGeneroesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -80,6 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catGenero.IdUsuarioModifico = Guid.Parse(fuser);
                     catGenero.FechaRegistro = DateTime.Now;
                     catGenero.GeneroDesc = catGenero.GeneroDesc.ToString().ToUpper();
                     catGenero.IdEstatusRegistro = 1;
@@ -136,6 +139,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catGenero.IdUsuarioModifico = Guid.Parse(fuser);
                     catGenero.FechaRegistro = DateTime.Now;
                     catGenero.GeneroDesc = catGenero.GeneroDesc.ToString().ToUpper();
                     catGenero.IdEstatusRegistro = catGenero.IdEstatusRegistro;

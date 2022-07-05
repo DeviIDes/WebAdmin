@@ -1,14 +1,13 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
-using WebAdmin.Data;
 
 namespace WebAdminHecsa.Controllers
 {
@@ -18,7 +17,7 @@ namespace WebAdminHecsa.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatTipoLicenciasController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatTipoLicenciasController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -43,7 +42,6 @@ namespace WebAdminHecsa.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
- 
                     }
                     else
                     {
@@ -63,15 +61,15 @@ namespace WebAdminHecsa.Controllers
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
             var fCatLicencia = from a in _context.CaTipotLicencias
-                          
-                                select new CaTipotLicencia
-                                {
-                                    IdTipoLicencia = a.IdTipoLicencia,
-                                    LicenciaDesc = a.LicenciaDesc,
-                              
-                                    FechaRegistro = a.FechaRegistro,
-                                    IdEstatusRegistro = a.IdEstatusRegistro
-                                };
+
+                               select new CaTipotLicencia
+                               {
+                                   IdTipoLicencia = a.IdTipoLicencia,
+                                   LicenciaDesc = a.LicenciaDesc,
+
+                                   FechaRegistro = a.FechaRegistro,
+                                   IdEstatusRegistro = a.IdEstatusRegistro
+                               };
 
             return View(await fCatLicencia.ToListAsync());
         }
@@ -97,7 +95,7 @@ namespace WebAdminHecsa.Controllers
         // GET: CaTipotLicencias/Create
         public IActionResult Create()
         {
-  List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
+            List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
             ListaLicencia = (from c in _context.CaTipotLicencias select c).Distinct().ToList();
             ViewBag.ListaLicencia = ListaLicencia;
 
@@ -118,10 +116,10 @@ namespace WebAdminHecsa.Controllers
                .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
-                    //var fMarca = (from c in _context.CatMarca where c.IdMarca == CaTipotLicencia.IdMarca select c).Distinct().ToList();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
                     CaTipotLicencia.IdEstatusRegistro = 1;
                     //CaTipotLicencia.MarcaDesc = fMarca[0].MarcaDesc;
@@ -148,12 +146,9 @@ namespace WebAdminHecsa.Controllers
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
-            ViewBag.ListaEstatus = ListaCatEstatus;
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
 
-              List<CatCategoria> ListaCategoria = new List<CatCategoria>();
-            ListaCategoria = (from c in _context.CatCategorias select c).Distinct().ToList();
-            ViewBag.ListaCategoria = ListaCategoria;
-
+        
 
             if (id == null)
             {
@@ -184,10 +179,11 @@ namespace WebAdminHecsa.Controllers
             {
                 try
                 {
-                    //var fMarca = (from c in _context.CatMarca where c.IdMarca == CaTipotLicencia.IdMarca select c).Distinct().ToList();
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
                     CaTipotLicencia.IdEstatusRegistro = 1;
-                    //CaTipotLicencia.MarcaDesc = fMarca[0].MarcaDesc;
                     CaTipotLicencia.LicenciaDesc = !string.IsNullOrEmpty(CaTipotLicencia.LicenciaDesc) ? CaTipotLicencia.LicenciaDesc.ToUpper() : CaTipotLicencia.LicenciaDesc;
 
                     _context.SaveChanges();

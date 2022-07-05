@@ -31,15 +31,15 @@ namespace WebAdmin.Controllers
         public IActionResult Index()
         {
             // !string.IsNullOrEmpty(catCategoria.CategoriaDesc) ? catCategoria.CategoriaDesc.ToUpper() : catCategoria.CategoriaDesc;
-             var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
-                        var vUsuarios = _context.TblUsuarios
-                                .Where(s => s.IdUsuario == Guid.Parse(fuser) && s.IdPerfil == 3 && s.IdRol == 2)
-                                .ToList();
-                                if (vUsuarios.Count == 0)
-                                {
-                                    ViewBag.ActivaRol = 1;
-                                }
+            //  var fuser = _userService.GetUserId();
+            //             var isLoggedIn = _userService.IsAuthenticated();
+            //             var vUsuarios = _context.TblUsuarios
+            //                     .Where(s => s.IdUsuario == Guid.Parse(fuser) && s.IdPerfil == 3 && s.IdRol == 2)
+            //                     .ToList();
+            //                     if (vUsuarios.Count == 0)
+            //                     {
+            //                         ViewBag.ActivaRol = 1;
+            //                     }
             return View();
         }
 

@@ -1,7 +1,7 @@
-﻿@model WebAdmin.Models.CatGenero
+﻿@model WebAdmin.Models.CatNivelEscolar
 
 @{
-    ViewData["Title"] = "Detalles Género";
+    ViewData["Title"] = "Detalles Nivel Escolar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -9,8 +9,7 @@
 
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Catálogos</li>
-        <li class="breadcrumb-item">Género</li>
-<li class="breadcrumb-item">Nivel Escolar</li>
+        <li class="breadcrumb-item">Nivel Escolar</li>
         <li class="breadcrumb-item active" aria-current="page">Crear Nivel Escolar</li>
     </ol>
 </nav>
@@ -18,10 +17,10 @@
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GeneroDesc)
+            @Html.DisplayNameFor(model => model.NivelEscolarDesc)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GeneroDesc)
+            @Html.DisplayFor(model => model.NivelEscolarDesc)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)

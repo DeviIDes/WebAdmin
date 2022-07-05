@@ -1,14 +1,13 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
-using WebAdmin.Data;
 
 namespace WebAdminHecsa.Controllers
 {
@@ -18,7 +17,7 @@ namespace WebAdminHecsa.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatCategoriasController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatCategoriasController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -43,7 +42,6 @@ namespace WebAdminHecsa.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
- 
                     }
                     else
                     {
@@ -63,12 +61,12 @@ namespace WebAdminHecsa.Controllers
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
             var fCatCategoria = from a in _context.CatCategorias
-                          
+
                                 select new CatCategoria
                                 {
                                     IdCategoria = a.IdCategoria,
                                     CategoriaDesc = a.CategoriaDesc,
-                              
+
                                     FechaRegistro = a.FechaRegistro,
                                     IdEstatusRegistro = a.IdEstatusRegistro
                                 };
@@ -97,7 +95,6 @@ namespace WebAdminHecsa.Controllers
         // GET: CatCategorias/Create
         public IActionResult Create()
         {
-
             return View();
         }
 
@@ -115,9 +112,10 @@ namespace WebAdminHecsa.Controllers
                .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
                     //var fMarca = (from c in _context.CatMarca where c.IdMarca == catCategoria.IdMarca select c).Distinct().ToList();
                     catCategoria.FechaRegistro = DateTime.Now;
                     catCategoria.IdEstatusRegistro = 1;
@@ -143,8 +141,6 @@ namespace WebAdminHecsa.Controllers
         // GET: CatCategorias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-
-
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
@@ -178,6 +174,9 @@ namespace WebAdminHecsa.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
                     //var fMarca = (from c in _context.CatMarca where c.IdMarca == catCategoria.IdMarca select c).Distinct().ToList();
                     catCategoria.FechaRegistro = DateTime.Now;
                     catCategoria.IdEstatusRegistro = 1;

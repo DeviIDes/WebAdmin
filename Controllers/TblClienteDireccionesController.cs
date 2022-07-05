@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblClienteDireccionesController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblClienteDireccionesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -135,9 +135,10 @@ namespace WebAdmin.Controllers
                         .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblClienteDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
                     var fCliente = (from c in _context.TblClientes where c.IdCliente == tblClienteDirecciones.IdCliente select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblClienteDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblClienteDirecciones.FechaRegistro = DateTime.Now;
@@ -209,6 +210,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblClienteDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
                     var fCliente = (from c in _context.TblClientes where c.IdCliente == tblClienteDirecciones.IdCliente select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblClienteDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblClienteDirecciones.FechaRegistro = DateTime.Now;

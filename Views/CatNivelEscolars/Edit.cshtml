@@ -1,7 +1,7 @@
-﻿@model WebAdmin.Models.CatGenero
+﻿@model WebAdmin.Models.CatNivelEscolar
 
 @{
-    ViewData["Title"] = "Editar Género";
+    ViewData["Title"] = "Editar Nivel Escolar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -18,11 +18,11 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input style="text-transform:uppercase" type="hidden" asp-for="IdGenero" id="IdEstatus" />
+            <input style="text-transform:uppercase" type="hidden" asp-for="IdNivelEscolar" id="IdEstatus" />
             <div class="form-group">
-                <label asp-for="GeneroDesc" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="GeneroDesc" class="form-control" />
-                <span asp-validation-for="GeneroDesc" class="text-danger"></span>
+                <label asp-for="NivelEscolarDesc" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="NivelEscolarDesc" class="form-control" />
+                <span asp-validation-for="NivelEscolarDesc" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdEstatusRegistro" class="control-label"></label>

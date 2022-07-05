@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblCentrosController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblCentrosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -27,7 +27,7 @@ namespace WebAdmin.Controllers
         // GET: tblCentros
         public async Task<IActionResult> Index()
         {
-                var ValidaEstatus = _context.CatEstatus.ToList();
+            var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
             {
@@ -42,7 +42,6 @@ namespace WebAdmin.Controllers
                     if (ValidaCorporativo.Count >= 1)
                     {
                         ViewBag.CorporativoFlag = 1;
-                       
                     }
                     else
                     {
@@ -99,7 +98,7 @@ namespace WebAdmin.Controllers
             ListaTipoCentro = (from c in _context.CatTipoCentros select c).Distinct().ToList();
             ViewBag.ListaTipoCentro = ListaTipoCentro;
 
-               List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
+            List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
             ListaLicencia = (from c in _context.CaTipotLicencias select c).Distinct().ToList();
             ViewBag.ListaLicencia = ListaLicencia;
             return View();
@@ -119,9 +118,10 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCentros.FechaRegistro = DateTime.Now;
                     tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
@@ -184,10 +184,13 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
                     tblCentros.FechaRegistro = DateTime.Now;
                     tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
 
-                     tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
+                    tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
                     tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
                     tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;

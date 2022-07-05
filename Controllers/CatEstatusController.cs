@@ -19,12 +19,13 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatEstatusController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatEstatusController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
+
         [HttpPost]
         public IActionResult Export(string GridHtml)
         {
@@ -34,6 +35,7 @@ namespace WebAdmin.Controllers
                 return File(stream.ToArray(), "application/pdf", "Grid.pdf");
             }
         }
+
         // GET: CatEstatus
         public async Task<IActionResult> Index()
         {
@@ -97,6 +99,9 @@ namespace WebAdmin.Controllers
 
                     if (vDuplicados.Count == 0)
                     {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
+                        CatEstatus.IdUsuarioModifico = Guid.Parse(fuser);
                         CatEstatus.FechaRegistro = DateTime.Now;
                         CatEstatus.EstatusDesc = CatEstatus.EstatusDesc.ToString().ToUpper();
 
@@ -154,6 +159,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    CatEstatus.IdUsuarioModifico = Guid.Parse(fuser);
                     CatEstatus.FechaRegistro = DateTime.Now;
                     CatEstatus.EstatusDesc = CatEstatus.EstatusDesc.ToString().ToUpper();
                     CatEstatus.IdEstatusRegistro = CatEstatus.IdEstatusRegistro;

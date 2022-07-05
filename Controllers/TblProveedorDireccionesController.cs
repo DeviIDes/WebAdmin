@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblProveedorDireccionesController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblProveedorDireccionesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -134,9 +134,11 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblProveedorDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
+
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorDirecciones.IdProveedor select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblProveedorDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblProveedorDirecciones.FechaRegistro = DateTime.Now;
@@ -211,6 +213,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblProveedorDirecciones.IdUsuarioModifico = Guid.Parse(fuser);
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorDirecciones.IdProveedor select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblProveedorDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblProveedorDirecciones.FechaRegistro = DateTime.Now;

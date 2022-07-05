@@ -29,7 +29,6 @@ namespace WebAdmin.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly INotyfService _notyf;
-        private readonly IUserService _userService;
  private readonly nDbContext _context;
 
 

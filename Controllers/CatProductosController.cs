@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
-using WebAdmin.Data;
 
 namespace WebAdminHecsa.Controllers
 {
@@ -17,7 +17,7 @@ namespace WebAdminHecsa.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatProductosController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatProductosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -73,14 +73,14 @@ namespace WebAdminHecsa.Controllers
             }
             var fProductos = from a in _context.CatProductos
                              join b in _context.CatCategorias on a.IdCategoria equals b.IdCategoria
-             
+
                              select new CatProducto
                              {
                                  IdProducto = a.IdProducto,
                                  CodigoInterno = a.CodigoInterno,
                                  CodigoExterno = a.CodigoExterno,
                                  CategoriaDesc = b.CategoriaDesc,
-                      
+
                                  DescProducto = a.DescProducto,
                                  FechaRegistro = a.FechaRegistro,
                                  IdEstatusRegistro = a.IdEstatusRegistro
@@ -95,7 +95,7 @@ namespace WebAdminHecsa.Controllers
         public ActionResult FiltroProductos(int idA, int idB)
         {
             var fProductos = _context.CatProductos
-                       .Where(s =>  s.IdCategoria == idB).Distinct().ToList();
+                       .Where(s => s.IdCategoria == idB).Distinct().ToList();
             return Json(fProductos);
         }
 
@@ -106,6 +106,7 @@ namespace WebAdminHecsa.Controllers
                        .Where(s => s.IdProducto == idA).Distinct().ToList();
             return Json(fProductos);
         }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -126,8 +127,6 @@ namespace WebAdminHecsa.Controllers
         // GET: CatProductos/Create
         public IActionResult Create()
         {
-
-
             List<CatCategoria> ListaCategoria = new List<CatCategoria>();
             ListaCategoria = (from c in _context.CatCategorias select c).Distinct().ToList();
             ViewBag.ListaCategoria = ListaCategoria;
@@ -145,18 +144,19 @@ namespace WebAdminHecsa.Controllers
             if (ModelState.IsValid)
             {
                 var DuplicadosEstatus = _context.CatProductos
-               .Where(s =>  s.IdCategoria == catProductos.IdCategoria && s.DescProducto == catProductos.DescProducto)
+               .Where(s => s.IdCategoria == catProductos.IdCategoria && s.DescProducto == catProductos.DescProducto)
                .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catProductos.IdUsuarioModifico = Guid.Parse(fuser);
 
                     var fCategoria = (from c in _context.CatCategorias where c.IdCategoria == catProductos.IdCategoria select c).Distinct().ToList();
                     catProductos.FechaRegistro = DateTime.Now;
                     catProductos.IdEstatusRegistro = 1;
-        
+
                     catProductos.CategoriaDesc = fCategoria[0].CategoriaDesc;
                     catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper() : catProductos.DescProducto;
                     catProductos.CodigoInterno = GeneraCodigoInterno();
@@ -180,8 +180,6 @@ namespace WebAdminHecsa.Controllers
         // GET: CatProductos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-    
-
             List<CatCategoria> ListaCategoria = new List<CatCategoria>();
             ListaCategoria = (from c in _context.CatCategorias select c).Distinct().ToList();
             ViewBag.ListaCategoria = ListaCategoria;
@@ -219,11 +217,13 @@ namespace WebAdminHecsa.Controllers
             {
                 try
                 {
-           
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catProductos.IdUsuarioModifico = Guid.Parse(fuser);
                     var fCategoria = (from c in _context.CatCategorias where c.IdCategoria == catProductos.IdCategoria select c).Distinct().ToList();
                     catProductos.FechaRegistro = DateTime.Now;
                     catProductos.IdEstatusRegistro = 1;
-              
+
                     catProductos.CategoriaDesc = fCategoria[0].CategoriaDesc;
                     catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper() : catProductos.DescProducto;
                     //catProductos.SubCosto = catProductos.ProductoPrecioUno * (1 + (catProductos.PorcentajePrecioUno / 100));

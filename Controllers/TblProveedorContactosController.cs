@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblProveedorContactosController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblProveedorContactosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -134,9 +134,10 @@ namespace WebAdmin.Controllers
                       .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblProveedorContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorContacto.IdProveedor select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblProveedorContacto.IdPerfil select c).Distinct().ToList();
                     tblProveedorContacto.NombreProveedorContacto = tblProveedorContacto.NombreProveedorContacto.ToString().ToUpper();
@@ -202,6 +203,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblProveedorContacto.IdUsuarioModifico = Guid.Parse(fuser);
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorContacto.IdProveedor select c).Distinct().ToList();
                     var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblProveedorContacto.IdPerfil select c).Distinct().ToList();
                     tblProveedorContacto.NombreProveedorContacto = tblProveedorContacto.NombreProveedorContacto.ToString().ToUpper();

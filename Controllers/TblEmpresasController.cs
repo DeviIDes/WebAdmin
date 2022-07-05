@@ -1,5 +1,4 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,7 +16,8 @@ namespace WebAdmin.Controllers
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
-        public TblEmpresasController(nDbContext context, INotyfService notyf,IUserService userService)
+
+        public TblEmpresasController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -97,7 +97,7 @@ namespace WebAdmin.Controllers
                         tblEmpresa.LocalidadMunicipio = !string.IsNullOrEmpty(tblEmpresa.LocalidadMunicipio) ? tblEmpresa.LocalidadMunicipio.ToUpper() : tblEmpresa.LocalidadMunicipio;
                         tblEmpresa.Ciudad = !string.IsNullOrEmpty(tblEmpresa.Ciudad) ? tblEmpresa.Ciudad.ToUpper() : tblEmpresa.Ciudad;
                         tblEmpresa.Estado = !string.IsNullOrEmpty(tblEmpresa.Estado) ? tblEmpresa.Estado.ToUpper() : tblEmpresa.Estado;
-                       tblEmpresa.IdUsuarioModifico = Guid.Parse(fuser);
+                        tblEmpresa.IdUsuarioModifico = Guid.Parse(fuser);
                         _context.SaveChanges();
                         _context.Add(tblEmpresa);
                         await _context.SaveChangesAsync();
@@ -153,10 +153,13 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblEmpresa.IdUsuarioModifico = Guid.Parse(fuser);
                     tblEmpresa.FechaRegistro = DateTime.Now;
                     tblEmpresa.NombreEmpresa = tblEmpresa.NombreEmpresa.ToString().ToUpper();
                     tblEmpresa.GiroComercial = !string.IsNullOrEmpty(tblEmpresa.GiroComercial) ? tblEmpresa.GiroComercial.ToUpper() : tblEmpresa.GiroComercial;
-                     tblEmpresa.IdEstatusRegistro = tblEmpresa.IdEstatusRegistro;
+                    tblEmpresa.IdEstatusRegistro = tblEmpresa.IdEstatusRegistro;
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblEmpresa.Colonia).FirstOrDefault();
                     tblEmpresa.IdColonia = !string.IsNullOrEmpty(tblEmpresa.Colonia) ? tblEmpresa.Colonia : tblEmpresa.Colonia;
                     tblEmpresa.Colonia = !string.IsNullOrEmpty(tblEmpresa.Colonia) ? strColonia.Dasenta.ToUpper() : tblEmpresa.Colonia;

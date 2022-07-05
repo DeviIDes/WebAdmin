@@ -1,11 +1,10 @@
-﻿using System;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
@@ -14,11 +13,11 @@ namespace WebAdmin.Controllers
 {
     public class TblCorporativoesController : Controller
     {
-       private readonly nDbContext _context;
+        private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblCorporativoesController(nDbContext context, INotyfService notyf,IUserService userService)
+        public TblCorporativoesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -28,7 +27,7 @@ namespace WebAdmin.Controllers
         // GET: TblCorporativoes
         public async Task<IActionResult> Index()
         {
-                      var ValidaEstatus = _context.CatEstatus.ToList();
+            var ValidaEstatus = _context.CatEstatus.ToList();
 
             if (ValidaEstatus.Count == 2)
             {
@@ -84,7 +83,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdCorporativo,IdTipoLicencia,IdTipoCorporativo,NombreCorporativo,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdEmpresa,FechaRegistro,IdEstatusRegistro")] TblCorporativo tblCorporativo)
         {
-           if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var vCorporativo = _context.TblCorporativos.ToList();
                 if (vCorporativo.Count == 0)
@@ -95,6 +94,9 @@ namespace WebAdmin.Controllers
 
                     if (DuplicadosEstatus.Count == 0)
                     {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
+                        tblCorporativo.IdUsuarioModifico = Guid.Parse(fuser);
                         tblCorporativo.FechaRegistro = DateTime.Now;
                         tblCorporativo.NombreCorporativo = tblCorporativo.NombreCorporativo.ToString().ToUpper();
                         tblCorporativo.IdEstatusRegistro = 1;
@@ -160,9 +162,12 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    tblCorporativo.IdUsuarioModifico = Guid.Parse(fuser);
                     tblCorporativo.FechaRegistro = DateTime.Now;
                     tblCorporativo.NombreCorporativo = tblCorporativo.NombreCorporativo.ToString().ToUpper();
-                     tblCorporativo.IdEstatusRegistro = tblCorporativo.IdEstatusRegistro;
+                    tblCorporativo.IdEstatusRegistro = tblCorporativo.IdEstatusRegistro;
                     var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCorporativo.Colonia).FirstOrDefault();
                     tblCorporativo.IdColonia = !string.IsNullOrEmpty(tblCorporativo.Colonia) ? tblCorporativo.Colonia : tblCorporativo.Colonia;
                     tblCorporativo.Colonia = !string.IsNullOrEmpty(tblCorporativo.Colonia) ? strColonia.Dasenta.ToUpper() : tblCorporativo.Colonia;
@@ -194,7 +199,7 @@ namespace WebAdmin.Controllers
         // GET: TblCorporativoes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
-             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
 
@@ -218,7 +223,7 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-           var tblCorporativo = await _context.TblCorporativos.FindAsync(id);
+            var tblCorporativo = await _context.TblCorporativos.FindAsync(id);
             tblCorporativo.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);

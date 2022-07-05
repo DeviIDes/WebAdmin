@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatPerfilesController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatPerfilesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -80,6 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catPerfil.IdUsuarioModifico = Guid.Parse(fuser);
                     catPerfil.FechaRegistro = DateTime.Now;
                     catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper();
                     catPerfil.IdEstatusRegistro = 1;
@@ -134,6 +137,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catPerfil.IdUsuarioModifico = Guid.Parse(fuser);
                     catPerfil.FechaRegistro = DateTime.Now;
                     catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper();
                     catPerfil.IdEstatusRegistro = catPerfil.IdEstatusRegistro;

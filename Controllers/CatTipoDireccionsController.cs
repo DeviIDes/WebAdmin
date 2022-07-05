@@ -17,7 +17,7 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatTipoDireccionsController(nDbContext context, INotyfService notyf,IUserService userService)
+        public CatTipoDireccionsController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
@@ -80,6 +80,9 @@ namespace WebAdmin.Controllers
 
                 if (vDuplicados.Count == 0)
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoDireccion.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoDireccion.FechaRegistro = DateTime.Now;
                     catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper();
                     catTipoDireccion.IdEstatusRegistro = 1;
@@ -134,6 +137,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoDireccion.IdUsuarioModifico = Guid.Parse(fuser);
                     catTipoDireccion.FechaRegistro = DateTime.Now;
                     catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper();
                     catTipoDireccion.IdEstatusRegistro = catTipoDireccion.IdEstatusRegistro;

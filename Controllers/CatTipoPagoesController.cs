@@ -1,11 +1,10 @@
-﻿using System;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
@@ -18,12 +17,13 @@ namespace WebAdmin.Controllers
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatTipoPagoesController(nDbContext context, INotyfService notyf)
+        public CatTipoPagoesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
-
+            _userService = userService;
         }
+
         // GET: CatTipoPagoes
         public async Task<IActionResult> Index()
         {
@@ -74,15 +74,15 @@ namespace WebAdmin.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var DuplicadosEstatus = _context.CatTipoPago
                        .Where(s => s.TipoPagoDesc == catTipoPago.TipoPagoDesc)
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                    {
-                        var fuser = _userService.GetUserId();
-                        var isLoggedIn = _userService.IsAuthenticated();
+                {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoPago.IdUsuarioModifico = Guid.Parse(fuser);
 
                     catTipoPago.FechaRegistro = DateTime.Now;
                     catTipoPago.TipoPagoDesc = catTipoPago.TipoPagoDesc.ToString().ToUpper();
@@ -106,6 +106,9 @@ namespace WebAdmin.Controllers
         // GET: CatTipoPagoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
+            ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
+            ViewBag.ListaCatEstatus = ListaCatEstatus;
             if (id == null)
             {
                 return NotFound();
@@ -135,6 +138,9 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                    var fuser = _userService.GetUserId();
+                    var isLoggedIn = _userService.IsAuthenticated();
+                    catTipoPago.IdUsuarioModifico = Guid.Parse(fuser);
                     _context.Update(catTipoPago);
                     await _context.SaveChangesAsync();
                 }
