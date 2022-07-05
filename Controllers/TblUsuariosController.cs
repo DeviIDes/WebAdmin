@@ -37,7 +37,12 @@ namespace WebAdmin.Controllers
                 if (ValidaEmpresa.Count == 1)
                 {
                     ViewBag.EmpresaFlag = 1;
-                    var ValidaGenero = _context.CatGeneros.ToList();
+                    var ValidaCorporativo = _context.TblCorporativos.ToList();
+
+                    if (ValidaCorporativo.Count >= 1)
+                    {
+                        ViewBag.CorporativoFlag = 1;
+     var ValidaGenero = _context.CatGeneros.ToList();
 
                     if (ValidaGenero.Count >= 1)
                     {
@@ -81,6 +86,13 @@ namespace WebAdmin.Controllers
                         ViewBag.vGeneroFlag = 0;
                         _notyf.Information("Favor de registrar los datos de Genero para la Aplicación", 5);
                     }
+                    }
+                    else
+                    {
+                        ViewBag.CorporativoFlag = 0;
+                        _notyf.Information("Favor de registrar los datos de Corporativo para la Aplicación", 5);
+                    }
+                   
                 }
                 else
                 {

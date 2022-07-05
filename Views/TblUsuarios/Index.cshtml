@@ -13,7 +13,7 @@
     </ol>
 </nav>
 <p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-plus"></i> Nuevo</a>
+    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register" style="text-align:center; visibility:hidden;"><i class="fas fa-plus"></i> Nuevo</a>
     @* <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus"></i> Nuevo</a> *@
 </p>
 <table class="table">
@@ -62,10 +62,10 @@
                         <i class="fas fa-stop-circle" style="font-size: 1em; color: red;"></i>
                     }
             </td>
-            <td style="text-align:center">
-                    <a asp-action="Edit" asp-route-id="@item.IdUsuario" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300;"></i></a>
-                    <a asp-action="Details" asp-route-id="@item.IdUsuario" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ;"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.IdUsuario" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333;"></i></a>
+            <td id="iAcciones" >
+                    <a id="iEditaUsuario" asp-action="Edit" asp-route-id="@item.IdUsuario" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300; "></i></a>
+                    <a id="iDetalleUsuario" asp-action="Details" asp-route-id="@item.IdUsuario" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ; "></i></a>
+                    <a id="iDesactivaUsuario" asp-action="Delete" asp-route-id="@item.IdUsuario" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333; "></i></a>
                 </td>
             </tr>
         }
@@ -82,6 +82,7 @@
 
            var vEstatusFlag = '@ViewBag.EstatusFlag'
            var vEmpresaFlag = '@ViewBag.EmpresaFlag'
+             var vCorporativoFlag = '@ViewBag.CorporativoFlag'
            var vGeneroFlag = '@ViewBag.GeneroFlag'
            var vAreaFlag = '@ViewBag.AreaFlag'
            var vPerfilFlag = '@ViewBag.PerfilFlag'
@@ -90,43 +91,64 @@
          if (vEstatusFlag == 0)
          {
          document.getElementById("iNuevo").style.visibility="hidden";
+         document.getElementById("iAcciones").style.visibility="hidden";
          }
          else
          {
              if (vEmpresaFlag == 0)
              {
              document.getElementById("iNuevo").style.visibility="hidden";
+                 document.getElementById("iAcciones").style.visibility="hidden";
              }
              else
              {
-                 if (vGeneroFlag == 0)
+                 if (vCorporativoFlag == 0)
                  {
                  document.getElementById("iNuevo").style.visibility="hidden";
+                     document.getElementById("iAcciones").style.visibility="hidden";
+
+                 }
+                 else
+                 {
+                  if (vGeneroFlag == 0)
+                 {
+                 document.getElementById("iNuevo").style.visibility="hidden";
+                     document.getElementById("iAcciones").style.visibility="hidden";
+
                  }
                  else
                  {
                      if (vAreaFlag == 0)
                      {
                      document.getElementById("iNuevo").style.visibility="hidden";
+                         document.getElementById("iAcciones").style.visibility="hidden";
+
                      }
                      else
                      {
                          if (vPerfilFlag == 0)
                          {
                          document.getElementById("iNuevo").style.visibility="hidden";
+                             document.getElementById("iAcciones").style.visibility="hidden";
+
                          }
                          else
                          {
                              if (vRolFlag == 0)
                              {
                              document.getElementById("iNuevo").style.visibility="hidden";
+                                 document.getElementById("iAcciones").style.visibility="hidden";
+
                              }
                              else
                              {
                              document.getElementById("iNuevo").style.visibility="visible";
+                                 document.getElementById("iAcciones").style.visibility="visible";
+
                              }
                          }
                      }
+                 }
                  }
              }
          }

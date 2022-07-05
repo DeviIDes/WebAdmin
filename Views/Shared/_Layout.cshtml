@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
 <!DOCTYPE html>
 <html lang="es-MX" xml:lang="es-MX">
 
@@ -25,6 +26,7 @@
 
     <!-- Custom styles for this page -->
     <link href="@Url.Content("~/plantilla/vendor/datatables/dataTables.bootstrap4.min.css")" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body id="page-top">
@@ -70,7 +72,7 @@
                     </a>
                 </li>
                 <!-- Nav Item - Catálogos Collapse Menu -->
-                <li class="nav-item">
+                <li class="nav-item" id="iCatalogos">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCatálogos"
                    aria-expanded="true" aria-controls="collapseCatálogos">
                         <i class="fa-solid fa-gears"></i>

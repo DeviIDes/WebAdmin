@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
 
@@ -13,14 +15,31 @@ namespace WebAdmin.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+            private readonly nDbContext _context;
+        private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,nDbContext context, INotyfService notyf,IUserService userService)
         {
-            _logger = logger;
+   _logger = logger;
+            _context = context;
+            _notyf = notyf;
+            _userService = userService;
         }
+
 
         public IActionResult Index()
         {
+            // !string.IsNullOrEmpty(catCategoria.CategoriaDesc) ? catCategoria.CategoriaDesc.ToUpper() : catCategoria.CategoriaDesc;
+             var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
+                        var vUsuarios = _context.TblUsuarios
+                                .Where(s => s.IdUsuario == Guid.Parse(fuser) && s.IdPerfil == 3 && s.IdRol == 2)
+                                .ToList();
+                                if (vUsuarios.Count == 0)
+                                {
+                                    ViewBag.ActivaRol = 1;
+                                }
             return View();
         }
 
