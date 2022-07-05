@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
+
+using System;
 namespace WebAdmin
 {
     public class Startup
@@ -28,6 +30,8 @@ namespace WebAdmin
             services.AddDbContext<nDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("msql_connection")));
+            // services.AddDbContext<nDbContext>(options =>
+            //      options.UseMySQL(Configuration.GetConnectionString("MySQLDataSource")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

@@ -88,6 +88,9 @@ namespace WebAdmin.Data
             {
                 entity.ToTable("UserTokens");
             });
+            //modelBuilder.Entity<IdentityRole>().Ignore("IdentityRole");
+    
+
             modelBuilder.Entity<CatEstatus>().HasData(
                 new CatEstatus { IdEstatusRegistro = 1, EstatusDesc = "ACTIVO", FechaRegistro = DateTime.Today },
                 new CatEstatus { IdEstatusRegistro = 2, EstatusDesc = "DESACTIVO", FechaRegistro = DateTime.Today }
