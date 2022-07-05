@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
@@ -15,11 +16,13 @@ namespace WebAdmin.Controllers
     {
        private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public TblCorporativoesController(nDbContext context, INotyfService notyf)
+        public TblCorporativoesController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: TblCorporativoes

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Models;
+using WebAdmin.Services;
 using WebAdmin.Data;
 
 namespace WebAdminHecsa.Controllers
@@ -14,11 +15,13 @@ namespace WebAdminHecsa.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public CatProductosController(nDbContext context, INotyfService notyf)
+        public CatProductosController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: CatProductos
@@ -146,7 +149,9 @@ namespace WebAdminHecsa.Controllers
                .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                {
+                    {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
 
                     var fCategoria = (from c in _context.CatCategorias where c.IdCategoria == catProductos.IdCategoria select c).Distinct().ToList();
                     catProductos.FechaRegistro = DateTime.Now;

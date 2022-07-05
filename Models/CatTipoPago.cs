@@ -7,18 +7,15 @@ namespace WebAdmin.Models
 {
     public class CatTipoPago
     {
-
-        public CatTipoPago()
-        {
-            TblCentros = new HashSet<TblCentro>();
-        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTipoPago { get; set; }
+
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]
         public string TipoPagoDesc { get; set; }
+
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
@@ -26,10 +23,8 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
         public DateTime FechaRegistro { get; set; }
+
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
-
-
-        public virtual ICollection<TblCentro> TblCentros { get; set; }
     }
 }

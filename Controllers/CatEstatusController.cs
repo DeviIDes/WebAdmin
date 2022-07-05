@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
@@ -16,11 +17,13 @@ namespace WebAdmin.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public CatEstatusController(nDbContext context, INotyfService notyf)
+        public CatEstatusController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
         [HttpPost]
         public IActionResult Export(string GridHtml)

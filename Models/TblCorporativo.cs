@@ -46,6 +46,7 @@ namespace WebAdmin.Models
 
         [ForeignKey("TblEmpresa")]
         public Guid IdEmpresa { get; set; }
+
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
@@ -56,50 +57,6 @@ namespace WebAdmin.Models
 
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
-
-        public TblCorporativo()
-        {
-            CatAreas = new HashSet<CatArea>();
-            CatCategorias = new HashSet<CatCategoria>();
-            CatEscolaridads = new HashSet<CatEscolaridad>();
-            CatEstatus = new HashSet<CatEstatus>();
-            CatGeneros = new HashSet<CatGenero>();
-            CatNivelEscolars = new HashSet<CatNivelEscolar>();
-            CatPerfiles = new HashSet<CatPerfil>();
-            CatRoles = new HashSet<CatRole>();
-            CatTipoAlumnos = new HashSet<CatTipoAlumno>();
-            CatTipoCentros = new HashSet<CatTipoCentro>();
-            CatTipoContratacions = new HashSet<CatTipoContratacion>();
-            CatTipoDireccions = new HashSet<CatTipoDireccion>();
-            CatTipoPagos = new HashSet<CatTipoPago>();
-            CatTipoPrestamos = new HashSet<CatTipoPrestamo>();
-            CatTipoServicios = new HashSet<CatTipoServicio>();
-            TblCentros = new HashSet<TblCentro>();
-            TblClientes = new HashSet<TblCliente>();
-            TblProveedores = new HashSet<TblProveedor>();
-        }
-
-        public virtual ICollection<CatArea> CatAreas { get; set; }
-        public virtual ICollection<CatCategoria> CatCategorias { get; set; }
-        public virtual ICollection<CatEscolaridad> CatEscolaridads { get; set; }
-        public virtual ICollection<CatEstatus> CatEstatus { get; set; }
-        public virtual ICollection<CatGenero> CatGeneros { get; set; }
-       
-        public virtual ICollection<CatNivelEscolar> CatNivelEscolars { get; set; }
-        public virtual ICollection<CatPerfil> CatPerfiles { get; set; }
-       
-        public virtual ICollection<CatRole> CatRoles { get; set; }
-        public virtual ICollection<CatTipoAlumno> CatTipoAlumnos { get; set; }
-        public virtual ICollection<CatTipoCentro> CatTipoCentros { get; set; }
-        public virtual ICollection<CatTipoContratacion> CatTipoContratacions { get; set; }
-        public virtual ICollection<CatTipoDireccion> CatTipoDireccions { get; set; }
-        public virtual ICollection<CatTipoPago> CatTipoPagos { get; set; }
-        public virtual ICollection<CatTipoPrestamo> CatTipoPrestamos { get; set; }
-        public virtual ICollection<CatTipoServicio> CatTipoServicios { get; set; }
-        public virtual ICollection<TblCentro> TblCentros { get; set; }
-        public virtual ICollection<TblCliente> TblClientes { get; set; }
-        public virtual ICollection<TblProveedor> TblProveedores { get; set; }
-
 
     }
 }

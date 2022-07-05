@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
@@ -14,11 +15,13 @@ namespace WebAdmin.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public TblProveedorDireccionesController(nDbContext context, INotyfService notyf)
+        public TblProveedorDireccionesController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: TblProveedorDirecciones
@@ -131,7 +134,9 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                {
+                    {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
                     var fProveedor = (from c in _context.TblProveedores where c.IdProveedor == tblProveedorDirecciones.IdProveedor select c).Distinct().ToList();
                     var fTipoDireccion = (from c in _context.CatTipoDirecciones where c.IdTipoDireccion == tblProveedorDirecciones.IdTipoDireccion select c).Distinct().ToList();
                     tblProveedorDirecciones.FechaRegistro = DateTime.Now;

@@ -17,7 +17,6 @@ namespace WebAdmin.Controllers
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
-
         public TblEmpresasController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
@@ -84,8 +83,6 @@ namespace WebAdmin.Controllers
 
                     if (DuplicadosEstatus.Count == 0)
                     {
-
-
                         var fuser = _userService.GetUserId();
                         var isLoggedIn = _userService.IsAuthenticated();
 

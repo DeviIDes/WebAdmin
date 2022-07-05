@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
@@ -15,6 +16,7 @@ namespace WebAdmin.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
         public CatTipoContratacionsController(nDbContext context, INotyfService notyf)
         {
@@ -78,7 +80,9 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                {
+                    {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
 
                     catTipoContratacion.FechaRegistro = DateTime.Now;
                     catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper();

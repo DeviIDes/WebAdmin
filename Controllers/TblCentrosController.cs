@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
@@ -14,11 +15,13 @@ namespace WebAdmin.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public TblCentrosController(nDbContext context, INotyfService notyf)
+        public TblCentrosController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: tblCentros
@@ -116,7 +119,9 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                {
+                    {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblCentros.FechaRegistro = DateTime.Now;
                     tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();

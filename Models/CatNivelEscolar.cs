@@ -7,18 +7,20 @@ namespace WebAdmin.Models
 {
     public class CatNivelEscolar
     {
-
         public CatNivelEscolar()
         {
             TblUsuarios = new HashSet<TblUsuario>();
         }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdNivelEscolar { get; set; }
+
         [Display(Name = "Descripción")]
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Campo Requerido")]
         public string NivelEscolarDesc { get; set; }
+
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
@@ -26,9 +28,9 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
         public DateTime FechaRegistro { get; set; }
+
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
-
 
         public virtual ICollection<TblUsuario> TblUsuarios { get; set; }
     }

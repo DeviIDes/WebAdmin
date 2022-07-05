@@ -19,21 +19,6 @@ namespace WebAdmin.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CatTipoCentroTblCorporativo", b =>
-                {
-                    b.Property<int>("CatTipoCentrosIdTipoCentro")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("TblCorporativosIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CatTipoCentrosIdTipoCentro", "TblCorporativosIdCorporativo");
-
-                    b.HasIndex("TblCorporativosIdCorporativo");
-
-                    b.ToTable("CatTipoCentroTblCorporativo");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -269,9 +254,7 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("WebAdmin.Models.CatArea", b =>
                 {
                     b.Property<int>("IdArea")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("AreaDesc")
                         .IsRequired()
@@ -287,14 +270,75 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdArea");
 
-                    b.HasIndex("TblCorporativoIdCorporativo");
-
                     b.ToTable("CatAreas");
+
+                    b.HasData(
+                        new
+                        {
+                            IdArea = 1,
+                            AreaDesc = "DIRECCION",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdArea = 2,
+                            AreaDesc = "RECURSOS HUMANOS",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdArea = 3,
+                            AreaDesc = "PRODUCCION DIGITAL",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdArea = 4,
+                            AreaDesc = "FINANZAS/CONTABILIDAD",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdArea = 5,
+                            AreaDesc = "MARKETING/VENTAS",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdArea = 6,
+                            AreaDesc = "TIC",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdArea = 7,
+                            AreaDesc = "SERVICIO AL CLIENTE",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            IdArea = 8,
+                            AreaDesc = "OTRA",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatCategoria", b =>
@@ -318,12 +362,7 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdCategoria");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatCategorias");
                 });
@@ -29213,12 +29252,7 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdEscolaridad");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatEscolaridad");
                 });
@@ -29241,12 +29275,7 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdEstatusRegistro");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatEstatus");
 
@@ -29254,15 +29283,15 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdEstatusRegistro = 1,
-                            EstatusDesc = "Activo",
-                            FechaRegistro = new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            EstatusDesc = "ACTIVO",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdEstatusRegistro = 2,
-                            EstatusDesc = "Desactivo",
-                            FechaRegistro = new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            EstatusDesc = "DESACTIVO",
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -29288,12 +29317,7 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdGenero");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatGeneros");
                 });
@@ -29319,12 +29343,7 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdNivelEscolar");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatNivelEscolar");
                 });
@@ -29350,14 +29369,51 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdPerfil");
 
-                    b.HasIndex("TblCorporativoIdCorporativo");
-
                     b.ToTable("CatPerfiles");
+
+                    b.HasData(
+                        new
+                        {
+                            IdPerfil = 1,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PerfilDesc = "DIRECTOR"
+                        },
+                        new
+                        {
+                            IdPerfil = 2,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PerfilDesc = "ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            IdPerfil = 3,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PerfilDesc = "GERENTE"
+                        },
+                        new
+                        {
+                            IdPerfil = 4,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PerfilDesc = "EJECUTIVO"
+                        },
+                        new
+                        {
+                            IdPerfil = 5,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            PerfilDesc = "DOCENTE"
+                        });
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatProducto", b =>
@@ -29371,9 +29427,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CantidadMinima")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatCategoriaIdCategoria")
                         .HasColumnType("int");
 
                     b.Property<string>("CodigoExterno")
@@ -29413,8 +29466,6 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdProducto");
 
-                    b.HasIndex("CatCategoriaIdCategoria");
-
                     b.ToTable("CatProductos");
                 });
 
@@ -29439,14 +29490,43 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdRol");
 
-                    b.HasIndex("TblCorporativoIdCorporativo");
-
                     b.ToTable("CatRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            IdRol = 1,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            RolDesc = "DESARROLLADOR"
+                        },
+                        new
+                        {
+                            IdRol = 2,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            RolDesc = "ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            IdRol = 3,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            RolDesc = "SUPERVISOR"
+                        },
+                        new
+                        {
+                            IdRol = 4,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            RolDesc = "OPERADOR"
+                        });
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoAlumno", b =>
@@ -29466,16 +29546,11 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("TipoAlumnoDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdTipoAlumno");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatTipoAlumno");
                 });
@@ -29549,16 +29624,11 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("TipoContratacionDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdTipoContratacion");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatTipoContratacion");
                 });
@@ -29580,16 +29650,11 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("TipoDireccionDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdTipoDireccion");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatTipoDirecciones");
                 });
@@ -29611,18 +29676,55 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("TipoPagoDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdTipoPago");
 
-                    b.HasIndex("TblCorporativoIdCorporativo");
-
                     b.ToTable("CatTipoPago");
+
+                    b.HasData(
+                        new
+                        {
+                            IdTipoPago = 1,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoPagoDesc = "EFECTIVO"
+                        },
+                        new
+                        {
+                            IdTipoPago = 2,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoPagoDesc = "TRANSFERENCIA"
+                        },
+                        new
+                        {
+                            IdTipoPago = 3,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoPagoDesc = "CREDITO"
+                        },
+                        new
+                        {
+                            IdTipoPago = 4,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoPagoDesc = "TDC"
+                        },
+                        new
+                        {
+                            IdTipoPago = 5,
+                            FechaRegistro = new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            IdEstatusRegistro = 1,
+                            IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
+                            TipoPagoDesc = "TDD"
+                        });
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatTipoPrestamo", b =>
@@ -29642,16 +29744,11 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("TipoPrestamoDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdTipoPrestamo");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatTipoPrestamo");
                 });
@@ -29673,16 +29770,11 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("TipoServicioDesc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdTipoServicio");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("CatTipoServicio");
                 });
@@ -29759,17 +29851,8 @@ namespace WebAdmin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("CaTipotLicenciaIdTipoLicencia")
-                        .HasColumnType("int");
-
                     b.Property<string>("Calle")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CatTipoPagoIdTipoPago")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatTipoServicioIdTipoServicio")
-                        .HasColumnType("int");
 
                     b.Property<string>("Ciudad")
                         .HasColumnType("nvarchar(max)");
@@ -29819,21 +29902,10 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCentro");
-
-                    b.HasIndex("CaTipotLicenciaIdTipoLicencia");
-
-                    b.HasIndex("CatTipoPagoIdTipoPago");
-
-                    b.HasIndex("CatTipoServicioIdTipoServicio");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("TblCentros");
                 });
@@ -29849,9 +29921,6 @@ namespace WebAdmin.Migrations
 
                     b.Property<string>("ApellidoPaterno")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CatTipoClienteIdTipoCliente")
-                        .HasColumnType("int");
 
                     b.Property<string>("ClaveAcceso")
                         .IsRequired()
@@ -29888,14 +29957,7 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdCliente");
-
-                    b.HasIndex("CatTipoClienteIdTipoCliente");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("TblClientes");
                 });
@@ -29931,9 +29993,6 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblClienteIdCliente")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
@@ -29941,8 +30000,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdClienteContacto");
-
-                    b.HasIndex("TblClienteIdCliente");
 
                     b.ToTable("TblClienteContactos");
                 });
@@ -29996,15 +30053,10 @@ namespace WebAdmin.Migrations
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblClienteIdCliente")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdClienteDirecciones");
-
-                    b.HasIndex("TblClienteIdCliente");
 
                     b.ToTable("TblClienteDirecciones");
                 });
@@ -30057,15 +30109,10 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblEmpresaIdEmpresa")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCorporativo");
-
-                    b.HasIndex("TblEmpresaIdEmpresa");
 
                     b.ToTable("TblCorporativos");
                 });
@@ -30078,9 +30125,6 @@ namespace WebAdmin.Migrations
 
                     b.Property<string>("Calle")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CatEstatusIdEstatusRegistro")
-                        .HasColumnType("int");
 
                     b.Property<string>("Ciudad")
                         .HasColumnType("nvarchar(max)");
@@ -30129,8 +30173,6 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdEmpresa");
 
-                    b.HasIndex("CatEstatusIdEstatusRegistro");
-
                     b.ToTable("TblEmpresa");
                 });
 
@@ -30163,12 +30205,7 @@ namespace WebAdmin.Migrations
                     b.Property<string>("Rfc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblCorporativoIdCorporativo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("IdProveedor");
-
-                    b.HasIndex("TblCorporativoIdCorporativo");
 
                     b.ToTable("TblProveedores");
                 });
@@ -30204,9 +30241,6 @@ namespace WebAdmin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblProveedorIdProveedor")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
@@ -30214,8 +30248,6 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProveedorContacto");
-
-                    b.HasIndex("TblProveedorIdProveedor");
 
                     b.ToTable("TblProveedorContactos");
                 });
@@ -30268,15 +30300,10 @@ namespace WebAdmin.Migrations
                     b.Property<string>("LocalidadMunicipio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TblProveedorIdProveedor")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProveedorDirecciones");
-
-                    b.HasIndex("TblProveedorIdProveedor");
 
                     b.ToTable("TblProveedorDirecciones");
                 });
@@ -30293,28 +30320,7 @@ namespace WebAdmin.Migrations
                     b.Property<string>("ApellidoPaterno")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CatAreaIdArea")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatEscolaridadIdEscolaridad")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatGeneroIdGenero")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CatNivelEscolarIdNivelEscolar")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatPerfilIdPerfil")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatRoleIdRol")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatTipoAlumnoIdTipoAlumno")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CatTipoContratacionIdTipoContratacion")
                         .HasColumnType("int");
 
                     b.Property<string>("CorreoAcceso")
@@ -30363,21 +30369,7 @@ namespace WebAdmin.Migrations
 
                     b.HasKey("IdUsuario");
 
-                    b.HasIndex("CatAreaIdArea");
-
-                    b.HasIndex("CatEscolaridadIdEscolaridad");
-
-                    b.HasIndex("CatGeneroIdGenero");
-
                     b.HasIndex("CatNivelEscolarIdNivelEscolar");
-
-                    b.HasIndex("CatPerfilIdPerfil");
-
-                    b.HasIndex("CatRoleIdRol");
-
-                    b.HasIndex("CatTipoAlumnoIdTipoAlumno");
-
-                    b.HasIndex("CatTipoContratacionIdTipoContratacion");
 
                     b.ToTable("TblUsuarios");
                 });
@@ -30434,21 +30426,6 @@ namespace WebAdmin.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("CatTipoCentroTblCorporativo", b =>
-                {
-                    b.HasOne("WebAdmin.Models.CatTipoCentro", null)
-                        .WithMany()
-                        .HasForeignKey("CatTipoCentrosIdTipoCentro")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany()
-                        .HasForeignKey("TblCorporativosIdCorporativo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -30500,349 +30477,16 @@ namespace WebAdmin.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebAdmin.Models.CatArea", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatAreas")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatCategoria", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatCategorias")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatEscolaridad", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatEscolaridads")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatEstatus", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatEstatus")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatGenero", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatGeneros")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatNivelEscolar", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatNivelEscolars")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatPerfil", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatPerfiles")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatProducto", b =>
-                {
-                    b.HasOne("WebAdmin.Models.CatCategoria", null)
-                        .WithMany("CatProductos")
-                        .HasForeignKey("CatCategoriaIdCategoria");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatRole", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatRoles")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoAlumno", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatTipoAlumnos")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoContratacion", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatTipoContratacions")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoDireccion", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatTipoDireccions")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoPago", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatTipoPagos")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoPrestamo", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatTipoPrestamos")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoServicio", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("CatTipoServicios")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblCentro", b =>
-                {
-                    b.HasOne("WebAdmin.Models.CaTipotLicencia", null)
-                        .WithMany("TblCentros")
-                        .HasForeignKey("CaTipotLicenciaIdTipoLicencia");
-
-                    b.HasOne("WebAdmin.Models.CatTipoPago", null)
-                        .WithMany("TblCentros")
-                        .HasForeignKey("CatTipoPagoIdTipoPago");
-
-                    b.HasOne("WebAdmin.Models.CatTipoServicio", null)
-                        .WithMany("TblCentros")
-                        .HasForeignKey("CatTipoServicioIdTipoServicio");
-
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("TblCentros")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblCliente", b =>
-                {
-                    b.HasOne("WebAdmin.Models.CatTipoCliente", null)
-                        .WithMany("TblClientes")
-                        .HasForeignKey("CatTipoClienteIdTipoCliente");
-
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("TblClientes")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblClienteContacto", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCliente", null)
-                        .WithMany("TblClienteContactos")
-                        .HasForeignKey("TblClienteIdCliente");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblClienteDireccion", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCliente", null)
-                        .WithMany("TblClienteDireccion")
-                        .HasForeignKey("TblClienteIdCliente");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblCorporativo", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblEmpresa", null)
-                        .WithMany("TblCorporativos")
-                        .HasForeignKey("TblEmpresaIdEmpresa");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblEmpresa", b =>
-                {
-                    b.HasOne("WebAdmin.Models.CatEstatus", null)
-                        .WithMany("TblEmpresas")
-                        .HasForeignKey("CatEstatusIdEstatusRegistro");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblProveedor", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblCorporativo", null)
-                        .WithMany("TblProveedores")
-                        .HasForeignKey("TblCorporativoIdCorporativo");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblProveedorContacto", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblProveedor", null)
-                        .WithMany("TblProveedorContactos")
-                        .HasForeignKey("TblProveedorIdProveedor");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblProveedorDireccion", b =>
-                {
-                    b.HasOne("WebAdmin.Models.TblProveedor", null)
-                        .WithMany("TblProveedorDireccion")
-                        .HasForeignKey("TblProveedorIdProveedor");
-                });
-
             modelBuilder.Entity("WebAdmin.Models.TblUsuario", b =>
                 {
-                    b.HasOne("WebAdmin.Models.CatArea", null)
-                        .WithMany("TblUsuarios")
-                        .HasForeignKey("CatAreaIdArea");
-
-                    b.HasOne("WebAdmin.Models.CatEscolaridad", null)
-                        .WithMany("TblUsuarios")
-                        .HasForeignKey("CatEscolaridadIdEscolaridad");
-
-                    b.HasOne("WebAdmin.Models.CatGenero", null)
-                        .WithMany("TblUsuarios")
-                        .HasForeignKey("CatGeneroIdGenero");
-
                     b.HasOne("WebAdmin.Models.CatNivelEscolar", null)
                         .WithMany("TblUsuarios")
                         .HasForeignKey("CatNivelEscolarIdNivelEscolar");
-
-                    b.HasOne("WebAdmin.Models.CatPerfil", null)
-                        .WithMany("TblUsuarios")
-                        .HasForeignKey("CatPerfilIdPerfil");
-
-                    b.HasOne("WebAdmin.Models.CatRole", null)
-                        .WithMany("TblUsuarios")
-                        .HasForeignKey("CatRoleIdRol");
-
-                    b.HasOne("WebAdmin.Models.CatTipoAlumno", null)
-                        .WithMany("TblUsuarios")
-                        .HasForeignKey("CatTipoAlumnoIdTipoAlumno");
-
-                    b.HasOne("WebAdmin.Models.CatTipoContratacion", null)
-                        .WithMany("TblUsuarios")
-                        .HasForeignKey("CatTipoContratacionIdTipoContratacion");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CaTipotLicencia", b =>
-                {
-                    b.Navigation("TblCentros");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatArea", b =>
-                {
-                    b.Navigation("TblUsuarios");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatCategoria", b =>
-                {
-                    b.Navigation("CatProductos");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatEscolaridad", b =>
-                {
-                    b.Navigation("TblUsuarios");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatEstatus", b =>
-                {
-                    b.Navigation("TblEmpresas");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatGenero", b =>
-                {
-                    b.Navigation("TblUsuarios");
                 });
 
             modelBuilder.Entity("WebAdmin.Models.CatNivelEscolar", b =>
                 {
                     b.Navigation("TblUsuarios");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatPerfil", b =>
-                {
-                    b.Navigation("TblUsuarios");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatRole", b =>
-                {
-                    b.Navigation("TblUsuarios");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoAlumno", b =>
-                {
-                    b.Navigation("TblUsuarios");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoCliente", b =>
-                {
-                    b.Navigation("TblClientes");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoContratacion", b =>
-                {
-                    b.Navigation("TblUsuarios");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoPago", b =>
-                {
-                    b.Navigation("TblCentros");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.CatTipoServicio", b =>
-                {
-                    b.Navigation("TblCentros");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblCliente", b =>
-                {
-                    b.Navigation("TblClienteContactos");
-
-                    b.Navigation("TblClienteDireccion");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblCorporativo", b =>
-                {
-                    b.Navigation("CatAreas");
-
-                    b.Navigation("CatCategorias");
-
-                    b.Navigation("CatEscolaridads");
-
-                    b.Navigation("CatEstatus");
-
-                    b.Navigation("CatGeneros");
-
-                    b.Navigation("CatNivelEscolars");
-
-                    b.Navigation("CatPerfiles");
-
-                    b.Navigation("CatRoles");
-
-                    b.Navigation("CatTipoAlumnos");
-
-                    b.Navigation("CatTipoContratacions");
-
-                    b.Navigation("CatTipoDireccions");
-
-                    b.Navigation("CatTipoPagos");
-
-                    b.Navigation("CatTipoPrestamos");
-
-                    b.Navigation("CatTipoServicios");
-
-                    b.Navigation("TblCentros");
-
-                    b.Navigation("TblClientes");
-
-                    b.Navigation("TblProveedores");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblEmpresa", b =>
-                {
-                    b.Navigation("TblCorporativos");
-                });
-
-            modelBuilder.Entity("WebAdmin.Models.TblProveedor", b =>
-                {
-                    b.Navigation("TblProveedorContactos");
-
-                    b.Navigation("TblProveedorDireccion");
                 });
 #pragma warning restore 612, 618
         }

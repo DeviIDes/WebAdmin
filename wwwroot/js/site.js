@@ -1,4 +1,36 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(document).ready(function() {
 
-// Write your JavaScript code.
+    var vRolFlag = '@ViewBag.RolFlag'
+
+     if (vRolFlag == 0)
+     {
+     document.getElementById("iNuevo").style.visibility="hidden";
+     }
+     else
+     {
+         if (vRolFlag == 0)
+         {
+         document.getElementById("iNuevo").style.visibility="hidden";
+         }
+         else
+         {
+             if (vRolFlag == 0)
+             {
+             document.getElementById("iNuevo").style.visibility="hidden";
+             }
+             else
+             {
+                if (vRolFlag == 0)
+                         {
+                            document.getElementById(id).style.visibility = "visible"; // show
+                            document.getElementById(id).style.visibility = "hidden"; // hide
+                         }
+                         else
+                         {
+                            document.getElementById(id).style.visibility = "visible"; // show
+                            document.getElementById(id).style.visibility = "hidden"; // hide
+                         }
+             }
+         }
+     }
+    });

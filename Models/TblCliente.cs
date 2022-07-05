@@ -9,11 +9,6 @@ namespace WebAdmin.Models
 {
     public partial class TblCliente
     {
-        public TblCliente()
-        {
-            TblClienteContactos = new HashSet<TblClienteContacto>();
-            TblClienteDireccion = new HashSet<TblClienteDireccion>();
-        }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -47,7 +42,8 @@ namespace WebAdmin.Models
 
         [Display(Name = "Clave Acceso")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public string ClaveAcceso {get; set;}
+        public string ClaveAcceso { get; set; }
+
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
@@ -60,15 +56,11 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Acceso")]
         public DateTime FechaAcceso { get; set; }
+
         [NotMapped]
-               public string ReturnUrl { get; set; }
+        public string ReturnUrl { get; set; }
 
         [Display(Name = "Estatus")]
-
         public int IdEstatusRegistro { get; set; }
-
-
-        public virtual ICollection<TblClienteContacto> TblClienteContactos { get; set; }
-        public virtual ICollection<TblClienteDireccion> TblClienteDireccion { get; set; }
     }
 }

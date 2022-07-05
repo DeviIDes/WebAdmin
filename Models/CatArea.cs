@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,13 +8,8 @@ namespace WebAdmin.Models
 {
     public partial class CatArea
     {
-        public CatArea()
-        {
-            TblUsuarios = new HashSet<TblUsuario>();
-        }
-
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdArea { get; set; }
 
         [Display(Name = "Descripción")]
@@ -25,6 +19,7 @@ namespace WebAdmin.Models
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
+
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
@@ -32,6 +27,5 @@ namespace WebAdmin.Models
 
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
-        public virtual ICollection<TblUsuario> TblUsuarios { get; set; }
     }
 }

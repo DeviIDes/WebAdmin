@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
@@ -15,11 +16,13 @@ namespace WebAdmin.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public CatTipoCentroesController(nDbContext context, INotyfService notyf)
+        public CatTipoCentroesController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
 
@@ -79,7 +82,9 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                {
+                    {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
 
                     catTipoCentro.FechaRegistro = DateTime.Now;
                     catTipoCentro.TipoCentroDesc = catTipoCentro.TipoCentroDesc.ToString().ToUpper();

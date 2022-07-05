@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace WebAdminHecsa.Controllers
 {
@@ -14,11 +15,13 @@ namespace WebAdminHecsa.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public TblProveedoresController(nDbContext context, INotyfService notyf)
+        public TblProveedoresController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: TblProveedors
@@ -99,7 +102,9 @@ namespace WebAdminHecsa.Controllers
                                 .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                {
+                    {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
                     tblProveedor.FechaRegistro = DateTime.Now;
                     tblProveedor.NombreProveedor = tblProveedor.NombreProveedor.ToString().ToUpper();

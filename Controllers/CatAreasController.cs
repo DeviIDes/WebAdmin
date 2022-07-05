@@ -7,18 +7,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
-
+using WebAdmin.Services;
 namespace WebAdmin.Controllers
 {
     public class CatAreasController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
-
-        public CatAreasController(nDbContext context, INotyfService notyf)
+        private readonly IUserService _userService;
+        public CatAreasController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         // GET: CatAreas
@@ -76,8 +77,9 @@ namespace WebAdmin.Controllers
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
-                {
-                    
+                    {
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
                     catArea.FechaRegistro = DateTime.Now;
                     catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
                     catArea.IdEstatusRegistro = 1;

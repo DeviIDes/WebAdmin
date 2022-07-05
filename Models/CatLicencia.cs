@@ -9,11 +9,6 @@ namespace WebAdmin.Models
 {
     public partial class CaTipotLicencia
     {
-        public CaTipotLicencia()
-        {
-            TblCentros = new HashSet<TblCentro>();
-        }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTipoLicencia { get; set; }
@@ -23,8 +18,9 @@ namespace WebAdmin.Models
         [Required(ErrorMessage = "Campo Requerido")]
         public string LicenciaDesc { get; set; }
 
-[Display(Name = "Usuario Modifico")]
+        [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
+
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
@@ -32,6 +28,6 @@ namespace WebAdmin.Models
 
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
-        public virtual ICollection<TblCentro> TblCentros { get; set; }
+
     }
 }

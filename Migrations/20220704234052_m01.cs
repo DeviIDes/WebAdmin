@@ -63,6 +63,37 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CatAreas",
+                columns: table => new
+                {
+                    IdArea = table.Column<int>(type: "int", nullable: false),
+                    AreaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatAreas", x => x.IdArea);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatCategorias",
+                columns: table => new
+                {
+                    IdCategoria = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoriaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatCategorias", x => x.IdCategoria);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CatCodigosPostales",
                 columns: table => new
                 {
@@ -90,6 +121,53 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CatEscolaridad",
+                columns: table => new
+                {
+                    IdEscolaridad = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EscolaridadDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatEscolaridad", x => x.IdEscolaridad);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatEstatus",
+                columns: table => new
+                {
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EstatusDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatEstatus", x => x.IdEstatusRegistro);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatGeneros",
+                columns: table => new
+                {
+                    IdGenero = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GeneroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatGeneros", x => x.IdGenero);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CaTipotLicencias",
                 columns: table => new
                 {
@@ -103,6 +181,95 @@ namespace WebAdmin.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CaTipotLicencias", x => x.IdTipoLicencia);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatNivelEscolar",
+                columns: table => new
+                {
+                    IdNivelEscolar = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NivelEscolarDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatNivelEscolar", x => x.IdNivelEscolar);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatPerfiles",
+                columns: table => new
+                {
+                    IdPerfil = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PerfilDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatPerfiles", x => x.IdPerfil);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatProductos",
+                columns: table => new
+                {
+                    IdProducto = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodigoInterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoExterno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdCategoria = table.Column<int>(type: "int", nullable: false),
+                    DescProducto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CantidadMinima = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    ProductoPrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PorcentajePrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubCosto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatProductos", x => x.IdProducto);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatRoles",
+                columns: table => new
+                {
+                    IdRol = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RolDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatRoles", x => x.IdRol);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatTipoAlumno",
+                columns: table => new
+                {
+                    IdTipoAlumno = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoAlumnoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoAlumno", x => x.IdTipoAlumno);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,6 +302,86 @@ namespace WebAdmin.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CatTipoClientes", x => x.IdTipoCliente);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatTipoContratacion",
+                columns: table => new
+                {
+                    IdTipoContratacion = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoContratacionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoContratacion", x => x.IdTipoContratacion);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatTipoDirecciones",
+                columns: table => new
+                {
+                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoDireccionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoDirecciones", x => x.IdTipoDireccion);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatTipoPago",
+                columns: table => new
+                {
+                    IdTipoPago = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoPagoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoPago", x => x.IdTipoPago);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatTipoPrestamo",
+                columns: table => new
+                {
+                    IdTipoPrestamo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoPrestamoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoPrestamo", x => x.IdTipoPrestamo);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatTipoServicio",
+                columns: table => new
+                {
+                    IdTipoServicio = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoServicioDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatTipoServicio", x => x.IdTipoServicio);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,6 +420,220 @@ namespace WebAdmin.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FilesOnFileSystem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblCentros",
+                columns: table => new
+                {
+                    IdCentro = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdTipoLicencia = table.Column<int>(type: "int", nullable: false),
+                    IdTipoCentro = table.Column<int>(type: "int", nullable: false),
+                    NombreCentro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioControl = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblCentros", x => x.IdCentro);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblClienteContactos",
+                columns: table => new
+                {
+                    IdClienteContacto = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdPerfil = table.Column<int>(type: "int", nullable: false),
+                    NombreClienteContacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblClienteContactos", x => x.IdClienteContacto);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblClienteDirecciones",
+                columns: table => new
+                {
+                    IdClienteDirecciones = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false),
+                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblClienteDirecciones", x => x.IdClienteDirecciones);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblClientes",
+                columns: table => new
+                {
+                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdTipoCliente = table.Column<int>(type: "int", nullable: false),
+                    NombreCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApellidoPaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdPerfil = table.Column<int>(type: "int", nullable: false),
+                    IdRol = table.Column<int>(type: "int", nullable: false),
+                    CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClaveAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaAcceso = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblClientes", x => x.IdCliente);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblCorporativos",
+                columns: table => new
+                {
+                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NombreCorporativo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblCorporativos", x => x.IdCorporativo);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblEmpresa",
+                columns: table => new
+                {
+                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblEmpresa", x => x.IdEmpresa);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblProveedorContactos",
+                columns: table => new
+                {
+                    IdProveedorContacto = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdPerfil = table.Column<int>(type: "int", nullable: false),
+                    NombreProveedorContacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblProveedorContactos", x => x.IdProveedorContacto);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblProveedorDirecciones",
+                columns: table => new
+                {
+                    IdProveedorDirecciones = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false),
+                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblProveedorDirecciones", x => x.IdProveedorDirecciones);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblProveedores",
+                columns: table => new
+                {
+                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NombreProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblProveedores", x => x.IdProveedor);
                 });
 
             migrationBuilder.CreateTable(
@@ -302,688 +763,32 @@ namespace WebAdmin.Migrations
                     IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    CatAreaIdArea = table.Column<int>(type: "int", nullable: true),
-                    CatEscolaridadIdEscolaridad = table.Column<int>(type: "int", nullable: true),
-                    CatGeneroIdGenero = table.Column<int>(type: "int", nullable: true),
-                    CatNivelEscolarIdNivelEscolar = table.Column<int>(type: "int", nullable: true),
-                    CatPerfilIdPerfil = table.Column<int>(type: "int", nullable: true),
-                    CatRoleIdRol = table.Column<int>(type: "int", nullable: true),
-                    CatTipoAlumnoIdTipoAlumno = table.Column<int>(type: "int", nullable: true),
-                    CatTipoContratacionIdTipoContratacion = table.Column<int>(type: "int", nullable: true)
+                    CatNivelEscolarIdNivelEscolar = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblUsuarios", x => x.IdUsuario);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatProductos",
-                columns: table => new
-                {
-                    IdProducto = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CodigoInterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoExterno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdCategoria = table.Column<int>(type: "int", nullable: false),
-                    DescProducto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CantidadMinima = table.Column<int>(type: "int", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    ProductoPrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PorcentajePrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SubCosto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    CatCategoriaIdCategoria = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatProductos", x => x.IdProducto);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblEmpresa",
-                columns: table => new
-                {
-                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    CatEstatusIdEstatusRegistro = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblEmpresa", x => x.IdEmpresa);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblCorporativos",
-                columns: table => new
-                {
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreCorporativo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblEmpresaIdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblCorporativos", x => x.IdCorporativo);
                     table.ForeignKey(
-                        name: "FK_TblCorporativos_TblEmpresa_TblEmpresaIdEmpresa",
-                        column: x => x.TblEmpresaIdEmpresa,
-                        principalTable: "TblEmpresa",
-                        principalColumn: "IdEmpresa",
+                        name: "FK_TblUsuarios_CatNivelEscolar_CatNivelEscolarIdNivelEscolar",
+                        column: x => x.CatNivelEscolarIdNivelEscolar,
+                        principalTable: "CatNivelEscolar",
+                        principalColumn: "IdNivelEscolar",
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "CatAreas",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "CatAreas",
+                columns: new[] { "IdArea", "AreaDesc", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico" },
+                values: new object[,]
                 {
-                    IdArea = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AreaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatAreas", x => x.IdArea);
-                    table.ForeignKey(
-                        name: "FK_CatAreas_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatCategorias",
-                columns: table => new
-                {
-                    IdCategoria = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoriaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatCategorias", x => x.IdCategoria);
-                    table.ForeignKey(
-                        name: "FK_CatCategorias_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatEscolaridad",
-                columns: table => new
-                {
-                    IdEscolaridad = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EscolaridadDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatEscolaridad", x => x.IdEscolaridad);
-                    table.ForeignKey(
-                        name: "FK_CatEscolaridad_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatEstatus",
-                columns: table => new
-                {
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EstatusDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatEstatus", x => x.IdEstatusRegistro);
-                    table.ForeignKey(
-                        name: "FK_CatEstatus_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatGeneros",
-                columns: table => new
-                {
-                    IdGenero = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GeneroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatGeneros", x => x.IdGenero);
-                    table.ForeignKey(
-                        name: "FK_CatGeneros_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatNivelEscolar",
-                columns: table => new
-                {
-                    IdNivelEscolar = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NivelEscolarDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatNivelEscolar", x => x.IdNivelEscolar);
-                    table.ForeignKey(
-                        name: "FK_CatNivelEscolar_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatPerfiles",
-                columns: table => new
-                {
-                    IdPerfil = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PerfilDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatPerfiles", x => x.IdPerfil);
-                    table.ForeignKey(
-                        name: "FK_CatPerfiles_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatRoles",
-                columns: table => new
-                {
-                    IdRol = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RolDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatRoles", x => x.IdRol);
-                    table.ForeignKey(
-                        name: "FK_CatRoles_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatTipoAlumno",
-                columns: table => new
-                {
-                    IdTipoAlumno = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoAlumnoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatTipoAlumno", x => x.IdTipoAlumno);
-                    table.ForeignKey(
-                        name: "FK_CatTipoAlumno_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatTipoCentroTblCorporativo",
-                columns: table => new
-                {
-                    CatTipoCentrosIdTipoCentro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativosIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatTipoCentroTblCorporativo", x => new { x.CatTipoCentrosIdTipoCentro, x.TblCorporativosIdCorporativo });
-                    table.ForeignKey(
-                        name: "FK_CatTipoCentroTblCorporativo_CatTipoCentros_CatTipoCentrosIdTipoCentro",
-                        column: x => x.CatTipoCentrosIdTipoCentro,
-                        principalTable: "CatTipoCentros",
-                        principalColumn: "IdTipoCentro",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CatTipoCentroTblCorporativo_TblCorporativos_TblCorporativosIdCorporativo",
-                        column: x => x.TblCorporativosIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatTipoContratacion",
-                columns: table => new
-                {
-                    IdTipoContratacion = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoContratacionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatTipoContratacion", x => x.IdTipoContratacion);
-                    table.ForeignKey(
-                        name: "FK_CatTipoContratacion_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatTipoDirecciones",
-                columns: table => new
-                {
-                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoDireccionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatTipoDirecciones", x => x.IdTipoDireccion);
-                    table.ForeignKey(
-                        name: "FK_CatTipoDirecciones_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatTipoPago",
-                columns: table => new
-                {
-                    IdTipoPago = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoPagoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatTipoPago", x => x.IdTipoPago);
-                    table.ForeignKey(
-                        name: "FK_CatTipoPago_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatTipoPrestamo",
-                columns: table => new
-                {
-                    IdTipoPrestamo = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoPrestamoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatTipoPrestamo", x => x.IdTipoPrestamo);
-                    table.ForeignKey(
-                        name: "FK_CatTipoPrestamo_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatTipoServicio",
-                columns: table => new
-                {
-                    IdTipoServicio = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoServicioDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatTipoServicio", x => x.IdTipoServicio);
-                    table.ForeignKey(
-                        name: "FK_CatTipoServicio_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblClientes",
-                columns: table => new
-                {
-                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdTipoCliente = table.Column<int>(type: "int", nullable: false),
-                    NombreCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApellidoPaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApellidoMaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdPerfil = table.Column<int>(type: "int", nullable: false),
-                    IdRol = table.Column<int>(type: "int", nullable: false),
-                    CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClaveAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaAcceso = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    CatTipoClienteIdTipoCliente = table.Column<int>(type: "int", nullable: true),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblClientes", x => x.IdCliente);
-                    table.ForeignKey(
-                        name: "FK_TblClientes_CatTipoClientes_CatTipoClienteIdTipoCliente",
-                        column: x => x.CatTipoClienteIdTipoCliente,
-                        principalTable: "CatTipoClientes",
-                        principalColumn: "IdTipoCliente",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TblClientes_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblProveedores",
-                columns: table => new
-                {
-                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblProveedores", x => x.IdProveedor);
-                    table.ForeignKey(
-                        name: "FK_TblProveedores_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblCentros",
-                columns: table => new
-                {
-                    IdCentro = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdTipoLicencia = table.Column<int>(type: "int", nullable: false),
-                    IdTipoCentro = table.Column<int>(type: "int", nullable: false),
-                    NombreCentro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioControl = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    CaTipotLicenciaIdTipoLicencia = table.Column<int>(type: "int", nullable: true),
-                    CatTipoPagoIdTipoPago = table.Column<int>(type: "int", nullable: true),
-                    CatTipoServicioIdTipoServicio = table.Column<int>(type: "int", nullable: true),
-                    TblCorporativoIdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblCentros", x => x.IdCentro);
-                    table.ForeignKey(
-                        name: "FK_TblCentros_CaTipotLicencias_CaTipotLicenciaIdTipoLicencia",
-                        column: x => x.CaTipotLicenciaIdTipoLicencia,
-                        principalTable: "CaTipotLicencias",
-                        principalColumn: "IdTipoLicencia",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TblCentros_CatTipoPago_CatTipoPagoIdTipoPago",
-                        column: x => x.CatTipoPagoIdTipoPago,
-                        principalTable: "CatTipoPago",
-                        principalColumn: "IdTipoPago",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TblCentros_CatTipoServicio_CatTipoServicioIdTipoServicio",
-                        column: x => x.CatTipoServicioIdTipoServicio,
-                        principalTable: "CatTipoServicio",
-                        principalColumn: "IdTipoServicio",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TblCentros_TblCorporativos_TblCorporativoIdCorporativo",
-                        column: x => x.TblCorporativoIdCorporativo,
-                        principalTable: "TblCorporativos",
-                        principalColumn: "IdCorporativo",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblClienteContactos",
-                columns: table => new
-                {
-                    IdClienteContacto = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPerfil = table.Column<int>(type: "int", nullable: false),
-                    NombreClienteContacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblClienteIdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblClienteContactos", x => x.IdClienteContacto);
-                    table.ForeignKey(
-                        name: "FK_TblClienteContactos_TblClientes_TblClienteIdCliente",
-                        column: x => x.TblClienteIdCliente,
-                        principalTable: "TblClientes",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblClienteDirecciones",
-                columns: table => new
-                {
-                    IdClienteDirecciones = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblClienteIdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblClienteDirecciones", x => x.IdClienteDirecciones);
-                    table.ForeignKey(
-                        name: "FK_TblClienteDirecciones_TblClientes_TblClienteIdCliente",
-                        column: x => x.TblClienteIdCliente,
-                        principalTable: "TblClientes",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblProveedorContactos",
-                columns: table => new
-                {
-                    IdProveedorContacto = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPerfil = table.Column<int>(type: "int", nullable: false),
-                    NombreProveedorContacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblProveedorIdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblProveedorContactos", x => x.IdProveedorContacto);
-                    table.ForeignKey(
-                        name: "FK_TblProveedorContactos_TblProveedores_TblProveedorIdProveedor",
-                        column: x => x.TblProveedorIdProveedor,
-                        principalTable: "TblProveedores",
-                        principalColumn: "IdProveedor",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblProveedorDirecciones",
-                columns: table => new
-                {
-                    IdProveedorDirecciones = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    TblProveedorIdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblProveedorDirecciones", x => x.IdProveedorDirecciones);
-                    table.ForeignKey(
-                        name: "FK_TblProveedorDirecciones_TblProveedores_TblProveedorIdProveedor",
-                        column: x => x.TblProveedorIdProveedor,
-                        principalTable: "TblProveedores",
-                        principalColumn: "IdProveedor",
-                        onDelete: ReferentialAction.Restrict);
+                    { 1, "DIRECCION", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "RECURSOS HUMANOS", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 3, "PRODUCCION DIGITAL", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 4, "FINANZAS/CONTABILIDAD", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 5, "MARKETING/VENTAS", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 6, "TIC", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 7, "SERVICIO AL CLIENTE", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 8, "OTRA", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -991,29 +796,28 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
-                    { 1, "0", "01", "09", "010", "01001", "09", "San Ángel", "Ciudad de México", "01000", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0001" },
-                    { 1017, "0", "11", "09", "016", "11411", "09", "Argentina Poniente", "Ciudad de México", "11230", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1765" },
-                    { 1016, "0", "11", "09", "016", "11411", "09", "Periodista", "Ciudad de México", "11220", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1764" },
-                    { 1015, "0", "11", "09", "016", "11411", "28", "San Lorenzo Tlaltenango", "Ciudad de México", "11210", "11411", "Ciudad de México", "Miguel Hidalgo", "Pueblo", "Urbano", "1761" },
-                    { 1014, "0", "11", "09", "016", "11411", "09", "Lomas de Sotelo", "Ciudad de México", "11200", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1758" },
-                    { 1013, "0", "11", "09", "016", "11411", "09", "Lomas Hermosa", "Ciudad de México", "11200", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1757" },
-                    { 1012, "0", "11", "09", "016", "11801", "17", "Bosque de Chapultepec III Sección", "Ciudad de México", "11100", "11801", "Ciudad de México", "Miguel Hidalgo", "Equipamiento", "Urbano", "2772" },
                     { 1011, "0", "11", "09", "016", "11801", "17", "Bosque de Chapultepec II Sección", "Ciudad de México", "11100", "11801", "Ciudad de México", "Miguel Hidalgo", "Equipamiento", "Urbano", "1754" },
+                    { 1012, "0", "11", "09", "016", "11801", "17", "Bosque de Chapultepec III Sección", "Ciudad de México", "11100", "11801", "Ciudad de México", "Miguel Hidalgo", "Equipamiento", "Urbano", "2772" },
+                    { 1013, "0", "11", "09", "016", "11411", "09", "Lomas Hermosa", "Ciudad de México", "11200", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1757" },
+                    { 1017, "0", "11", "09", "016", "11411", "09", "Argentina Poniente", "Ciudad de México", "11230", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1765" },
+                    { 1015, "0", "11", "09", "016", "11411", "28", "San Lorenzo Tlaltenango", "Ciudad de México", "11210", "11411", "Ciudad de México", "Miguel Hidalgo", "Pueblo", "Urbano", "1761" },
+                    { 1016, "0", "11", "09", "016", "11411", "09", "Periodista", "Ciudad de México", "11220", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1764" },
                     { 1010, "0", "11", "09", "016", "11801", "09", "Molino del Rey", "Ciudad de México", "11040", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1752" },
+                    { 1014, "0", "11", "09", "016", "11411", "09", "Lomas de Sotelo", "Ciudad de México", "11200", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1758" },
                     { 1009, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec VII Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2780" },
-                    { 1008, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec VI Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2779" },
+                    { 1005, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec III Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2776" },
                     { 1007, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec V Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2778" },
                     { 1006, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec IV Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2777" },
-                    { 1005, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec III Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2776" },
+                    { 1018, "0", "11", "09", "016", "11411", "09", "Ignacio Manuel Altamirano", "Ciudad de México", "11240", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1767" },
                     { 1004, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec II Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2775" },
                     { 1003, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec VIII Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2774" },
                     { 1002, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec I Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1745" },
                     { 1001, "0", "10", "09", "008", "10901", "04", "Tierra Colorada", "Ciudad de México", "10926", "10901", "Ciudad de México", "La Magdalena Contreras", "Campamento", "Urbano", "1739" },
                     { 1000, "0", "10", "09", "008", "10901", "09", "Las Huertas", "Ciudad de México", "10920", "10901", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1738" },
                     { 999, "0", "10", "09", "008", "10581", "28", "La Magdalena", "Ciudad de México", "10910", "10581", "Ciudad de México", "La Magdalena Contreras", "Pueblo", "Urbano", "1737" },
-                    { 1018, "0", "11", "09", "016", "11411", "09", "Ignacio Manuel Altamirano", "Ciudad de México", "11240", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1767" },
+                    { 1008, "0", "11", "09", "016", "11801", "09", "Lomas de Chapultepec VI Sección", "Ciudad de México", "11000", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2779" },
                     { 1019, "0", "11", "09", "016", "11411", "09", "10 de Abril", "Ciudad de México", "11250", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1768" },
-                    { 1020, "0", "11", "09", "016", "11411", "09", "México Nuevo", "Ciudad de México", "11260", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1770" },
+                    { 1023, "0", "11", "09", "016", "11411", "09", "Torre Blanca", "Ciudad de México", "11280", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1773" },
                     { 1021, "0", "11", "09", "016", "11411", "09", "San Joaquín", "Ciudad de México", "11260", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1771" },
                     { 1041, "0", "11", "09", "016", "11411", "09", "Ventura Pérez de Alva", "Ciudad de México", "11430", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1798" },
                     { 1040, "0", "11", "09", "016", "11411", "09", "Pensil Norte", "Ciudad de México", "11430", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1797" },
@@ -1024,15 +828,8 @@ namespace WebAdmin.Migrations
                     { 1035, "0", "11", "09", "016", "11411", "09", "Tlaxpana", "Ciudad de México", "11370", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1789" },
                     { 1034, "0", "11", "09", "016", "11411", "09", "Agricultura", "Ciudad de México", "11360", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1787" },
                     { 1033, "0", "11", "09", "016", "11411", "09", "Plutarco Elías Calles", "Ciudad de México", "11350", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1786" },
-                    { 998, "0", "10", "09", "008", "10901", "28", "San Nicolás Totolapan", "Ciudad de México", "10900", "10901", "Ciudad de México", "La Magdalena Contreras", "Pueblo", "Urbano", "1735" },
-                    { 1032, "0", "11", "09", "016", "11411", "09", "Santo Tomas", "Ciudad de México", "11340", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1785" },
-                    { 1030, "0", "11", "09", "016", "11411", "09", "Anáhuac II Sección", "Ciudad de México", "11320", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2771" },
-                    { 1029, "0", "11", "09", "016", "11411", "09", "Anáhuac I Sección", "Ciudad de México", "11320", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1782" },
-                    { 1028, "0", "11", "09", "016", "11411", "09", "Mariano Escobedo", "Ciudad de México", "11310", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1780" },
-                    { 1027, "0", "11", "09", "016", "11411", "09", "Verónica Anzures", "Ciudad de México", "11300", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1777" },
-                    { 1026, "0", "11", "09", "016", "11411", "09", "San Diego Ocoyoacac", "Ciudad de México", "11290", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1776" },
-                    { 1025, "0", "11", "09", "016", "11411", "09", "Huíchapan", "Ciudad de México", "11290", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1775" },
-                    { 1024, "0", "11", "09", "016", "11411", "09", "Ampliación Torre Blanca", "Ciudad de México", "11289", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1774" }
+                    { 1020, "0", "11", "09", "016", "11411", "09", "México Nuevo", "Ciudad de México", "11260", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1770" },
+                    { 1032, "0", "11", "09", "016", "11411", "09", "Santo Tomas", "Ciudad de México", "11340", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1785" }
                 });
 
             migrationBuilder.InsertData(
@@ -1040,11 +837,18 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
-                    { 1023, "0", "11", "09", "016", "11411", "09", "Torre Blanca", "Ciudad de México", "11280", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1773" },
+                    { 1030, "0", "11", "09", "016", "11411", "09", "Anáhuac II Sección", "Ciudad de México", "11320", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2771" },
+                    { 1029, "0", "11", "09", "016", "11411", "09", "Anáhuac I Sección", "Ciudad de México", "11320", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1782" },
+                    { 1028, "0", "11", "09", "016", "11411", "09", "Mariano Escobedo", "Ciudad de México", "11310", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1780" },
+                    { 1027, "0", "11", "09", "016", "11411", "09", "Verónica Anzures", "Ciudad de México", "11300", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1777" },
+                    { 1026, "0", "11", "09", "016", "11411", "09", "San Diego Ocoyoacac", "Ciudad de México", "11290", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1776" },
+                    { 1025, "0", "11", "09", "016", "11411", "09", "Huíchapan", "Ciudad de México", "11290", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1775" },
+                    { 1024, "0", "11", "09", "016", "11411", "09", "Ampliación Torre Blanca", "Ciudad de México", "11289", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1774" },
+                    { 998, "0", "10", "09", "008", "10901", "28", "San Nicolás Totolapan", "Ciudad de México", "10900", "10901", "Ciudad de México", "La Magdalena Contreras", "Pueblo", "Urbano", "1735" },
                     { 1022, "0", "11", "09", "016", "11411", "09", "Argentina Antigua", "Ciudad de México", "11270", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1772" },
                     { 1031, "0", "11", "09", "016", "11411", "09", "Un Hogar Para Nosotros", "Ciudad de México", "11330", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1784" },
-                    { 1042, "0", "11", "09", "016", "11411", "09", "Reforma Pensil", "Ciudad de México", "11440", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1799" },
                     { 997, "0", "10", "09", "008", "10901", "02", "Plazuela del Pedregal", "Ciudad de México", "10840", "10901", "Ciudad de México", "La Magdalena Contreras", "Barrio", "Urbano", "1734" },
+                    { 993, "0", "10", "09", "008", "10581", "09", "San Francisco", "Ciudad de México", "10810", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1730" },
                     { 995, "0", "10", "09", "008", "10901", "09", "La Concepción", "Ciudad de México", "10830", "10901", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1732" },
                     { 970, "0", "10", "09", "008", "10021", "09", "Lomas de San Bernabé", "Ciudad de México", "10350", "10021", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1693" },
                     { 969, "0", "10", "09", "008", "10021", "09", "Los Padres", "Ciudad de México", "10340", "10021", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1692" },
@@ -1070,18 +874,11 @@ namespace WebAdmin.Migrations
                     { 973, "0", "10", "09", "008", "10021", "09", "Ampliación Lomas de San Bernabé", "Ciudad de México", "10369", "10021", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1696" },
                     { 974, "0", "10", "09", "008", "10021", "09", "Tierra Unida", "Ciudad de México", "10369", "10021", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "2669" },
                     { 994, "0", "10", "09", "008", "10901", "09", "La Guadalupe", "Ciudad de México", "10820", "10901", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1731" },
-                    { 993, "0", "10", "09", "008", "10581", "09", "San Francisco", "Ciudad de México", "10810", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1730" },
+                    { 1042, "0", "11", "09", "016", "11411", "09", "Reforma Pensil", "Ciudad de México", "11440", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1799" },
                     { 992, "0", "10", "09", "008", "10581", "09", "La Cruz", "Ciudad de México", "10800", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1728" },
                     { 991, "0", "10", "09", "008", "10901", "09", "Santa Teresa", "Ciudad de México", "10710", "10901", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1723" },
                     { 990, "0", "10", "09", "008", "10701", "09", "Héroes de Padierna", "Ciudad de México", "10700", "10701", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1721" },
-                    { 989, "0", "10", "09", "008", "10581", "09", "El Ermitaño", "Ciudad de México", "10660", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1720" },
-                    { 988, "0", "10", "09", "008", "10581", "09", "Pueblo Nuevo Bajo", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1718" },
-                    { 987, "0", "10", "09", "008", "10581", "09", "Pueblo Nuevo Alto", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1717" },
-                    { 986, "0", "10", "09", "008", "10581", "09", "La Carbonera", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1716" },
-                    { 996, "0", "10", "09", "008", "10901", "02", "Las Calles", "Ciudad de México", "10840", "10901", "Ciudad de México", "La Magdalena Contreras", "Barrio", "Urbano", "1733" },
-                    { 985, "0", "00", "09", "008", "10581", "04", "El Ocotal", "", "10630", "10581", "Ciudad de México", "La Magdalena Contreras", "Campamento", "Urbano", "2706" },
-                    { 983, "0", "10", "09", "008", "10581", "09", "El Toro", "Ciudad de México", "10610", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1713" },
-                    { 982, "0", "10", "09", "008", "10581", "09", "El Rosal", "Ciudad de México", "10600", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1710" }
+                    { 989, "0", "10", "09", "008", "10581", "09", "El Ermitaño", "Ciudad de México", "10660", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1720" }
                 });
 
             migrationBuilder.InsertData(
@@ -1089,6 +886,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 988, "0", "10", "09", "008", "10581", "09", "Pueblo Nuevo Bajo", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1718" },
+                    { 987, "0", "10", "09", "008", "10581", "09", "Pueblo Nuevo Alto", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1717" },
+                    { 986, "0", "10", "09", "008", "10581", "09", "La Carbonera", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1716" },
+                    { 996, "0", "10", "09", "008", "10901", "02", "Las Calles", "Ciudad de México", "10840", "10901", "Ciudad de México", "La Magdalena Contreras", "Barrio", "Urbano", "1733" },
+                    { 985, "0", "00", "09", "008", "10581", "04", "El Ocotal", "", "10630", "10581", "Ciudad de México", "La Magdalena Contreras", "Campamento", "Urbano", "2706" },
+                    { 983, "0", "10", "09", "008", "10581", "09", "El Toro", "Ciudad de México", "10610", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1713" },
+                    { 982, "0", "10", "09", "008", "10581", "09", "El Rosal", "Ciudad de México", "10600", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1710" },
                     { 981, "0", "10", "09", "008", "10581", "09", "Barranca Seca", "Ciudad de México", "10580", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1707" },
                     { 980, "0", "10", "09", "008", "10581", "09", "Barrio San Francisco", "Ciudad de México", "10500", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1703" },
                     { 979, "0", "10", "09", "008", "10701", "09", "San Jerónimo Aculco", "Ciudad de México", "10400", "10701", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1702" },
@@ -1098,7 +902,7 @@ namespace WebAdmin.Migrations
                     { 975, "0", "10", "09", "008", "10021", "09", "Palmas", "Ciudad de México", "10370", "10021", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1697" },
                     { 984, "0", "10", "09", "008", "10581", "09", "Potrerillo", "Ciudad de México", "10620", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1714" },
                     { 1043, "0", "11", "09", "016", "11411", "09", "San Juanico", "Ciudad de México", "11440", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1800" },
-                    { 1044, "0", "11", "09", "016", "11411", "09", "Ahuehuetes Anáhuac", "Ciudad de México", "11450", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1801" },
+                    { 1047, "0", "11", "09", "016", "11411", "09", "Dos Lagos", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1804" },
                     { 1045, "0", "11", "09", "016", "11411", "09", "Modelo Pensil", "Ciudad de México", "11450", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1802" },
                     { 1112, "0", "12", "09", "009", "12001", "02", "San Miguel", "Ciudad de México", "12400", "12001", "Ciudad de México", "Milpa Alta", "Barrio", "Urbano", "1907" },
                     { 1111, "0", "12", "09", "009", "12001", "02", "San Juan", "Ciudad de México", "12400", "12001", "Ciudad de México", "Milpa Alta", "Barrio", "Urbano", "1906" },
@@ -1123,14 +927,7 @@ namespace WebAdmin.Migrations
                     { 1114, "0", "12", "09", "009", "12001", "28", "San Lorenzo Tlacoyucan", "Ciudad de México", "12500", "12001", "Ciudad de México", "Milpa Alta", "Pueblo", "Urbano", "1910" },
                     { 1115, "0", "12", "09", "009", "12001", "28", "San Jerónimo Miacatlán", "Ciudad de México", "12600", "12001", "Ciudad de México", "Milpa Alta", "Pueblo", "Urbano", "1911" },
                     { 1116, "0", "12", "09", "009", "12001", "28", "San Francisco Tecoxpa", "Ciudad de México", "12700", "12001", "Ciudad de México", "Milpa Alta", "Pueblo", "Urbano", "1912" },
-                    { 1136, "0", "13", "09", "011", "13011", "09", "San Isidro", "Ciudad de México", "13094", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2898" },
-                    { 1135, "0", "13", "09", "011", "13011", "09", "San Sebastián", "Ciudad de México", "13093", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2497" },
-                    { 1134, "0", "13", "09", "011", "13011", "09", "Quiahuatla", "Ciudad de México", "13090", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1934" },
-                    { 1133, "0", "13", "09", "011", "13011", "02", "Los Reyes", "Ciudad de México", "13080", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1933" },
-                    { 1132, "0", "13", "09", "011", "13011", "02", "San Miguel", "Ciudad de México", "13070", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1932" },
-                    { 1131, "0", "13", "09", "011", "13011", "02", "La Magdalena", "Ciudad de México", "13070", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1931" },
-                    { 1130, "0", "13", "09", "011", "13011", "02", "Santa Ana", "Ciudad de México", "13060", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1930" },
-                    { 1129, "0", "13", "09", "011", "13011", "02", "La Guadalupe", "Ciudad de México", "13060", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1929" }
+                    { 1136, "0", "13", "09", "011", "13011", "09", "San Isidro", "Ciudad de México", "13094", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2898" }
                 });
 
             migrationBuilder.InsertData(
@@ -1138,6 +935,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1135, "0", "13", "09", "011", "13011", "09", "San Sebastián", "Ciudad de México", "13093", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2497" },
+                    { 1134, "0", "13", "09", "011", "13011", "09", "Quiahuatla", "Ciudad de México", "13090", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1934" },
+                    { 1133, "0", "13", "09", "011", "13011", "02", "Los Reyes", "Ciudad de México", "13080", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1933" },
+                    { 1132, "0", "13", "09", "011", "13011", "02", "San Miguel", "Ciudad de México", "13070", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1932" },
+                    { 1131, "0", "13", "09", "011", "13011", "02", "La Magdalena", "Ciudad de México", "13070", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1931" },
+                    { 1130, "0", "13", "09", "011", "13011", "02", "Santa Ana", "Ciudad de México", "13060", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1930" },
+                    { 1129, "0", "13", "09", "011", "13011", "02", "La Guadalupe", "Ciudad de México", "13060", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1929" },
                     { 1128, "0", "13", "09", "011", "13011", "09", "La Habana", "Ciudad de México", "13050", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1928" },
                     { 1093, "0", "12", "09", "009", "12001", "02", "Santa Martha", "Ciudad de México", "12000", "12001", "Ciudad de México", "Milpa Alta", "Barrio", "Urbano", "1883" },
                     { 1127, "0", "13", "09", "011", "13011", "02", "San Mateo", "Ciudad de México", "13040", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1926" },
@@ -1172,14 +976,7 @@ namespace WebAdmin.Migrations
                     { 1050, "0", "11", "09", "016", "11411", "09", "Los Manzanos", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1807" },
                     { 1049, "0", "11", "09", "016", "11411", "09", "Lago Sur", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1806" },
                     { 1048, "0", "11", "09", "016", "11411", "09", "Lago Norte", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1805" },
-                    { 1047, "0", "11", "09", "016", "11411", "09", "Dos Lagos", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1804" },
-                    { 1046, "0", "11", "09", "016", "11411", "09", "Peralitos", "Ciudad de México", "11450", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1803" },
-                    { 1055, "0", "11", "09", "016", "11411", "09", "Ampliación Popo", "Ciudad de México", "11489", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1813" },
-                    { 951, "0", "09", "09", "007", "09291", "09", "El Rosario", "Ciudad de México", "09930", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1644" },
-                    { 1067, "0", "11", "09", "016", "11591", "17", "Bosque de Chapultepec I Sección", "Ciudad de México", "11580", "11591", "Ciudad de México", "Miguel Hidalgo", "Equipamiento", "Urbano", "1833" },
-                    { 1069, "0", "11", "09", "016", "11801", "09", "Residencial Militar", "Ciudad de México", "11600", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1843" },
-                    { 1089, "0", "12", "09", "009", "12001", "02", "La Luz", "Ciudad de México", "12000", "12001", "Ciudad de México", "Milpa Alta", "Barrio", "Urbano", "1878" },
-                    { 1088, "0", "12", "09", "009", "12001", "02", "La Concepción", "Ciudad de México", "12000", "12001", "Ciudad de México", "Milpa Alta", "Barrio", "Urbano", "1877" }
+                    { 951, "0", "09", "09", "007", "09291", "09", "El Rosario", "Ciudad de México", "09930", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1644" }
                 });
 
             migrationBuilder.InsertData(
@@ -1187,6 +984,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1046, "0", "11", "09", "016", "11411", "09", "Peralitos", "Ciudad de México", "11450", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1803" },
+                    { 1055, "0", "11", "09", "016", "11411", "09", "Ampliación Popo", "Ciudad de México", "11489", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1813" },
+                    { 1044, "0", "11", "09", "016", "11411", "09", "Ahuehuetes Anáhuac", "Ciudad de México", "11450", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1801" },
+                    { 1067, "0", "11", "09", "016", "11591", "17", "Bosque de Chapultepec I Sección", "Ciudad de México", "11580", "11591", "Ciudad de México", "Miguel Hidalgo", "Equipamiento", "Urbano", "1833" },
+                    { 1069, "0", "11", "09", "016", "11801", "09", "Residencial Militar", "Ciudad de México", "11600", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1843" },
+                    { 1089, "0", "12", "09", "009", "12001", "02", "La Luz", "Ciudad de México", "12000", "12001", "Ciudad de México", "Milpa Alta", "Barrio", "Urbano", "1878" },
+                    { 1088, "0", "12", "09", "009", "12001", "02", "La Concepción", "Ciudad de México", "12000", "12001", "Ciudad de México", "Milpa Alta", "Barrio", "Urbano", "1877" },
                     { 1087, "0", "11", "09", "016", "11801", "09", "Lomas Altas", "Ciudad de México", "11950", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1874" },
                     { 1086, "0", "11", "09", "016", "11801", "09", "Lomas de Reforma", "Ciudad de México", "11930", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2789" },
                     { 1085, "0", "11", "09", "016", "11801", "09", "Real de las Lomas", "Ciudad de México", "11920", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1870" },
@@ -1207,7 +1011,7 @@ namespace WebAdmin.Migrations
                     { 1070, "0", "11", "09", "016", "11801", "09", "Manuel Avila Camacho", "Ciudad de México", "11610", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1844" },
                     { 1079, "0", "11", "09", "016", "11801", "09", "Ampliación Daniel Garza", "Ciudad de México", "11840", "11801", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1863" },
                     { 950, "0", "09", "09", "007", "09291", "09", "José López Portillo", "Ciudad de México", "09920", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1643" },
-                    { 949, "0", "09", "09", "007", "09291", "09", "La Esperanza", "Ciudad de México", "09910", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1640" },
+                    { 946, "0", "09", "09", "007", "09291", "02", "Guadalupe", "Ciudad de México", "09900", "09291", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1637" },
                     { 948, "0", "09", "09", "007", "09291", "02", "San Lorenzo", "Ciudad de México", "09900", "09291", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1639" },
                     { 828, "0", "09", "09", "007", "09081", "09", "El Prado", "Ciudad de México", "09480", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1433" },
                     { 827, "0", "09", "09", "007", "09081", "09", "Ampliación Sinatel", "Ciudad de México", "09479", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1432" },
@@ -1221,14 +1025,7 @@ namespace WebAdmin.Migrations
                     { 819, "0", "09", "09", "007", "09081", "09", "El Triunfo", "Ciudad de México", "09430", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1419" },
                     { 818, "0", "09", "09", "007", "09081", "09", "Apatlaco", "Ciudad de México", "09430", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1418" },
                     { 817, "0", "09", "09", "007", "09081", "09", "Purísima Atlazolpa", "Ciudad de México", "09429", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1417" },
-                    { 816, "0", "09", "09", "007", "09081", "09", "Nueva Rosita", "Ciudad de México", "09420", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1416" },
-                    { 815, "0", "09", "09", "007", "09081", "09", "Los Picos VI-B", "Ciudad de México", "09420", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1415" },
-                    { 814, "0", "09", "09", "007", "09081", "09", "San José Aculco", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1414" },
-                    { 813, "0", "09", "09", "007", "09081", "28", "Magdalena Atlazolpa", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1413" },
-                    { 812, "0", "09", "09", "007", "09081", "09", "Jardines de Churubusco", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1412" },
-                    { 811, "0", "09", "09", "007", "09081", "28", "Aculco", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1410" },
-                    { 810, "0", "09", "09", "007", "09081", "09", "El Sifón", "Ciudad de México", "09400", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1408" },
-                    { 829, "0", "09", "09", "007", "09511", "28", "Santa María Aztahuacán", "Ciudad de México", "09500", "09511", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1435" }
+                    { 816, "0", "09", "09", "007", "09081", "09", "Nueva Rosita", "Ciudad de México", "09420", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1416" }
                 });
 
             migrationBuilder.InsertData(
@@ -1236,6 +1033,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 815, "0", "09", "09", "007", "09081", "09", "Los Picos VI-B", "Ciudad de México", "09420", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1415" },
+                    { 814, "0", "09", "09", "007", "09081", "09", "San José Aculco", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1414" },
+                    { 813, "0", "09", "09", "007", "09081", "28", "Magdalena Atlazolpa", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1413" },
+                    { 812, "0", "09", "09", "007", "09081", "09", "Jardines de Churubusco", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1412" },
+                    { 811, "0", "09", "09", "007", "09081", "28", "Aculco", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1410" },
+                    { 810, "0", "09", "09", "007", "09081", "09", "El Sifón", "Ciudad de México", "09400", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1408" },
+                    { 829, "0", "09", "09", "007", "09511", "28", "Santa María Aztahuacán", "Ciudad de México", "09500", "09511", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1435" },
                     { 830, "0", "09", "09", "007", "09511", "09", "Santa María Aztahuacán Ampliación", "Ciudad de México", "09500", "09511", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2565" },
                     { 831, "0", "09", "09", "007", "09511", "28", "Santa Martha Acatitla", "Ciudad de México", "09510", "09511", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1436" },
                     { 832, "0", "09", "09", "007", "09511", "09", "El Edén", "Ciudad de México", "09520", "09511", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1439" },
@@ -1270,14 +1074,7 @@ namespace WebAdmin.Migrations
                     { 777, "0", "09", "09", "007", "09081", "09", "Héroes de Churubusco", "Ciudad de México", "09090", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1329" },
                     { 776, "0", "09", "09", "007", "09081", "09", "Unidad Modelo", "Ciudad de México", "09089", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1328" },
                     { 775, "0", "09", "09", "007", "09081", "09", "Cacama", "Ciudad de México", "09080", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1325" },
-                    { 774, "0", "09", "09", "007", "09081", "09", "Granjas de San Antonio", "Ciudad de México", "09070", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1322" },
-                    { 773, "0", "09", "09", "007", "09081", "09", "Sector Popular", "Ciudad de México", "09060", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1321" },
-                    { 782, "0", "09", "09", "007", "09181", "09", "Ermita Zaragoza", "Ciudad de México", "09180", "09181", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1339" },
-                    { 772, "0", "09", "09", "007", "09081", "09", "Escuadrón 201", "Ciudad de México", "09060", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1320" },
-                    { 770, "0", "09", "09", "007", "09081", "09", "Paseos de Churubusco", "Ciudad de México", "09030", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1314" },
-                    { 769, "0", "09", "09", "007", "09081", "09", "Dr. Alfonso Ortiz Tirado", "Ciudad de México", "09020", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1310" },
-                    { 768, "0", "09", "09", "007", "09081", "09", "Real del Moral", "Ciudad de México", "09010", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1308" },
-                    { 767, "0", "09", "09", "007", "09081", "02", "Santa Bárbara", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1305" }
+                    { 774, "0", "09", "09", "007", "09081", "09", "Granjas de San Antonio", "Ciudad de México", "09070", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1322" }
                 });
 
             migrationBuilder.InsertData(
@@ -1285,11 +1082,18 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 773, "0", "09", "09", "007", "09081", "09", "Sector Popular", "Ciudad de México", "09060", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1321" },
+                    { 782, "0", "09", "09", "007", "09181", "09", "Ermita Zaragoza", "Ciudad de México", "09180", "09181", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1339" },
+                    { 772, "0", "09", "09", "007", "09081", "09", "Escuadrón 201", "Ciudad de México", "09060", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1320" },
+                    { 770, "0", "09", "09", "007", "09081", "09", "Paseos de Churubusco", "Ciudad de México", "09030", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1314" },
+                    { 769, "0", "09", "09", "007", "09081", "09", "Dr. Alfonso Ortiz Tirado", "Ciudad de México", "09020", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1310" },
+                    { 768, "0", "09", "09", "007", "09081", "09", "Real del Moral", "Ciudad de México", "09010", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1308" },
+                    { 767, "0", "09", "09", "007", "09081", "02", "Santa Bárbara", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1305" },
                     { 766, "0", "09", "09", "007", "09081", "02", "San Pedro", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1304" },
                     { 765, "0", "09", "09", "007", "09081", "02", "San Pablo", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1303" },
                     { 764, "0", "09", "09", "007", "09081", "02", "San Lucas", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1302" },
                     { 763, "0", "09", "09", "007", "09081", "02", "San José", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1301" },
-                    { 762, "0", "09", "09", "007", "09081", "02", "San Ignacio", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1300" },
+                    { 761, "0", "09", "09", "007", "09081", "02", "La Asunción", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1299" },
                     { 771, "0", "09", "09", "007", "09081", "09", "Central de Abasto", "Ciudad de México", "09040", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1316" },
                     { 853, "0", "09", "09", "007", "09511", "09", "San Miguel Teotongo Sección Palmitas", "Ciudad de México", "09630", "09511", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2859" },
                     { 783, "0", "09", "09", "007", "09201", "09", "Unidad Vicente Guerrero", "Ciudad de México", "09200", "09201", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1341" },
@@ -1315,18 +1119,11 @@ namespace WebAdmin.Migrations
                     { 787, "0", "09", "09", "007", "09201", "09", "Unidad Ejército Constitucionalista", "Ciudad de México", "09220", "09201", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1357" },
                     { 786, "0", "09", "09", "007", "09201", "09", "Tepalcates", "Ciudad de México", "09210", "09201", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1355" },
                     { 795, "0", "09", "09", "007", "09201", "09", "Constitución de 1917", "Ciudad de México", "09260", "09201", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1375" },
-                    { 1137, "0", "13", "09", "011", "13011", "02", "San Andrés", "Ciudad de México", "13099", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1935" },
+                    { 949, "0", "09", "09", "007", "09291", "09", "La Esperanza", "Ciudad de México", "09910", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1640" },
                     { 854, "0", "09", "09", "007", "09511", "09", "San Miguel Teotongo Sección Puente", "Ciudad de México", "09630", "09511", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2860" },
                     { 856, "0", "09", "09", "007", "09511", "09", "San Miguel Teotongo Sección Rancho Bajo", "Ciudad de México", "09630", "09511", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2862" },
                     { 923, "0", "09", "09", "007", "09821", "09", "Ampliación Los Reyes", "Ciudad de México", "09849", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1580" },
-                    { 922, "0", "09", "09", "007", "09821", "28", "Los Reyes Culhuacán", "Ciudad de México", "09840", "09821", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1578" },
-                    { 921, "0", "09", "09", "007", "09821", "09", "San Juan Joya", "Ciudad de México", "09839", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1576" },
-                    { 920, "0", "09", "09", "007", "09821", "09", "Ampliación Paraje San Juan", "Ciudad de México", "09839", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1573" },
-                    { 919, "0", "09", "09", "007", "09821", "09", "Plan de Iguala", "Ciudad de México", "09838", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1571" },
-                    { 918, "0", "09", "09", "007", "09821", "09", "San Miguel 8va. Ampliación", "Ciudad de México", "09837", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1570" },
-                    { 917, "0", "09", "09", "007", "09821", "09", "Paraje San Juan", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1568" },
-                    { 916, "0", "09", "09", "007", "09821", "09", "Los Ángeles", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1566" },
-                    { 915, "0", "09", "09", "007", "09821", "09", "Lomas El Manto", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1565" }
+                    { 922, "0", "09", "09", "007", "09821", "28", "Los Reyes Culhuacán", "Ciudad de México", "09840", "09821", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1578" }
                 });
 
             migrationBuilder.InsertData(
@@ -1334,6 +1131,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 921, "0", "09", "09", "007", "09821", "09", "San Juan Joya", "Ciudad de México", "09839", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1576" },
+                    { 920, "0", "09", "09", "007", "09821", "09", "Ampliación Paraje San Juan", "Ciudad de México", "09839", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1573" },
+                    { 919, "0", "09", "09", "007", "09821", "09", "Plan de Iguala", "Ciudad de México", "09838", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1571" },
+                    { 918, "0", "09", "09", "007", "09821", "09", "San Miguel 8va. Ampliación", "Ciudad de México", "09837", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1570" },
+                    { 917, "0", "09", "09", "007", "09821", "09", "Paraje San Juan", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1568" },
+                    { 916, "0", "09", "09", "007", "09821", "09", "Los Ángeles", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1566" },
+                    { 915, "0", "09", "09", "007", "09821", "09", "Lomas El Manto", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1565" },
                     { 914, "0", "09", "09", "007", "09821", "09", "El Molino", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1563" },
                     { 913, "0", "09", "09", "007", "09821", "09", "El Manto", "Ciudad de México", "09830", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1562" },
                     { 912, "0", "09", "09", "007", "09821", "09", "Ampliación El Santuario", "Ciudad de México", "09829", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1560" },
@@ -1349,7 +1153,7 @@ namespace WebAdmin.Migrations
                     { 926, "0", "09", "09", "007", "09821", "09", "Santa María del Monte", "Ciudad de México", "09850", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1589" },
                     { 927, "0", "09", "09", "007", "09821", "09", "Estado de Veracruz", "Ciudad de México", "09856", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1590" },
                     { 947, "0", "09", "09", "007", "09291", "02", "San Antonio", "Ciudad de México", "09900", "09291", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1638" },
-                    { 946, "0", "09", "09", "007", "09291", "02", "Guadalupe", "Ciudad de México", "09900", "09291", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1637" },
+                    { 1137, "0", "13", "09", "011", "13011", "02", "San Andrés", "Ciudad de México", "13099", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1935" },
                     { 945, "0", "09", "09", "007", "09821", "09", "Carlos Jonguitud Barrios", "Ciudad de México", "09897", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1633" },
                     { 944, "0", "09", "09", "007", "09821", "09", "Lomas Estrella", "Ciudad de México", "09890", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1629" },
                     { 943, "0", "09", "09", "007", "09821", "09", "Granjas Estrella", "Ciudad de México", "09880", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1621" },
@@ -1368,14 +1172,7 @@ namespace WebAdmin.Migrations
                     { 930, "0", "09", "09", "007", "09821", "09", "Benito Juárez", "Ciudad de México", "09859", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1595" },
                     { 929, "0", "09", "09", "007", "09821", "09", "Paraje San Juan Cerro", "Ciudad de México", "09858", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1594" },
                     { 928, "0", "09", "09", "007", "09821", "09", "Ampliación Veracruzana", "Ciudad de México", "09856", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1591" },
-                    { 937, "0", "09", "09", "007", "09821", "09", "San Juan Estrella", "Ciudad de México", "09868", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1607" },
-                    { 903, "0", "09", "09", "007", "09821", "09", "Los Cipreses", "Ciudad de México", "09810", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1548" },
-                    { 902, "0", "09", "09", "007", "09821", "09", "Granjas Esmeralda", "Ciudad de México", "09810", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1547" },
-                    { 901, "0", "09", "09", "007", "09821", "09", "Valle de Luces", "Ciudad de México", "09800", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1542" },
-                    { 876, "0", "09", "09", "007", "09291", "09", "San José Buenavista", "Ciudad de México", "09706", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1497" },
-                    { 875, "0", "09", "09", "007", "09291", "09", "Degollado - Mexicatlalli", "Ciudad de México", "09705", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2726" },
-                    { 874, "0", "09", "09", "007", "09291", "09", "Degollado", "Ciudad de México", "09704", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1492" },
-                    { 873, "0", "09", "09", "007", "09291", "28", "Santa Cruz Meyehualco", "Ciudad de México", "09700", "09291", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1491" }
+                    { 937, "0", "09", "09", "007", "09821", "09", "San Juan Estrella", "Ciudad de México", "09868", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1607" }
                 });
 
             migrationBuilder.InsertData(
@@ -1383,6 +1180,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 903, "0", "09", "09", "007", "09821", "09", "Los Cipreses", "Ciudad de México", "09810", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1548" },
+                    { 902, "0", "09", "09", "007", "09821", "09", "Granjas Esmeralda", "Ciudad de México", "09810", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1547" },
+                    { 901, "0", "09", "09", "007", "09821", "09", "Valle de Luces", "Ciudad de México", "09800", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1542" },
+                    { 876, "0", "09", "09", "007", "09291", "09", "San José Buenavista", "Ciudad de México", "09706", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1497" },
+                    { 875, "0", "09", "09", "007", "09291", "09", "Degollado - Mexicatlalli", "Ciudad de México", "09705", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2726" },
+                    { 874, "0", "09", "09", "007", "09291", "09", "Degollado", "Ciudad de México", "09704", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1492" },
+                    { 873, "0", "09", "09", "007", "09291", "28", "Santa Cruz Meyehualco", "Ciudad de México", "09700", "09291", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1491" },
                     { 872, "0", "09", "09", "007", "09291", "09", "Desarrollo Urbano Quetzalcoatl", "Ciudad de México", "09700", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1488" },
                     { 871, "0", "09", "09", "007", "09291", "09", "Carlos Hank Gonzalez", "Ciudad de México", "09700", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1486" },
                     { 870, "0", "09", "09", "007", "09291", "09", "Buenavista", "Ciudad de México", "09700", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1485" },
@@ -1417,14 +1221,7 @@ namespace WebAdmin.Migrations
                     { 889, "0", "09", "09", "007", "09291", "09", "Puente Blanco", "Ciudad de México", "09770", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1524" },
                     { 888, "0", "09", "09", "007", "09291", "09", "El Triángulo", "Ciudad de México", "09769", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1523" },
                     { 887, "0", "09", "09", "007", "09291", "09", "Consejo Agrarista Mexicano", "Ciudad de México", "09760", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1518" },
-                    { 886, "0", "09", "09", "007", "09291", "09", "Las Peñas", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1515" },
-                    { 885, "0", "09", "09", "007", "09291", "09", "La Polvorilla", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1514" },
-                    { 884, "0", "09", "09", "007", "09291", "09", "Insurgentes", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1512" },
-                    { 883, "0", "09", "09", "007", "09291", "09", "Presidentes de México", "Ciudad de México", "09740", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1511" },
-                    { 882, "0", "09", "09", "007", "09291", "09", "Reforma Política", "Ciudad de México", "09730", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1508" },
-                    { 881, "0", "09", "09", "007", "09291", "09", "La Era", "Ciudad de México", "09720", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1506" },
-                    { 890, "0", "09", "09", "007", "09291", "09", "Año de Juárez", "Ciudad de México", "09780", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1527" },
-                    { 1138, "0", "13", "09", "011", "13011", "02", "La Guadalupe", "Ciudad de México", "13100", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1937" }
+                    { 886, "0", "09", "09", "007", "09291", "09", "Las Peñas", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1515" }
                 });
 
             migrationBuilder.InsertData(
@@ -1432,7 +1229,14 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
-                    { 1139, "0", "13", "09", "011", "13011", "09", "Ampliación Santa Catarina", "Ciudad de México", "13120", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1942" },
+                    { 885, "0", "09", "09", "007", "09291", "09", "La Polvorilla", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1514" },
+                    { 884, "0", "09", "09", "007", "09291", "09", "Insurgentes", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1512" },
+                    { 883, "0", "09", "09", "007", "09291", "09", "Presidentes de México", "Ciudad de México", "09740", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1511" },
+                    { 882, "0", "09", "09", "007", "09291", "09", "Reforma Política", "Ciudad de México", "09730", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1508" },
+                    { 881, "0", "09", "09", "007", "09291", "09", "La Era", "Ciudad de México", "09720", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1506" },
+                    { 890, "0", "09", "09", "007", "09291", "09", "Año de Juárez", "Ciudad de México", "09780", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1527" },
+                    { 1138, "0", "13", "09", "011", "13011", "02", "La Guadalupe", "Ciudad de México", "13100", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1937" },
+                    { 1142, "0", "13", "09", "011", "13011", "02", "San Miguel", "Ciudad de México", "13180", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1946" },
                     { 1140, "0", "13", "09", "011", "13011", "02", "Santiago", "Ciudad de México", "13120", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1943" },
                     { 1397, "0", "15", "09", "017", "15001", "09", "Merced Balbuena", "Ciudad de México", "15810", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2358" },
                     { 1396, "0", "15", "09", "017", "15001", "09", "Jamaica", "Ciudad de México", "15800", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2356" },
@@ -1466,14 +1270,7 @@ namespace WebAdmin.Migrations
                     { 1415, "0", "16", "09", "013", "16001", "09", "San Bartolo El Chico", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2832" },
                     { 1414, "0", "16", "09", "013", "16001", "09", "Paseos del Sur", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2388" },
                     { 1413, "0", "16", "09", "013", "16001", "09", "Las Peritas", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2386" },
-                    { 1378, "0", "15", "09", "017", "15001", "09", "Peñón de los Baños", "Ciudad de México", "15520", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2331" },
-                    { 1412, "0", "16", "09", "013", "16001", "09", "Bosque Residencial del Sur", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2385" },
-                    { 1410, "0", "16", "09", "013", "16001", "02", "San Antonio", "Ciudad de México", "16000", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2380" },
-                    { 1409, "0", "16", "09", "013", "16001", "02", "La Concepción Tlacoapa", "Ciudad de México", "16000", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2379" },
-                    { 1408, "0", "15", "09", "017", "15001", "09", "Álvaro Obregón", "Ciudad de México", "15990", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2378" },
-                    { 1407, "0", "15", "09", "017", "15001", "09", "24 de Abril", "Ciudad de México", "15980", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2377" },
-                    { 1406, "0", "15", "09", "017", "15001", "09", "Aeronáutica Militar", "Ciudad de México", "15970", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2376" },
-                    { 1405, "0", "15", "09", "017", "15001", "09", "Del Parque", "Ciudad de México", "15960", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2372" }
+                    { 1378, "0", "15", "09", "017", "15001", "09", "Peñón de los Baños", "Ciudad de México", "15520", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2331" }
                 });
 
             migrationBuilder.InsertData(
@@ -1481,6 +1278,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1412, "0", "16", "09", "013", "16001", "09", "Bosque Residencial del Sur", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2385" },
+                    { 1410, "0", "16", "09", "013", "16001", "02", "San Antonio", "Ciudad de México", "16000", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2380" },
+                    { 1409, "0", "16", "09", "013", "16001", "02", "La Concepción Tlacoapa", "Ciudad de México", "16000", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2379" },
+                    { 1408, "0", "15", "09", "017", "15001", "09", "Álvaro Obregón", "Ciudad de México", "15990", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2378" },
+                    { 1407, "0", "15", "09", "017", "15001", "09", "24 de Abril", "Ciudad de México", "15980", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2377" },
+                    { 1406, "0", "15", "09", "017", "15001", "09", "Aeronáutica Militar", "Ciudad de México", "15970", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2376" },
+                    { 1405, "0", "15", "09", "017", "15001", "09", "Del Parque", "Ciudad de México", "15960", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2372" },
                     { 1404, "0", "15", "09", "017", "15001", "09", "Jardín Balbuena", "Ciudad de México", "15900", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2365" },
                     { 1403, "0", "15", "09", "017", "15001", "09", "Aarón Sáenz", "Ciudad de México", "15870", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2364" },
                     { 1402, "0", "15", "09", "017", "15001", "28", "La Magdalena Mixiuhca", "Ciudad de México", "15860", "15001", "Ciudad de México", "Venustiano Carranza", "Pueblo", "Urbano", "2363" },
@@ -1515,14 +1319,7 @@ namespace WebAdmin.Migrations
                     { 1374, "0", "15", "09", "017", "15001", "09", "Revolución", "Ciudad de México", "15460", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2326" },
                     { 1373, "0", "15", "09", "017", "15001", "09", "Damián Carmona", "Ciudad de México", "15450", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2325" },
                     { 1372, "0", "15", "09", "017", "15001", "09", "1° de Mayo", "Ciudad de México", "15440", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2324" },
-                    { 1371, "0", "15", "09", "017", "15001", "09", "Aquiles Serdán", "Ciudad de México", "15430", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2323" },
-                    { 1370, "0", "15", "09", "017", "15001", "09", "Ampliación Simón Bolívar", "Ciudad de México", "15420", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2322" },
-                    { 1369, "0", "15", "09", "017", "15001", "09", "Simón Bolívar", "Ciudad de México", "15410", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2321" },
-                    { 1368, "0", "15", "09", "017", "15001", "09", "Romero Rubio", "Ciudad de México", "15400", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2320" },
-                    { 1367, "0", "15", "09", "017", "15001", "09", "7 de Julio", "Ciudad de México", "15390", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2319" },
-                    { 1366, "0", "15", "09", "017", "15001", "09", "Escuela de Tiro", "Ciudad de México", "15380", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2316" },
-                    { 1353, "0", "15", "09", "017", "15001", "09", "Ampliación 20 de Noviembre", "Ciudad de México", "15260", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2300" },
-                    { 1365, "0", "15", "09", "017", "15001", "09", "Progresista", "Ciudad de México", "15370", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2315" }
+                    { 1371, "0", "15", "09", "017", "15001", "09", "Aquiles Serdán", "Ciudad de México", "15430", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2323" }
                 });
 
             migrationBuilder.InsertData(
@@ -1530,6 +1327,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1370, "0", "15", "09", "017", "15001", "09", "Ampliación Simón Bolívar", "Ciudad de México", "15420", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2322" },
+                    { 1369, "0", "15", "09", "017", "15001", "09", "Simón Bolívar", "Ciudad de México", "15410", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2321" },
+                    { 1368, "0", "15", "09", "017", "15001", "09", "Romero Rubio", "Ciudad de México", "15400", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2320" },
+                    { 1367, "0", "15", "09", "017", "15001", "09", "7 de Julio", "Ciudad de México", "15390", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2319" },
+                    { 1366, "0", "15", "09", "017", "15001", "09", "Escuela de Tiro", "Ciudad de México", "15380", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2316" },
+                    { 1353, "0", "15", "09", "017", "15001", "09", "Ampliación 20 de Noviembre", "Ciudad de México", "15260", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2300" },
+                    { 1365, "0", "15", "09", "017", "15001", "09", "Progresista", "Ciudad de México", "15370", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2315" },
                     { 1363, "0", "15", "09", "017", "15001", "09", "Venustiano Carranza", "Ciudad de México", "15340", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2312" },
                     { 1362, "0", "15", "09", "017", "15001", "09", "Ampliación Venustiano Carranza", "Ciudad de México", "15339", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2311" },
                     { 1361, "0", "15", "09", "017", "15001", "09", "Tres Mosqueteros", "Ciudad de México", "15330", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2310" },
@@ -1564,14 +1368,7 @@ namespace WebAdmin.Migrations
                     { 1474, "0", "16", "09", "013", "16001", "09", "Valle de Santa María", "Ciudad de México", "16550", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2481" },
                     { 1493, "0", "16", "09", "013", "16001", "09", "San Isidro", "Ciudad de México", "16739", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2498" },
                     { 1494, "0", "16", "09", "013", "16001", "09", "Guadalupita", "Ciudad de México", "16740", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2499" },
-                    { 1495, "0", "16", "09", "013", "16001", "09", "Las Animas", "Ciudad de México", "16749", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2500" },
-                    { 1496, "0", "16", "09", "013", "16001", "02", "Calyequita", "Ciudad de México", "16750", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2501" },
-                    { 1516, "0", "16", "09", "013", "16001", "28", "San Francisco Tlalnepantla", "Ciudad de México", "16900", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2530" },
-                    { 1515, "0", "16", "09", "013", "16001", "28", "Santa Cecilia Tepetlapa", "Ciudad de México", "16880", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2527" },
-                    { 1514, "0", "16", "09", "013", "16001", "09", "Santa Cruz de Guadalupe", "Ciudad de México", "16860", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2521" },
-                    { 1513, "0", "16", "09", "013", "16001", "02", "Chapultepec", "Ciudad de México", "16850", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2520" },
-                    { 1512, "0", "16", "09", "013", "16001", "09", "Santa Cruz Chavarrieta", "Ciudad de México", "16840", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2519" },
-                    { 1511, "0", "16", "09", "013", "16001", "02", "El Calvario", "Ciudad de México", "16813", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2914" }
+                    { 1495, "0", "16", "09", "013", "16001", "09", "Las Animas", "Ciudad de México", "16749", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2500" }
                 });
 
             migrationBuilder.InsertData(
@@ -1579,6 +1376,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1496, "0", "16", "09", "013", "16001", "02", "Calyequita", "Ciudad de México", "16750", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2501" },
+                    { 1516, "0", "16", "09", "013", "16001", "28", "San Francisco Tlalnepantla", "Ciudad de México", "16900", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2530" },
+                    { 1515, "0", "16", "09", "013", "16001", "28", "Santa Cecilia Tepetlapa", "Ciudad de México", "16880", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2527" },
+                    { 1514, "0", "16", "09", "013", "16001", "09", "Santa Cruz de Guadalupe", "Ciudad de México", "16860", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2521" },
+                    { 1513, "0", "16", "09", "013", "16001", "02", "Chapultepec", "Ciudad de México", "16850", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2520" },
+                    { 1512, "0", "16", "09", "013", "16001", "09", "Santa Cruz Chavarrieta", "Ciudad de México", "16840", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2519" },
+                    { 1511, "0", "16", "09", "013", "16001", "02", "El Calvario", "Ciudad de México", "16813", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2914" },
                     { 1510, "0", "16", "09", "013", "16001", "09", "Rosario Tlali", "Ciudad de México", "16810", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2607" },
                     { 1509, "0", "16", "09", "013", "16001", "09", "Santa Inés", "Ciudad de México", "16810", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2516" },
                     { 1508, "0", "16", "09", "013", "16001", "28", "San Andrés Ahuayucan", "Ciudad de México", "16810", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2515" },
@@ -1613,14 +1417,7 @@ namespace WebAdmin.Migrations
                     { 1432, "0", "16", "09", "013", "16001", "09", "Tierra Nueva", "Ciudad de México", "16050", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2415" },
                     { 1431, "0", "16", "09", "013", "16001", "02", "San Marcos", "Ciudad de México", "16050", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2414" },
                     { 1430, "0", "16", "09", "013", "16001", "09", "Jardines del Sur", "Ciudad de México", "16050", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2413" },
-                    { 1429, "0", "16", "09", "013", "16001", "02", "San Lorenzo", "Ciudad de México", "16040", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2412" },
-                    { 1428, "0", "16", "09", "013", "16001", "02", "La Asunción", "Ciudad de México", "16040", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2411" },
-                    { 1427, "0", "16", "09", "013", "16001", "09", "Ampliación San Marcos Norte", "Ciudad de México", "16038", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2409" },
-                    { 1426, "0", "16", "09", "013", "16001", "17", "Mercado de Flores Plantas y Hortalizas", "Ciudad de México", "16036", "16001", "Ciudad de México", "Xochimilco", "Equipamiento", "Urbano", "2408" },
-                    { 1435, "0", "16", "09", "013", "16001", "02", "Belén", "Ciudad de México", "16070", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2423" },
-                    { 1424, "0", "16", "09", "013", "16001", "09", "San Lorenzo La Cebada", "Ciudad de México", "16035", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2407" },
-                    { 1447, "0", "16", "09", "013", "16001", "28", "Santiago Tepalcatlalpan", "Ciudad de México", "16200", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2443" },
-                    { 1449, "0", "16", "09", "013", "16001", "28", "San Lucas Xochimanca", "Ciudad de México", "16300", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2458" }
+                    { 1429, "0", "16", "09", "013", "16001", "02", "San Lorenzo", "Ciudad de México", "16040", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2412" }
                 });
 
             migrationBuilder.InsertData(
@@ -1628,6 +1425,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1428, "0", "16", "09", "013", "16001", "02", "La Asunción", "Ciudad de México", "16040", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2411" },
+                    { 1427, "0", "16", "09", "013", "16001", "09", "Ampliación San Marcos Norte", "Ciudad de México", "16038", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2409" },
+                    { 1426, "0", "16", "09", "013", "16001", "17", "Mercado de Flores Plantas y Hortalizas", "Ciudad de México", "16036", "16001", "Ciudad de México", "Xochimilco", "Equipamiento", "Urbano", "2408" },
+                    { 1435, "0", "16", "09", "013", "16001", "02", "Belén", "Ciudad de México", "16070", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2423" },
+                    { 1424, "0", "16", "09", "013", "16001", "09", "San Lorenzo La Cebada", "Ciudad de México", "16035", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2407" },
+                    { 1447, "0", "16", "09", "013", "16001", "28", "Santiago Tepalcatlalpan", "Ciudad de México", "16200", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2443" },
+                    { 1449, "0", "16", "09", "013", "16001", "28", "San Lucas Xochimanca", "Ciudad de México", "16300", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2458" },
                     { 1469, "0", "16", "09", "013", "16001", "02", "Calpulco", "Ciudad de México", "16514", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2904" },
                     { 1468, "0", "16", "09", "013", "16001", "02", "Tetitla", "Ciudad de México", "16514", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2903" },
                     { 1467, "0", "16", "09", "013", "16001", "02", "La Gallera", "Ciudad de México", "16514", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2902" },
@@ -1649,7 +1453,7 @@ namespace WebAdmin.Migrations
                     { 1451, "0", "16", "09", "013", "16001", "09", "San Lucas Oriente", "Ciudad de México", "16320", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2460" },
                     { 1450, "0", "16", "09", "013", "16001", "09", "La Cañada", "Ciudad de México", "16310", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2459" },
                     { 1459, "0", "16", "09", "013", "16001", "09", "Año de Juárez", "Ciudad de México", "16440", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2471" },
-                    { 761, "0", "09", "09", "007", "09081", "02", "La Asunción", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1299" },
+                    { 1139, "0", "13", "09", "011", "13011", "09", "Ampliación Santa Catarina", "Ciudad de México", "13120", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1942" },
                     { 1329, "0", "14", "09", "012", "14201", "28", "Santo Tomas Ajusco", "Ciudad de México", "14710", "14201", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2262" },
                     { 1327, "0", "14", "09", "012", "14091", "09", "María Esther Zuno de Echeverría", "Ciudad de México", "14659", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2260" },
                     { 1207, "0", "14", "09", "012", "14091", "09", "San Pedro Apóstol", "Ciudad de México", "14070", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2050" },
@@ -1662,14 +1466,7 @@ namespace WebAdmin.Migrations
                     { 1200, "0", "14", "09", "012", "14091", "09", "Cantera Puente de Piedra", "Ciudad de México", "14040", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2042" },
                     { 1199, "0", "14", "09", "012", "14091", "09", "Ampliación Isidro Fabela", "Ciudad de México", "14039", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2041" },
                     { 1198, "0", "14", "09", "012", "14091", "09", "Isidro Fabela", "Ciudad de México", "14030", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2036" },
-                    { 1197, "0", "14", "09", "012", "14091", "09", "Villa Olímpica", "Ciudad de México", "14020", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2035" },
-                    { 1196, "0", "14", "09", "012", "14091", "09", "Parque del Pedregal", "Ciudad de México", "14010", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2029" },
-                    { 1195, "0", "14", "09", "012", "14091", "09", "Tlalpan", "Ciudad de México", "14000", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2876" },
-                    { 1194, "0", "14", "09", "012", "14091", "09", "Tlalpan Centro", "Ciudad de México", "14000", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2027" },
-                    { 1193, "0", "13", "09", "011", "13611", "09", "Tepantitlamilco", "Ciudad de México", "13700", "13611", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2892" },
-                    { 1192, "0", "13", "09", "011", "13611", "28", "San Nicolás Tetelco", "Ciudad de México", "13700", "13611", "Ciudad de México", "Tláhuac", "Pueblo", "Urbano", "2009" },
-                    { 1191, "0", "13", "09", "011", "13611", "02", "San Miguel", "Ciudad de México", "13640", "13611", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2008" },
-                    { 1190, "0", "13", "09", "011", "13611", "02", "San Agustín", "Ciudad de México", "13630", "13611", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2007" }
+                    { 1197, "0", "14", "09", "012", "14091", "09", "Villa Olímpica", "Ciudad de México", "14020", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2035" }
                 });
 
             migrationBuilder.InsertData(
@@ -1677,6 +1474,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1196, "0", "14", "09", "012", "14091", "09", "Parque del Pedregal", "Ciudad de México", "14010", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2029" },
+                    { 1195, "0", "14", "09", "012", "14091", "09", "Tlalpan", "Ciudad de México", "14000", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2876" },
+                    { 1194, "0", "14", "09", "012", "14091", "09", "Tlalpan Centro", "Ciudad de México", "14000", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2027" },
+                    { 1193, "0", "13", "09", "011", "13611", "09", "Tepantitlamilco", "Ciudad de México", "13700", "13611", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2892" },
+                    { 1192, "0", "13", "09", "011", "13611", "28", "San Nicolás Tetelco", "Ciudad de México", "13700", "13611", "Ciudad de México", "Tláhuac", "Pueblo", "Urbano", "2009" },
+                    { 1191, "0", "13", "09", "011", "13611", "02", "San Miguel", "Ciudad de México", "13640", "13611", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2008" },
+                    { 1190, "0", "13", "09", "011", "13611", "02", "San Agustín", "Ciudad de México", "13630", "13611", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2007" },
                     { 1189, "0", "13", "09", "011", "13611", "02", "Santa Cruz", "Ciudad de México", "13625", "13611", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2005" },
                     { 1208, "0", "14", "09", "012", "14091", "09", "Belisario Domínguez Sección XVI", "Ciudad de México", "14080", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2051" },
                     { 1209, "0", "14", "09", "012", "14091", "02", "Del Niño Jesús", "Ciudad de México", "14080", "14091", "Ciudad de México", "Tlalpan", "Barrio", "Urbano", "2052" },
@@ -1711,14 +1515,7 @@ namespace WebAdmin.Migrations
                     { 1158, "0", "13", "09", "011", "13221", "02", "Santiago Norte", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2894" },
                     { 1157, "0", "13", "09", "011", "13221", "02", "Santa Ana Norte", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2893" },
                     { 1156, "0", "13", "09", "011", "13221", "02", "Santa Ana Poniente", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2891" },
-                    { 1155, "0", "13", "09", "011", "13221", "02", "Santiago Centro", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1964" },
-                    { 1154, "0", "13", "09", "011", "13221", "02", "Santa Ana Centro", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1963" },
-                    { 1153, "0", "13", "09", "011", "13221", "09", "Agrícola Metropolitana", "Ciudad de México", "13280", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1962" },
-                    { 1152, "0", "13", "09", "011", "13221", "09", "Villa Centroamericana", "Ciudad de México", "13278", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1959" },
-                    { 1161, "0", "13", "09", "011", "13221", "09", "La Estación", "Ciudad de México", "13319", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1970" },
-                    { 1151, "0", "13", "09", "011", "13221", "09", "La Draga", "Ciudad de México", "13273", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2580" },
-                    { 1149, "0", "13", "09", "011", "13221", "09", "La Turba", "Ciudad de México", "13250", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1957" },
-                    { 1148, "0", "13", "09", "011", "13221", "09", "Granjas Cabrera", "Ciudad de México", "13230", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1955" }
+                    { 1155, "0", "13", "09", "011", "13221", "02", "Santiago Centro", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1964" }
                 });
 
             migrationBuilder.InsertData(
@@ -1726,12 +1523,19 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1154, "0", "13", "09", "011", "13221", "02", "Santa Ana Centro", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1963" },
+                    { 1153, "0", "13", "09", "011", "13221", "09", "Agrícola Metropolitana", "Ciudad de México", "13280", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1962" },
+                    { 1152, "0", "13", "09", "011", "13221", "09", "Villa Centroamericana", "Ciudad de México", "13278", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1959" },
+                    { 1161, "0", "13", "09", "011", "13221", "09", "La Estación", "Ciudad de México", "13319", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1970" },
+                    { 1151, "0", "13", "09", "011", "13221", "09", "La Draga", "Ciudad de México", "13273", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2580" },
+                    { 1149, "0", "13", "09", "011", "13221", "09", "La Turba", "Ciudad de México", "13250", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1957" },
+                    { 1148, "0", "13", "09", "011", "13221", "09", "Granjas Cabrera", "Ciudad de México", "13230", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1955" },
                     { 1147, "0", "13", "09", "011", "13221", "09", "La Nopalera", "Ciudad de México", "13220", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1952" },
                     { 1146, "0", "13", "09", "011", "13221", "09", "Ampliación Los Olivos", "Ciudad de México", "13219", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1951" },
                     { 1145, "0", "13", "09", "011", "13221", "09", "Las Arboledas", "Ciudad de México", "13219", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1950" },
                     { 1144, "0", "13", "09", "011", "13221", "09", "Los Olivos", "Ciudad de México", "13210", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1949" },
                     { 1143, "0", "13", "09", "011", "13221", "09", "Miguel Hidalgo", "Ciudad de México", "13200", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1947" },
-                    { 1142, "0", "13", "09", "011", "13011", "02", "San Miguel", "Ciudad de México", "13180", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1946" },
+                    { 760, "0", "08", "09", "006", "08231", "09", "Campamento 2 de Octubre", "Ciudad de México", "08930", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1296" },
                     { 1141, "0", "13", "09", "011", "13011", "02", "La Concepción", "Ciudad de México", "13150", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1945" },
                     { 1150, "0", "13", "09", "011", "13221", "09", "Del Mar", "Ciudad de México", "13270", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1958" },
                     { 1232, "0", "14", "09", "012", "14201", "09", "Los Encinos", "Ciudad de México", "14239", "14201", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2093" },
@@ -1760,14 +1564,7 @@ namespace WebAdmin.Migrations
                     { 1174, "0", "13", "09", "011", "13011", "02", "San Agustín", "Ciudad de México", "13508", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1985" },
                     { 1328, "0", "14", "09", "012", "14201", "28", "San Miguel Ajusco", "Ciudad de México", "14700", "14201", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2261" },
                     { 1233, "0", "14", "09", "012", "14201", "09", "Lomas de Padierna", "Ciudad de México", "14240", "14201", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2094" },
-                    { 1235, "0", "14", "09", "012", "14201", "09", "Cruz del Farol", "Ciudad de México", "14248", "14201", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2096" },
-                    { 1302, "0", "14", "09", "012", "14091", "09", "Tlalpuente", "Ciudad de México", "14460", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2213" },
-                    { 1301, "0", "14", "09", "012", "14091", "09", "El Mirador 3A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2210" },
-                    { 1300, "0", "14", "09", "012", "14091", "09", "El Mirador 2A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2209" },
-                    { 1299, "0", "14", "09", "012", "14091", "09", "El Mirador 1A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2208" },
-                    { 1298, "0", "14", "09", "012", "14091", "09", "Los Volcanes", "Ciudad de México", "14440", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2207" },
-                    { 1297, "0", "14", "09", "012", "14091", "09", "Pedregal de las Águilas", "Ciudad de México", "14439", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2206" },
-                    { 1296, "0", "14", "09", "012", "14091", "09", "Pedregal de Santa Úrsula Xitla", "Ciudad de México", "14438", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2205" }
+                    { 1235, "0", "14", "09", "012", "14201", "09", "Cruz del Farol", "Ciudad de México", "14248", "14201", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2096" }
                 });
 
             migrationBuilder.InsertData(
@@ -1775,6 +1572,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1302, "0", "14", "09", "012", "14091", "09", "Tlalpuente", "Ciudad de México", "14460", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2213" },
+                    { 1301, "0", "14", "09", "012", "14091", "09", "El Mirador 3A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2210" },
+                    { 1300, "0", "14", "09", "012", "14091", "09", "El Mirador 2A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2209" },
+                    { 1299, "0", "14", "09", "012", "14091", "09", "El Mirador 1A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2208" },
+                    { 1298, "0", "14", "09", "012", "14091", "09", "Los Volcanes", "Ciudad de México", "14440", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2207" },
+                    { 1297, "0", "14", "09", "012", "14091", "09", "Pedregal de las Águilas", "Ciudad de México", "14439", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2206" },
+                    { 1296, "0", "14", "09", "012", "14091", "09", "Pedregal de Santa Úrsula Xitla", "Ciudad de México", "14438", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2205" },
                     { 1295, "0", "14", "09", "012", "14091", "09", "Tlalcoligia", "Ciudad de México", "14430", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2203" },
                     { 1294, "0", "14", "09", "012", "14091", "02", "El Truenito", "Ciudad de México", "14430", "14091", "Ciudad de México", "Tlalpan", "Barrio", "Urbano", "2201" },
                     { 1293, "0", "14", "09", "012", "14091", "09", "Santísima Trinidad", "Ciudad de México", "14429", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2200" },
@@ -1809,14 +1613,7 @@ namespace WebAdmin.Migrations
                     { 1311, "0", "14", "09", "012", "14091", "09", "Las Tórtolas", "Ciudad de México", "14609", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2232" },
                     { 1310, "0", "14", "09", "012", "14091", "09", "Colinas del Bosque", "Ciudad de México", "14608", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2231" },
                     { 1309, "0", "14", "09", "012", "14091", "09", "Valle Escondido", "Ciudad de México", "14600", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2229" },
-                    { 1308, "0", "14", "09", "012", "14091", "28", "San Miguel Topilejo", "Ciudad de México", "14500", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2222" },
-                    { 1307, "0", "14", "09", "012", "14091", "28", "San Miguel Xicalco", "Ciudad de México", "14490", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2221" },
-                    { 1316, "0", "14", "09", "012", "14091", "09", "Villa Tlalpan", "Ciudad de México", "14630", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2238" },
-                    { 1282, "0", "14", "09", "012", "14091", "09", "Divisadero", "Ciudad de México", "14406", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2182" },
-                    { 1281, "0", "14", "09", "012", "14091", "28", "San Andrés Totoltepec", "Ciudad de México", "14400", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2179" },
-                    { 1280, "0", "14", "09", "012", "14391", "09", "Villa Coapa", "Ciudad de México", "14390", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2878" },
-                    { 1255, "0", "14", "09", "012", "14391", "09", "Rinconada Coapa 2A Sección", "Ciudad de México", "14325", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2125" },
-                    { 1254, "0", "14", "09", "012", "14391", "09", "Vergel Coapa", "Ciudad de México", "14320", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2123" }
+                    { 1308, "0", "14", "09", "012", "14091", "28", "San Miguel Topilejo", "Ciudad de México", "14500", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2222" }
                 });
 
             migrationBuilder.InsertData(
@@ -1824,6 +1621,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1307, "0", "14", "09", "012", "14091", "28", "San Miguel Xicalco", "Ciudad de México", "14490", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2221" },
+                    { 1316, "0", "14", "09", "012", "14091", "09", "Villa Tlalpan", "Ciudad de México", "14630", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2238" },
+                    { 1282, "0", "14", "09", "012", "14091", "09", "Divisadero", "Ciudad de México", "14406", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2182" },
+                    { 1281, "0", "14", "09", "012", "14091", "28", "San Andrés Totoltepec", "Ciudad de México", "14400", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2179" },
+                    { 1280, "0", "14", "09", "012", "14391", "09", "Villa Coapa", "Ciudad de México", "14390", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2878" },
+                    { 1255, "0", "14", "09", "012", "14391", "09", "Rinconada Coapa 2A Sección", "Ciudad de México", "14325", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2125" },
+                    { 1254, "0", "14", "09", "012", "14391", "09", "Vergel Coapa", "Ciudad de México", "14320", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2123" },
                     { 1253, "0", "14", "09", "012", "14391", "09", "Floresta Coyoacán", "Ciudad de México", "14310", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2121" },
                     { 1252, "0", "14", "09", "012", "14391", "09", "Belisario Domínguez", "Ciudad de México", "14310", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2120" },
                     { 1251, "0", "14", "09", "012", "14391", "09", "Ex Hacienda Coapa", "Ciudad de México", "14308", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2879" },
@@ -1858,14 +1662,7 @@ namespace WebAdmin.Migrations
                     { 1258, "0", "14", "09", "012", "14391", "09", "Rinconada Coapa 1A Sección", "Ciudad de México", "14330", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2134" },
                     { 1270, "0", "14", "09", "012", "14391", "09", "Hacienda San Juan", "Ciudad de México", "14377", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2161" },
                     { 1268, "0", "14", "09", "012", "14391", "09", "Villa Lázaro Cárdenas", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2158" },
-                    { 1267, "0", "14", "09", "012", "14391", "28", "San Lorenzo Huipulco", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2157" },
-                    { 1266, "0", "14", "09", "012", "14391", "09", "Residencial Chimali", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2155" },
-                    { 1265, "0", "14", "09", "012", "14391", "09", "Magisterial Coapa", "Ciudad de México", "14360", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2877" },
-                    { 1264, "0", "14", "09", "012", "14391", "09", "Magisterial", "Ciudad de México", "14360", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2153" },
-                    { 1263, "0", "14", "09", "012", "14391", "09", "Prado Coapa 3A Sección", "Ciudad de México", "14357", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2150" },
-                    { 1262, "0", "14", "09", "012", "14391", "09", "Prado Coapa 2A Sección", "Ciudad de México", "14357", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2149" },
-                    { 1261, "0", "14", "09", "012", "14391", "09", "Prado Coapa 1A Sección", "Ciudad de México", "14350", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2147" },
-                    { 1260, "0", "14", "09", "012", "14391", "09", "Vergel del Sur", "Ciudad de México", "14340", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2146" }
+                    { 1267, "0", "14", "09", "012", "14391", "28", "San Lorenzo Huipulco", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2157" }
                 });
 
             migrationBuilder.InsertData(
@@ -1873,10 +1670,17 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 1266, "0", "14", "09", "012", "14391", "09", "Residencial Chimali", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2155" },
+                    { 1265, "0", "14", "09", "012", "14391", "09", "Magisterial Coapa", "Ciudad de México", "14360", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2877" },
+                    { 1264, "0", "14", "09", "012", "14391", "09", "Magisterial", "Ciudad de México", "14360", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2153" },
+                    { 1263, "0", "14", "09", "012", "14391", "09", "Prado Coapa 3A Sección", "Ciudad de México", "14357", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2150" },
+                    { 1262, "0", "14", "09", "012", "14391", "09", "Prado Coapa 2A Sección", "Ciudad de México", "14357", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2149" },
+                    { 1261, "0", "14", "09", "012", "14391", "09", "Prado Coapa 1A Sección", "Ciudad de México", "14350", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2147" },
+                    { 1260, "0", "14", "09", "012", "14391", "09", "Vergel del Sur", "Ciudad de México", "14340", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2146" },
                     { 1269, "0", "14", "09", "012", "14391", "09", "Arboledas del Sur", "Ciudad de México", "14376", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2159" },
-                    { 760, "0", "08", "09", "006", "08231", "09", "Campamento 2 de Octubre", "Ciudad de México", "08930", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1296" },
                     { 759, "0", "08", "09", "006", "08231", "09", "Jardines Tecma", "Ciudad de México", "08920", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1295" },
-                    { 758, "0", "08", "09", "006", "08231", "02", "Santa Cruz", "Ciudad de México", "08910", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1294" },
+                    { 762, "0", "09", "09", "007", "09081", "02", "San Ignacio", "Ciudad de México", "09000", "09081", "Ciudad de México", "Iztapalapa", "Barrio", "Urbano", "1300" },
+                    { 757, "0", "08", "09", "006", "08231", "09", "INFONAVIT Iztacalco", "Ciudad de México", "08900", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1293" },
                     { 257, "0", "02", "09", "002", "02601", "02", "Huautla de las Salinas", "Ciudad de México", "02330", "02601", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0406" },
                     { 256, "0", "02", "09", "002", "02601", "28", "San Andrés de las Salinas", "Ciudad de México", "02320", "02601", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0405" },
                     { 255, "0", "02", "09", "002", "02601", "09", "Ferrería", "Ciudad de México", "02310", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0404" },
@@ -1907,14 +1711,7 @@ namespace WebAdmin.Migrations
                     { 277, "0", "02", "09", "002", "02601", "09", "Trabajadores de Hierro", "Ciudad de México", "02650", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0445" },
                     { 276, "0", "02", "09", "002", "02601", "09", "Monte Alto", "Ciudad de México", "02640", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0444" },
                     { 275, "0", "02", "09", "002", "02601", "09", "Coltongo", "Ciudad de México", "02630", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "2798" },
-                    { 274, "0", "02", "09", "002", "02601", "02", "Coltongo", "Ciudad de México", "02630", "02601", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0443" },
-                    { 273, "0", "02", "09", "002", "02601", "09", "Pro-Hogar", "Ciudad de México", "02600", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0441" },
-                    { 238, "0", "02", "09", "002", "02011", "09", "Sector Naval", "Ciudad de México", "02080", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0376" },
-                    { 272, "0", "02", "09", "002", "02011", "09", "Jardín Azpeitia", "Ciudad de México", "02530", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0439" },
-                    { 270, "0", "02", "09", "002", "02011", "09", "El Jagüey", "Ciudad de México", "02519", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0430" },
-                    { 269, "0", "02", "09", "002", "02011", "09", "Unidad Cuitláhuac", "Ciudad de México", "02500", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0428" },
-                    { 268, "0", "02", "09", "002", "02431", "02", "San Mateo", "Ciudad de México", "02490", "02431", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0427" },
-                    { 267, "0", "02", "09", "002", "02431", "09", "Petrolera", "Ciudad de México", "02480", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0425" }
+                    { 274, "0", "02", "09", "002", "02601", "02", "Coltongo", "Ciudad de México", "02630", "02601", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0443" }
                 });
 
             migrationBuilder.InsertData(
@@ -1922,14 +1719,21 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 273, "0", "02", "09", "002", "02601", "09", "Pro-Hogar", "Ciudad de México", "02600", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0441" },
+                    { 238, "0", "02", "09", "002", "02011", "09", "Sector Naval", "Ciudad de México", "02080", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0376" },
+                    { 272, "0", "02", "09", "002", "02011", "09", "Jardín Azpeitia", "Ciudad de México", "02530", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0439" },
+                    { 270, "0", "02", "09", "002", "02011", "09", "El Jagüey", "Ciudad de México", "02519", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0430" },
+                    { 269, "0", "02", "09", "002", "02011", "09", "Unidad Cuitláhuac", "Ciudad de México", "02500", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0428" },
+                    { 268, "0", "02", "09", "002", "02431", "02", "San Mateo", "Ciudad de México", "02490", "02431", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0427" },
+                    { 267, "0", "02", "09", "002", "02431", "09", "Petrolera", "Ciudad de México", "02480", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0425" },
                     { 266, "0", "02", "09", "002", "02431", "09", "Ampliación Petrolera", "Ciudad de México", "02470", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0423" },
                     { 265, "0", "02", "09", "002", "02431", "09", "La Preciosa", "Ciudad de México", "02460", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0422" },
                     { 264, "0", "02", "09", "002", "02431", "09", "Tezozomoc", "Ciudad de México", "02459", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0421" },
                     { 263, "0", "02", "09", "002", "02431", "09", "Providencia", "Ciudad de México", "02440", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0418" },
                     { 262, "0", "02", "09", "002", "02431", "09", "Ex-Hacienda El Rosario", "Ciudad de México", "02420", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0415" },
                     { 271, "0", "02", "09", "002", "02601", "17", "Estación Pantaco", "Ciudad de México", "02520", "02601", "Ciudad de México", "Azcapotzalco", "Equipamiento", "Urbano", "0431" },
-                    { 282, "0", "02", "09", "002", "02431", "28", "San Pedro Xalpa", "Ciudad de México", "02710", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0451" },
                     { 237, "0", "02", "09", "002", "02011", "09", "Clavería", "Ciudad de México", "02080", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0374" },
+                    { 236, "0", "02", "09", "002", "02011", "02", "Nextengo", "Ciudad de México", "02070", "02011", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0372" },
                     { 235, "0", "02", "09", "002", "02011", "09", "Del Recreo", "Ciudad de México", "02070", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0371" },
                     { 210, "0", "01", "09", "010", "01001", "09", "Lomas Axomiatla", "Ciudad de México", "01820", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0332" },
                     { 209, "0", "01", "09", "010", "01001", "09", "Villa Verdún", "Ciudad de México", "01810", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0330" },
@@ -1940,8 +1744,8 @@ namespace WebAdmin.Migrations
                     { 204, "0", "01", "09", "010", "01001", "09", "Miguel Hidalgo", "Ciudad de México", "01789", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0323" },
                     { 203, "0", "01", "09", "010", "01001", "09", "Tizampampano del Pueblo Tetelpan", "Ciudad de México", "01780", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0319" },
                     { 202, "0", "01", "09", "010", "01001", "09", "Olivar de los Padres", "Ciudad de México", "01780", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0318" },
+                    { 211, "0", "01", "09", "010", "01001", "09", "Ejido San Mateo", "Ciudad de México", "01820", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2843" },
                     { 201, "0", "01", "09", "010", "01001", "09", "San José del Olivar", "Ciudad de México", "01770", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0316" },
-                    { 200, "0", "01", "09", "010", "01001", "09", "La Angostura", "Ciudad de México", "01770", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0315" },
                     { 199, "0", "01", "09", "010", "01001", "09", "La Herradura del Pueblo Tetelpan", "Ciudad de México", "01760", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0311" },
                     { 198, "0", "01", "09", "010", "01001", "09", "Flor de María", "Ciudad de México", "01760", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0310" },
                     { 197, "0", "01", "09", "010", "01001", "09", "Atlamaya", "Ciudad de México", "01760", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0309" },
@@ -1950,20 +1754,13 @@ namespace WebAdmin.Migrations
                     { 194, "0", "01", "09", "010", "01001", "09", "Las Águilas 2o Parque", "Ciudad de México", "01750", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0306" },
                     { 193, "0", "01", "09", "010", "01001", "09", "Las Águilas 1a Sección", "Ciudad de México", "01750", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0305" },
                     { 192, "0", "01", "09", "010", "01001", "09", "San Clemente Sur", "Ciudad de México", "01740", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2842" },
-                    { 211, "0", "01", "09", "010", "01001", "09", "Ejido San Mateo", "Ciudad de México", "01820", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2843" },
+                    { 191, "0", "01", "09", "010", "01001", "09", "San Clemente Norte", "Ciudad de México", "01740", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0304" },
+                    { 200, "0", "01", "09", "010", "01001", "09", "La Angostura", "Ciudad de México", "01770", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0315" },
+                    { 282, "0", "02", "09", "002", "02431", "28", "San Pedro Xalpa", "Ciudad de México", "02710", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0451" },
                     { 212, "0", "01", "09", "010", "01001", "28", "Santa Rosa Xochiac", "Ciudad de México", "01830", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0333" },
-                    { 213, "0", "01", "09", "010", "01001", "09", "Torres de Potrero", "Ciudad de México", "01840", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0334" },
                     { 214, "0", "01", "09", "010", "01001", "09", "Rincón de la Bolsa", "Ciudad de México", "01849", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0337" },
                     { 234, "0", "02", "09", "002", "02011", "09", "Un Hogar Para Cada Trabajador", "Ciudad de México", "02060", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0369" },
-                    { 233, "0", "02", "09", "002", "02011", "09", "Sindicato Mexicano de Electricistas", "Ciudad de México", "02060", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0368" },
-                    { 232, "0", "02", "09", "002", "02011", "28", "Santa María Malinalco", "Ciudad de México", "02050", "02011", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0365" },
-                    { 231, "0", "02", "09", "002", "02011", "09", "Libertad", "Ciudad de México", "02050", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0364" },
-                    { 230, "0", "02", "09", "002", "02011", "09", "San Sebastián", "Ciudad de México", "02040", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0363" },
-                    { 229, "0", "02", "09", "002", "02011", "09", "Del Maestro", "Ciudad de México", "02040", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0362" },
-                    { 228, "0", "02", "09", "002", "02011", "09", "Santo Tomás", "Ciudad de México", "02020", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0361" },
-                    { 227, "0", "02", "09", "002", "02011", "02", "San Marcos", "Ciudad de México", "02020", "02011", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0360" },
-                    { 226, "0", "02", "09", "002", "02011", "02", "Nuevo Barrio San Rafael", "Ciudad de México", "02010", "02011", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0358" },
-                    { 236, "0", "02", "09", "002", "02011", "02", "Nextengo", "Ciudad de México", "02070", "02011", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0372" }
+                    { 233, "0", "02", "09", "002", "02011", "09", "Sindicato Mexicano de Electricistas", "Ciudad de México", "02060", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0368" }
                 });
 
             migrationBuilder.InsertData(
@@ -1971,6 +1768,14 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 232, "0", "02", "09", "002", "02011", "28", "Santa María Malinalco", "Ciudad de México", "02050", "02011", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0365" },
+                    { 231, "0", "02", "09", "002", "02011", "09", "Libertad", "Ciudad de México", "02050", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0364" },
+                    { 230, "0", "02", "09", "002", "02011", "09", "San Sebastián", "Ciudad de México", "02040", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0363" },
+                    { 229, "0", "02", "09", "002", "02011", "09", "Del Maestro", "Ciudad de México", "02040", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0362" },
+                    { 228, "0", "02", "09", "002", "02011", "09", "Santo Tomás", "Ciudad de México", "02020", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0361" },
+                    { 227, "0", "02", "09", "002", "02011", "02", "San Marcos", "Ciudad de México", "02020", "02011", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0360" },
+                    { 226, "0", "02", "09", "002", "02011", "02", "Nuevo Barrio San Rafael", "Ciudad de México", "02010", "02011", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0358" },
+                    { 213, "0", "01", "09", "010", "01001", "09", "Torres de Potrero", "Ciudad de México", "01840", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0334" },
                     { 225, "0", "02", "09", "002", "02011", "09", "San Rafael", "Ciudad de México", "02010", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0357" },
                     { 223, "0", "02", "09", "002", "02011", "09", "Centro de Azcapotzalco", "Ciudad de México", "02000", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0353" },
                     { 222, "0", "01", "09", "010", "01001", "09", "San Jerónimo Aculco", "Ciudad de México", "01904", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2846" },
@@ -1982,8 +1787,8 @@ namespace WebAdmin.Migrations
                     { 216, "0", "01", "09", "010", "01001", "09", "Lomas de Chamontoya", "Ciudad de México", "01857", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0341" },
                     { 215, "0", "01", "09", "010", "01001", "09", "Rancho del Carmen del Pueblo San Bartolo Ameyalco", "Ciudad de México", "01849", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2847" },
                     { 224, "0", "02", "09", "002", "02011", "02", "Los Reyes", "Ciudad de México", "02010", "02011", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0356" },
+                    { 190, "0", "01", "09", "010", "01001", "09", "La Peñita del Pueblo Tetelpan", "Ciudad de México", "01740", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0303" },
                     { 283, "0", "02", "09", "002", "02431", "09", "Ampliación San Pedro Xalpa", "Ciudad de México", "02719", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0454" },
-                    { 284, "0", "02", "09", "002", "02431", "09", "San Antonio", "Ciudad de México", "02720", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0456" },
                     { 285, "0", "02", "09", "002", "02431", "28", "San Bartolo Cahualtongo", "Ciudad de México", "02720", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0457" },
                     { 352, "0", "03", "09", "014", "03901", "09", "Nochebuena", "Ciudad de México", "03720", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0543" },
                     { 351, "0", "03", "09", "014", "03901", "09", "Ciudad de los Deportes", "Ciudad de México", "03710", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0542" },
@@ -2004,15 +1809,7 @@ namespace WebAdmin.Migrations
                     { 336, "0", "03", "09", "014", "03501", "09", "Villa de Cortes", "Ciudad de México", "03530", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0527" },
                     { 335, "0", "03", "09", "014", "03501", "09", "Iztaccihuatl", "Ciudad de México", "03520", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0526" },
                     { 334, "0", "03", "09", "014", "03501", "09", "Moderna", "Ciudad de México", "03510", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0525" },
-                    { 353, "0", "03", "09", "014", "03901", "09", "San Juan", "Ciudad de México", "03730", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0544" },
-                    { 354, "0", "03", "09", "014", "03901", "09", "Extremadura Insurgentes", "Ciudad de México", "03740", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0545" },
-                    { 355, "0", "03", "09", "014", "03901", "09", "San Pedro de los Pinos", "Ciudad de México", "03800", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0546" },
-                    { 356, "0", "03", "09", "014", "03901", "09", "Nápoles", "Ciudad de México", "03810", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0548" },
-                    { 376, "0", "04", "09", "003", "04831", "09", "Paseos de Taxqueña", "Ciudad de México", "04250", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0587" },
-                    { 375, "0", "04", "09", "003", "04831", "09", "Hermosillo", "Ciudad de México", "04240", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0586" },
-                    { 374, "0", "04", "09", "003", "04831", "09", "Prado Churubusco", "Ciudad de México", "04230", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0584" },
-                    { 373, "0", "04", "09", "003", "04831", "09", "Churubusco Country Club", "Ciudad de México", "04210", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0582" },
-                    { 372, "0", "04", "09", "003", "04831", "09", "Campestre Churubusco", "Ciudad de México", "04200", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0580" }
+                    { 353, "0", "03", "09", "014", "03901", "09", "San Juan", "Ciudad de México", "03730", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0544" }
                 });
 
             migrationBuilder.InsertData(
@@ -2020,6 +1817,14 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 354, "0", "03", "09", "014", "03901", "09", "Extremadura Insurgentes", "Ciudad de México", "03740", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0545" },
+                    { 355, "0", "03", "09", "014", "03901", "09", "San Pedro de los Pinos", "Ciudad de México", "03800", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0546" },
+                    { 356, "0", "03", "09", "014", "03901", "09", "Nápoles", "Ciudad de México", "03810", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0548" },
+                    { 376, "0", "04", "09", "003", "04831", "09", "Paseos de Taxqueña", "Ciudad de México", "04250", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0587" },
+                    { 375, "0", "04", "09", "003", "04831", "09", "Hermosillo", "Ciudad de México", "04240", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0586" },
+                    { 374, "0", "04", "09", "003", "04831", "09", "Prado Churubusco", "Ciudad de México", "04230", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0584" },
+                    { 373, "0", "04", "09", "003", "04831", "09", "Churubusco Country Club", "Ciudad de México", "04210", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0582" },
+                    { 758, "0", "08", "09", "006", "08231", "02", "Santa Cruz", "Ciudad de México", "08910", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1294" },
                     { 371, "0", "04", "09", "003", "03501", "09", "San Mateo", "Ciudad de México", "04120", "03501", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0578" },
                     { 370, "0", "04", "09", "003", "03501", "09", "San Diego Churubusco", "Ciudad de México", "04120", "03501", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0577" },
                     { 369, "0", "04", "09", "003", "03501", "09", "Del Carmen", "Ciudad de México", "04100", "03501", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0571" },
@@ -2053,15 +1858,7 @@ namespace WebAdmin.Migrations
                     { 294, "0", "02", "09", "002", "02601", "09", "Ignacio Allende", "Ciudad de México", "02810", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0469" },
                     { 293, "0", "02", "09", "002", "02601", "09", "Nueva Santa María", "Ciudad de México", "02800", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0467" },
                     { 292, "0", "02", "09", "002", "02431", "02", "Santa Apolonia", "Ciudad de México", "02790", "02431", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0466" },
-                    { 291, "0", "02", "09", "002", "02431", "09", "Plenitud", "Ciudad de México", "02780", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0465" },
-                    { 290, "0", "02", "09", "002", "02431", "28", "Santa Cruz Acayucan", "Ciudad de México", "02770", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0464" },
-                    { 289, "0", "02", "09", "002", "02431", "02", "Santa Lucía", "Ciudad de México", "02760", "02431", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0463" },
-                    { 288, "0", "02", "09", "002", "02431", "09", "Industrial San Antonio", "Ciudad de México", "02760", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0462" },
-                    { 287, "0", "02", "09", "002", "02431", "28", "Santiago Ahuizotla", "Ciudad de México", "02750", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0461" },
-                    { 286, "0", "02", "09", "002", "02431", "28", "San Francisco Tetecala", "Ciudad de México", "02730", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0459" },
-                    { 295, "0", "02", "09", "002", "02601", "09", "Victoria de las Democracias", "Ciudad de México", "02810", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0470" },
-                    { 191, "0", "01", "09", "010", "01001", "09", "San Clemente Norte", "Ciudad de México", "01740", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0304" },
-                    { 307, "0", "02", "09", "002", "02601", "09", "Ampliación Del Gas", "Ciudad de México", "02970", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0485" }
+                    { 291, "0", "02", "09", "002", "02431", "09", "Plenitud", "Ciudad de México", "02780", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0465" }
                 });
 
             migrationBuilder.InsertData(
@@ -2069,6 +1866,14 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 290, "0", "02", "09", "002", "02431", "28", "Santa Cruz Acayucan", "Ciudad de México", "02770", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0464" },
+                    { 289, "0", "02", "09", "002", "02431", "02", "Santa Lucía", "Ciudad de México", "02760", "02431", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0463" },
+                    { 288, "0", "02", "09", "002", "02431", "09", "Industrial San Antonio", "Ciudad de México", "02760", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0462" },
+                    { 287, "0", "02", "09", "002", "02431", "28", "Santiago Ahuizotla", "Ciudad de México", "02750", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0461" },
+                    { 286, "0", "02", "09", "002", "02431", "28", "San Francisco Tetecala", "Ciudad de México", "02730", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0459" },
+                    { 295, "0", "02", "09", "002", "02601", "09", "Victoria de las Democracias", "Ciudad de México", "02810", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0470" },
+                    { 284, "0", "02", "09", "002", "02431", "09", "San Antonio", "Ciudad de México", "02720", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0456" },
+                    { 307, "0", "02", "09", "002", "02601", "09", "Ampliación Del Gas", "Ciudad de México", "02970", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0485" },
                     { 309, "0", "02", "09", "002", "02601", "09", "Patrimonio Familiar", "Ciudad de México", "02980", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0487" },
                     { 329, "0", "03", "09", "014", "03501", "09", "Postal", "Ciudad de México", "03410", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0518" },
                     { 328, "0", "03", "09", "014", "03501", "09", "Álamos", "Ciudad de México", "03400", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0516" },
@@ -2091,10 +1896,9 @@ namespace WebAdmin.Migrations
                     { 311, "0", "03", "09", "014", "03001", "09", "Piedad Narvarte", "Ciudad de México", "03000", "03001", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0489" },
                     { 310, "0", "02", "09", "002", "02601", "09", "La Raza", "Ciudad de México", "02990", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0488" },
                     { 319, "0", "03", "09", "014", "03001", "09", "Tlacoquemécatl", "Ciudad de México", "03200", "03001", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0501" },
-                    { 190, "0", "01", "09", "010", "01001", "09", "La Peñita del Pueblo Tetelpan", "Ciudad de México", "01740", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0303" },
+                    { 377, "0", "04", "09", "003", "04831", "02", "San Francisco Culhuacán Barrio de San Francisco", "Ciudad de México", "04260", "04831", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "0590" },
                     { 189, "0", "01", "09", "010", "01001", "09", "Puente Colorado", "Ciudad de México", "01730", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0300" },
-                    { 188, "0", "01", "09", "010", "01001", "09", "Lomas de las Águilas", "Ciudad de México", "01730", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0299" },
-                    { 68, "0", "01", "09", "010", "01401", "09", "La Mexicana", "Ciudad de México", "01260", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0112" },
+                    { 187, "0", "01", "09", "010", "01001", "09", "Alcantarilla", "Ciudad de México", "01729", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0298" },
                     { 67, "0", "01", "09", "010", "01401", "09", "Calzada Jalalpa", "Ciudad de México", "01260", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0110" },
                     { 66, "0", "01", "09", "010", "01401", "09", "La Mexicana 2a Ampliación", "Ciudad de México", "01259", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2845" },
                     { 65, "0", "01", "09", "010", "01401", "09", "Ampliación La Cebada", "Ciudad de México", "01259", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0109" },
@@ -2103,14 +1907,7 @@ namespace WebAdmin.Migrations
                     { 62, "0", "01", "09", "010", "01401", "09", "Lomas de Nuevo México", "Ciudad de México", "01250", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0106" },
                     { 61, "0", "01", "09", "010", "01401", "09", "Ladera", "Ciudad de México", "01250", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0105" },
                     { 60, "0", "01", "09", "010", "01401", "09", "El Árbol", "Ciudad de México", "01250", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0104" },
-                    { 59, "0", "01", "09", "010", "01401", "09", "Pueblo Nuevo", "Ciudad de México", "01240", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0103" },
-                    { 58, "0", "01", "09", "010", "01401", "09", "La Huerta", "Ciudad de México", "01239", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0102" },
-                    { 57, "0", "01", "09", "010", "01401", "09", "El Piru 2a Ampliación", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0224" },
-                    { 56, "0", "01", "09", "010", "01401", "09", "El Piru Santa Fe", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0132" },
-                    { 55, "0", "01", "09", "010", "01401", "09", "Tlapechico", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0098" },
-                    { 54, "0", "01", "09", "010", "01401", "09", "Los Gamitos", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0097" },
-                    { 53, "0", "01", "09", "010", "01401", "09", "Campo de Tiro los Gamitos", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0092" },
-                    { 52, "0", "01", "09", "010", "01401", "09", "Zenón Delgado", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0090" }
+                    { 59, "0", "01", "09", "010", "01401", "09", "Pueblo Nuevo", "Ciudad de México", "01240", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0103" }
                 });
 
             migrationBuilder.InsertData(
@@ -2118,13 +1915,20 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 58, "0", "01", "09", "010", "01401", "09", "La Huerta", "Ciudad de México", "01239", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0102" },
+                    { 57, "0", "01", "09", "010", "01401", "09", "El Piru 2a Ampliación", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0224" },
+                    { 56, "0", "01", "09", "010", "01401", "09", "El Piru Santa Fe", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0132" },
+                    { 55, "0", "01", "09", "010", "01401", "09", "Tlapechico", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0098" },
+                    { 54, "0", "01", "09", "010", "01401", "09", "Los Gamitos", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0097" },
+                    { 53, "0", "01", "09", "010", "01401", "09", "Campo de Tiro los Gamitos", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0092" },
+                    { 52, "0", "01", "09", "010", "01401", "09", "Zenón Delgado", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0090" },
                     { 51, "0", "01", "09", "010", "01401", "09", "Mártires de Tacubaya", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0089" },
                     { 50, "0", "01", "09", "010", "01401", "09", "El Cuernito", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0087" },
+                    { 49, "0", "01", "09", "010", "01401", "09", "Cuevitas", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0086" },
+                    { 68, "0", "01", "09", "010", "01401", "09", "La Mexicana", "Ciudad de México", "01260", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0112" },
                     { 69, "0", "01", "09", "010", "01401", "09", "Ampliación La Mexicana", "Ciudad de México", "01260", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0113" },
                     { 70, "0", "01", "09", "010", "01401", "09", "La Palmita", "Ciudad de México", "01260", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0114" },
                     { 71, "0", "01", "09", "010", "01401", "09", "Liberación Proletaria", "Ciudad de México", "01260", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0115" },
-                    { 72, "0", "01", "09", "010", "01401", "09", "1a Sección Cañada", "Ciudad de México", "01269", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0117" },
-                    { 92, "0", "01", "09", "010", "01401", "09", "Jalalpa Tepito 2a Ampliación", "Ciudad de México", "01296", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0152" },
                     { 91, "0", "01", "09", "010", "01401", "09", "Presidentes", "Ciudad de México", "01290", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0148" },
                     { 90, "0", "01", "09", "010", "01401", "09", "Piloto Adolfo López Mateos", "Ciudad de México", "01290", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0147" },
                     { 89, "0", "01", "09", "010", "01401", "09", "Reacomodo El Cuernito", "Ciudad de México", "01289", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0146" },
@@ -2133,9 +1937,9 @@ namespace WebAdmin.Migrations
                     { 86, "0", "01", "09", "010", "01401", "09", "Francisco Villa", "Ciudad de México", "01280", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0140" },
                     { 85, "0", "01", "09", "010", "01401", "09", "El Pocito", "Ciudad de México", "01280", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0139" },
                     { 84, "0", "01", "09", "010", "01401", "09", "Arvide", "Ciudad de México", "01280", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0138" },
-                    { 49, "0", "01", "09", "010", "01401", "09", "Cuevitas", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0086" },
                     { 83, "0", "01", "09", "010", "01401", "09", "Lomas de Becerra", "Ciudad de México", "01279", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0136" },
-                    { 81, "0", "01", "09", "010", "01401", "09", "El Pirul", "Ciudad de México", "01276", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0093" },
+                    { 48, "0", "01", "09", "010", "01401", "09", "Bonanza", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0085" },
+                    { 82, "0", "01", "09", "010", "01401", "09", "Desarrollo Urbano", "Ciudad de México", "01278", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0133" },
                     { 80, "0", "01", "09", "010", "01401", "09", "Villa Solidaridad", "Ciudad de México", "01275", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0131" },
                     { 79, "0", "01", "09", "010", "01401", "09", "Lomas de Capula", "Ciudad de México", "01270", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0127" },
                     { 78, "0", "01", "09", "010", "01401", "09", "Golondrinas 2a Sección", "Ciudad de México", "01270", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0125" },
@@ -2144,22 +1948,15 @@ namespace WebAdmin.Migrations
                     { 75, "0", "01", "09", "010", "01401", "09", "La Presa", "Ciudad de México", "01270", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0121" },
                     { 74, "0", "01", "09", "010", "01401", "09", "El Tejocote", "Ciudad de México", "01270", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0120" },
                     { 73, "0", "01", "09", "010", "01401", "09", "2a Sección Cañada", "Ciudad de México", "01269", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0118" },
-                    { 82, "0", "01", "09", "010", "01401", "09", "Desarrollo Urbano", "Ciudad de México", "01278", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0133" },
-                    { 48, "0", "01", "09", "010", "01401", "09", "Bonanza", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0085" },
+                    { 72, "0", "01", "09", "010", "01401", "09", "1a Sección Cañada", "Ciudad de México", "01269", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0117" },
+                    { 81, "0", "01", "09", "010", "01401", "09", "El Pirul", "Ciudad de México", "01276", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0093" },
                     { 47, "0", "01", "09", "010", "01401", "09", "La Estrella", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2681" },
                     { 46, "0", "01", "09", "010", "01401", "09", "Lomas de Santa Fe", "Ciudad de México", "01219", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0084" },
-                    { 21, "0", "01", "09", "010", "01131", "09", "Ampliación El Capulín", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0037" },
+                    { 45, "0", "01", "09", "010", "01401", "28", "Santa Fe", "Ciudad de México", "01210", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0082" },
                     { 20, "0", "01", "09", "010", "01131", "09", "El Capulín", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0036" },
                     { 19, "0", "01", "09", "010", "01131", "09", "Belém de las Flores", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0034" },
                     { 18, "0", "01", "09", "010", "01131", "09", "La Conchita", "Ciudad de México", "01109", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0033" },
-                    { 17, "0", "01", "09", "010", "01131", "09", "Pólvora", "Ciudad de México", "01100", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0031" },
-                    { 16, "0", "01", "09", "010", "01001", "28", "Tizapan", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0028" },
-                    { 15, "0", "01", "09", "010", "01001", "02", "Loreto", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0026" },
-                    { 14, "0", "01", "09", "010", "01001", "02", "La Otra Banda", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0025" },
-                    { 13, "0", "01", "09", "010", "01001", "09", "Ermita Tizapan", "Ciudad de México", "01089", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0024" },
-                    { 22, "0", "01", "09", "010", "01131", "09", "Liberales de 1857", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0039" },
-                    { 12, "0", "01", "09", "010", "01001", "09", "Progreso Tizapan", "Ciudad de México", "01080", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0022" },
-                    { 10, "0", "01", "09", "010", "01001", "09", "San Ángel Inn", "Ciudad de México", "01060", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0018" }
+                    { 17, "0", "01", "09", "010", "01131", "09", "Pólvora", "Ciudad de México", "01100", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0031" }
                 });
 
             migrationBuilder.InsertData(
@@ -2167,6 +1964,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 16, "0", "01", "09", "010", "01001", "28", "Tizapan", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0028" },
+                    { 15, "0", "01", "09", "010", "01001", "02", "Loreto", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0026" },
+                    { 14, "0", "01", "09", "010", "01001", "02", "La Otra Banda", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0025" },
+                    { 13, "0", "01", "09", "010", "01001", "09", "Ermita Tizapan", "Ciudad de México", "01089", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0024" },
+                    { 12, "0", "01", "09", "010", "01001", "09", "Progreso Tizapan", "Ciudad de México", "01080", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0022" },
+                    { 21, "0", "01", "09", "010", "01131", "09", "Ampliación El Capulín", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0037" },
+                    { 11, "0", "01", "09", "010", "01001", "09", "Chimalistac", "Ciudad de México", "01070", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0019" },
                     { 9, "0", "01", "09", "010", "01001", "09", "Altavista", "Ciudad de México", "01060", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0017" },
                     { 8, "0", "01", "09", "010", "01001", "09", "Ex-Hacienda de Guadalupe Chimalistac", "Ciudad de México", "01050", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0016" },
                     { 7, "0", "01", "09", "010", "01001", "28", "Tlacopac", "Ciudad de México", "01049", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0014" },
@@ -2175,11 +1979,11 @@ namespace WebAdmin.Migrations
                     { 4, "0", "01", "09", "010", "01001", "28", "Axotla", "Ciudad de México", "01030", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0009" },
                     { 3, "0", "01", "09", "010", "01001", "09", "Guadalupe Inn", "Ciudad de México", "01020", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0006" },
                     { 2, "0", "01", "09", "010", "01001", "09", "Los Alpes", "Ciudad de México", "01010", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0005" },
-                    { 11, "0", "01", "09", "010", "01001", "09", "Chimalistac", "Ciudad de México", "01070", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0019" },
-                    { 93, "0", "01", "09", "010", "01401", "09", "Ampliación Jalalpa", "Ciudad de México", "01296", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0153" },
-                    { 23, "0", "01", "09", "010", "01131", "09", "Acueducto", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0042" },
-                    { 25, "0", "01", "09", "010", "01131", "09", "Hidalgo", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0046" },
-                    { 45, "0", "01", "09", "010", "01401", "28", "Santa Fe", "Ciudad de México", "01210", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0082" },
+                    { 1, "0", "01", "09", "010", "01001", "09", "San Ángel", "Ciudad de México", "01000", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0001" },
+                    { 10, "0", "01", "09", "010", "01001", "09", "San Ángel Inn", "Ciudad de México", "01060", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0018" },
+                    { 92, "0", "01", "09", "010", "01401", "09", "Jalalpa Tepito 2a Ampliación", "Ciudad de México", "01296", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0152" },
+                    { 22, "0", "01", "09", "010", "01131", "09", "Liberales de 1857", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0039" },
+                    { 24, "0", "01", "09", "010", "01131", "09", "Cove", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0044" },
                     { 44, "0", "01", "09", "010", "01401", "09", "Arturo Martínez", "Ciudad de México", "01200", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0079" },
                     { 43, "0", "01", "09", "010", "01131", "09", "San Pedro de los Pinos", "Ciudad de México", "01180", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0078" },
                     { 42, "0", "01", "09", "010", "01131", "09", "8 de Agosto", "Ciudad de México", "01180", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0077" },
@@ -2188,9 +1992,9 @@ namespace WebAdmin.Migrations
                     { 39, "0", "01", "09", "010", "01131", "09", "1a Victoria", "Ciudad de México", "01160", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0069" },
                     { 38, "0", "01", "09", "010", "01131", "09", "Maria G. de García Ruiz", "Ciudad de México", "01160", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0068" },
                     { 37, "0", "01", "09", "010", "01131", "09", "Isidro Fabela", "Ciudad de México", "01160", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0067" },
-                    { 24, "0", "01", "09", "010", "01131", "09", "Cove", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0044" },
                     { 36, "0", "01", "09", "010", "01131", "09", "Bosque", "Ciudad de México", "01160", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0066" },
-                    { 34, "0", "01", "09", "010", "01131", "09", "Cristo Rey", "Ciudad de México", "01150", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0063" },
+                    { 23, "0", "01", "09", "010", "01131", "09", "Acueducto", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0042" },
+                    { 35, "0", "01", "09", "010", "01131", "09", "Tolteca", "Ciudad de México", "01150", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0064" },
                     { 33, "0", "01", "09", "010", "01131", "09", "José Maria Pino Suárez", "Ciudad de México", "01140", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0060" },
                     { 32, "0", "01", "09", "010", "01131", "09", "Bellavista", "Ciudad de México", "01140", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0059" },
                     { 31, "0", "01", "09", "010", "01131", "09", "Reacomodo Pino Suárez", "Ciudad de México", "01139", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0058" },
@@ -2199,16 +2003,9 @@ namespace WebAdmin.Migrations
                     { 28, "0", "01", "09", "010", "01131", "09", "Paraíso", "Ciudad de México", "01130", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0052" },
                     { 27, "0", "01", "09", "010", "01131", "09", "Ampliación Acueducto", "Ciudad de México", "01125", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0043" },
                     { 26, "0", "01", "09", "010", "01131", "09", "Las Américas", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0047" },
-                    { 35, "0", "01", "09", "010", "01131", "09", "Tolteca", "Ciudad de México", "01150", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0064" },
-                    { 377, "0", "04", "09", "003", "04831", "02", "San Francisco Culhuacán Barrio de San Francisco", "Ciudad de México", "04260", "04831", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "0590" },
-                    { 94, "0", "01", "09", "010", "01401", "09", "Jalalpa Tepito", "Ciudad de México", "01296", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0154" },
-                    { 96, "0", "01", "09", "010", "01401", "09", "1a Ampliación Presidentes", "Ciudad de México", "01299", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0160" },
-                    { 163, "0", "01", "09", "010", "01401", "09", "Lomas de Tarango", "Ciudad de México", "01620", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0270" },
-                    { 162, "0", "01", "09", "010", "01401", "09", "La Martinica", "Ciudad de México", "01619", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0268" },
-                    { 161, "0", "01", "09", "010", "01401", "09", "Rinconada de Tarango", "Ciudad de México", "01619", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0269" },
-                    { 160, "0", "01", "09", "010", "01401", "09", "Ex-Hacienda de Tarango", "Ciudad de México", "01618", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2745" },
-                    { 159, "0", "01", "09", "010", "01401", "09", "Arcos Centenario", "Ciudad de México", "01618", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0267" },
-                    { 158, "0", "01", "09", "010", "01401", "09", "Profesor J. Arturo López Martínez", "Ciudad de México", "01610", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2639" }
+                    { 25, "0", "01", "09", "010", "01131", "09", "Hidalgo", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0046" },
+                    { 34, "0", "01", "09", "010", "01131", "09", "Cristo Rey", "Ciudad de México", "01150", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0063" },
+                    { 188, "0", "01", "09", "010", "01001", "09", "Lomas de las Águilas", "Ciudad de México", "01730", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0299" }
                 });
 
             migrationBuilder.InsertData(
@@ -2216,6 +2013,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 93, "0", "01", "09", "010", "01401", "09", "Ampliación Jalalpa", "Ciudad de México", "01296", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0153" },
+                    { 95, "0", "01", "09", "010", "01401", "09", "Ampliación Piloto Adolfo López Mateos", "Ciudad de México", "01298", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0156" },
+                    { 162, "0", "01", "09", "010", "01401", "09", "La Martinica", "Ciudad de México", "01619", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0268" },
+                    { 161, "0", "01", "09", "010", "01401", "09", "Rinconada de Tarango", "Ciudad de México", "01619", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0269" },
+                    { 160, "0", "01", "09", "010", "01401", "09", "Ex-Hacienda de Tarango", "Ciudad de México", "01618", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2745" },
+                    { 159, "0", "01", "09", "010", "01401", "09", "Arcos Centenario", "Ciudad de México", "01618", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0267" },
+                    { 158, "0", "01", "09", "010", "01401", "09", "Profesor J. Arturo López Martínez", "Ciudad de México", "01610", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2639" },
                     { 157, "0", "01", "09", "010", "01401", "09", "Colinas de Tarango", "Ciudad de México", "01610", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0265" },
                     { 156, "0", "01", "09", "010", "01401", "09", "Merced Gómez", "Ciudad de México", "01600", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0263" },
                     { 155, "0", "01", "09", "010", "01401", "09", "El Rincón", "Ciudad de México", "01590", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0261" },
@@ -2229,11 +2033,11 @@ namespace WebAdmin.Migrations
                     { 147, "0", "01", "09", "010", "01401", "09", "Rinconada Las Cuevitas", "Ciudad de México", "01550", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2849" },
                     { 146, "0", "01", "09", "010", "01401", "09", "Ampliación Tepeaca", "Ciudad de México", "01550", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0246" },
                     { 145, "0", "01", "09", "010", "01401", "09", "Tepeaca", "Ciudad de México", "01550", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0245" },
+                    { 144, "0", "01", "09", "010", "01401", "09", "Dos Ríos del Pueblo Santa Lucía", "Ciudad de México", "01549", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0243" },
+                    { 163, "0", "01", "09", "010", "01401", "09", "Lomas de Tarango", "Ciudad de México", "01620", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0270" },
                     { 164, "0", "01", "09", "010", "01401", "09", "Lomas de Puerta Grande", "Ciudad de México", "01630", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0271" },
                     { 165, "0", "01", "09", "010", "01401", "09", "Puerta Grande", "Ciudad de México", "01630", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0273" },
                     { 166, "0", "01", "09", "010", "01401", "09", "Los Juristas", "Ciudad de México", "01630", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2640" },
-                    { 167, "0", "01", "09", "010", "01401", "09", "Herón Proal", "Ciudad de México", "01640", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0275" },
-                    { 187, "0", "01", "09", "010", "01001", "09", "Alcantarilla", "Ciudad de México", "01729", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0298" },
                     { 186, "0", "01", "09", "010", "01001", "09", "Lomas de Guadalupe", "Ciudad de México", "01720", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0297" },
                     { 185, "0", "01", "09", "010", "01001", "09", "Ampliación Alpes", "Ciudad de México", "01710", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0295" },
                     { 184, "0", "01", "09", "010", "01001", "09", "Las Águilas", "Ciudad de México", "01710", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0294" },
@@ -2242,22 +2046,15 @@ namespace WebAdmin.Migrations
                     { 181, "0", "01", "09", "010", "01001", "28", "Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0287" },
                     { 180, "0", "01", "09", "010", "01001", "09", "Tecalcapa del Pueblo Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0286" },
                     { 179, "0", "01", "09", "010", "01001", "09", "2a Del Moral del Pueblo Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0285" },
-                    { 144, "0", "01", "09", "010", "01401", "09", "Dos Ríos del Pueblo Santa Lucía", "Ciudad de México", "01549", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0243" },
                     { 178, "0", "01", "09", "010", "01001", "09", "San Agustín del Pueblo Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0284" },
-                    { 176, "0", "01", "09", "010", "01001", "09", "La Joyita del Pueblo Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0282" },
+                    { 143, "0", "01", "09", "010", "01401", "09", "Villa Progresista", "Ciudad de México", "01548", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2638" },
+                    { 177, "0", "01", "09", "010", "01001", "09", "Ocotillos del Pueblo Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0283" },
                     { 175, "0", "01", "09", "010", "01401", "09", "Santa Lucía Chantepec", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2848" },
                     { 174, "0", "01", "09", "010", "01401", "09", "El Ruedo", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2844" },
                     { 173, "0", "01", "09", "010", "01401", "09", "2o Reacomodo Tlacuitlapa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0281" },
                     { 172, "0", "01", "09", "010", "01401", "09", "Ampliación Tlacuitlapa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0280" },
                     { 171, "0", "01", "09", "010", "01401", "09", "Tlacuitlapa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0279" },
-                    { 170, "0", "01", "09", "010", "01401", "09", "Palmas Axotitla", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0278" },
-                    { 169, "0", "01", "09", "010", "01401", "09", "La Milagrosa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0277" },
-                    { 168, "0", "01", "09", "010", "01401", "09", "Ponciano Arriaga", "Ciudad de México", "01645", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0276" },
-                    { 177, "0", "01", "09", "010", "01001", "09", "Ocotillos del Pueblo Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0283" },
-                    { 143, "0", "01", "09", "010", "01401", "09", "Villa Progresista", "Ciudad de México", "01548", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2638" },
-                    { 142, "0", "01", "09", "010", "01401", "09", "Punta de Cehuaya", "Ciudad de México", "01540", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0241" },
-                    { 141, "0", "01", "09", "010", "01401", "09", "Llano Redondo", "Ciudad de México", "01540", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0240" },
-                    { 116, "0", "01", "09", "010", "01401", "02", "Santa María Nonoalco", "Ciudad de México", "01420", "01401", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0197" }
+                    { 170, "0", "01", "09", "010", "01401", "09", "Palmas Axotitla", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0278" }
                 });
 
             migrationBuilder.InsertData(
@@ -2265,6 +2062,13 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 169, "0", "01", "09", "010", "01401", "09", "La Milagrosa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0277" },
+                    { 168, "0", "01", "09", "010", "01401", "09", "Ponciano Arriaga", "Ciudad de México", "01645", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0276" },
+                    { 167, "0", "01", "09", "010", "01401", "09", "Herón Proal", "Ciudad de México", "01640", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0275" },
+                    { 176, "0", "01", "09", "010", "01001", "09", "La Joyita del Pueblo Tetelpan", "Ciudad de México", "01700", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0282" },
+                    { 142, "0", "01", "09", "010", "01401", "09", "Punta de Cehuaya", "Ciudad de México", "01540", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0241" },
+                    { 141, "0", "01", "09", "010", "01401", "09", "Llano Redondo", "Ciudad de México", "01540", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0240" },
+                    { 140, "0", "01", "09", "010", "01401", "09", "Cehuaya", "Ciudad de México", "01540", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0239" },
                     { 115, "0", "01", "09", "010", "01401", "09", "Sacramento", "Ciudad de México", "01420", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0196" },
                     { 114, "0", "01", "09", "010", "01401", "09", "Minas Cristo Rey", "Ciudad de México", "01419", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0195" },
                     { 113, "0", "01", "09", "010", "01401", "09", "Palmas", "Ciudad de México", "01410", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0194" },
@@ -2273,9 +2077,9 @@ namespace WebAdmin.Migrations
                     { 110, "0", "01", "09", "010", "01401", "09", "Galeana", "Ciudad de México", "01407", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0187" },
                     { 109, "0", "01", "09", "010", "01401", "09", "Preconcreto", "Ciudad de México", "01400", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0184" },
                     { 108, "0", "01", "09", "010", "01401", "09", "Olivar del Conde 1a Sección", "Ciudad de México", "01400", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0181" },
-                    { 117, "0", "01", "09", "010", "01401", "09", "Colina del Sur", "Ciudad de México", "01430", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0198" },
                     { 107, "0", "01", "09", "010", "01401", "09", "Santa Fe Tlayapaca", "Ciudad de México", "01389", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0176" },
-                    { 105, "0", "01", "09", "010", "01401", "09", "Santa Fe Centro Ciudad", "Ciudad de México", "01376", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2864" },
+                    { 116, "0", "01", "09", "010", "01401", "02", "Santa María Nonoalco", "Ciudad de México", "01420", "01401", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0197" },
+                    { 106, "0", "01", "09", "010", "01401", "09", "Jalalpa El Grande", "Ciudad de México", "01377", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0172" },
                     { 104, "0", "01", "09", "010", "01401", "09", "Santa Fe La Loma", "Ciudad de México", "01376", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2683" },
                     { 103, "0", "01", "09", "010", "01401", "09", "Santa Fe Peña Blanca", "Ciudad de México", "01376", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2682" },
                     { 102, "0", "01", "09", "010", "01401", "09", "Santa Fe", "Ciudad de México", "01376", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0171" },
@@ -2284,11 +2088,11 @@ namespace WebAdmin.Migrations
                     { 99, "0", "01", "09", "010", "01401", "09", "Carlos A. Madrazo", "Ciudad de México", "01320", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0164" },
                     { 98, "0", "01", "09", "010", "01401", "09", "San Gabriel", "Ciudad de México", "01310", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0163" },
                     { 97, "0", "01", "09", "010", "01401", "09", "2a Ampliación Presidentes", "Ciudad de México", "01299", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0161" },
-                    { 106, "0", "01", "09", "010", "01401", "09", "Jalalpa El Grande", "Ciudad de México", "01377", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0172" },
-                    { 95, "0", "01", "09", "010", "01401", "09", "Ampliación Piloto Adolfo López Mateos", "Ciudad de México", "01298", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0156" },
-                    { 118, "0", "01", "09", "010", "01401", "09", "Hogar y Redención", "Ciudad de México", "01450", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0202" },
-                    { 120, "0", "01", "09", "010", "01401", "02", "Alfalfar", "Ciudad de México", "01470", "01401", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0206" },
-                    { 140, "0", "01", "09", "010", "01401", "09", "Cehuaya", "Ciudad de México", "01540", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0239" },
+                    { 96, "0", "01", "09", "010", "01401", "09", "1a Ampliación Presidentes", "Ciudad de México", "01299", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0160" },
+                    { 105, "0", "01", "09", "010", "01401", "09", "Santa Fe Centro Ciudad", "Ciudad de México", "01376", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2864" },
+                    { 94, "0", "01", "09", "010", "01401", "09", "Jalalpa Tepito", "Ciudad de México", "01296", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0154" },
+                    { 117, "0", "01", "09", "010", "01401", "09", "Colina del Sur", "Ciudad de México", "01430", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0198" },
+                    { 119, "0", "01", "09", "010", "01401", "09", "Alfonso XIII", "Ciudad de México", "01460", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0204" },
                     { 139, "0", "01", "09", "010", "01401", "09", "Balcones de Cehuayo", "Ciudad de México", "01540", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0238" },
                     { 138, "0", "01", "09", "010", "01401", "09", "Cooperativa Unión Olivos", "Ciudad de México", "01539", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2643" },
                     { 137, "0", "01", "09", "010", "01401", "09", "Acuilotla", "Ciudad de México", "01539", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0233" },
@@ -2297,16 +2101,9 @@ namespace WebAdmin.Migrations
                     { 134, "0", "01", "09", "010", "01401", "09", "El Politoco", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2841" },
                     { 133, "0", "01", "09", "010", "01401", "09", "Piru Santa Lucía", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0227" },
                     { 132, "0", "01", "09", "010", "01401", "09", "Ampliación Estado de Hidalgo", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0226" },
-                    { 119, "0", "01", "09", "010", "01401", "09", "Alfonso XIII", "Ciudad de México", "01460", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0204" },
                     { 131, "0", "01", "09", "010", "01401", "09", "Estado de Hidalgo", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0225" },
-                    { 129, "0", "01", "09", "010", "01401", "09", "Los Cedros", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2636" },
-                    { 128, "0", "01", "09", "010", "01401", "09", "La Araña", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0223" },
-                    { 127, "0", "01", "09", "010", "01401", "09", "Garcimarrero", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0222" },
-                    { 126, "0", "01", "09", "010", "01401", "28", "Santa Lucía Chantepec", "Ciudad de México", "01509", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0221" },
-                    { 125, "0", "01", "09", "010", "01401", "09", "Miguel Gaona Armenta", "Ciudad de México", "01500", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2704" },
-                    { 124, "0", "01", "09", "010", "01401", "28", "Santa Lucía", "Ciudad de México", "01500", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0213" },
-                    { 123, "0", "01", "09", "010", "01401", "09", "La Cascada", "Ciudad de México", "01490", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0211" },
-                    { 122, "0", "01", "09", "010", "01401", "09", "Lomas de Plateros", "Ciudad de México", "01480", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0209" }
+                    { 118, "0", "01", "09", "010", "01401", "09", "Hogar y Redención", "Ciudad de México", "01450", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0202" },
+                    { 130, "0", "01", "09", "010", "01401", "09", "Ampliación Los Pirules", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0094" }
                 });
 
             migrationBuilder.InsertData(
@@ -2314,11 +2111,20 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 128, "0", "01", "09", "010", "01401", "09", "La Araña", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0223" },
+                    { 127, "0", "01", "09", "010", "01401", "09", "Garcimarrero", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0222" },
+                    { 126, "0", "01", "09", "010", "01401", "28", "Santa Lucía Chantepec", "Ciudad de México", "01509", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0221" },
+                    { 125, "0", "01", "09", "010", "01401", "09", "Miguel Gaona Armenta", "Ciudad de México", "01500", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2704" },
+                    { 124, "0", "01", "09", "010", "01401", "28", "Santa Lucía", "Ciudad de México", "01500", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0213" },
+                    { 123, "0", "01", "09", "010", "01401", "09", "La Cascada", "Ciudad de México", "01490", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0211" },
+                    { 122, "0", "01", "09", "010", "01401", "09", "Lomas de Plateros", "Ciudad de México", "01480", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0209" },
                     { 121, "0", "01", "09", "010", "01401", "09", "Molino de Rosas", "Ciudad de México", "01470", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0207" },
-                    { 130, "0", "01", "09", "010", "01401", "09", "Ampliación Los Pirules", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0094" },
+                    { 120, "0", "01", "09", "010", "01401", "02", "Alfalfar", "Ciudad de México", "01470", "01401", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0206" },
+                    { 129, "0", "01", "09", "010", "01401", "09", "Los Cedros", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2636" },
                     { 378, "0", "04", "09", "003", "04831", "02", "San Francisco Culhuacán Barrio de La Magdalena", "Ciudad de México", "04260", "04831", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "2807" },
-                    { 379, "0", "04", "09", "003", "04831", "02", "San Francisco Culhuacán Barrio de Santa Ana", "Ciudad de México", "04260", "04831", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "2808" },
-                    { 569, "0", "07", "09", "005", "07201", "09", "Compositores Mexicanos", "Ciudad de México", "07130", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1023" },
+                    { 372, "0", "04", "09", "003", "04831", "09", "Campestre Churubusco", "Ciudad de México", "04200", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0580" },
+                    { 380, "0", "04", "09", "003", "04831", "02", "San Francisco Culhuacán Barrio de San Juan", "Ciudad de México", "04260", "04831", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "2831" },
+                    { 637, "0", "07", "09", "005", "07001", "09", "Ferrocarrilera", "Ciudad de México", "07455", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1111" },
                     { 636, "0", "07", "09", "005", "07001", "09", "DM Nacional", "Ciudad de México", "07450", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1110" },
                     { 635, "0", "07", "09", "005", "07001", "09", "Vasco de Quiroga", "Ciudad de México", "07440", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1109" },
                     { 634, "0", "07", "09", "005", "07001", "09", "Del Obrero", "Ciudad de México", "07430", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1108" },
@@ -2337,25 +2143,16 @@ namespace WebAdmin.Migrations
                     { 621, "0", "07", "09", "005", "07311", "02", "Guadalupe Ticomán", "Ciudad de México", "07350", "07311", "Ciudad de México", "Gustavo A. Madero", "Barrio", "Urbano", "1091" },
                     { 620, "0", "07", "09", "005", "07311", "09", "San José Ticomán", "Ciudad de México", "07340", "07311", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1088" },
                     { 619, "0", "07", "09", "005", "07311", "02", "La Laguna Ticomán", "Ciudad de México", "07340", "07311", "Ciudad de México", "Gustavo A. Madero", "Barrio", "Urbano", "1087" },
-                    { 618, "0", "07", "09", "005", "07311", "09", "Santa María Ticomán", "Ciudad de México", "07330", "07311", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1085" },
-                    { 637, "0", "07", "09", "005", "07001", "09", "Ferrocarrilera", "Ciudad de México", "07455", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1111" },
                     { 638, "0", "07", "09", "005", "07001", "09", "LI Legislatura", "Ciudad de México", "07456", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1112" },
                     { 639, "0", "07", "09", "005", "07001", "09", "Granjas Modernas", "Ciudad de México", "07460", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1117" },
                     { 640, "0", "07", "09", "005", "07001", "09", "Constitución de la República", "Ciudad de México", "07469", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1118" },
+                    { 641, "0", "07", "09", "005", "07001", "09", "Ampliación San Juan de Aragón", "Ciudad de México", "07470", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1119" },
+                    { 661, "0", "07", "09", "005", "07001", "09", "Siete Maravillas", "Ciudad de México", "07707", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1149" },
                     { 660, "0", "07", "09", "005", "07001", "09", "Nueva Industrial Vallejo", "Ciudad de México", "07700", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1148" },
                     { 659, "0", "07", "09", "005", "07001", "09", "Ampliación Guadalupe Proletaria", "Ciudad de México", "07680", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1147" },
                     { 658, "0", "07", "09", "005", "07001", "09", "Guadalupe Proletaria", "Ciudad de México", "07670", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1146" },
                     { 657, "0", "07", "09", "005", "07001", "09", "Ampliación Progreso Nacional", "Ciudad de México", "07650", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1144" },
-                    { 656, "0", "07", "09", "005", "07001", "09", "Santiago Atepetlac", "Ciudad de México", "07640", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1143" },
-                    { 655, "0", "07", "09", "005", "07001", "09", "San José de la Escalera", "Ciudad de México", "07630", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1142" },
-                    { 654, "0", "07", "09", "005", "07001", "09", "Santa Rosa", "Ciudad de México", "07620", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1141" },
-                    { 653, "0", "07", "09", "005", "07001", "09", "Progreso Nacional", "Ciudad de México", "07600", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1139" },
-                    { 652, "0", "07", "09", "005", "07501", "09", "Ampliación Casas Alemán", "Ciudad de México", "07580", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1138" },
-                    { 617, "0", "07", "09", "005", "07311", "09", "Residencial la Escalera", "Ciudad de México", "07320", "07311", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1080" },
-                    { 651, "0", "07", "09", "005", "07501", "09", "Villa de Aragón", "Ciudad de México", "07570", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1137" },
-                    { 649, "0", "07", "09", "005", "07501", "09", "Providencia", "Ciudad de México", "07550", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1135" },
-                    { 648, "0", "07", "09", "005", "07501", "09", "La Esmeralda", "Ciudad de México", "07540", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1131" },
-                    { 647, "0", "07", "09", "005", "07501", "09", "Campestre Aragón", "Ciudad de México", "07530", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1129" }
+                    { 656, "0", "07", "09", "005", "07001", "09", "Santiago Atepetlac", "Ciudad de México", "07640", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1143" }
                 });
 
             migrationBuilder.InsertData(
@@ -2363,16 +2160,25 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 655, "0", "07", "09", "005", "07001", "09", "San José de la Escalera", "Ciudad de México", "07630", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1142" },
+                    { 654, "0", "07", "09", "005", "07001", "09", "Santa Rosa", "Ciudad de México", "07620", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1141" },
+                    { 653, "0", "07", "09", "005", "07001", "09", "Progreso Nacional", "Ciudad de México", "07600", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1139" },
+                    { 618, "0", "07", "09", "005", "07311", "09", "Santa María Ticomán", "Ciudad de México", "07330", "07311", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1085" },
+                    { 652, "0", "07", "09", "005", "07501", "09", "Ampliación Casas Alemán", "Ciudad de México", "07580", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1138" },
+                    { 650, "0", "07", "09", "005", "07501", "09", "Ampliación Providencia", "Ciudad de México", "07560", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1136" },
+                    { 649, "0", "07", "09", "005", "07501", "09", "Providencia", "Ciudad de México", "07550", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1135" },
+                    { 648, "0", "07", "09", "005", "07501", "09", "La Esmeralda", "Ciudad de México", "07540", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1131" },
+                    { 647, "0", "07", "09", "005", "07501", "09", "Campestre Aragón", "Ciudad de México", "07530", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1129" },
                     { 646, "0", "07", "09", "005", "07501", "09", "25 de Julio", "Ciudad de México", "07520", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1128" },
                     { 645, "0", "07", "09", "005", "07501", "09", "San Felipe de Jesús", "Ciudad de México", "07510", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1126" },
                     { 644, "0", "07", "09", "005", "07501", "09", "Pradera II Sección", "Ciudad de México", "07509", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1125" },
                     { 643, "0", "07", "09", "005", "07501", "09", "La Pradera", "Ciudad de México", "07500", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1122" },
                     { 642, "0", "07", "09", "005", "07001", "09", "San Pedro El Chico", "Ciudad de México", "07480", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1120" },
-                    { 641, "0", "07", "09", "005", "07001", "09", "Ampliación San Juan de Aragón", "Ciudad de México", "07470", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1119" },
-                    { 650, "0", "07", "09", "005", "07501", "09", "Ampliación Providencia", "Ciudad de México", "07560", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1136" },
-                    { 661, "0", "07", "09", "005", "07001", "09", "Siete Maravillas", "Ciudad de México", "07707", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1149" },
+                    { 651, "0", "07", "09", "005", "07501", "09", "Villa de Aragón", "Ciudad de México", "07570", "07501", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1137" },
+                    { 617, "0", "07", "09", "005", "07311", "09", "Residencial la Escalera", "Ciudad de México", "07320", "07311", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1080" },
                     { 616, "0", "07", "09", "005", "07311", "02", "La Purísima Ticomán", "Ciudad de México", "07320", "07311", "Ciudad de México", "Gustavo A. Madero", "Barrio", "Urbano", "1079" },
-                    { 614, "0", "07", "09", "005", "07051", "09", "Lindavista Sur", "Ciudad de México", "07300", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2888" },
+                    { 615, "0", "07", "09", "005", "07311", "02", "Candelaria Ticomán", "Ciudad de México", "07310", "07311", "Ciudad de México", "Gustavo A. Madero", "Barrio", "Urbano", "1075" },
+                    { 590, "0", "07", "09", "005", "07201", "09", "Vista Hermosa", "Ciudad de México", "07187", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1038" },
                     { 589, "0", "07", "09", "005", "07201", "09", "6 de Junio", "Ciudad de México", "07183", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2688" },
                     { 588, "0", "07", "09", "005", "07201", "09", "Ampliación Cocoyotes", "Ciudad de México", "07180", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2687" },
                     { 587, "0", "07", "09", "005", "07201", "09", "General Felipe Berriozabal", "Ciudad de México", "07180", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1037" },
@@ -2381,21 +2187,29 @@ namespace WebAdmin.Migrations
                     { 584, "0", "07", "09", "005", "07201", "09", "Prados de Cuautepec", "Ciudad de México", "07164", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2718" },
                     { 583, "0", "07", "09", "005", "07201", "09", "Graciano Sánchez", "Ciudad de México", "07164", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2717" },
                     { 582, "0", "07", "09", "005", "07201", "09", "Tlacaélel", "Ciudad de México", "07164", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2549" },
+                    { 591, "0", "07", "09", "005", "07201", "09", "Tlalpexco", "Ciudad de México", "07188", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1039" },
                     { 581, "0", "07", "09", "005", "07201", "09", "Luis Donaldo Colosio", "Ciudad de México", "07164", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2548" },
-                    { 580, "0", "07", "09", "005", "07201", "09", "Loma La Palma", "Ciudad de México", "07160", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1034" },
                     { 579, "0", "07", "09", "005", "07201", "09", "La Casilda", "Ciudad de México", "07150", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1033" },
                     { 578, "0", "07", "09", "005", "07201", "09", "Juventino Rosas", "Ciudad de México", "07150", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1032" },
                     { 577, "0", "07", "09", "005", "07201", "09", "Parque Metropolitano", "Ciudad de México", "07149", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1031" },
-                    { 576, "0", "07", "09", "005", "07201", "09", "La Lengüeta", "Ciudad de México", "07144", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2887" },
+                    { 379, "0", "04", "09", "003", "04831", "02", "San Francisco Culhuacán Barrio de Santa Ana", "Ciudad de México", "04260", "04831", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "2808" },
                     { 575, "0", "07", "09", "005", "07201", "09", "Forestal II", "Ciudad de México", "07144", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2885" },
                     { 574, "0", "07", "09", "005", "07201", "09", "Forestal I", "Ciudad de México", "07140", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1029" },
                     { 573, "0", "07", "09", "005", "07201", "09", "Forestal", "Ciudad de México", "07140", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1028" },
                     { 572, "0", "07", "09", "005", "07201", "09", "Ampliación Arboledas", "Ciudad de México", "07140", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1027" },
                     { 571, "0", "07", "09", "005", "07201", "09", "Arboledas", "Ciudad de México", "07140", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1026" },
-                    { 590, "0", "07", "09", "005", "07201", "09", "Vista Hermosa", "Ciudad de México", "07187", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1038" },
-                    { 591, "0", "07", "09", "005", "07201", "09", "Tlalpexco", "Ciudad de México", "07188", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1039" },
+                    { 580, "0", "07", "09", "005", "07201", "09", "Loma La Palma", "Ciudad de México", "07160", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1034" },
+                    { 662, "0", "07", "09", "005", "07001", "09", "Torres Lindavista", "Ciudad de México", "07708", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1150" },
                     { 592, "0", "07", "09", "005", "07201", "09", "Ahuehuetes", "Ciudad de México", "07189", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1040" },
-                    { 593, "0", "07", "09", "005", "07201", "09", "Valle de Madero", "Ciudad de México", "07190", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1041" },
+                    { 594, "0", "07", "09", "005", "07201", "09", "Del Carmen", "Ciudad de México", "07199", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1042" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatCodigosPostales",
+                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
+                values: new object[,]
+                {
+                    { 614, "0", "07", "09", "005", "07051", "09", "Lindavista Sur", "Ciudad de México", "07300", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2888" },
                     { 613, "0", "07", "09", "005", "07051", "09", "Lindavista Norte", "Ciudad de México", "07300", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1072" },
                     { 612, "0", "07", "09", "005", "07201", "09", "La Pastora", "Ciudad de México", "07290", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1071" },
                     { 611, "0", "07", "09", "005", "07201", "09", "Jorge Negrete", "Ciudad de México", "07280", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1070" },
@@ -2404,16 +2218,9 @@ namespace WebAdmin.Migrations
                     { 608, "0", "07", "09", "005", "07201", "09", "Solidaridad Nacional", "Ciudad de México", "07268", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1065" },
                     { 607, "0", "07", "09", "005", "07201", "09", "Ampliación Benito Juárez", "Ciudad de México", "07259", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1063" },
                     { 606, "0", "07", "09", "005", "07201", "09", "Benito Juárez", "Ciudad de México", "07250", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1061" },
-                    { 605, "0", "07", "09", "005", "07201", "09", "El Arbolillo", "Ciudad de México", "07240", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1056" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
-                    { 615, "0", "07", "09", "005", "07311", "02", "Candelaria Ticomán", "Ciudad de México", "07310", "07311", "Ciudad de México", "Gustavo A. Madero", "Barrio", "Urbano", "1075" },
-                    { 604, "0", "07", "09", "005", "07201", "09", "Zona Escolar Oriente", "Ciudad de México", "07239", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1054" },
+                    { 593, "0", "07", "09", "005", "07201", "09", "Valle de Madero", "Ciudad de México", "07190", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1041" },
+                    { 605, "0", "07", "09", "005", "07201", "09", "El Arbolillo", "Ciudad de México", "07240", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1056" },
+                    { 603, "0", "07", "09", "005", "07201", "09", "Zona Escolar", "Ciudad de México", "07230", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1053" },
                     { 602, "0", "07", "09", "005", "07201", "09", "Ampliación Castillo Grande", "Ciudad de México", "07224", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2883" },
                     { 601, "0", "07", "09", "005", "07201", "09", "Castillo Grande", "Ciudad de México", "07220", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1052" },
                     { 600, "0", "07", "09", "005", "07201", "09", "Castillo Chico", "Ciudad de México", "07220", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1051" },
@@ -2422,11 +2229,11 @@ namespace WebAdmin.Migrations
                     { 597, "0", "07", "09", "005", "07201", "09", "Guadalupe Victoria Cuautepec", "Ciudad de México", "07209", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1048" },
                     { 596, "0", "07", "09", "005", "07201", "09", "Del Bosque", "Ciudad de México", "07207", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1046" },
                     { 595, "0", "07", "09", "005", "07201", "09", "Cuautepec de Madero", "Ciudad de México", "07200", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1043" },
-                    { 594, "0", "07", "09", "005", "07201", "09", "Del Carmen", "Ciudad de México", "07199", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1042" },
-                    { 603, "0", "07", "09", "005", "07201", "09", "Zona Escolar", "Ciudad de México", "07230", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1053" },
-                    { 662, "0", "07", "09", "005", "07001", "09", "Torres Lindavista", "Ciudad de México", "07708", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1150" },
+                    { 604, "0", "07", "09", "005", "07201", "09", "Zona Escolar Oriente", "Ciudad de México", "07239", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1054" },
+                    { 570, "0", "07", "09", "005", "07201", "09", "El Tepetatal", "Ciudad de México", "07130", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1024" },
                     { 663, "0", "07", "09", "005", "07001", "09", "Lindavista Vallejo I Sección", "Ciudad de México", "07720", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1153" },
-                    { 664, "0", "07", "09", "005", "07051", "09", "Churubusco Tepeyac", "Ciudad de México", "07730", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1155" },
+                    { 665, "0", "07", "09", "005", "07051", "09", "Montevideo", "Ciudad de México", "07730", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1156" },
+                    { 732, "0", "08", "09", "006", "08231", "02", "San Francisco Xicaltongo", "Ciudad de México", "08230", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1253" },
                     { 731, "0", "08", "09", "006", "08231", "02", "San Pedro", "Ciudad de México", "08220", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1252" },
                     { 730, "0", "08", "09", "006", "08231", "09", "Nueva Santa Anita", "Ciudad de México", "08210", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1251" },
                     { 729, "0", "08", "09", "006", "08231", "09", "Viaducto Piedad", "Ciudad de México", "08200", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1250" },
@@ -2443,17 +2250,7 @@ namespace WebAdmin.Migrations
                     { 718, "0", "07", "09", "005", "07981", "09", "San Juan de Aragón III Sección", "Ciudad de México", "07970", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1217" },
                     { 717, "0", "07", "09", "005", "07981", "09", "San Juan de Aragón II Sección", "Ciudad de México", "07969", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1216" },
                     { 716, "0", "07", "09", "005", "07981", "09", "San Juan de Aragón I Sección", "Ciudad de México", "07969", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1215" },
-                    { 715, "0", "07", "09", "005", "07981", "09", "Fernando Casas Alemán", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1213" },
-                    { 714, "0", "07", "09", "005", "07981", "09", "Ex Escuela de Tiro", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1212" },
-                    { 713, "0", "07", "09", "005", "07981", "09", "Héroes de Cerro Prieto", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1211" },
-                    { 732, "0", "08", "09", "006", "08231", "02", "San Francisco Xicaltongo", "Ciudad de México", "08230", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1253" },
-                    { 733, "0", "08", "09", "006", "08231", "02", "Santiago Norte", "Ciudad de México", "08240", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1254" },
-                    { 734, "0", "08", "09", "006", "08231", "09", "Santa Anita", "Ciudad de México", "08300", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1255" },
-                    { 735, "0", "08", "09", "006", "08231", "09", "La Cruz", "Ciudad de México", "08310", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1256" },
-                    { 755, "0", "08", "09", "006", "08231", "09", "Militar Marte", "Ciudad de México", "08830", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1291" },
-                    { 754, "0", "08", "09", "006", "08231", "09", "Reforma Iztaccíhuatl Norte", "Ciudad de México", "08810", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1288" },
-                    { 753, "0", "08", "09", "006", "08231", "02", "Santiago Sur", "Ciudad de México", "08800", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1286" },
-                    { 752, "0", "08", "09", "006", "08231", "09", "Los Picos de Iztacalco Sección 1A", "Ciudad de México", "08770", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1285" }
+                    { 715, "0", "07", "09", "005", "07981", "09", "Fernando Casas Alemán", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1213" }
                 });
 
             migrationBuilder.InsertData(
@@ -2461,13 +2258,23 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 714, "0", "07", "09", "005", "07981", "09", "Ex Escuela de Tiro", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1212" },
+                    { 733, "0", "08", "09", "006", "08231", "02", "Santiago Norte", "Ciudad de México", "08240", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1254" },
+                    { 734, "0", "08", "09", "006", "08231", "09", "Santa Anita", "Ciudad de México", "08300", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1255" },
+                    { 735, "0", "08", "09", "006", "08231", "09", "La Cruz", "Ciudad de México", "08310", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1256" },
+                    { 736, "0", "08", "09", "006", "08231", "09", "Fraccionamiento Coyuya", "Ciudad de México", "08320", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1257" },
+                    { 756, "0", "08", "09", "006", "08231", "09", "Reforma Iztaccíhuatl Sur", "Ciudad de México", "08840", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1292" },
+                    { 755, "0", "08", "09", "006", "08231", "09", "Militar Marte", "Ciudad de México", "08830", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1291" },
+                    { 754, "0", "08", "09", "006", "08231", "09", "Reforma Iztaccíhuatl Norte", "Ciudad de México", "08810", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1288" },
+                    { 753, "0", "08", "09", "006", "08231", "02", "Santiago Sur", "Ciudad de México", "08800", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1286" },
+                    { 752, "0", "08", "09", "006", "08231", "09", "Los Picos de Iztacalco Sección 1A", "Ciudad de México", "08770", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1285" },
                     { 751, "0", "08", "09", "006", "08231", "09", "Los Picos de Iztacalco Sección 1B", "Ciudad de México", "08760", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "2796" },
                     { 750, "0", "08", "09", "006", "08231", "09", "Los Picos de Iztacalco Sección 2A", "Ciudad de México", "08760", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "2795" },
                     { 749, "0", "08", "09", "006", "08231", "09", "INPI Picos", "Ciudad de México", "08760", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1284" },
                     { 748, "0", "08", "09", "006", "08231", "09", "Gabriel Ramos Millán", "Ciudad de México", "08730", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1281" },
+                    { 713, "0", "07", "09", "005", "07981", "09", "Héroes de Cerro Prieto", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1211" },
                     { 747, "0", "08", "09", "006", "08231", "09", "Gabriel Ramos Millán Sección Tlacotal", "Ciudad de México", "08720", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1280" },
-                    { 712, "0", "07", "09", "005", "07981", "28", "San Juan de Aragón", "Ciudad de México", "07950", "07981", "Ciudad de México", "Gustavo A. Madero", "Pueblo", "Urbano", "1207" },
-                    { 746, "0", "08", "09", "006", "08231", "09", "Tlazintla", "Ciudad de México", "08710", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1279" },
+                    { 745, "0", "08", "09", "006", "08231", "09", "Juventino Rosas", "Ciudad de México", "08700", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1278" },
                     { 744, "0", "08", "09", "006", "08231", "02", "San Miguel", "Ciudad de México", "08650", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1277" },
                     { 743, "0", "08", "09", "006", "08231", "02", "Los Reyes", "Ciudad de México", "08620", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1272" },
                     { 742, "0", "08", "09", "006", "08231", "02", "Zapotla", "Ciudad de México", "08610", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1270" },
@@ -2476,11 +2283,11 @@ namespace WebAdmin.Migrations
                     { 739, "0", "08", "09", "006", "08231", "09", "Agrícola Oriental", "Ciudad de México", "08500", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1263" },
                     { 738, "0", "08", "09", "006", "08231", "09", "Cuchilla Agrícola Oriental", "Ciudad de México", "08420", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1262" },
                     { 737, "0", "08", "09", "006", "08231", "09", "Granjas México", "Ciudad de México", "08400", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1258" },
-                    { 736, "0", "08", "09", "006", "08231", "09", "Fraccionamiento Coyuya", "Ciudad de México", "08320", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1257" },
-                    { 745, "0", "08", "09", "006", "08231", "09", "Juventino Rosas", "Ciudad de México", "08700", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1278" },
+                    { 746, "0", "08", "09", "006", "08231", "09", "Tlazintla", "Ciudad de México", "08710", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1279" },
+                    { 712, "0", "07", "09", "005", "07981", "28", "San Juan de Aragón", "Ciudad de México", "07950", "07981", "Ciudad de México", "Gustavo A. Madero", "Pueblo", "Urbano", "1207" },
                     { 711, "0", "07", "09", "005", "07981", "09", "Ex Ejido San Juan de Aragón Sector 33", "Ciudad de México", "07940", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1206" },
                     { 710, "0", "07", "09", "005", "07981", "09", "Héroes de Chapultepec", "Ciudad de México", "07939", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1205" },
-                    { 709, "0", "07", "09", "005", "07981", "09", "Indeco", "Ciudad de México", "07930", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1204" },
+                    { 685, "0", "07", "09", "005", "07001", "09", "Gertrudis Sánchez 2a Sección", "Ciudad de México", "07839", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1178" },
                     { 684, "0", "07", "09", "005", "07001", "09", "Gertrudis Sánchez 3a Sección", "Ciudad de México", "07838", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2886" },
                     { 683, "0", "07", "09", "005", "07001", "09", "Gertrudis Sánchez 1a Sección", "Ciudad de México", "07830", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1176" },
                     { 682, "0", "07", "09", "005", "07001", "09", "Tres Estrellas", "Ciudad de México", "07820", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1175" },
@@ -2489,20 +2296,10 @@ namespace WebAdmin.Migrations
                     { 679, "0", "07", "09", "005", "07001", "09", "Industrial", "Ciudad de México", "07800", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1170" },
                     { 678, "0", "07", "09", "005", "07001", "09", "Vallejo Poniente", "Ciudad de México", "07790", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1169" },
                     { 677, "0", "07", "09", "005", "07001", "09", "Guadalupe Victoria", "Ciudad de México", "07790", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1168" },
+                    { 686, "0", "07", "09", "005", "07001", "09", "Guadalupe Tepeyac", "Ciudad de México", "07840", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1179" },
                     { 676, "0", "07", "09", "005", "07001", "09", "Héroe de Nacozari", "Ciudad de México", "07780", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1167" },
-                    { 685, "0", "07", "09", "005", "07001", "09", "Gertrudis Sánchez 2a Sección", "Ciudad de México", "07839", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1178" },
-                    { 675, "0", "07", "09", "005", "07001", "09", "Defensores de La República", "Ciudad de México", "07780", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1166" },
-                    { 673, "0", "07", "09", "005", "07001", "09", "Panamericana", "Ciudad de México", "07770", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1163" },
-                    { 672, "0", "07", "09", "005", "07001", "09", "Magdalena de las Salinas", "Ciudad de México", "07760", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1162" },
-                    { 671, "0", "07", "09", "005", "07001", "09", "Lindavista Vallejo II Sección", "Ciudad de México", "07755", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2889" },
-                    { 670, "0", "07", "09", "005", "07001", "09", "Lindavista Vallejo III Sección", "Ciudad de México", "07754", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2890" },
-                    { 669, "0", "07", "09", "005", "07001", "09", "Nueva Vallejo", "Ciudad de México", "07750", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1161" },
-                    { 668, "0", "07", "09", "005", "07051", "09", "Valle del Tepeyac", "Ciudad de México", "07740", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1160" },
-                    { 667, "0", "07", "09", "005", "07051", "09", "Planetario Lindavista", "Ciudad de México", "07739", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1159" },
-                    { 666, "0", "07", "09", "005", "07051", "09", "San Bartolo Atepehuacan", "Ciudad de México", "07730", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1157" },
-                    { 665, "0", "07", "09", "005", "07051", "09", "Montevideo", "Ciudad de México", "07730", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1156" },
                     { 674, "0", "07", "09", "005", "07001", "09", "Ampliación Panamericana", "Ciudad de México", "07770", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1164" },
-                    { 570, "0", "07", "09", "005", "07201", "09", "El Tepetatal", "Ciudad de México", "07130", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1024" }
+                    { 673, "0", "07", "09", "005", "07001", "09", "Panamericana", "Ciudad de México", "07770", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1163" }
                 });
 
             migrationBuilder.InsertData(
@@ -2510,8 +2307,18 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
-                    { 686, "0", "07", "09", "005", "07001", "09", "Guadalupe Tepeyac", "Ciudad de México", "07840", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1179" },
-                    { 688, "0", "07", "09", "005", "07001", "09", "Bondojito", "Ciudad de México", "07850", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1181" },
+                    { 672, "0", "07", "09", "005", "07001", "09", "Magdalena de las Salinas", "Ciudad de México", "07760", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1162" },
+                    { 671, "0", "07", "09", "005", "07001", "09", "Lindavista Vallejo II Sección", "Ciudad de México", "07755", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2889" },
+                    { 670, "0", "07", "09", "005", "07001", "09", "Lindavista Vallejo III Sección", "Ciudad de México", "07754", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2890" },
+                    { 669, "0", "07", "09", "005", "07001", "09", "Nueva Vallejo", "Ciudad de México", "07750", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1161" },
+                    { 668, "0", "07", "09", "005", "07051", "09", "Valle del Tepeyac", "Ciudad de México", "07740", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1160" },
+                    { 667, "0", "07", "09", "005", "07051", "09", "Planetario Lindavista", "Ciudad de México", "07739", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1159" },
+                    { 666, "0", "07", "09", "005", "07051", "09", "San Bartolo Atepehuacan", "Ciudad de México", "07730", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1157" },
+                    { 675, "0", "07", "09", "005", "07001", "09", "Defensores de La República", "Ciudad de México", "07780", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1166" },
+                    { 664, "0", "07", "09", "005", "07051", "09", "Churubusco Tepeyac", "Ciudad de México", "07730", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1155" },
+                    { 687, "0", "07", "09", "005", "07001", "09", "7 de Noviembre", "Ciudad de México", "07840", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1180" },
+                    { 689, "0", "07", "09", "005", "07001", "09", "Faja de Oro", "Ciudad de México", "07850", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1182" },
+                    { 709, "0", "07", "09", "005", "07981", "09", "Indeco", "Ciudad de México", "07930", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1204" },
                     { 708, "0", "07", "09", "005", "07981", "09", "San Juan de Aragón", "Ciudad de México", "07920", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1203" },
                     { 707, "0", "07", "09", "005", "07981", "09", "El Olivo", "Ciudad de México", "07920", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1202" },
                     { 706, "0", "07", "09", "005", "07981", "09", "Ex Ejido San Juan de Aragón Sector 32", "Ciudad de México", "07919", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1201" },
@@ -2520,9 +2327,9 @@ namespace WebAdmin.Migrations
                     { 703, "0", "07", "09", "005", "07981", "09", "Cuchilla del Tesoro", "Ciudad de México", "07900", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1197" },
                     { 702, "0", "07", "09", "005", "07001", "09", "La Malinche", "Ciudad de México", "07899", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1196" },
                     { 701, "0", "07", "09", "005", "07001", "09", "Nueva Tenochtitlán", "Ciudad de México", "07890", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1195" },
+                    { 688, "0", "07", "09", "005", "07001", "09", "Bondojito", "Ciudad de México", "07850", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1181" },
                     { 700, "0", "07", "09", "005", "07001", "09", "La Joya", "Ciudad de México", "07890", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1194" },
-                    { 687, "0", "07", "09", "005", "07001", "09", "7 de Noviembre", "Ciudad de México", "07840", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1180" },
-                    { 699, "0", "07", "09", "005", "07001", "09", "Cuchilla La Joya", "Ciudad de México", "07890", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1193" },
+                    { 698, "0", "07", "09", "005", "07001", "09", "Emiliano Zapata", "Ciudad de México", "07889", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1192" },
                     { 697, "0", "07", "09", "005", "07001", "09", "Mártires de Río Blanco", "Ciudad de México", "07880", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1191" },
                     { 696, "0", "07", "09", "005", "07001", "09", "Vallejo", "Ciudad de México", "07870", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1190" },
                     { 695, "0", "07", "09", "005", "07001", "09", "Guadalupe Insurgentes", "Ciudad de México", "07870", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1189" },
@@ -2531,10 +2338,9 @@ namespace WebAdmin.Migrations
                     { 692, "0", "07", "09", "005", "07001", "09", "La Joyita", "Ciudad de México", "07860", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1185" },
                     { 691, "0", "07", "09", "005", "07001", "09", "Ampliación Mártires de Río Blanco", "Ciudad de México", "07859", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1184" },
                     { 690, "0", "07", "09", "005", "07001", "09", "Ampliación Emiliano Zapata", "Ciudad de México", "07858", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1183" },
-                    { 689, "0", "07", "09", "005", "07001", "09", "Faja de Oro", "Ciudad de México", "07850", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1182" },
-                    { 698, "0", "07", "09", "005", "07001", "09", "Emiliano Zapata", "Ciudad de México", "07889", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1192" },
-                    { 380, "0", "04", "09", "003", "04831", "02", "San Francisco Culhuacán Barrio de San Juan", "Ciudad de México", "04260", "04831", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "2831" },
-                    { 568, "0", "07", "09", "005", "07201", "09", "Ampliación Malacates", "Ciudad de México", "07119", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1227" },
+                    { 699, "0", "07", "09", "005", "07001", "09", "Cuchilla La Joya", "Ciudad de México", "07890", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1193" },
+                    { 569, "0", "07", "09", "005", "07201", "09", "Compositores Mexicanos", "Ciudad de México", "07130", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1023" },
+                    { 576, "0", "07", "09", "005", "07201", "09", "La Lengüeta", "Ciudad de México", "07144", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2887" },
                     { 567, "0", "07", "09", "005", "07201", "09", "Malacates", "Ciudad de México", "07119", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1022" },
                     { 447, "0", "04", "09", "003", "04831", "09", "Emiliano Zapata Fraccionamiento Popular", "Ciudad de México", "04919", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0718" },
                     { 446, "0", "04", "09", "003", "04831", "09", "Cafetales", "Ciudad de México", "04918", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0717" },
@@ -2542,7 +2348,14 @@ namespace WebAdmin.Migrations
                     { 444, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección IX-B", "Ciudad de México", "04909", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "2814" },
                     { 443, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección IX-A", "Ciudad de México", "04909", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0715" },
                     { 442, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección VIII", "Ciudad de México", "04909", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0714" },
-                    { 441, "0", "04", "09", "003", "04831", "09", "El Parque de Coyoacán", "Ciudad de México", "04899", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0711" },
+                    { 441, "0", "04", "09", "003", "04831", "09", "El Parque de Coyoacán", "Ciudad de México", "04899", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0711" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatCodigosPostales",
+                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
+                values: new object[,]
+                {
                     { 440, "0", "04", "09", "003", "04831", "09", "Los Olivos", "Ciudad de México", "04890", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0709" },
                     { 439, "0", "04", "09", "003", "04831", "09", "Jardines de Coyoacán", "Ciudad de México", "04890", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0708" },
                     { 438, "0", "04", "09", "003", "04831", "09", "Espartaco", "Ciudad de México", "04870", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0706" },
@@ -2551,14 +2364,7 @@ namespace WebAdmin.Migrations
                     { 435, "0", "04", "09", "003", "04831", "09", "Emiliano Zapata", "Ciudad de México", "04815", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0696" },
                     { 434, "0", "04", "09", "003", "04831", "09", "Prados de Coyoacán", "Ciudad de México", "04810", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0695" },
                     { 433, "0", "04", "09", "003", "04831", "09", "Los Cedros", "Ciudad de México", "04800", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0692" },
-                    { 432, "0", "04", "09", "003", "04831", "09", "Alianza Popular Revolucionaria", "Ciudad de México", "04800", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0691" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 432, "0", "04", "09", "003", "04831", "09", "Alianza Popular Revolucionaria", "Ciudad de México", "04800", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0691" },
                     { 431, "0", "04", "09", "003", "14391", "09", "El Caracol", "Ciudad de México", "04739", "14391", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0690" },
                     { 430, "0", "04", "09", "003", "14391", "09", "Bosques de Tetlameya", "Ciudad de México", "04730", "14391", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0687" },
                     { 429, "0", "04", "09", "003", "14391", "09", "Cantil del Pedregal", "Ciudad de México", "04730", "14391", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0686" },
@@ -2571,7 +2377,7 @@ namespace WebAdmin.Migrations
                     { 469, "0", "05", "09", "004", "05501", "09", "Campestre Palo Alto", "Ciudad de México", "05119", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0752" },
                     { 468, "0", "05", "09", "004", "05501", "09", "Granjas Palo Alto", "Ciudad de México", "05118", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0751" },
                     { 467, "0", "05", "09", "004", "05501", "09", "Cooperativa Palo Alto", "Ciudad de México", "05110", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0748" },
-                    { 466, "0", "05", "09", "004", "05501", "09", "Lomas de Vista Hermosa", "Ciudad de México", "05100", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0746" },
+                    { 568, "0", "07", "09", "005", "07201", "09", "Ampliación Malacates", "Ciudad de México", "07119", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1227" },
                     { 465, "0", "05", "09", "004", "05501", "28", "San Pablo Chimalpa", "Ciudad de México", "05050", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Pueblo", "Urbano", "0740" },
                     { 464, "0", "05", "09", "004", "05501", "09", "La Manzanita", "Ciudad de México", "05030", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "2867" },
                     { 463, "0", "05", "09", "004", "05501", "09", "San Pedro", "Ciudad de México", "05030", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0737" },
@@ -2591,7 +2397,14 @@ namespace WebAdmin.Migrations
                     { 426, "0", "04", "09", "003", "14391", "09", "Joyas del Pedregal", "Ciudad de México", "04660", "14391", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0677" },
                     { 425, "0", "04", "09", "003", "14391", "28", "Santa Úrsula Coapa", "Ciudad de México", "04650", "14391", "Ciudad de México", "Coyoacán", "Pueblo", "Urbano", "0676" },
                     { 400, "0", "04", "09", "003", "04831", "09", "Petrolera Taxqueña", "Ciudad de México", "04410", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0646" },
-                    { 399, "0", "04", "09", "003", "04831", "09", "Educación", "Ciudad de México", "04400", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0645" },
+                    { 399, "0", "04", "09", "003", "04831", "09", "Educación", "Ciudad de México", "04400", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0645" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatCodigosPostales",
+                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
+                values: new object[,]
+                {
                     { 398, "0", "04", "09", "003", "04831", "09", "Nueva Díaz Ordaz", "Ciudad de México", "04390", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0644" },
                     { 397, "0", "04", "09", "003", "04831", "09", "Huayamilpas", "Ciudad de México", "04390", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0643" },
                     { 396, "0", "04", "09", "003", "04831", "28", "La Candelaria", "Ciudad de México", "04380", "04831", "Ciudad de México", "Coyoacán", "Pueblo", "Urbano", "0641" },
@@ -2600,14 +2413,7 @@ namespace WebAdmin.Migrations
                     { 393, "0", "04", "09", "003", "04831", "09", "Atlántida", "Ciudad de México", "04370", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0637" },
                     { 392, "0", "04", "09", "003", "04831", "09", "Pedregal de Santo Domingo", "Ciudad de México", "04369", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0636" },
                     { 401, "0", "04", "09", "003", "04831", "09", "Ex-Ejido de San Francisco Culhuacán", "Ciudad de México", "04420", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0649" },
-                    { 391, "0", "04", "09", "003", "04831", "09", "Copilco Universidad", "Ciudad de México", "04360", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0633" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 391, "0", "04", "09", "003", "04831", "09", "Copilco Universidad", "Ciudad de México", "04360", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0633" },
                     { 389, "0", "04", "09", "003", "04831", "09", "Copilco El Bajo", "Ciudad de México", "04340", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0622" },
                     { 388, "0", "04", "09", "003", "04331", "02", "Del Niño Jesús", "Ciudad de México", "04330", "04331", "Ciudad de México", "Coyoacán", "Barrio", "Urbano", "0614" },
                     { 387, "0", "04", "09", "003", "04331", "28", "Los Reyes", "Ciudad de México", "04330", "04331", "Ciudad de México", "Coyoacán", "Pueblo", "Urbano", "0613" },
@@ -2640,16 +2446,7 @@ namespace WebAdmin.Migrations
                     { 408, "0", "04", "09", "003", "04831", "09", "Presidentes Ejidales 2a Sección", "Ciudad de México", "04470", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "2805" },
                     { 407, "0", "04", "09", "003", "04831", "09", "Presidentes Ejidales 1a Sección", "Ciudad de México", "04470", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0655" },
                     { 406, "0", "04", "09", "003", "04831", "09", "Avante", "Ciudad de México", "04460", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0653" },
-                    { 405, "0", "04", "09", "003", "04831", "09", "El Centinela", "Ciudad de México", "04450", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0652" },
-                    { 414, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección Piloto", "Ciudad de México", "04490", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0659" },
-                    { 756, "0", "08", "09", "006", "08231", "09", "Reforma Iztaccíhuatl Sur", "Ciudad de México", "08840", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1292" },
-                    { 473, "0", "05", "09", "004", "05501", "09", "Granjas Navidad", "Ciudad de México", "05219", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0768" },
-                    { 475, "0", "05", "09", "004", "05501", "09", "El Ébano", "Ciudad de México", "05230", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0770" },
-                    { 542, "0", "06", "09", "015", "06401", "09", "Algarin", "Ciudad de México", "06880", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0984" },
-                    { 541, "0", "06", "09", "015", "06401", "09", "Paulino Navarro", "Ciudad de México", "06870", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0983" },
-                    { 540, "0", "06", "09", "015", "06401", "09", "Vista Alegre", "Ciudad de México", "06860", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0982" },
-                    { 539, "0", "06", "09", "015", "06401", "09", "Asturias", "Ciudad de México", "06850", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0981" },
-                    { 538, "0", "06", "09", "015", "06401", "09", "Esperanza", "Ciudad de México", "06840", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0980" }
+                    { 405, "0", "04", "09", "003", "04831", "09", "El Centinela", "Ciudad de México", "04450", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0652" }
                 });
 
             migrationBuilder.InsertData(
@@ -2657,6 +2454,15 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 414, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección Piloto", "Ciudad de México", "04490", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0659" },
+                    { 473, "0", "05", "09", "004", "05501", "09", "Granjas Navidad", "Ciudad de México", "05219", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0768" },
+                    { 466, "0", "05", "09", "004", "05501", "09", "Lomas de Vista Hermosa", "Ciudad de México", "05100", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0746" },
+                    { 475, "0", "05", "09", "004", "05501", "09", "El Ébano", "Ciudad de México", "05230", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0770" },
+                    { 542, "0", "06", "09", "015", "06401", "09", "Algarin", "Ciudad de México", "06880", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0984" },
+                    { 541, "0", "06", "09", "015", "06401", "09", "Paulino Navarro", "Ciudad de México", "06870", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0983" },
+                    { 540, "0", "06", "09", "015", "06401", "09", "Vista Alegre", "Ciudad de México", "06860", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0982" },
+                    { 539, "0", "06", "09", "015", "06401", "09", "Asturias", "Ciudad de México", "06850", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0981" },
+                    { 538, "0", "06", "09", "015", "06401", "09", "Esperanza", "Ciudad de México", "06840", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0980" },
                     { 537, "0", "06", "09", "015", "06401", "09", "Tránsito", "Ciudad de México", "06820", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0978" },
                     { 536, "0", "06", "09", "015", "06401", "09", "Obrera", "Ciudad de México", "06800", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0974" },
                     { 535, "0", "06", "09", "015", "06401", "09", "Buenos Aires", "Ciudad de México", "06780", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0970" },
@@ -2665,7 +2471,7 @@ namespace WebAdmin.Migrations
                     { 532, "0", "06", "09", "015", "06401", "09", "Roma Norte", "Ciudad de México", "06700", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0947" },
                     { 531, "0", "06", "09", "015", "06401", "09", "Juárez", "Ciudad de México", "06600", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0930" },
                     { 530, "0", "06", "09", "015", "06401", "09", "Cuauhtémoc", "Ciudad de México", "06500", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0919" },
-                    { 529, "0", "06", "09", "015", "06401", "09", "San Rafael", "Ciudad de México", "06470", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0915" },
+                    { 474, "0", "05", "09", "004", "05501", "09", "Tepetongo", "Ciudad de México", "05220", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0769" },
                     { 528, "0", "06", "09", "015", "06401", "09", "Atlampa", "Ciudad de México", "06450", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0914" },
                     { 527, "0", "06", "09", "015", "06401", "09", "Santa María Insurgentes", "Ciudad de México", "06430", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0913" },
                     { 526, "0", "06", "09", "015", "06401", "09", "Santa María la Ribera", "Ciudad de México", "06400", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0911" },
@@ -2689,16 +2495,7 @@ namespace WebAdmin.Migrations
                     { 555, "0", "07", "09", "005", "07001", "09", "Triunfo de La República", "Ciudad de México", "07069", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1006" },
                     { 554, "0", "07", "09", "005", "07001", "09", "Estanzuela", "Ciudad de México", "07060", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1005" },
                     { 553, "0", "07", "09", "005", "07001", "09", "15 de Agosto", "Ciudad de México", "07058", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1003" },
-                    { 552, "0", "07", "09", "005", "07001", "09", "Villa Gustavo A. Madero", "Ciudad de México", "07050", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1001" },
-                    { 551, "0", "07", "09", "005", "07001", "28", "Santiago Atzacoalco", "Ciudad de México", "07040", "07001", "Ciudad de México", "Gustavo A. Madero", "Pueblo", "Urbano", "0998" },
-                    { 550, "0", "07", "09", "005", "07001", "09", "Tepeyac Insurgentes", "Ciudad de México", "07020", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0997" },
-                    { 549, "0", "07", "09", "005", "07001", "09", "Tepetates", "Ciudad de México", "07010", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0996" },
-                    { 548, "0", "07", "09", "005", "07001", "09", "Santa Isabel Tola", "Ciudad de México", "07010", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0995" },
-                    { 547, "0", "07", "09", "005", "07001", "09", "Rosas del Tepeyac", "Ciudad de México", "07010", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0994" },
-                    { 556, "0", "07", "09", "005", "07001", "09", "La Cruz", "Ciudad de México", "07070", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1007" },
-                    { 522, "0", "06", "09", "015", "06401", "09", "Maza", "Ciudad de México", "06270", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0898" },
-                    { 521, "0", "06", "09", "015", "06401", "09", "Ex-Hipódromo de Peralvillo", "Ciudad de México", "06250", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0896" },
-                    { 520, "0", "06", "09", "015", "06401", "09", "Valle Gómez", "Ciudad de México", "06240", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0895" }
+                    { 552, "0", "07", "09", "005", "07001", "09", "Villa Gustavo A. Madero", "Ciudad de México", "07050", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1001" }
                 });
 
             migrationBuilder.InsertData(
@@ -2706,12 +2503,21 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 551, "0", "07", "09", "005", "07001", "28", "Santiago Atzacoalco", "Ciudad de México", "07040", "07001", "Ciudad de México", "Gustavo A. Madero", "Pueblo", "Urbano", "0998" },
+                    { 550, "0", "07", "09", "005", "07001", "09", "Tepeyac Insurgentes", "Ciudad de México", "07020", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0997" },
+                    { 549, "0", "07", "09", "005", "07001", "09", "Tepetates", "Ciudad de México", "07010", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0996" },
+                    { 548, "0", "07", "09", "005", "07001", "09", "Santa Isabel Tola", "Ciudad de México", "07010", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0995" },
+                    { 547, "0", "07", "09", "005", "07001", "09", "Rosas del Tepeyac", "Ciudad de México", "07010", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0994" },
+                    { 556, "0", "07", "09", "005", "07001", "09", "La Cruz", "Ciudad de México", "07070", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1007" },
+                    { 522, "0", "06", "09", "015", "06401", "09", "Maza", "Ciudad de México", "06270", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0898" },
+                    { 529, "0", "06", "09", "015", "06401", "09", "San Rafael", "Ciudad de México", "06470", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0915" },
+                    { 520, "0", "06", "09", "015", "06401", "09", "Valle Gómez", "Ciudad de México", "06240", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0895" },
                     { 495, "0", "05", "09", "004", "05501", "09", "La Venta", "Ciudad de México", "05520", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0808" },
                     { 494, "0", "05", "09", "004", "05501", "09", "Contadero", "Ciudad de México", "05500", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0803" },
                     { 493, "0", "05", "09", "004", "05501", "09", "1° de Mayo", "Ciudad de México", "05410", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "2866" },
                     { 492, "0", "05", "09", "004", "05501", "28", "San Lorenzo Acopilco", "Ciudad de México", "05410", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Pueblo", "Urbano", "0801" },
                     { 491, "0", "05", "09", "004", "05501", "09", "El Tianguillo", "Ciudad de México", "05400", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0800" },
-                    { 490, "0", "05", "09", "004", "05501", "09", "Lomas de San Pedro", "Ciudad de México", "05379", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0799" },
+                    { 521, "0", "06", "09", "015", "06401", "09", "Ex-Hipódromo de Peralvillo", "Ciudad de México", "06250", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0896" },
                     { 489, "0", "05", "09", "004", "05501", "09", "Las Tinajas", "Ciudad de México", "05370", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0797" },
                     { 488, "0", "05", "09", "004", "05501", "09", "Locaxco", "Ciudad de México", "05360", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0794" },
                     { 487, "0", "05", "09", "004", "05501", "09", "Santa Fe Cuajimalpa", "Ciudad de México", "05348", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0792" },
@@ -2727,27 +2533,18 @@ namespace WebAdmin.Migrations
                     { 477, "0", "05", "09", "004", "05501", "09", "Jesús del Monte", "Ciudad de México", "05260", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0777" },
                     { 476, "0", "05", "09", "004", "05501", "09", "El Molino", "Ciudad de México", "05240", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0774" },
                     { 485, "0", "05", "09", "004", "05501", "09", "Ampliación Memetla", "Ciudad de México", "05330", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0789" },
-                    { 474, "0", "05", "09", "004", "05501", "09", "Tepetongo", "Ciudad de México", "05220", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0769" },
                     { 497, "0", "05", "09", "004", "05501", "28", "San Mateo Tlaltenango", "Ciudad de México", "05600", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Pueblo", "Urbano", "0810" },
+                    { 490, "0", "05", "09", "004", "05501", "09", "Lomas de San Pedro", "Ciudad de México", "05379", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0799" },
                     { 499, "0", "05", "09", "004", "05501", "09", "Cruz Blanca", "Ciudad de México", "05700", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0819" },
                     { 519, "0", "06", "09", "015", "06401", "09", "Peralvillo", "Ciudad de México", "06220", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0894" },
                     { 518, "0", "06", "09", "015", "06401", "09", "Morelos", "Ciudad de México", "06200", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0891" },
-                    { 517, "0", "06", "09", "015", "06401", "09", "Hipódromo Condesa", "Ciudad de México", "06170", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0886" },
+                    { 498, "0", "05", "09", "004", "05501", "28", "Santa Rosa Xochiac", "Ciudad de México", "05610", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Pueblo", "Urbano", "2868" },
                     { 516, "0", "06", "09", "015", "06401", "09", "Condesa", "Ciudad de México", "06140", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0884" },
                     { 515, "0", "06", "09", "015", "06401", "09", "Hipódromo", "Ciudad de México", "06100", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0882" },
                     { 514, "0", "06", "09", "015", "06002", "09", "Centro (Área 9)", "Ciudad de México", "06090", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0879" },
                     { 513, "0", "06", "09", "015", "06002", "09", "Centro (Área 8)", "Ciudad de México", "06080", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0875" },
                     { 512, "0", "06", "09", "015", "06002", "09", "Centro (Área 7)", "Ciudad de México", "06070", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0873" },
-                    { 511, "0", "06", "09", "015", "06002", "09", "Centro (Área 6)", "Ciudad de México", "06060", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0867" },
-                    { 498, "0", "05", "09", "004", "05501", "28", "Santa Rosa Xochiac", "Ciudad de México", "05610", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Pueblo", "Urbano", "2868" },
-                    { 510, "0", "06", "09", "015", "06002", "09", "Centro (Área 5)", "Ciudad de México", "06050", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0863" },
-                    { 508, "0", "06", "09", "015", "06002", "09", "Tabacalera", "Ciudad de México", "06030", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0853" },
-                    { 507, "0", "06", "09", "015", "06002", "09", "Centro (Área 3)", "Ciudad de México", "06020", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0850" },
-                    { 506, "0", "06", "09", "015", "06002", "09", "Centro (Área 2)", "Ciudad de México", "06010", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0847" },
-                    { 505, "0", "06", "09", "015", "06002", "09", "Centro (Área 1)", "Ciudad de México", "06000", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0838" },
-                    { 504, "0", "05", "09", "004", "05501", "09", "Agua Bendita", "Ciudad de México", "05780", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0833" },
-                    { 503, "0", "05", "09", "004", "05501", "09", "Las Lajas", "Ciudad de México", "05760", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0829" },
-                    { 502, "0", "05", "09", "004", "05501", "09", "La Pila", "Ciudad de México", "05750", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0827" }
+                    { 511, "0", "06", "09", "015", "06002", "09", "Centro (Área 6)", "Ciudad de México", "06060", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0867" }
                 });
 
             migrationBuilder.InsertData(
@@ -2755,19 +2552,62 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 510, "0", "06", "09", "015", "06002", "09", "Centro (Área 5)", "Ciudad de México", "06050", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0863" },
+                    { 517, "0", "06", "09", "015", "06401", "09", "Hipódromo Condesa", "Ciudad de México", "06170", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0886" },
+                    { 508, "0", "06", "09", "015", "06002", "09", "Tabacalera", "Ciudad de México", "06030", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0853" },
+                    { 507, "0", "06", "09", "015", "06002", "09", "Centro (Área 3)", "Ciudad de México", "06020", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0850" },
+                    { 506, "0", "06", "09", "015", "06002", "09", "Centro (Área 2)", "Ciudad de México", "06010", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0847" },
+                    { 505, "0", "06", "09", "015", "06002", "09", "Centro (Área 1)", "Ciudad de México", "06000", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0838" },
+                    { 504, "0", "05", "09", "004", "05501", "09", "Agua Bendita", "Ciudad de México", "05780", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0833" },
+                    { 503, "0", "05", "09", "004", "05501", "09", "Las Lajas", "Ciudad de México", "05760", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0829" },
+                    { 502, "0", "05", "09", "004", "05501", "09", "La Pila", "Ciudad de México", "05750", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0827" },
                     { 501, "0", "05", "09", "004", "05501", "09", "Xalpa", "Ciudad de México", "05730", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0825" },
                     { 500, "0", "05", "09", "004", "05501", "09", "Las Maromas", "Ciudad de México", "05710", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0820" },
-                    { 509, "0", "06", "09", "015", "06002", "09", "Centro (Área 4)", "Ciudad de México", "06040", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0860" },
-                    { 757, "0", "08", "09", "006", "08231", "09", "INFONAVIT Iztacalco", "Ciudad de México", "08900", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1293" }
+                    { 509, "0", "06", "09", "015", "06002", "09", "Centro (Área 4)", "Ciudad de México", "06040", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0860" }
                 });
 
             migrationBuilder.InsertData(
                 table: "CatEstatus",
-                columns: new[] { "IdEstatusRegistro", "EstatusDesc", "FechaRegistro", "IdUsuarioModifico", "TblCorporativoIdCorporativo" },
+                columns: new[] { "IdEstatusRegistro", "EstatusDesc", "FechaRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "Activo", new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000"), null },
-                    { 2, "Desactivo", new DateTime(2022, 7, 3, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000"), null }
+                    { 1, "ACTIVO", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "DESACTIVO", new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatPerfiles",
+                columns: new[] { "IdPerfil", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "PerfilDesc" },
+                values: new object[,]
+                {
+                    { 5, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCENTE" },
+                    { 4, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EJECUTIVO" },
+                    { 1, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DIRECTOR" },
+                    { 2, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "GERENTE" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatRoles",
+                columns: new[] { "IdRol", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "RolDesc" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DESARROLLADOR" },
+                    { 2, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SUPERVISOR" },
+                    { 4, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "OPERADOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatTipoPago",
+                columns: new[] { "IdTipoPago", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoPagoDesc" },
+                values: new object[,]
+                {
+                    { 4, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDC" },
+                    { 1, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EFECTIVO" },
+                    { 2, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TRANSFERENCIA" },
+                    { 3, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "CREDITO" },
+                    { 5, new DateTime(2022, 7, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDD" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -2810,277 +2650,13 @@ namespace WebAdmin.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CatAreas_TblCorporativoIdCorporativo",
-                table: "CatAreas",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatCategorias_TblCorporativoIdCorporativo",
-                table: "CatCategorias",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatEscolaridad_TblCorporativoIdCorporativo",
-                table: "CatEscolaridad",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatEstatus_TblCorporativoIdCorporativo",
-                table: "CatEstatus",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatGeneros_TblCorporativoIdCorporativo",
-                table: "CatGeneros",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatNivelEscolar_TblCorporativoIdCorporativo",
-                table: "CatNivelEscolar",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatPerfiles_TblCorporativoIdCorporativo",
-                table: "CatPerfiles",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatProductos_CatCategoriaIdCategoria",
-                table: "CatProductos",
-                column: "CatCategoriaIdCategoria");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatRoles_TblCorporativoIdCorporativo",
-                table: "CatRoles",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatTipoAlumno_TblCorporativoIdCorporativo",
-                table: "CatTipoAlumno",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatTipoCentroTblCorporativo_TblCorporativosIdCorporativo",
-                table: "CatTipoCentroTblCorporativo",
-                column: "TblCorporativosIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatTipoContratacion_TblCorporativoIdCorporativo",
-                table: "CatTipoContratacion",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatTipoDirecciones_TblCorporativoIdCorporativo",
-                table: "CatTipoDirecciones",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatTipoPago_TblCorporativoIdCorporativo",
-                table: "CatTipoPago",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatTipoPrestamo_TblCorporativoIdCorporativo",
-                table: "CatTipoPrestamo",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CatTipoServicio_TblCorporativoIdCorporativo",
-                table: "CatTipoServicio",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblCentros_CaTipotLicenciaIdTipoLicencia",
-                table: "TblCentros",
-                column: "CaTipotLicenciaIdTipoLicencia");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblCentros_CatTipoPagoIdTipoPago",
-                table: "TblCentros",
-                column: "CatTipoPagoIdTipoPago");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblCentros_CatTipoServicioIdTipoServicio",
-                table: "TblCentros",
-                column: "CatTipoServicioIdTipoServicio");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblCentros_TblCorporativoIdCorporativo",
-                table: "TblCentros",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblClienteContactos_TblClienteIdCliente",
-                table: "TblClienteContactos",
-                column: "TblClienteIdCliente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblClienteDirecciones_TblClienteIdCliente",
-                table: "TblClienteDirecciones",
-                column: "TblClienteIdCliente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblClientes_CatTipoClienteIdTipoCliente",
-                table: "TblClientes",
-                column: "CatTipoClienteIdTipoCliente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblClientes_TblCorporativoIdCorporativo",
-                table: "TblClientes",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblCorporativos_TblEmpresaIdEmpresa",
-                table: "TblCorporativos",
-                column: "TblEmpresaIdEmpresa");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblEmpresa_CatEstatusIdEstatusRegistro",
-                table: "TblEmpresa",
-                column: "CatEstatusIdEstatusRegistro");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblProveedorContactos_TblProveedorIdProveedor",
-                table: "TblProveedorContactos",
-                column: "TblProveedorIdProveedor");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblProveedorDirecciones_TblProveedorIdProveedor",
-                table: "TblProveedorDirecciones",
-                column: "TblProveedorIdProveedor");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblProveedores_TblCorporativoIdCorporativo",
-                table: "TblProveedores",
-                column: "TblCorporativoIdCorporativo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblUsuarios_CatAreaIdArea",
-                table: "TblUsuarios",
-                column: "CatAreaIdArea");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblUsuarios_CatEscolaridadIdEscolaridad",
-                table: "TblUsuarios",
-                column: "CatEscolaridadIdEscolaridad");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblUsuarios_CatGeneroIdGenero",
-                table: "TblUsuarios",
-                column: "CatGeneroIdGenero");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TblUsuarios_CatNivelEscolarIdNivelEscolar",
                 table: "TblUsuarios",
                 column: "CatNivelEscolarIdNivelEscolar");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblUsuarios_CatPerfilIdPerfil",
-                table: "TblUsuarios",
-                column: "CatPerfilIdPerfil");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblUsuarios_CatRoleIdRol",
-                table: "TblUsuarios",
-                column: "CatRoleIdRol");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblUsuarios_CatTipoAlumnoIdTipoAlumno",
-                table: "TblUsuarios",
-                column: "CatTipoAlumnoIdTipoAlumno");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblUsuarios_CatTipoContratacionIdTipoContratacion",
-                table: "TblUsuarios",
-                column: "CatTipoContratacionIdTipoContratacion");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatAreas_CatAreaIdArea",
-                table: "TblUsuarios",
-                column: "CatAreaIdArea",
-                principalTable: "CatAreas",
-                principalColumn: "IdArea",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatEscolaridad_CatEscolaridadIdEscolaridad",
-                table: "TblUsuarios",
-                column: "CatEscolaridadIdEscolaridad",
-                principalTable: "CatEscolaridad",
-                principalColumn: "IdEscolaridad",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatGeneros_CatGeneroIdGenero",
-                table: "TblUsuarios",
-                column: "CatGeneroIdGenero",
-                principalTable: "CatGeneros",
-                principalColumn: "IdGenero",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatNivelEscolar_CatNivelEscolarIdNivelEscolar",
-                table: "TblUsuarios",
-                column: "CatNivelEscolarIdNivelEscolar",
-                principalTable: "CatNivelEscolar",
-                principalColumn: "IdNivelEscolar",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatPerfiles_CatPerfilIdPerfil",
-                table: "TblUsuarios",
-                column: "CatPerfilIdPerfil",
-                principalTable: "CatPerfiles",
-                principalColumn: "IdPerfil",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatRoles_CatRoleIdRol",
-                table: "TblUsuarios",
-                column: "CatRoleIdRol",
-                principalTable: "CatRoles",
-                principalColumn: "IdRol",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatTipoAlumno_CatTipoAlumnoIdTipoAlumno",
-                table: "TblUsuarios",
-                column: "CatTipoAlumnoIdTipoAlumno",
-                principalTable: "CatTipoAlumno",
-                principalColumn: "IdTipoAlumno",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblUsuarios_CatTipoContratacion_CatTipoContratacionIdTipoContratacion",
-                table: "TblUsuarios",
-                column: "CatTipoContratacionIdTipoContratacion",
-                principalTable: "CatTipoContratacion",
-                principalColumn: "IdTipoContratacion",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CatProductos_CatCategorias_CatCategoriaIdCategoria",
-                table: "CatProductos",
-                column: "CatCategoriaIdCategoria",
-                principalTable: "CatCategorias",
-                principalColumn: "IdCategoria",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TblEmpresa_CatEstatus_CatEstatusIdEstatusRegistro",
-                table: "TblEmpresa",
-                column: "CatEstatusIdEstatusRegistro",
-                principalTable: "CatEstatus",
-                principalColumn: "IdEstatusRegistro",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_CatEstatus_TblCorporativos_TblCorporativoIdCorporativo",
-                table: "CatEstatus");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -3097,19 +2673,58 @@ namespace WebAdmin.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CatAreas");
+
+            migrationBuilder.DropTable(
+                name: "CatCategorias");
+
+            migrationBuilder.DropTable(
                 name: "CatCodigosPostales");
+
+            migrationBuilder.DropTable(
+                name: "CatEscolaridad");
+
+            migrationBuilder.DropTable(
+                name: "CatEstatus");
+
+            migrationBuilder.DropTable(
+                name: "CatGeneros");
+
+            migrationBuilder.DropTable(
+                name: "CaTipotLicencias");
+
+            migrationBuilder.DropTable(
+                name: "CatPerfiles");
 
             migrationBuilder.DropTable(
                 name: "CatProductos");
 
             migrationBuilder.DropTable(
-                name: "CatTipoCentroTblCorporativo");
+                name: "CatRoles");
+
+            migrationBuilder.DropTable(
+                name: "CatTipoAlumno");
+
+            migrationBuilder.DropTable(
+                name: "CatTipoCentros");
+
+            migrationBuilder.DropTable(
+                name: "CatTipoClientes");
+
+            migrationBuilder.DropTable(
+                name: "CatTipoContratacion");
 
             migrationBuilder.DropTable(
                 name: "CatTipoDirecciones");
 
             migrationBuilder.DropTable(
+                name: "CatTipoPago");
+
+            migrationBuilder.DropTable(
                 name: "CatTipoPrestamo");
+
+            migrationBuilder.DropTable(
+                name: "CatTipoServicio");
 
             migrationBuilder.DropTable(
                 name: "FilesOnDatabase");
@@ -3127,10 +2742,22 @@ namespace WebAdmin.Migrations
                 name: "TblClienteDirecciones");
 
             migrationBuilder.DropTable(
+                name: "TblClientes");
+
+            migrationBuilder.DropTable(
+                name: "TblCorporativos");
+
+            migrationBuilder.DropTable(
+                name: "TblEmpresa");
+
+            migrationBuilder.DropTable(
                 name: "TblProveedorContactos");
 
             migrationBuilder.DropTable(
                 name: "TblProveedorDirecciones");
+
+            migrationBuilder.DropTable(
+                name: "TblProveedores");
 
             migrationBuilder.DropTable(
                 name: "TblUsuarios");
@@ -3142,61 +2769,7 @@ namespace WebAdmin.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "CatCategorias");
-
-            migrationBuilder.DropTable(
-                name: "CatTipoCentros");
-
-            migrationBuilder.DropTable(
-                name: "CaTipotLicencias");
-
-            migrationBuilder.DropTable(
-                name: "CatTipoPago");
-
-            migrationBuilder.DropTable(
-                name: "CatTipoServicio");
-
-            migrationBuilder.DropTable(
-                name: "TblClientes");
-
-            migrationBuilder.DropTable(
-                name: "TblProveedores");
-
-            migrationBuilder.DropTable(
-                name: "CatAreas");
-
-            migrationBuilder.DropTable(
-                name: "CatEscolaridad");
-
-            migrationBuilder.DropTable(
-                name: "CatGeneros");
-
-            migrationBuilder.DropTable(
                 name: "CatNivelEscolar");
-
-            migrationBuilder.DropTable(
-                name: "CatPerfiles");
-
-            migrationBuilder.DropTable(
-                name: "CatRoles");
-
-            migrationBuilder.DropTable(
-                name: "CatTipoAlumno");
-
-            migrationBuilder.DropTable(
-                name: "CatTipoContratacion");
-
-            migrationBuilder.DropTable(
-                name: "CatTipoClientes");
-
-            migrationBuilder.DropTable(
-                name: "TblCorporativos");
-
-            migrationBuilder.DropTable(
-                name: "TblEmpresa");
-
-            migrationBuilder.DropTable(
-                name: "CatEstatus");
         }
     }
 }

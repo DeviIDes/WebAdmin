@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using WebAdmin.Models;
+using WebAdmin.Services;
 namespace WebAdmin.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]

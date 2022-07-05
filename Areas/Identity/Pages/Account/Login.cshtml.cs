@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WebAdmin.Models;
+using WebAdmin.Services;
 using System.Net.Mail;
 
 namespace WebAdmin.Areas.Identity.Pages.Account

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Data;
 using WebAdmin.Models;
+using WebAdmin.Services;
 
 namespace FileUpload.MVC.Controllers
 {
@@ -16,11 +17,13 @@ namespace FileUpload.MVC.Controllers
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
+        private readonly IUserService _userService;
 
-        public FileController(nDbContext context, INotyfService notyf)
+        public FileController(nDbContext context, INotyfService notyf,IUserService userService)
         {
             _context = context;
             _notyf = notyf;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
