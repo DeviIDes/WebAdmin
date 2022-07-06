@@ -55,7 +55,7 @@ namespace WebAdmin.Models
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
-
+  [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Usuario Control")]
         public Guid IdUsuarioControl { get; set; }
 

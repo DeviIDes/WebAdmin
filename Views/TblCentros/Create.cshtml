@@ -115,6 +115,15 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
         </div>
+           <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="IdUsuarioControl" class="control-label"></label>
+                <select id="IdUsuarioControl" class="js-example-basic-single form-control" asp-for="IdUsuarioControl" asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <span asp-validation-for="IdUsuarioControl" class="text-danger"></span>
+            </div>
+        </div>
     </div>
     <br />
     <div class="form-group">
@@ -131,6 +140,9 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
 <script type="text/javascript">
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
         function validaRFC() {
         let pattern = /^[a-zA-Z]{3,4}(\d{6})((\D|\d){2,3})?$/;
         let rfc = document.getElementById("iRFC").value;

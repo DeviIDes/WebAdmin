@@ -101,6 +101,18 @@ namespace WebAdmin.Controllers
             List<CaTipotLicencia> ListaLicencia = new List<CaTipotLicencia>();
             ListaLicencia = (from c in _context.CaTipotLicencias select c).Distinct().ToList();
             ViewBag.ListaLicencia = ListaLicencia;
+
+ var fUsuariosCentros = from a in _context.TblUsuarios
+                             where a.IdPerfil == 3 && a.IdRol == 2
+                             select new TblUsuario
+                             {
+                                 IdUsuario = a.IdUsuario,
+                                 NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                 
+                             };
+TempData["Mpps"] = fUsuariosCentros.ToList();
+            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
+
             return View();
         }
 
@@ -109,7 +121,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCentro,IdTipoLicencia,IdTipoCentro,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono")] TblCentro tblCentros)
+        public async Task<IActionResult> Create([Bind("IdCentro,IdTipoLicencia,IdTipoCentro,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdUsuarioControl")] TblCentro tblCentros)
         {
             if (ModelState.IsValid)
             {
@@ -119,6 +131,13 @@ namespace WebAdmin.Controllers
 
                 if (DuplicadosEstatus.Count == 0)
                 {
+                     var DuplicadoUsuarioAsignado = _context.TblCentros
+                       .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
+                       .ToList();
+
+                        if (DuplicadoUsuarioAsignado.Count == 0)
+                {
+
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
@@ -133,11 +152,18 @@ namespace WebAdmin.Controllers
                     tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
                     tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
                     tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
+                    tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
                     tblCentros.IdCorporativo = idCorporativos.IdCorporativo;
                     _context.SaveChanges();
                     _context.Add(tblCentros);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
+                }
+                else
+                {
+                 
+                    _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
+                }
                 }
                 else
                 {
@@ -155,6 +181,9 @@ namespace WebAdmin.Controllers
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
+
+            
+
             if (id == null)
             {
                 return NotFound();
@@ -173,7 +202,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdEmpresaFiscales,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdEstatusRegistro,IdEmpresa")] TblCentro tblCentros)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdEmpresaFiscales,NombreCentro,RFC,RegimenFiscal,Calle,CodigoPostal,IdColonia,Colonia,LocalidadMunicipio,Ciudad,Estado,CorreoElectronico,Telefono,IdEstatusRegistro,IdEmpresa,IdUsuarioControl")] TblCentro tblCentros)
         {
             if (id != tblCentros.IdCentro)
             {
@@ -184,6 +213,13 @@ namespace WebAdmin.Controllers
             {
                 try
                 {
+                           var DuplicadoUsuarioAsignado = _context.TblCentros
+                       .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
+                       .ToList();
+
+                        if (DuplicadoUsuarioAsignado.Count == 0)
+                {
+
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
@@ -198,9 +234,16 @@ namespace WebAdmin.Controllers
                     tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
                     tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
                     tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
+                    tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
                     _context.Update(tblCentros);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
+                          }
+                else
+                {
+                 
+                    _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
+                }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
