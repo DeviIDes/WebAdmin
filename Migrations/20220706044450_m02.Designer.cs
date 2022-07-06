@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAdmin.Data;
 
 namespace WebAdmin.Migrations
 {
     [DbContext(typeof(nDbContext))]
-    partial class nDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220706044450_m02")]
+    partial class m02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,7 +281,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 1,
                             AreaDesc = "DIRECCION",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -287,7 +289,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 2,
                             AreaDesc = "RECURSOS HUMANOS",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -295,7 +297,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 3,
                             AreaDesc = "PRODUCCION DIGITAL",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -303,7 +305,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 4,
                             AreaDesc = "FINANZAS/CONTABILIDAD",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -311,7 +313,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 5,
                             AreaDesc = "MARKETING/VENTAS",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -319,7 +321,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 6,
                             AreaDesc = "TIC",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -327,7 +329,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 7,
                             AreaDesc = "SERVICIO AL CLIENTE",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -335,7 +337,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 8,
                             AreaDesc = "OTRA",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -29284,14 +29286,14 @@ namespace WebAdmin.Migrations
                         {
                             IdEstatusRegistro = 1,
                             EstatusDesc = "ACTIVO",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdEstatusRegistro = 2,
                             EstatusDesc = "DESACTIVO",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -29325,7 +29327,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "HOMBRE",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
@@ -29333,7 +29335,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "MUJER",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
@@ -29395,7 +29397,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DIRECTOR"
@@ -29403,7 +29405,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "ADMINISTRADOR"
@@ -29411,7 +29413,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 3,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "GERENTE"
@@ -29419,7 +29421,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 4,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "EJECUTIVO"
@@ -29427,7 +29429,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 5,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DOCENTE"
@@ -29516,7 +29518,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "DESARROLLADOR"
@@ -29524,7 +29526,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "ADMINISTRADOR"
@@ -29532,7 +29534,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 3,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "SUPERVISOR"
@@ -29540,7 +29542,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 4,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "OPERADOR"
@@ -29602,7 +29604,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "INTERNO"
@@ -29610,7 +29612,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "LICENCIA"
@@ -29724,7 +29726,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "EFECTIVO"
@@ -29732,7 +29734,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TRANSFERENCIA"
@@ -29740,7 +29742,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 3,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "CREDITO"
@@ -29748,7 +29750,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 4,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDC"
@@ -29756,7 +29758,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 5,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDD"
@@ -30023,9 +30025,11 @@ namespace WebAdmin.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaveAcceso")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CorreoAcceso")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaAcceso")
@@ -30047,9 +30051,6 @@ namespace WebAdmin.Migrations
 
                     b.Property<int>("IdTipoCliente")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("IdUCorporativoCentro")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdUsuarioModifico")
                         .HasColumnType("uniqueidentifier");

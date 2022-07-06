@@ -100,13 +100,6 @@ namespace WebAdmin.Controllers
             ListaTipoClientes = (from c in _context.CatTipoClientes select c).Distinct().ToList();
             ViewBag.ListaTipoClientes = ListaTipoClientes;
 
-            List<CatPerfil> ListaPerfil = new List<CatPerfil>();
-            ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
-            ViewBag.ListaPerfil = ListaPerfil;
-
-            List<CatRole> ListaRol = new List<CatRole>();
-            ListaRol = (from c in _context.CatRoles select c).Distinct().ToList();
-            ViewBag.ListaRol = ListaRol;
             return View();
         }
 
@@ -115,7 +108,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCliente,NombreCliente,Rfc,GiroComercial")] TblCliente tblCliente)
+        public async Task<IActionResult> Create([Bind("IdCliente,NombreCliente,ApellidoPaterno,ApellidoMaterno,IdTipoCliente")] TblCliente tblCliente)
         {
             if (ModelState.IsValid)
             {
@@ -128,13 +121,30 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     tblCliente.IdUsuarioModifico = Guid.Parse(fuser);
-                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
+                    var fCentro = Guid.Empty;
+
+                    var vCentro = _context.TblCentros
+                                              .Where(s => s.IdUsuarioControl == Guid.Parse(fuser))
+                                              .ToList();
+
+                    if (vCentro.Count == 0)
+                    {
+                        var fcorporativo = _context.TblCorporativos.FirstOrDefault();
+                        tblCliente.IdUCorporativoCentro = fcorporativo.IdCorporativo;
+                        
+                    }
+                    else
+                    {
+                        fCentro = vCentro[0].IdCentro;
+                        tblCliente.IdUCorporativoCentro = fCentro;
+                    }
+                  
+
                     tblCliente.FechaRegistro = DateTime.Now;
-                    tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
-
+                    tblCliente.ApellidoPaterno = !string.IsNullOrEmpty(tblCliente.ApellidoPaterno) ? tblCliente.ApellidoPaterno.ToUpper() : tblCliente.ApellidoPaterno;
+                    tblCliente.ApellidoPaterno = !string.IsNullOrEmpty(tblCliente.ApellidoMaterno) ? tblCliente.ApellidoMaterno.ToUpper() : tblCliente.ApellidoMaterno;
                     tblCliente.IdEstatusRegistro = 1;
-
-                    _context.SaveChanges();
+                 
                     _context.Add(tblCliente);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -155,6 +165,14 @@ namespace WebAdmin.Controllers
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
 
+            List<CatPerfil> ListaPerfil = new List<CatPerfil>();
+            ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
+            ViewBag.ListaPerfil = ListaPerfil;
+
+            List<CatRole> ListaRol = new List<CatRole>();
+            ListaRol = (from c in _context.CatRoles select c).Distinct().ToList();
+            ViewBag.ListaRol = ListaRol;
+
             if (id == null)
             {
                 return NotFound();
@@ -173,7 +191,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdCliente,NombreCliente,Rfc,GiroComercial,IdEstatusRegistro")] TblCliente tblCliente)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdCliente,NombreCliente,IdTipoCliente, IdPerfil, IdRol,IdEstatusRegistro")] TblCliente tblCliente)
         {
             if (id != tblCliente.IdCliente)
             {

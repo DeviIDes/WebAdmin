@@ -1658,5 +1658,11 @@ new CatCodigosPostal { IdCodigosPostales = 1516, Dcodigo = "16900", Dasenta = "S
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<WebAdmin.Models.TblVenta> TblVenta { get; set; }
+
+        public DbSet<WebAdmin.Models.RelVentasPagos> RelVentasPagos { get; set; }
+
+        public DbSet<WebAdmin.Models.RelVentaProducto> RelVentaProducto { get; set; }
     }
 }

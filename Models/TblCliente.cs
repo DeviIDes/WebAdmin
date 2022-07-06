@@ -37,16 +37,18 @@ namespace WebAdmin.Models
         public int IdRol { get; set; }
 
         [Display(Name = "Correo Electronico")]
-        [Required(ErrorMessage = "Campo Requerido")]
+
         public string CorreoAcceso { get; set; }
 
         [Display(Name = "Clave Acceso")]
-        [Required(ErrorMessage = "Campo Requerido")]
+      
         public string ClaveAcceso { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
+[Display(Name = "Corporativo / Centro")]
+        public Guid IdUCorporativoCentro { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
