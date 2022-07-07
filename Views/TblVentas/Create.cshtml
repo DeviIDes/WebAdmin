@@ -190,8 +190,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var vPorcentaje = document.getElementById("iDescuento").value;
         var vCosto = 0;
         var vtotal = 0;
-
-
         $.ajax({
             type: "GET",
             url: "/CatProductos/FiltroProducto/",
@@ -199,7 +197,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-
                 var items = "";
                 $.each(data, function (i, item) {
                     const options2 = { style: "currency", currency: "USD" };
@@ -233,30 +230,14 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                         "'class='btn btn-outline-secondary' title='Desactivar'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;' onclick='DProducto(this)'></i></a></td>" +
                         "</tr>";
                     $("#tblProductos tbody").append(rows);
-
-  
                 });
-                                 var table = document.getElementById("tblProductos");
-  let subTotal = Array.from(table.rows).slice(1).reduce((total, row) => {
-    return total + parseFloat(row.cells[2].innerHTML);
-  }, 0);
-  document.getElementById("ivTotal").value = "subTotal.toFixed(2);
             },
-            error: function (ex) {
-                var r = jQuery.parseJSON(response.responseText);
-                alert("Message: " + r.Message);
-                alert("StackTrace: " + r.StackTrace);
-                alert("ExceptionType: " + r.ExceptionType);
+    error: function (ex) {
             },
         });
-        return false;
     }
-    updateSubTotal(); // Initial call
-
-function updateSubTotal() {
-  
-}
-
-
+    function subtotal() {
+        var table = document.getElementById("tblProductos");
+    }
 </script>
 }
