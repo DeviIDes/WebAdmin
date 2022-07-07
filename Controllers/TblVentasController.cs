@@ -46,6 +46,24 @@ namespace WebAdmin.Controllers
         // GET: TblVentas/Create
         public IActionResult Create()
         {
+            List<CatCategoria> ListaCategoria = new List<CatCategoria>();
+            ListaCategoria = (from c in _context.CatCategorias select c).Distinct().ToList();
+            ViewBag.ListaCategoria = ListaCategoria;
+
+            List<CatTipoPago> ListaTipoPago = new List<CatTipoPago>();
+            ListaTipoPago = (from c in _context.CatTipoPago select c).Distinct().ToList();
+            ViewBag.ListaTipoPago = ListaTipoPago;
+            
+             var fUsuariosCentros = from a in _context.TblClientes
+                                //    where a.IdPerfil == 3 && a.IdRol == 2
+                                   select new TblUsuario
+                                   {
+                                       IdUsuario = a.IdCliente,
+                                       NombreUsuario = a.NombreCliente + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+
+                                   };
+            TempData["Mpps"] = fUsuariosCentros.ToList();
+            ViewBag.ListaUsuariosCentros = TempData["Mpps"];
             return View();
         }
 

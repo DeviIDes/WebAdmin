@@ -92,18 +92,32 @@ namespace WebAdminHecsa.Controllers
         // GET: CatProductos/Details/5
 
         [HttpGet]
-        public ActionResult FiltroProductos(int idA, int idB)
+        public ActionResult FiltroProductos(int id)
         {
-            var fProductos = _context.CatProductos
-                       .Where(s => s.IdCategoria == idB).Distinct().ToList();
+            var fProductos = from a in _context.CatProductos
+                             join b in _context.CatCategorias on a.IdCategoria equals b.IdCategoria
+                             where b.IdCategoria == id
+                             select new CatProducto
+                             {
+                                 IdProducto = a.IdProducto,
+                                 DescProducto = a.DescProducto + " - $ " + a.ProductoPrecioUno
+                             };
             return Json(fProductos);
         }
 
         [HttpGet]
         public ActionResult FiltroProducto(int idA)
         {
-            var fProductos = _context.CatProductos
-                       .Where(s => s.IdProducto == idA).Distinct().ToList();
+            var fProductos = from a in _context.CatProductos
+                             join b in _context.CatCategorias on a.IdCategoria equals b.IdCategoria
+                             where a.IdProducto == idA
+                             select new
+                             {
+                                 IdProducto = a.IdProducto,
+                                 DescProducto = a.DescProducto,
+                                 DescCategoria = b.CategoriaDesc,
+                                 Costo = a.ProductoPrecioUno,
+                             };
             return Json(fProductos);
         }
 

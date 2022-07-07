@@ -102,15 +102,15 @@ namespace WebAdmin.Controllers
             ListaLicencia = (from c in _context.CaTipotLicencias select c).Distinct().ToList();
             ViewBag.ListaLicencia = ListaLicencia;
 
- var fUsuariosCentros = from a in _context.TblUsuarios
-                             where a.IdPerfil == 3 && a.IdRol == 2
-                             select new TblUsuario
-                             {
-                                 IdUsuario = a.IdUsuario,
-                                 NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
-                                 
-                             };
-TempData["Mpps"] = fUsuariosCentros.ToList();
+            var fUsuariosCentros = from a in _context.TblUsuarios
+                                   where a.IdPerfil == 3 && a.IdRol == 2
+                                   select new TblUsuario
+                                   {
+                                       IdUsuario = a.IdUsuario,
+                                       NombreUsuario = a.Nombres + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+
+                                   };
+            TempData["Mpps"] = fUsuariosCentros.ToList();
             ViewBag.ListaUsuariosCentros = TempData["Mpps"];
 
             return View();
@@ -131,39 +131,39 @@ TempData["Mpps"] = fUsuariosCentros.ToList();
 
                 if (DuplicadosEstatus.Count == 0)
                 {
-                     var DuplicadoUsuarioAsignado = _context.TblCentros
-                       .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
-                       .ToList();
+                    var DuplicadoUsuarioAsignado = _context.TblCentros
+                      .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
+                      .ToList();
 
-                        if (DuplicadoUsuarioAsignado.Count == 0)
-                {
+                    if (DuplicadoUsuarioAsignado.Count == 0)
+                    {
 
-                    var fuser = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
-                    var idCorporativos = _context.TblCorporativos.FirstOrDefault();
-                    tblCentros.FechaRegistro = DateTime.Now;
-                    tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
-                    tblCentros.IdEstatusRegistro = 1;
-                    var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
-                    tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
-                    tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
-                    tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
-                    tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
-                    tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
-                    tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
-                    tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
-                    tblCentros.IdCorporativo = idCorporativos.IdCorporativo;
-                    _context.SaveChanges();
-                    _context.Add(tblCentros);
-                    await _context.SaveChangesAsync();
-                    _notyf.Success("Registro creado con éxito", 5);
-                }
-                else
-                {
-                 
-                    _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
-                }
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
+                        tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
+                        var idCorporativos = _context.TblCorporativos.FirstOrDefault();
+                        tblCentros.FechaRegistro = DateTime.Now;
+                        tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
+                        tblCentros.IdEstatusRegistro = 1;
+                        var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
+                        tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
+                        tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
+                        tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
+                        tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
+                        tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
+                        tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
+                        tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
+                        tblCentros.IdCorporativo = idCorporativos.IdCorporativo;
+                        _context.SaveChanges();
+                        _context.Add(tblCentros);
+                        await _context.SaveChangesAsync();
+                        _notyf.Success("Registro creado con éxito", 5);
+                    }
+                    else
+                    {
+
+                        _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
+                    }
                 }
                 else
                 {
@@ -182,7 +182,7 @@ TempData["Mpps"] = fUsuariosCentros.ToList();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaEstatus = ListaCatEstatus;
 
-            
+
 
             if (id == null)
             {
@@ -213,37 +213,37 @@ TempData["Mpps"] = fUsuariosCentros.ToList();
             {
                 try
                 {
-                           var DuplicadoUsuarioAsignado = _context.TblCentros
-                       .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
-                       .ToList();
+                    var DuplicadoUsuarioAsignado = _context.TblCentros
+                .Where(s => s.IdUsuarioControl == tblCentros.IdUsuarioControl)
+                .ToList();
 
-                        if (DuplicadoUsuarioAsignado.Count == 0)
-                {
+                    if (DuplicadoUsuarioAsignado.Count == 0)
+                    {
 
-                    var fuser = _userService.GetUserId();
-                    var isLoggedIn = _userService.IsAuthenticated();
-                    tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
-                    tblCentros.FechaRegistro = DateTime.Now;
-                    tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
+                        var fuser = _userService.GetUserId();
+                        var isLoggedIn = _userService.IsAuthenticated();
+                        tblCentros.IdUsuarioModifico = Guid.Parse(fuser);
+                        tblCentros.FechaRegistro = DateTime.Now;
+                        tblCentros.NombreCentro = tblCentros.NombreCentro.ToString().ToUpper();
 
-                    tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
-                    var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
-                    tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
-                    tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
-                    tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
-                    tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
-                    tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
-                    tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
-                    tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
-                    _context.Update(tblCentros);
-                    await _context.SaveChangesAsync();
-                    _notyf.Warning("Registro actualizado con éxito", 5);
-                          }
-                else
-                {
-                 
-                    _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
-                }
+                        tblCentros.IdEstatusRegistro = tblCentros.IdEstatusRegistro;
+                        var strColonia = _context.CatCodigosPostales.Where(s => s.IdAsentaCpcons == tblCentros.Colonia).FirstOrDefault();
+                        tblCentros.IdColonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? tblCentros.Colonia : tblCentros.Colonia;
+                        tblCentros.Colonia = !string.IsNullOrEmpty(tblCentros.Colonia) ? strColonia.Dasenta.ToUpper() : tblCentros.Colonia;
+                        tblCentros.Calle = !string.IsNullOrEmpty(tblCentros.Calle) ? tblCentros.Calle.ToUpper() : tblCentros.Calle;
+                        tblCentros.LocalidadMunicipio = !string.IsNullOrEmpty(tblCentros.LocalidadMunicipio) ? tblCentros.LocalidadMunicipio.ToUpper() : tblCentros.LocalidadMunicipio;
+                        tblCentros.Ciudad = !string.IsNullOrEmpty(tblCentros.Ciudad) ? tblCentros.Ciudad.ToUpper() : tblCentros.Ciudad;
+                        tblCentros.Estado = !string.IsNullOrEmpty(tblCentros.Estado) ? tblCentros.Estado.ToUpper() : tblCentros.Estado;
+                        tblCentros.IdUsuarioControl = tblCentros.IdUsuarioControl;
+                        _context.Update(tblCentros);
+                        await _context.SaveChangesAsync();
+                        _notyf.Warning("Registro actualizado con éxito", 5);
+                    }
+                    else
+                    {
+
+                        _notyf.Warning("Favor de validar, este Usurio ya esta asignado a otro centro", 5);
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {

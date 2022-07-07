@@ -115,10 +115,10 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
         </div>
-           <div class="col-md-2">
+           <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="IdUsuarioControl" class="control-label"></label>
-                <select id="IdUsuarioControl" class="js-example-basic-single form-control" asp-for="IdUsuarioControl" asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                <select id="IdUsuarioControl" class="form-select" asp-for="IdUsuarioControl" asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
                     <option value="">SELECCIONAR</option>
                 </select>
                 <span asp-validation-for="IdUsuarioControl" class="text-danger"></span>
@@ -140,6 +140,11 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
             }
 <script type="text/javascript">
+    $('#IdUsuarioControl').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
 $(document).ready(function() {
     $('.js-example-basic-single').select2();
 });

@@ -9,42 +9,254 @@
 
 <h4>TblVenta</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-3">
             <div class="form-group">
                 <label asp-for="IdCliente" class="control-label"></label>
-                <input asp-for="IdCliente" class="form-control" />
-                <span asp-validation-for="IdCliente" class="text-danger"></span>
+                <select id="IdCliente" class="form-select" asp-for="IdCliente"
+                    asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
             </div>
+            <span asp-validation-for="IdCliente" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-1">
             <div class="form-group">
                 <label asp-for="Descuento" class="control-label"></label>
-                <input asp-for="Descuento" class="form-control" />
+                <input id="iDescuento" asp-for="Descuento" class="form-control" type="number" min="0" max="100"
+                    value="0" />
                 <span asp-validation-for="Descuento" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="IdCategoria" class="control-label"></label>
+            <div class="input-group mb-3">
+                <select id="drpCategoria" class="form-select" asp-for="IdCategoria"
+                    asp-items="@(new SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
+            </div>
+            <span asp-validation-for="IdCategoria" class="text-danger"></span>
+        </div>
+        <div class="col-md-5">
+            <label asp-for="IdProducto" class="control-label"></label>
+            <div class="input-group mb-3">
+                <select id="drpProducto" class="form-select" asp-for="IdProducto">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <button id="btnAddProducto" class="btn btn-primary" type="button" onclick="AgregaProducto()"
+                    disabled>Agregar</button>
+            </div>
+            <span asp-validation-for="IdCategoria" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <table class="table" id="tblProductos">
+            <thead>
+                <tr>
+
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.DescCategoria)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.DescProducto)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Total)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Costo)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Descuento)
+                    </th>
+
+                    <th style="text-align:center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="IdTipoPago" class="control-label"></label>
-                <input asp-for="IdTipoPago" class="form-control" />
+                <select id="IdTipoPago" class="form-select" asp-for="IdCliente"
+                    asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
                 <span asp-validation-for="IdTipoPago" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="col-md-4">
+            <div class="form-group" hidden>
+                <label asp-for="CodigoPago" class="control-label"></label>
+                <input asp-for="CodigoPago" class="form-control" />
+                <span asp-validation-for="CodigoPago" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group" hidden>
                 <label asp-for="FechaAlterna" class="control-label"></label>
                 <input asp-for="FechaAlterna" class="form-control" />
-                <span asp-validation-for="FechaAlterna" class="text-danger"></span>
             </div>
-      
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-3">
+            <dt class="col-sm-4">
+                <label class="control-label">Total Venta</label>
+            </dt>
+            <dd class="col-sm-12">
+                <input id="ivTotal" class="form-control" />
+            </dd>
+        </div>
+    </div>
+    <input type="submit" value="Create" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</form>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{
+await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script>
+    $('#IdCliente').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#drpCategoria').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    $('#drpProducto').select2({
+        theme: "bootstrap-5",
+        width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        placeholder: $(this).data('placeholder'),
+    });
+    function DatosProductos() {
+        var vProducto = document.getElementById("drpCategoria").value;
+
+        $.ajax({
+            type: "GET",
+            url: "/CatProductos/FiltroProductos/",
+            data: { id: vProducto },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                var $select_colonias = $('#drpProducto');
+                $("#drpProducto").empty();
+
+                if (list.length == 0) {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    $select_colonias.attr('required', false);
+                    $("#btnAddProducto").setAttribute("disabled");
+                }
+                else {
+                    $select_colonias.append('<option value="">SELECCIONAR</option>');
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        $select_colonias.append('<option value=' + list[i].idProducto + '>' + list[i].descProducto + '</option>');
+                        $select_colonias.attr('required', true);
+                    }
+                    $("#btnAddProducto").removeAttr("disabled");
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+        return false;
+    }
+    function DProducto(ctl) {
+        $(ctl).parents("tr").remove();
+    }
+    function AgregaProducto() {
+        var vProducto = document.getElementById("drpProducto").value;
+        var vPorcentaje = document.getElementById("iDescuento").value;
+        var vCosto = 0;
+        var vtotal = 0;
+
+
+        $.ajax({
+            type: "GET",
+            url: "/CatProductos/FiltroProducto/",
+            data: { idA: vProducto },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var items = "";
+                $.each(data, function (i, item) {
+                    const options2 = { style: "currency", currency: "USD" };
+                    const numberFormat2 = new Intl.NumberFormat("en-US", options2);
+                    vCosto = item.costo - (item.costo * (vPorcentaje / 100));
+                    vCosto = vCosto;
+
+                    var rows =
+                        "<tr>" +
+                        "<td style='text-align:center'>" +
+                        item.descCategoria +
+                        "</td>" +
+                        "<td style='text-align:center'>" +
+                        item.descProducto +
+                        "</td>" +
+                        "<td style='text-align:center'>" +
+                        vCosto +
+                        "<td style='text-align:center'>" +
+                        numberFormat2.format(item.costo) +
+                        "</td>" +
+                        "<td style='text-align:center'>" +
+                        numberFormat2.format((item.costo * (vPorcentaje / 100))) +
+                        "</td>" +
+                        "<td style='text-align:center'>" +
+
+                        "<a asp-action='Edit' asp-route-id='" +
+                        item.idProducto +
+                        "'class='btn btn-outline-secondary' title='Editar'><i class='far fa-edit' style='font-size: 1em; color: #FFC300;' onclick='MProducto(this)'></i></a>" +
+                        "<a asp-action='Delete' asp-route-id='" +
+                        item.idProducto +
+                        "'class='btn btn-outline-secondary' title='Desactivar'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;' onclick='DProducto(this)'></i></a></td>" +
+                        "</tr>";
+                    $("#tblProductos tbody").append(rows);
+
+  
+                });
+                                 var table = document.getElementById("tblProductos");
+  let subTotal = Array.from(table.rows).slice(1).reduce((total, row) => {
+    return total + parseFloat(row.cells[2].innerHTML);
+  }, 0);
+  document.getElementById("ivTotal").value = "subTotal.toFixed(2);
+            },
+            error: function (ex) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+                alert("StackTrace: " + r.StackTrace);
+                alert("ExceptionType: " + r.ExceptionType);
+            },
+        });
+        return false;
+    }
+    updateSubTotal(); // Initial call
+
+function updateSubTotal() {
+  
+}
+
+
+</script>
 }
