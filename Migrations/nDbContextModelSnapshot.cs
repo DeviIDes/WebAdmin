@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebAdmin.Data;
 
 namespace WebAdmin.Migrations
@@ -15,33 +15,32 @@ namespace WebAdmin.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -50,18 +49,18 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -73,58 +72,58 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
@@ -133,8 +132,7 @@ namespace WebAdmin.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
 
@@ -145,18 +143,18 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -169,18 +167,18 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -192,10 +190,10 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -207,18 +205,18 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -229,22 +227,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoLicencia")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LicenciaDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoLicencia");
 
@@ -254,21 +252,21 @@ namespace WebAdmin.Migrations
             modelBuilder.Entity("WebAdmin.Models.CatArea", b =>
                 {
                     b.Property<int>("IdArea")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("AreaDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("IdArea");
 
@@ -279,7 +277,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 1,
                             AreaDesc = "DIRECCION",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -287,7 +285,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 2,
                             AreaDesc = "RECURSOS HUMANOS",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -295,7 +293,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 3,
                             AreaDesc = "PRODUCCION DIGITAL",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -303,7 +301,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 4,
                             AreaDesc = "FINANZAS/CONTABILIDAD",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -311,7 +309,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 5,
                             AreaDesc = "MARKETING/VENTAS",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -319,7 +317,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 6,
                             AreaDesc = "TIC",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -327,7 +325,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 7,
                             AreaDesc = "SERVICIO AL CLIENTE",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
@@ -335,7 +333,7 @@ namespace WebAdmin.Migrations
                         {
                             IdArea = 8,
                             AreaDesc = "OTRA",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -345,22 +343,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdCategoria")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CategoriaDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("IdCategoria");
 
@@ -371,54 +369,54 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdCodigosPostales")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("IdCodigosPostales")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Ccp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CcveCiudad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Cestado")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Cmnpio")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Coficina")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CtipoAsenta")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Dasenta")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Dciudad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Dcodigo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Dcp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Destado")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Dmnpio")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("DtipoAsenta")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Dzona")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("IdAsentaCpcons")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdCodigosPostales");
 
@@ -29235,22 +29233,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdEscolaridad")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("EscolaridadDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("IdEscolaridad");
 
@@ -29261,19 +29259,19 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdEstatusRegistro")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("EstatusDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("IdEstatusRegistro");
 
@@ -29284,14 +29282,14 @@ namespace WebAdmin.Migrations
                         {
                             IdEstatusRegistro = 1,
                             EstatusDesc = "ACTIVO",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
                             IdEstatusRegistro = 2,
                             EstatusDesc = "DESACTIVO",
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
@@ -29300,22 +29298,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdGenero")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("GeneroDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("IdGenero");
 
@@ -29325,7 +29323,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "HOMBRE",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
@@ -29333,7 +29331,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdGenero = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             GeneroDesc = "MUJER",
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000")
@@ -29344,22 +29342,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdNivelEscolar")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("NivelEscolarDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdNivelEscolar");
 
@@ -29370,22 +29368,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdPerfil")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("PerfilDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdPerfil");
 
@@ -29395,7 +29393,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DIRECTOR"
@@ -29403,7 +29401,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "ADMINISTRADOR"
@@ -29411,7 +29409,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 3,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "GERENTE"
@@ -29419,7 +29417,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 4,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "EJECUTIVO"
@@ -29427,7 +29425,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdPerfil = 5,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             PerfilDesc = "DOCENTE"
@@ -29438,49 +29436,49 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdProducto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("Cantidad")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("CantidadMinima")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("CodigoExterno")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CodigoInterno")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Costo")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<string>("DescProducto")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdCategoria")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("PorcentajePrecioUno")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<decimal>("ProductoPrecioUno")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<decimal>("SubCosto")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.HasKey("IdProducto");
 
@@ -29491,22 +29489,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdRol")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("RolDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdRol");
 
@@ -29516,7 +29514,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "DESARROLLADOR"
@@ -29524,7 +29522,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "ADMINISTRADOR"
@@ -29532,7 +29530,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 3,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "SUPERVISOR"
@@ -29540,7 +29538,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdRol = 4,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             RolDesc = "OPERADOR"
@@ -29551,22 +29549,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoAlumno")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoAlumnoDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoAlumno");
 
@@ -29577,22 +29575,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoCentro")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoCentroDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoCentro");
 
@@ -29602,7 +29600,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "INTERNO"
@@ -29610,7 +29608,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoCentro = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoCentroDesc = "LICENCIA"
@@ -29621,22 +29619,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoCliente")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoClienteDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoCliente");
 
@@ -29647,22 +29645,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoContratacion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoContratacionDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoContratacion");
 
@@ -29673,22 +29671,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoDireccion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoDireccionDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoDireccion");
 
@@ -29699,22 +29697,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoPago")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoPagoDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoPago");
 
@@ -29724,7 +29722,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 1,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "EFECTIVO"
@@ -29732,7 +29730,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 2,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TRANSFERENCIA"
@@ -29740,7 +29738,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 3,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "CREDITO"
@@ -29748,7 +29746,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 4,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDC"
@@ -29756,7 +29754,7 @@ namespace WebAdmin.Migrations
                         new
                         {
                             IdTipoPago = 5,
-                            FechaRegistro = new DateTime(2022, 7, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            FechaRegistro = new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             IdEstatusRegistro = 1,
                             IdUsuarioModifico = new Guid("00000000-0000-0000-0000-000000000000"),
                             TipoPagoDesc = "TDD"
@@ -29767,22 +29765,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoPrestamo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoPrestamoDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoPrestamo");
 
@@ -29793,22 +29791,22 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdTipoServicio")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TipoServicioDesc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdTipoServicio");
 
@@ -29819,29 +29817,29 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<byte[]>("Data")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FileType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UploadedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -29852,29 +29850,29 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FilePath")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("FileType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UploadedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -29885,31 +29883,31 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdRelVentaProducto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Cantidad")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("IdCategoria")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdProducto")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdVenta")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<decimal>("ProductoPrecioUno")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.HasKey("IdRelVentaProducto");
 
@@ -29920,25 +29918,25 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdRelVentasPago")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("CantidadPago")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("CodigoReferencia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdVenta")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.HasKey("IdRelVentasPago");
 
@@ -29949,61 +29947,61 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdCentro")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Calle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Ciudad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CodigoPostal")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Colonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("IdColonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("IdCorporativo")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdTipoCentro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdTipoLicencia")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioControl")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LocalidadMunicipio")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("NombreCentro")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdCentro");
 
@@ -30014,49 +30012,49 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdCliente")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ApellidoMaterno")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ApellidoPaterno")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaveAcceso")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CorreoAcceso")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaAcceso")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaAcceso");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdPerfil")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdRol")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdTipoCliente")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUCorporativoCentro")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("NombreCliente")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdCliente");
 
@@ -30067,38 +30065,38 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdClienteContacto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<Guid>("IdCliente")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdPerfil")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("NombreClienteContacto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("TelefonoMovil")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdClienteContacto");
 
@@ -30109,53 +30107,53 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdClienteDirecciones")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Calle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Ciudad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CodigoPostal")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Colonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<Guid>("IdCliente")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("IdColonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdTipoDireccion")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LocalidadMunicipio")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdClienteDirecciones");
 
@@ -30166,52 +30164,52 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdCorporativo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Calle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Ciudad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CodigoPostal")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Colonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("IdColonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("IdEmpresa")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LocalidadMunicipio")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("NombreCorporativo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdCorporativo");
 
@@ -30222,55 +30220,55 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdEmpresa")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Calle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Ciudad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CodigoPostal")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Colonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("GiroComercial")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("IdColonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LocalidadMunicipio")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("NombreEmpresa")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Rfc")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdEmpresa");
 
@@ -30281,30 +30279,30 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdProveedor")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("GiroComercial")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("IdCorporativo")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("NombreProveedor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Rfc")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdProveedor");
 
@@ -30315,38 +30313,38 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdProveedorContacto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdPerfil")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdProveedor")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("NombreProveedorContacto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("TelefonoMovil")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdProveedorContacto");
 
@@ -30357,52 +30355,52 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<int>("IdProveedorDirecciones")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Calle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Ciudad")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CodigoPostal")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Colonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CorreoElectronico")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<string>("IdColonia")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdProveedor")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("IdTipoDireccion")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LocalidadMunicipio")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdProveedorDirecciones");
 
@@ -30413,60 +30411,60 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdUsuario")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ApellidoMaterno")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ApellidoPaterno")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("CatNivelEscolarIdNivelEscolar")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("CorreoAcceso")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaNacimiento")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("Fecha de Nacimiento");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("FechaRegistro");
 
                     b.Property<int>("IdArea")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdCorporativo")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdGenero")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdPerfil")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdRol")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<byte[]>("ImagenPErfil")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<string>("NombreEmpresa")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("NombreUsuario")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Nombres")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("IdUsuario");
 
@@ -30479,37 +30477,37 @@ namespace WebAdmin.Migrations
                 {
                     b.Property<Guid>("IdVenta")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
-                    b.Property<decimal>("Descuento")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Descuento")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("FechaAlterna")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("IdCentro")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdCliente")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdTipoPago")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdUsuarioVenta")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("NumeroVenta")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("IdVenta");
 
@@ -30521,49 +30519,49 @@ namespace WebAdmin.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("ApellidoMaterno")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ApellidoPaterno")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CorreoAcceso")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("FechaNacimiento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("IdArea")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdGenero")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdPerfil")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("IdRol")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("NombreEmpresa")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("NombreUsuario")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Nombres")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WebAdmin.Migrations
 {
@@ -11,10 +12,10 @@ namespace WebAdmin.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,37 +26,37 @@ namespace WebAdmin.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApellidoPaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApellidoMaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdArea = table.Column<int>(type: "int", nullable: true),
-                    IdGenero = table.Column<int>(type: "int", nullable: true),
-                    IdPerfil = table.Column<int>(type: "int", nullable: true),
-                    IdRol = table.Column<int>(type: "int", nullable: true),
-                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Discriminator = table.Column<string>(type: "text", nullable: false),
+                    Nombres = table.Column<string>(type: "text", nullable: true),
+                    ApellidoPaterno = table.Column<string>(type: "text", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "text", nullable: true),
+                    NombreUsuario = table.Column<string>(type: "text", nullable: true),
+                    NombreEmpresa = table.Column<string>(type: "text", nullable: true),
+                    IdArea = table.Column<int>(type: "integer", nullable: true),
+                    IdGenero = table.Column<int>(type: "integer", nullable: true),
+                    IdPerfil = table.Column<int>(type: "integer", nullable: true),
+                    IdRol = table.Column<int>(type: "integer", nullable: true),
+                    FechaNacimiento = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CorreoAcceso = table.Column<string>(type: "text", nullable: true),
+                    ProfilePicture = table.Column<byte[]>(type: "bytea", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: true),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: true),
+                    UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,11 +67,11 @@ namespace WebAdmin.Migrations
                 name: "CatAreas",
                 columns: table => new
                 {
-                    IdArea = table.Column<int>(type: "int", nullable: false),
-                    AreaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdArea = table.Column<int>(type: "integer", nullable: false),
+                    AreaDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,12 +82,12 @@ namespace WebAdmin.Migrations
                 name: "CatCategorias",
                 columns: table => new
                 {
-                    IdCategoria = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoriaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdCategoria = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CategoriaDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,23 +98,23 @@ namespace WebAdmin.Migrations
                 name: "CatCodigosPostales",
                 columns: table => new
                 {
-                    IdCodigosPostales = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Dcodigo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Dasenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DtipoAsenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Dmnpio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Destado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Dciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Dcp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cestado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Coficina = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ccp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CtipoAsenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cmnpio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdAsentaCpcons = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Dzona = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CcveCiudad = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IdCodigosPostales = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Dcodigo = table.Column<string>(type: "text", nullable: true),
+                    Dasenta = table.Column<string>(type: "text", nullable: true),
+                    DtipoAsenta = table.Column<string>(type: "text", nullable: true),
+                    Dmnpio = table.Column<string>(type: "text", nullable: true),
+                    Destado = table.Column<string>(type: "text", nullable: true),
+                    Dciudad = table.Column<string>(type: "text", nullable: true),
+                    Dcp = table.Column<string>(type: "text", nullable: true),
+                    Cestado = table.Column<string>(type: "text", nullable: true),
+                    Coficina = table.Column<string>(type: "text", nullable: true),
+                    Ccp = table.Column<string>(type: "text", nullable: true),
+                    CtipoAsenta = table.Column<string>(type: "text", nullable: true),
+                    Cmnpio = table.Column<string>(type: "text", nullable: true),
+                    IdAsentaCpcons = table.Column<string>(type: "text", nullable: true),
+                    Dzona = table.Column<string>(type: "text", nullable: true),
+                    CcveCiudad = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -124,12 +125,12 @@ namespace WebAdmin.Migrations
                 name: "CatEscolaridad",
                 columns: table => new
                 {
-                    IdEscolaridad = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EscolaridadDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdEscolaridad = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EscolaridadDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,11 +141,11 @@ namespace WebAdmin.Migrations
                 name: "CatEstatus",
                 columns: table => new
                 {
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EstatusDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EstatusDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,12 +156,12 @@ namespace WebAdmin.Migrations
                 name: "CatGeneros",
                 columns: table => new
                 {
-                    IdGenero = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GeneroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdGenero = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    GeneroDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -171,12 +172,12 @@ namespace WebAdmin.Migrations
                 name: "CaTipotLicencias",
                 columns: table => new
                 {
-                    IdTipoLicencia = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LicenciaDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoLicencia = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    LicenciaDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,12 +188,12 @@ namespace WebAdmin.Migrations
                 name: "CatNivelEscolar",
                 columns: table => new
                 {
-                    IdNivelEscolar = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NivelEscolarDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdNivelEscolar = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NivelEscolarDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -203,12 +204,12 @@ namespace WebAdmin.Migrations
                 name: "CatPerfiles",
                 columns: table => new
                 {
-                    IdPerfil = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PerfilDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdPerfil = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PerfilDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -219,21 +220,21 @@ namespace WebAdmin.Migrations
                 name: "CatProductos",
                 columns: table => new
                 {
-                    IdProducto = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CodigoInterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoExterno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdCategoria = table.Column<int>(type: "int", nullable: false),
-                    DescProducto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CantidadMinima = table.Column<int>(type: "int", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    ProductoPrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PorcentajePrecioUno = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SubCosto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Costo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdProducto = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CodigoInterno = table.Column<string>(type: "text", nullable: true),
+                    CodigoExterno = table.Column<string>(type: "text", nullable: false),
+                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
+                    DescProducto = table.Column<string>(type: "text", nullable: true),
+                    CantidadMinima = table.Column<int>(type: "integer", nullable: false),
+                    Cantidad = table.Column<int>(type: "integer", nullable: false),
+                    ProductoPrecioUno = table.Column<decimal>(type: "numeric", nullable: false),
+                    PorcentajePrecioUno = table.Column<decimal>(type: "numeric", nullable: false),
+                    SubCosto = table.Column<decimal>(type: "numeric", nullable: false),
+                    Costo = table.Column<decimal>(type: "numeric", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -244,12 +245,12 @@ namespace WebAdmin.Migrations
                 name: "CatRoles",
                 columns: table => new
                 {
-                    IdRol = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RolDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdRol = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RolDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -260,12 +261,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoAlumno",
                 columns: table => new
                 {
-                    IdTipoAlumno = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoAlumnoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoAlumno = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoAlumnoDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -276,12 +277,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoCentros",
                 columns: table => new
                 {
-                    IdTipoCentro = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoCentroDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoCentro = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoCentroDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -292,12 +293,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoClientes",
                 columns: table => new
                 {
-                    IdTipoCliente = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoClienteDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoCliente = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoClienteDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -308,12 +309,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoContratacion",
                 columns: table => new
                 {
-                    IdTipoContratacion = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoContratacionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoContratacion = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoContratacionDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -324,12 +325,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoDirecciones",
                 columns: table => new
                 {
-                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoDireccionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoDireccion = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoDireccionDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -340,12 +341,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoPago",
                 columns: table => new
                 {
-                    IdTipoPago = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoPagoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoPago = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoPagoDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -356,12 +357,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoPrestamo",
                 columns: table => new
                 {
-                    IdTipoPrestamo = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoPrestamoDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoPrestamo = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoPrestamoDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -372,12 +373,12 @@ namespace WebAdmin.Migrations
                 name: "CatTipoServicio",
                 columns: table => new
                 {
-                    IdTipoServicio = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoServicioDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdTipoServicio = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TipoServicioDesc = table.Column<string>(type: "text", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -388,15 +389,15 @@ namespace WebAdmin.Migrations
                 name: "FilesOnDatabase",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Data = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FileType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UploadedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Data = table.Column<byte[]>(type: "bytea", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    FileType = table.Column<string>(type: "text", nullable: true),
+                    Extension = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    UploadedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -407,15 +408,15 @@ namespace WebAdmin.Migrations
                 name: "FilesOnFileSystem",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FileType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UploadedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FilePath = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    FileType = table.Column<string>(type: "text", nullable: true),
+                    Extension = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    UploadedBy = table.Column<string>(type: "text", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -423,27 +424,63 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RelVentaProducto",
+                columns: table => new
+                {
+                    IdRelVentaProducto = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
+                    IdProducto = table.Column<int>(type: "integer", nullable: false),
+                    Cantidad = table.Column<int>(type: "integer", nullable: false),
+                    ProductoPrecioUno = table.Column<decimal>(type: "numeric", nullable: false),
+                    IdVenta = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RelVentaProducto", x => x.IdRelVentaProducto);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RelVentasPagos",
+                columns: table => new
+                {
+                    IdRelVentasPago = table.Column<Guid>(type: "uuid", nullable: false),
+                    CodigoReferencia = table.Column<string>(type: "text", nullable: true),
+                    CantidadPago = table.Column<int>(type: "integer", nullable: false),
+                    IdVenta = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RelVentasPagos", x => x.IdRelVentasPago);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TblCentros",
                 columns: table => new
                 {
-                    IdCentro = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdTipoLicencia = table.Column<int>(type: "int", nullable: false),
-                    IdTipoCentro = table.Column<int>(type: "int", nullable: false),
-                    NombreCentro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioControl = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdCentro = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdTipoLicencia = table.Column<int>(type: "integer", nullable: false),
+                    IdTipoCentro = table.Column<int>(type: "integer", nullable: false),
+                    NombreCentro = table.Column<string>(type: "text", nullable: false),
+                    Calle = table.Column<string>(type: "text", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "text", nullable: true),
+                    IdColonia = table.Column<string>(type: "text", nullable: true),
+                    Colonia = table.Column<string>(type: "text", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
+                    Ciudad = table.Column<string>(type: "text", nullable: true),
+                    Estado = table.Column<string>(type: "text", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    Telefono = table.Column<string>(type: "text", nullable: true),
+                    IdCorporativo = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioControl = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -454,17 +491,17 @@ namespace WebAdmin.Migrations
                 name: "TblClienteContactos",
                 columns: table => new
                 {
-                    IdClienteContacto = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPerfil = table.Column<int>(type: "int", nullable: false),
-                    NombreClienteContacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdClienteContacto = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdPerfil = table.Column<int>(type: "integer", nullable: false),
+                    NombreClienteContacto = table.Column<string>(type: "text", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    Telefono = table.Column<string>(type: "text", nullable: true),
+                    TelefonoMovil = table.Column<string>(type: "text", nullable: true),
+                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -475,22 +512,22 @@ namespace WebAdmin.Migrations
                 name: "TblClienteDirecciones",
                 columns: table => new
                 {
-                    IdClienteDirecciones = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdClienteDirecciones = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdTipoDireccion = table.Column<int>(type: "integer", nullable: false),
+                    Calle = table.Column<string>(type: "text", nullable: false),
+                    CodigoPostal = table.Column<string>(type: "text", nullable: true),
+                    IdColonia = table.Column<string>(type: "text", nullable: true),
+                    Colonia = table.Column<string>(type: "text", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
+                    Ciudad = table.Column<string>(type: "text", nullable: true),
+                    Estado = table.Column<string>(type: "text", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    Telefono = table.Column<string>(type: "text", nullable: true),
+                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -501,19 +538,20 @@ namespace WebAdmin.Migrations
                 name: "TblClientes",
                 columns: table => new
                 {
-                    IdCliente = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdTipoCliente = table.Column<int>(type: "int", nullable: false),
-                    NombreCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApellidoPaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApellidoMaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdPerfil = table.Column<int>(type: "int", nullable: false),
-                    IdRol = table.Column<int>(type: "int", nullable: false),
-                    CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClaveAcceso = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaAcceso = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdTipoCliente = table.Column<int>(type: "integer", nullable: false),
+                    NombreCliente = table.Column<string>(type: "text", nullable: false),
+                    ApellidoPaterno = table.Column<string>(type: "text", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "text", nullable: true),
+                    IdPerfil = table.Column<int>(type: "integer", nullable: false),
+                    IdRol = table.Column<int>(type: "integer", nullable: false),
+                    CorreoAcceso = table.Column<string>(type: "text", nullable: true),
+                    ClaveAcceso = table.Column<string>(type: "text", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUCorporativoCentro = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    FechaAcceso = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -524,21 +562,21 @@ namespace WebAdmin.Migrations
                 name: "TblCorporativos",
                 columns: table => new
                 {
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreCorporativo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdCorporativo = table.Column<Guid>(type: "uuid", nullable: false),
+                    NombreCorporativo = table.Column<string>(type: "text", nullable: false),
+                    Calle = table.Column<string>(type: "text", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "text", nullable: true),
+                    IdColonia = table.Column<string>(type: "text", nullable: true),
+                    Colonia = table.Column<string>(type: "text", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
+                    Ciudad = table.Column<string>(type: "text", nullable: true),
+                    Estado = table.Column<string>(type: "text", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    Telefono = table.Column<string>(type: "text", nullable: true),
+                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -549,22 +587,22 @@ namespace WebAdmin.Migrations
                 name: "TblEmpresa",
                 columns: table => new
                 {
-                    IdEmpresa = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdEmpresa = table.Column<Guid>(type: "uuid", nullable: false),
+                    NombreEmpresa = table.Column<string>(type: "text", nullable: false),
+                    Rfc = table.Column<string>(type: "text", nullable: true),
+                    GiroComercial = table.Column<string>(type: "text", nullable: true),
+                    Calle = table.Column<string>(type: "text", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "text", nullable: true),
+                    IdColonia = table.Column<string>(type: "text", nullable: true),
+                    Colonia = table.Column<string>(type: "text", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
+                    Ciudad = table.Column<string>(type: "text", nullable: true),
+                    Estado = table.Column<string>(type: "text", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    Telefono = table.Column<string>(type: "text", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -575,17 +613,17 @@ namespace WebAdmin.Migrations
                 name: "TblProveedorContactos",
                 columns: table => new
                 {
-                    IdProveedorContacto = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPerfil = table.Column<int>(type: "int", nullable: false),
-                    NombreProveedorContacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TelefonoMovil = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdProveedorContacto = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdPerfil = table.Column<int>(type: "integer", nullable: false),
+                    NombreProveedorContacto = table.Column<string>(type: "text", nullable: false),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    Telefono = table.Column<string>(type: "text", nullable: true),
+                    TelefonoMovil = table.Column<string>(type: "text", nullable: true),
+                    IdProveedor = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -596,22 +634,22 @@ namespace WebAdmin.Migrations
                 name: "TblProveedorDirecciones",
                 columns: table => new
                 {
-                    IdProveedorDirecciones = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTipoDireccion = table.Column<int>(type: "int", nullable: false),
-                    Calle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdColonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Colonia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LocalidadMunicipio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CorreoElectronico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdProveedorDirecciones = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IdTipoDireccion = table.Column<int>(type: "integer", nullable: false),
+                    Calle = table.Column<string>(type: "text", nullable: true),
+                    CodigoPostal = table.Column<string>(type: "text", nullable: true),
+                    IdColonia = table.Column<string>(type: "text", nullable: true),
+                    Colonia = table.Column<string>(type: "text", nullable: true),
+                    LocalidadMunicipio = table.Column<string>(type: "text", nullable: true),
+                    Ciudad = table.Column<string>(type: "text", nullable: true),
+                    Estado = table.Column<string>(type: "text", nullable: true),
+                    CorreoElectronico = table.Column<string>(type: "text", nullable: false),
+                    Telefono = table.Column<string>(type: "text", nullable: true),
+                    IdProveedor = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -622,14 +660,14 @@ namespace WebAdmin.Migrations
                 name: "TblProveedores",
                 columns: table => new
                 {
-                    IdProveedor = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreProveedor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rfc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GiroComercial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false)
+                    IdProveedor = table.Column<Guid>(type: "uuid", nullable: false),
+                    NombreProveedor = table.Column<string>(type: "text", nullable: false),
+                    Rfc = table.Column<string>(type: "text", nullable: true),
+                    GiroComercial = table.Column<string>(type: "text", nullable: true),
+                    IdCorporativo = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -637,14 +675,35 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TblVenta",
+                columns: table => new
+                {
+                    IdVenta = table.Column<Guid>(type: "uuid", nullable: false),
+                    NumeroVenta = table.Column<int>(type: "integer", nullable: false),
+                    IdUsuarioVenta = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdCentro = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
+                    Descuento = table.Column<int>(type: "integer", nullable: false),
+                    IdTipoPago = table.Column<int>(type: "integer", nullable: false),
+                    FechaAlterna = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblVenta", x => x.IdVenta);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RoleId = table.Column<string>(type: "text", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -661,11 +720,11 @@ namespace WebAdmin.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    ClaimType = table.Column<string>(type: "text", nullable: true),
+                    ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -682,10 +741,10 @@ namespace WebAdmin.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -702,8 +761,8 @@ namespace WebAdmin.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    RoleId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -726,10 +785,10 @@ namespace WebAdmin.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    LoginProvider = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -746,24 +805,24 @@ namespace WebAdmin.Migrations
                 name: "TblUsuarios",
                 columns: table => new
                 {
-                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nombres = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApellidoPaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApellidoMaterno = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCorporativo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdArea = table.Column<int>(type: "int", nullable: false),
-                    IdGenero = table.Column<int>(type: "int", nullable: false),
-                    IdPerfil = table.Column<int>(type: "int", nullable: false),
-                    IdRol = table.Column<int>(type: "int", nullable: false),
-                    FechadeNacimiento = table.Column<DateTime>(name: "Fecha de Nacimiento", type: "datetime2", nullable: false),
-                    CorreoAcceso = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImagenPErfil = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "int", nullable: false),
-                    CatNivelEscolarIdNivelEscolar = table.Column<int>(type: "int", nullable: true)
+                    IdUsuario = table.Column<Guid>(type: "uuid", nullable: false),
+                    Nombres = table.Column<string>(type: "text", nullable: true),
+                    ApellidoPaterno = table.Column<string>(type: "text", nullable: true),
+                    ApellidoMaterno = table.Column<string>(type: "text", nullable: true),
+                    NombreUsuario = table.Column<string>(type: "text", nullable: true),
+                    IdCorporativo = table.Column<Guid>(type: "uuid", nullable: false),
+                    NombreEmpresa = table.Column<string>(type: "text", nullable: true),
+                    IdArea = table.Column<int>(type: "integer", nullable: false),
+                    IdGenero = table.Column<int>(type: "integer", nullable: false),
+                    IdPerfil = table.Column<int>(type: "integer", nullable: false),
+                    IdRol = table.Column<int>(type: "integer", nullable: false),
+                    FechadeNacimiento = table.Column<DateTime>(name: "Fecha de Nacimiento", type: "timestamp without time zone", nullable: false),
+                    CorreoAcceso = table.Column<string>(type: "text", nullable: true),
+                    ImagenPErfil = table.Column<byte[]>(type: "bytea", nullable: true),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false),
+                    CatNivelEscolarIdNivelEscolar = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -781,14 +840,14 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdArea", "AreaDesc", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "DIRECCION", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "RECURSOS HUMANOS", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 3, "PRODUCCION DIGITAL", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 4, "FINANZAS/CONTABILIDAD", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 5, "MARKETING/VENTAS", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 6, "TIC", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 7, "SERVICIO AL CLIENTE", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 8, "OTRA", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "DIRECCION", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "RECURSOS HUMANOS", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 3, "PRODUCCION DIGITAL", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 4, "FINANZAS/CONTABILIDAD", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 5, "MARKETING/VENTAS", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 6, "TIC", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 7, "SERVICIO AL CLIENTE", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 8, "OTRA", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -829,14 +888,7 @@ namespace WebAdmin.Migrations
                     { 1034, "0", "11", "09", "016", "11411", "09", "Agricultura", "Ciudad de México", "11360", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1787" },
                     { 1033, "0", "11", "09", "016", "11411", "09", "Plutarco Elías Calles", "Ciudad de México", "11350", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1786" },
                     { 1020, "0", "11", "09", "016", "11411", "09", "México Nuevo", "Ciudad de México", "11260", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1770" },
-                    { 1032, "0", "11", "09", "016", "11411", "09", "Santo Tomas", "Ciudad de México", "11340", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1785" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1032, "0", "11", "09", "016", "11411", "09", "Santo Tomas", "Ciudad de México", "11340", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1785" },
                     { 1030, "0", "11", "09", "016", "11411", "09", "Anáhuac II Sección", "Ciudad de México", "11320", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "2771" },
                     { 1029, "0", "11", "09", "016", "11411", "09", "Anáhuac I Sección", "Ciudad de México", "11320", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1782" },
                     { 1028, "0", "11", "09", "016", "11411", "09", "Mariano Escobedo", "Ciudad de México", "11310", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1780" },
@@ -878,14 +930,7 @@ namespace WebAdmin.Migrations
                     { 992, "0", "10", "09", "008", "10581", "09", "La Cruz", "Ciudad de México", "10800", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1728" },
                     { 991, "0", "10", "09", "008", "10901", "09", "Santa Teresa", "Ciudad de México", "10710", "10901", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1723" },
                     { 990, "0", "10", "09", "008", "10701", "09", "Héroes de Padierna", "Ciudad de México", "10700", "10701", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1721" },
-                    { 989, "0", "10", "09", "008", "10581", "09", "El Ermitaño", "Ciudad de México", "10660", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1720" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 989, "0", "10", "09", "008", "10581", "09", "El Ermitaño", "Ciudad de México", "10660", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1720" },
                     { 988, "0", "10", "09", "008", "10581", "09", "Pueblo Nuevo Bajo", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1718" },
                     { 987, "0", "10", "09", "008", "10581", "09", "Pueblo Nuevo Alto", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1717" },
                     { 986, "0", "10", "09", "008", "10581", "09", "La Carbonera", "Ciudad de México", "10640", "10581", "Ciudad de México", "La Magdalena Contreras", "Colonia", "Urbano", "1716" },
@@ -927,14 +972,7 @@ namespace WebAdmin.Migrations
                     { 1114, "0", "12", "09", "009", "12001", "28", "San Lorenzo Tlacoyucan", "Ciudad de México", "12500", "12001", "Ciudad de México", "Milpa Alta", "Pueblo", "Urbano", "1910" },
                     { 1115, "0", "12", "09", "009", "12001", "28", "San Jerónimo Miacatlán", "Ciudad de México", "12600", "12001", "Ciudad de México", "Milpa Alta", "Pueblo", "Urbano", "1911" },
                     { 1116, "0", "12", "09", "009", "12001", "28", "San Francisco Tecoxpa", "Ciudad de México", "12700", "12001", "Ciudad de México", "Milpa Alta", "Pueblo", "Urbano", "1912" },
-                    { 1136, "0", "13", "09", "011", "13011", "09", "San Isidro", "Ciudad de México", "13094", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2898" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1136, "0", "13", "09", "011", "13011", "09", "San Isidro", "Ciudad de México", "13094", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2898" },
                     { 1135, "0", "13", "09", "011", "13011", "09", "San Sebastián", "Ciudad de México", "13093", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "2497" },
                     { 1134, "0", "13", "09", "011", "13011", "09", "Quiahuatla", "Ciudad de México", "13090", "13011", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1934" },
                     { 1133, "0", "13", "09", "011", "13011", "02", "Los Reyes", "Ciudad de México", "13080", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1933" },
@@ -976,14 +1014,7 @@ namespace WebAdmin.Migrations
                     { 1050, "0", "11", "09", "016", "11411", "09", "Los Manzanos", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1807" },
                     { 1049, "0", "11", "09", "016", "11411", "09", "Lago Sur", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1806" },
                     { 1048, "0", "11", "09", "016", "11411", "09", "Lago Norte", "Ciudad de México", "11460", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1805" },
-                    { 951, "0", "09", "09", "007", "09291", "09", "El Rosario", "Ciudad de México", "09930", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1644" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 951, "0", "09", "09", "007", "09291", "09", "El Rosario", "Ciudad de México", "09930", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1644" },
                     { 1046, "0", "11", "09", "016", "11411", "09", "Peralitos", "Ciudad de México", "11450", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1803" },
                     { 1055, "0", "11", "09", "016", "11411", "09", "Ampliación Popo", "Ciudad de México", "11489", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1813" },
                     { 1044, "0", "11", "09", "016", "11411", "09", "Ahuehuetes Anáhuac", "Ciudad de México", "11450", "11411", "Ciudad de México", "Miguel Hidalgo", "Colonia", "Urbano", "1801" },
@@ -1025,14 +1056,7 @@ namespace WebAdmin.Migrations
                     { 819, "0", "09", "09", "007", "09081", "09", "El Triunfo", "Ciudad de México", "09430", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1419" },
                     { 818, "0", "09", "09", "007", "09081", "09", "Apatlaco", "Ciudad de México", "09430", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1418" },
                     { 817, "0", "09", "09", "007", "09081", "09", "Purísima Atlazolpa", "Ciudad de México", "09429", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1417" },
-                    { 816, "0", "09", "09", "007", "09081", "09", "Nueva Rosita", "Ciudad de México", "09420", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1416" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 816, "0", "09", "09", "007", "09081", "09", "Nueva Rosita", "Ciudad de México", "09420", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1416" },
                     { 815, "0", "09", "09", "007", "09081", "09", "Los Picos VI-B", "Ciudad de México", "09420", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1415" },
                     { 814, "0", "09", "09", "007", "09081", "09", "San José Aculco", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1414" },
                     { 813, "0", "09", "09", "007", "09081", "28", "Magdalena Atlazolpa", "Ciudad de México", "09410", "09081", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1413" },
@@ -1074,14 +1098,7 @@ namespace WebAdmin.Migrations
                     { 777, "0", "09", "09", "007", "09081", "09", "Héroes de Churubusco", "Ciudad de México", "09090", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1329" },
                     { 776, "0", "09", "09", "007", "09081", "09", "Unidad Modelo", "Ciudad de México", "09089", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1328" },
                     { 775, "0", "09", "09", "007", "09081", "09", "Cacama", "Ciudad de México", "09080", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1325" },
-                    { 774, "0", "09", "09", "007", "09081", "09", "Granjas de San Antonio", "Ciudad de México", "09070", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1322" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 774, "0", "09", "09", "007", "09081", "09", "Granjas de San Antonio", "Ciudad de México", "09070", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1322" },
                     { 773, "0", "09", "09", "007", "09081", "09", "Sector Popular", "Ciudad de México", "09060", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1321" },
                     { 782, "0", "09", "09", "007", "09181", "09", "Ermita Zaragoza", "Ciudad de México", "09180", "09181", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1339" },
                     { 772, "0", "09", "09", "007", "09081", "09", "Escuadrón 201", "Ciudad de México", "09060", "09081", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1320" },
@@ -1123,14 +1140,7 @@ namespace WebAdmin.Migrations
                     { 854, "0", "09", "09", "007", "09511", "09", "San Miguel Teotongo Sección Puente", "Ciudad de México", "09630", "09511", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2860" },
                     { 856, "0", "09", "09", "007", "09511", "09", "San Miguel Teotongo Sección Rancho Bajo", "Ciudad de México", "09630", "09511", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "2862" },
                     { 923, "0", "09", "09", "007", "09821", "09", "Ampliación Los Reyes", "Ciudad de México", "09849", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1580" },
-                    { 922, "0", "09", "09", "007", "09821", "28", "Los Reyes Culhuacán", "Ciudad de México", "09840", "09821", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1578" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 922, "0", "09", "09", "007", "09821", "28", "Los Reyes Culhuacán", "Ciudad de México", "09840", "09821", "Ciudad de México", "Iztapalapa", "Pueblo", "Urbano", "1578" },
                     { 921, "0", "09", "09", "007", "09821", "09", "San Juan Joya", "Ciudad de México", "09839", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1576" },
                     { 920, "0", "09", "09", "007", "09821", "09", "Ampliación Paraje San Juan", "Ciudad de México", "09839", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1573" },
                     { 919, "0", "09", "09", "007", "09821", "09", "Plan de Iguala", "Ciudad de México", "09838", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1571" },
@@ -1172,14 +1182,7 @@ namespace WebAdmin.Migrations
                     { 930, "0", "09", "09", "007", "09821", "09", "Benito Juárez", "Ciudad de México", "09859", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1595" },
                     { 929, "0", "09", "09", "007", "09821", "09", "Paraje San Juan Cerro", "Ciudad de México", "09858", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1594" },
                     { 928, "0", "09", "09", "007", "09821", "09", "Ampliación Veracruzana", "Ciudad de México", "09856", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1591" },
-                    { 937, "0", "09", "09", "007", "09821", "09", "San Juan Estrella", "Ciudad de México", "09868", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1607" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 937, "0", "09", "09", "007", "09821", "09", "San Juan Estrella", "Ciudad de México", "09868", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1607" },
                     { 903, "0", "09", "09", "007", "09821", "09", "Los Cipreses", "Ciudad de México", "09810", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1548" },
                     { 902, "0", "09", "09", "007", "09821", "09", "Granjas Esmeralda", "Ciudad de México", "09810", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1547" },
                     { 901, "0", "09", "09", "007", "09821", "09", "Valle de Luces", "Ciudad de México", "09800", "09821", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1542" },
@@ -1221,14 +1224,7 @@ namespace WebAdmin.Migrations
                     { 889, "0", "09", "09", "007", "09291", "09", "Puente Blanco", "Ciudad de México", "09770", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1524" },
                     { 888, "0", "09", "09", "007", "09291", "09", "El Triángulo", "Ciudad de México", "09769", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1523" },
                     { 887, "0", "09", "09", "007", "09291", "09", "Consejo Agrarista Mexicano", "Ciudad de México", "09760", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1518" },
-                    { 886, "0", "09", "09", "007", "09291", "09", "Las Peñas", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1515" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 886, "0", "09", "09", "007", "09291", "09", "Las Peñas", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1515" },
                     { 885, "0", "09", "09", "007", "09291", "09", "La Polvorilla", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1514" },
                     { 884, "0", "09", "09", "007", "09291", "09", "Insurgentes", "Ciudad de México", "09750", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1512" },
                     { 883, "0", "09", "09", "007", "09291", "09", "Presidentes de México", "Ciudad de México", "09740", "09291", "Ciudad de México", "Iztapalapa", "Colonia", "Urbano", "1511" },
@@ -1270,14 +1266,7 @@ namespace WebAdmin.Migrations
                     { 1415, "0", "16", "09", "013", "16001", "09", "San Bartolo El Chico", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2832" },
                     { 1414, "0", "16", "09", "013", "16001", "09", "Paseos del Sur", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2388" },
                     { 1413, "0", "16", "09", "013", "16001", "09", "Las Peritas", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2386" },
-                    { 1378, "0", "15", "09", "017", "15001", "09", "Peñón de los Baños", "Ciudad de México", "15520", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2331" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1378, "0", "15", "09", "017", "15001", "09", "Peñón de los Baños", "Ciudad de México", "15520", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2331" },
                     { 1412, "0", "16", "09", "013", "16001", "09", "Bosque Residencial del Sur", "Ciudad de México", "16010", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2385" },
                     { 1410, "0", "16", "09", "013", "16001", "02", "San Antonio", "Ciudad de México", "16000", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2380" },
                     { 1409, "0", "16", "09", "013", "16001", "02", "La Concepción Tlacoapa", "Ciudad de México", "16000", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2379" },
@@ -1319,14 +1308,7 @@ namespace WebAdmin.Migrations
                     { 1374, "0", "15", "09", "017", "15001", "09", "Revolución", "Ciudad de México", "15460", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2326" },
                     { 1373, "0", "15", "09", "017", "15001", "09", "Damián Carmona", "Ciudad de México", "15450", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2325" },
                     { 1372, "0", "15", "09", "017", "15001", "09", "1° de Mayo", "Ciudad de México", "15440", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2324" },
-                    { 1371, "0", "15", "09", "017", "15001", "09", "Aquiles Serdán", "Ciudad de México", "15430", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2323" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1371, "0", "15", "09", "017", "15001", "09", "Aquiles Serdán", "Ciudad de México", "15430", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2323" },
                     { 1370, "0", "15", "09", "017", "15001", "09", "Ampliación Simón Bolívar", "Ciudad de México", "15420", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2322" },
                     { 1369, "0", "15", "09", "017", "15001", "09", "Simón Bolívar", "Ciudad de México", "15410", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2321" },
                     { 1368, "0", "15", "09", "017", "15001", "09", "Romero Rubio", "Ciudad de México", "15400", "15001", "Ciudad de México", "Venustiano Carranza", "Colonia", "Urbano", "2320" },
@@ -1368,14 +1350,7 @@ namespace WebAdmin.Migrations
                     { 1474, "0", "16", "09", "013", "16001", "09", "Valle de Santa María", "Ciudad de México", "16550", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2481" },
                     { 1493, "0", "16", "09", "013", "16001", "09", "San Isidro", "Ciudad de México", "16739", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2498" },
                     { 1494, "0", "16", "09", "013", "16001", "09", "Guadalupita", "Ciudad de México", "16740", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2499" },
-                    { 1495, "0", "16", "09", "013", "16001", "09", "Las Animas", "Ciudad de México", "16749", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2500" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1495, "0", "16", "09", "013", "16001", "09", "Las Animas", "Ciudad de México", "16749", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2500" },
                     { 1496, "0", "16", "09", "013", "16001", "02", "Calyequita", "Ciudad de México", "16750", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2501" },
                     { 1516, "0", "16", "09", "013", "16001", "28", "San Francisco Tlalnepantla", "Ciudad de México", "16900", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2530" },
                     { 1515, "0", "16", "09", "013", "16001", "28", "Santa Cecilia Tepetlapa", "Ciudad de México", "16880", "16001", "Ciudad de México", "Xochimilco", "Pueblo", "Urbano", "2527" },
@@ -1417,14 +1392,7 @@ namespace WebAdmin.Migrations
                     { 1432, "0", "16", "09", "013", "16001", "09", "Tierra Nueva", "Ciudad de México", "16050", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2415" },
                     { 1431, "0", "16", "09", "013", "16001", "02", "San Marcos", "Ciudad de México", "16050", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2414" },
                     { 1430, "0", "16", "09", "013", "16001", "09", "Jardines del Sur", "Ciudad de México", "16050", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2413" },
-                    { 1429, "0", "16", "09", "013", "16001", "02", "San Lorenzo", "Ciudad de México", "16040", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2412" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1429, "0", "16", "09", "013", "16001", "02", "San Lorenzo", "Ciudad de México", "16040", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2412" },
                     { 1428, "0", "16", "09", "013", "16001", "02", "La Asunción", "Ciudad de México", "16040", "16001", "Ciudad de México", "Xochimilco", "Barrio", "Urbano", "2411" },
                     { 1427, "0", "16", "09", "013", "16001", "09", "Ampliación San Marcos Norte", "Ciudad de México", "16038", "16001", "Ciudad de México", "Xochimilco", "Colonia", "Urbano", "2409" },
                     { 1426, "0", "16", "09", "013", "16001", "17", "Mercado de Flores Plantas y Hortalizas", "Ciudad de México", "16036", "16001", "Ciudad de México", "Xochimilco", "Equipamiento", "Urbano", "2408" },
@@ -1466,14 +1434,7 @@ namespace WebAdmin.Migrations
                     { 1200, "0", "14", "09", "012", "14091", "09", "Cantera Puente de Piedra", "Ciudad de México", "14040", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2042" },
                     { 1199, "0", "14", "09", "012", "14091", "09", "Ampliación Isidro Fabela", "Ciudad de México", "14039", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2041" },
                     { 1198, "0", "14", "09", "012", "14091", "09", "Isidro Fabela", "Ciudad de México", "14030", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2036" },
-                    { 1197, "0", "14", "09", "012", "14091", "09", "Villa Olímpica", "Ciudad de México", "14020", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2035" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1197, "0", "14", "09", "012", "14091", "09", "Villa Olímpica", "Ciudad de México", "14020", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2035" },
                     { 1196, "0", "14", "09", "012", "14091", "09", "Parque del Pedregal", "Ciudad de México", "14010", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2029" },
                     { 1195, "0", "14", "09", "012", "14091", "09", "Tlalpan", "Ciudad de México", "14000", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2876" },
                     { 1194, "0", "14", "09", "012", "14091", "09", "Tlalpan Centro", "Ciudad de México", "14000", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2027" },
@@ -1515,14 +1476,7 @@ namespace WebAdmin.Migrations
                     { 1158, "0", "13", "09", "011", "13221", "02", "Santiago Norte", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2894" },
                     { 1157, "0", "13", "09", "011", "13221", "02", "Santa Ana Norte", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2893" },
                     { 1156, "0", "13", "09", "011", "13221", "02", "Santa Ana Poniente", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "2891" },
-                    { 1155, "0", "13", "09", "011", "13221", "02", "Santiago Centro", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1964" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1155, "0", "13", "09", "011", "13221", "02", "Santiago Centro", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1964" },
                     { 1154, "0", "13", "09", "011", "13221", "02", "Santa Ana Centro", "Ciudad de México", "13300", "13221", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1963" },
                     { 1153, "0", "13", "09", "011", "13221", "09", "Agrícola Metropolitana", "Ciudad de México", "13280", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1962" },
                     { 1152, "0", "13", "09", "011", "13221", "09", "Villa Centroamericana", "Ciudad de México", "13278", "13221", "Ciudad de México", "Tláhuac", "Colonia", "Urbano", "1959" },
@@ -1564,14 +1518,7 @@ namespace WebAdmin.Migrations
                     { 1174, "0", "13", "09", "011", "13011", "02", "San Agustín", "Ciudad de México", "13508", "13011", "Ciudad de México", "Tláhuac", "Barrio", "Urbano", "1985" },
                     { 1328, "0", "14", "09", "012", "14201", "28", "San Miguel Ajusco", "Ciudad de México", "14700", "14201", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2261" },
                     { 1233, "0", "14", "09", "012", "14201", "09", "Lomas de Padierna", "Ciudad de México", "14240", "14201", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2094" },
-                    { 1235, "0", "14", "09", "012", "14201", "09", "Cruz del Farol", "Ciudad de México", "14248", "14201", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2096" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1235, "0", "14", "09", "012", "14201", "09", "Cruz del Farol", "Ciudad de México", "14248", "14201", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2096" },
                     { 1302, "0", "14", "09", "012", "14091", "09", "Tlalpuente", "Ciudad de México", "14460", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2213" },
                     { 1301, "0", "14", "09", "012", "14091", "09", "El Mirador 3A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2210" },
                     { 1300, "0", "14", "09", "012", "14091", "09", "El Mirador 2A Sección", "Ciudad de México", "14449", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2209" },
@@ -1613,14 +1560,7 @@ namespace WebAdmin.Migrations
                     { 1311, "0", "14", "09", "012", "14091", "09", "Las Tórtolas", "Ciudad de México", "14609", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2232" },
                     { 1310, "0", "14", "09", "012", "14091", "09", "Colinas del Bosque", "Ciudad de México", "14608", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2231" },
                     { 1309, "0", "14", "09", "012", "14091", "09", "Valle Escondido", "Ciudad de México", "14600", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2229" },
-                    { 1308, "0", "14", "09", "012", "14091", "28", "San Miguel Topilejo", "Ciudad de México", "14500", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2222" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1308, "0", "14", "09", "012", "14091", "28", "San Miguel Topilejo", "Ciudad de México", "14500", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2222" },
                     { 1307, "0", "14", "09", "012", "14091", "28", "San Miguel Xicalco", "Ciudad de México", "14490", "14091", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2221" },
                     { 1316, "0", "14", "09", "012", "14091", "09", "Villa Tlalpan", "Ciudad de México", "14630", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2238" },
                     { 1282, "0", "14", "09", "012", "14091", "09", "Divisadero", "Ciudad de México", "14406", "14091", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2182" },
@@ -1662,14 +1602,7 @@ namespace WebAdmin.Migrations
                     { 1258, "0", "14", "09", "012", "14391", "09", "Rinconada Coapa 1A Sección", "Ciudad de México", "14330", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2134" },
                     { 1270, "0", "14", "09", "012", "14391", "09", "Hacienda San Juan", "Ciudad de México", "14377", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2161" },
                     { 1268, "0", "14", "09", "012", "14391", "09", "Villa Lázaro Cárdenas", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2158" },
-                    { 1267, "0", "14", "09", "012", "14391", "28", "San Lorenzo Huipulco", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2157" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 1267, "0", "14", "09", "012", "14391", "28", "San Lorenzo Huipulco", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Pueblo", "Urbano", "2157" },
                     { 1266, "0", "14", "09", "012", "14391", "09", "Residencial Chimali", "Ciudad de México", "14370", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2155" },
                     { 1265, "0", "14", "09", "012", "14391", "09", "Magisterial Coapa", "Ciudad de México", "14360", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2877" },
                     { 1264, "0", "14", "09", "012", "14391", "09", "Magisterial", "Ciudad de México", "14360", "14391", "Ciudad de México", "Tlalpan", "Colonia", "Urbano", "2153" },
@@ -1711,14 +1644,7 @@ namespace WebAdmin.Migrations
                     { 277, "0", "02", "09", "002", "02601", "09", "Trabajadores de Hierro", "Ciudad de México", "02650", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0445" },
                     { 276, "0", "02", "09", "002", "02601", "09", "Monte Alto", "Ciudad de México", "02640", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0444" },
                     { 275, "0", "02", "09", "002", "02601", "09", "Coltongo", "Ciudad de México", "02630", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "2798" },
-                    { 274, "0", "02", "09", "002", "02601", "02", "Coltongo", "Ciudad de México", "02630", "02601", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0443" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 274, "0", "02", "09", "002", "02601", "02", "Coltongo", "Ciudad de México", "02630", "02601", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0443" },
                     { 273, "0", "02", "09", "002", "02601", "09", "Pro-Hogar", "Ciudad de México", "02600", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0441" },
                     { 238, "0", "02", "09", "002", "02011", "09", "Sector Naval", "Ciudad de México", "02080", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0376" },
                     { 272, "0", "02", "09", "002", "02011", "09", "Jardín Azpeitia", "Ciudad de México", "02530", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0439" },
@@ -1760,14 +1686,7 @@ namespace WebAdmin.Migrations
                     { 212, "0", "01", "09", "010", "01001", "28", "Santa Rosa Xochiac", "Ciudad de México", "01830", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0333" },
                     { 214, "0", "01", "09", "010", "01001", "09", "Rincón de la Bolsa", "Ciudad de México", "01849", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0337" },
                     { 234, "0", "02", "09", "002", "02011", "09", "Un Hogar Para Cada Trabajador", "Ciudad de México", "02060", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0369" },
-                    { 233, "0", "02", "09", "002", "02011", "09", "Sindicato Mexicano de Electricistas", "Ciudad de México", "02060", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0368" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 233, "0", "02", "09", "002", "02011", "09", "Sindicato Mexicano de Electricistas", "Ciudad de México", "02060", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0368" },
                     { 232, "0", "02", "09", "002", "02011", "28", "Santa María Malinalco", "Ciudad de México", "02050", "02011", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0365" },
                     { 231, "0", "02", "09", "002", "02011", "09", "Libertad", "Ciudad de México", "02050", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0364" },
                     { 230, "0", "02", "09", "002", "02011", "09", "San Sebastián", "Ciudad de México", "02040", "02011", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0363" },
@@ -1809,14 +1728,7 @@ namespace WebAdmin.Migrations
                     { 336, "0", "03", "09", "014", "03501", "09", "Villa de Cortes", "Ciudad de México", "03530", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0527" },
                     { 335, "0", "03", "09", "014", "03501", "09", "Iztaccihuatl", "Ciudad de México", "03520", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0526" },
                     { 334, "0", "03", "09", "014", "03501", "09", "Moderna", "Ciudad de México", "03510", "03501", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0525" },
-                    { 353, "0", "03", "09", "014", "03901", "09", "San Juan", "Ciudad de México", "03730", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0544" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 353, "0", "03", "09", "014", "03901", "09", "San Juan", "Ciudad de México", "03730", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0544" },
                     { 354, "0", "03", "09", "014", "03901", "09", "Extremadura Insurgentes", "Ciudad de México", "03740", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0545" },
                     { 355, "0", "03", "09", "014", "03901", "09", "San Pedro de los Pinos", "Ciudad de México", "03800", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0546" },
                     { 356, "0", "03", "09", "014", "03901", "09", "Nápoles", "Ciudad de México", "03810", "03901", "Ciudad de México", "Benito Juárez", "Colonia", "Urbano", "0548" },
@@ -1858,14 +1770,7 @@ namespace WebAdmin.Migrations
                     { 294, "0", "02", "09", "002", "02601", "09", "Ignacio Allende", "Ciudad de México", "02810", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0469" },
                     { 293, "0", "02", "09", "002", "02601", "09", "Nueva Santa María", "Ciudad de México", "02800", "02601", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0467" },
                     { 292, "0", "02", "09", "002", "02431", "02", "Santa Apolonia", "Ciudad de México", "02790", "02431", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0466" },
-                    { 291, "0", "02", "09", "002", "02431", "09", "Plenitud", "Ciudad de México", "02780", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0465" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 291, "0", "02", "09", "002", "02431", "09", "Plenitud", "Ciudad de México", "02780", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0465" },
                     { 290, "0", "02", "09", "002", "02431", "28", "Santa Cruz Acayucan", "Ciudad de México", "02770", "02431", "Ciudad de México", "Azcapotzalco", "Pueblo", "Urbano", "0464" },
                     { 289, "0", "02", "09", "002", "02431", "02", "Santa Lucía", "Ciudad de México", "02760", "02431", "Ciudad de México", "Azcapotzalco", "Barrio", "Urbano", "0463" },
                     { 288, "0", "02", "09", "002", "02431", "09", "Industrial San Antonio", "Ciudad de México", "02760", "02431", "Ciudad de México", "Azcapotzalco", "Colonia", "Urbano", "0462" },
@@ -1907,14 +1812,7 @@ namespace WebAdmin.Migrations
                     { 62, "0", "01", "09", "010", "01401", "09", "Lomas de Nuevo México", "Ciudad de México", "01250", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0106" },
                     { 61, "0", "01", "09", "010", "01401", "09", "Ladera", "Ciudad de México", "01250", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0105" },
                     { 60, "0", "01", "09", "010", "01401", "09", "El Árbol", "Ciudad de México", "01250", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0104" },
-                    { 59, "0", "01", "09", "010", "01401", "09", "Pueblo Nuevo", "Ciudad de México", "01240", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0103" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 59, "0", "01", "09", "010", "01401", "09", "Pueblo Nuevo", "Ciudad de México", "01240", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0103" },
                     { 58, "0", "01", "09", "010", "01401", "09", "La Huerta", "Ciudad de México", "01239", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0102" },
                     { 57, "0", "01", "09", "010", "01401", "09", "El Piru 2a Ampliación", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0224" },
                     { 56, "0", "01", "09", "010", "01401", "09", "El Piru Santa Fe", "Ciudad de México", "01230", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0132" },
@@ -1948,15 +1846,7 @@ namespace WebAdmin.Migrations
                     { 75, "0", "01", "09", "010", "01401", "09", "La Presa", "Ciudad de México", "01270", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0121" },
                     { 74, "0", "01", "09", "010", "01401", "09", "El Tejocote", "Ciudad de México", "01270", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0120" },
                     { 73, "0", "01", "09", "010", "01401", "09", "2a Sección Cañada", "Ciudad de México", "01269", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0118" },
-                    { 72, "0", "01", "09", "010", "01401", "09", "1a Sección Cañada", "Ciudad de México", "01269", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0117" },
-                    { 81, "0", "01", "09", "010", "01401", "09", "El Pirul", "Ciudad de México", "01276", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0093" },
-                    { 47, "0", "01", "09", "010", "01401", "09", "La Estrella", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2681" },
-                    { 46, "0", "01", "09", "010", "01401", "09", "Lomas de Santa Fe", "Ciudad de México", "01219", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0084" },
-                    { 45, "0", "01", "09", "010", "01401", "28", "Santa Fe", "Ciudad de México", "01210", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0082" },
-                    { 20, "0", "01", "09", "010", "01131", "09", "El Capulín", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0036" },
-                    { 19, "0", "01", "09", "010", "01131", "09", "Belém de las Flores", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0034" },
-                    { 18, "0", "01", "09", "010", "01131", "09", "La Conchita", "Ciudad de México", "01109", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0033" },
-                    { 17, "0", "01", "09", "010", "01131", "09", "Pólvora", "Ciudad de México", "01100", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0031" }
+                    { 72, "0", "01", "09", "010", "01401", "09", "1a Sección Cañada", "Ciudad de México", "01269", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0117" }
                 });
 
             migrationBuilder.InsertData(
@@ -1964,6 +1854,14 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
                 values: new object[,]
                 {
+                    { 81, "0", "01", "09", "010", "01401", "09", "El Pirul", "Ciudad de México", "01276", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0093" },
+                    { 47, "0", "01", "09", "010", "01401", "09", "La Estrella", "Ciudad de México", "01220", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "2681" },
+                    { 46, "0", "01", "09", "010", "01401", "09", "Lomas de Santa Fe", "Ciudad de México", "01219", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0084" },
+                    { 45, "0", "01", "09", "010", "01401", "28", "Santa Fe", "Ciudad de México", "01210", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0082" },
+                    { 20, "0", "01", "09", "010", "01131", "09", "El Capulín", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0036" },
+                    { 19, "0", "01", "09", "010", "01131", "09", "Belém de las Flores", "Ciudad de México", "01110", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0034" },
+                    { 18, "0", "01", "09", "010", "01131", "09", "La Conchita", "Ciudad de México", "01109", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0033" },
+                    { 17, "0", "01", "09", "010", "01131", "09", "Pólvora", "Ciudad de México", "01100", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0031" },
                     { 16, "0", "01", "09", "010", "01001", "28", "Tizapan", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0028" },
                     { 15, "0", "01", "09", "010", "01001", "02", "Loreto", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0026" },
                     { 14, "0", "01", "09", "010", "01001", "02", "La Otra Banda", "Ciudad de México", "01090", "01001", "Ciudad de México", "Álvaro Obregón", "Barrio", "Urbano", "0025" },
@@ -2005,14 +1903,7 @@ namespace WebAdmin.Migrations
                     { 26, "0", "01", "09", "010", "01131", "09", "Las Américas", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0047" },
                     { 25, "0", "01", "09", "010", "01131", "09", "Hidalgo", "Ciudad de México", "01120", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0046" },
                     { 34, "0", "01", "09", "010", "01131", "09", "Cristo Rey", "Ciudad de México", "01150", "01131", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0063" },
-                    { 188, "0", "01", "09", "010", "01001", "09", "Lomas de las Águilas", "Ciudad de México", "01730", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0299" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 188, "0", "01", "09", "010", "01001", "09", "Lomas de las Águilas", "Ciudad de México", "01730", "01001", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0299" },
                     { 93, "0", "01", "09", "010", "01401", "09", "Ampliación Jalalpa", "Ciudad de México", "01296", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0153" },
                     { 95, "0", "01", "09", "010", "01401", "09", "Ampliación Piloto Adolfo López Mateos", "Ciudad de México", "01298", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0156" },
                     { 162, "0", "01", "09", "010", "01401", "09", "La Martinica", "Ciudad de México", "01619", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0268" },
@@ -2054,14 +1945,7 @@ namespace WebAdmin.Migrations
                     { 173, "0", "01", "09", "010", "01401", "09", "2o Reacomodo Tlacuitlapa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0281" },
                     { 172, "0", "01", "09", "010", "01401", "09", "Ampliación Tlacuitlapa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0280" },
                     { 171, "0", "01", "09", "010", "01401", "09", "Tlacuitlapa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0279" },
-                    { 170, "0", "01", "09", "010", "01401", "09", "Palmas Axotitla", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0278" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 170, "0", "01", "09", "010", "01401", "09", "Palmas Axotitla", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0278" },
                     { 169, "0", "01", "09", "010", "01401", "09", "La Milagrosa", "Ciudad de México", "01650", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0277" },
                     { 168, "0", "01", "09", "010", "01401", "09", "Ponciano Arriaga", "Ciudad de México", "01645", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0276" },
                     { 167, "0", "01", "09", "010", "01401", "09", "Herón Proal", "Ciudad de México", "01640", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0275" },
@@ -2103,14 +1987,7 @@ namespace WebAdmin.Migrations
                     { 132, "0", "01", "09", "010", "01401", "09", "Ampliación Estado de Hidalgo", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0226" },
                     { 131, "0", "01", "09", "010", "01401", "09", "Estado de Hidalgo", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0225" },
                     { 118, "0", "01", "09", "010", "01401", "09", "Hogar y Redención", "Ciudad de México", "01450", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0202" },
-                    { 130, "0", "01", "09", "010", "01401", "09", "Ampliación Los Pirules", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0094" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 130, "0", "01", "09", "010", "01401", "09", "Ampliación Los Pirules", "Ciudad de México", "01520", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0094" },
                     { 128, "0", "01", "09", "010", "01401", "09", "La Araña", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0223" },
                     { 127, "0", "01", "09", "010", "01401", "09", "Garcimarrero", "Ciudad de México", "01510", "01401", "Ciudad de México", "Álvaro Obregón", "Colonia", "Urbano", "0222" },
                     { 126, "0", "01", "09", "010", "01401", "28", "Santa Lucía Chantepec", "Ciudad de México", "01509", "01401", "Ciudad de México", "Álvaro Obregón", "Pueblo", "Urbano", "0221" },
@@ -2152,14 +2029,7 @@ namespace WebAdmin.Migrations
                     { 659, "0", "07", "09", "005", "07001", "09", "Ampliación Guadalupe Proletaria", "Ciudad de México", "07680", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1147" },
                     { 658, "0", "07", "09", "005", "07001", "09", "Guadalupe Proletaria", "Ciudad de México", "07670", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1146" },
                     { 657, "0", "07", "09", "005", "07001", "09", "Ampliación Progreso Nacional", "Ciudad de México", "07650", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1144" },
-                    { 656, "0", "07", "09", "005", "07001", "09", "Santiago Atepetlac", "Ciudad de México", "07640", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1143" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 656, "0", "07", "09", "005", "07001", "09", "Santiago Atepetlac", "Ciudad de México", "07640", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1143" },
                     { 655, "0", "07", "09", "005", "07001", "09", "San José de la Escalera", "Ciudad de México", "07630", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1142" },
                     { 654, "0", "07", "09", "005", "07001", "09", "Santa Rosa", "Ciudad de México", "07620", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1141" },
                     { 653, "0", "07", "09", "005", "07001", "09", "Progreso Nacional", "Ciudad de México", "07600", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1139" },
@@ -2201,14 +2071,7 @@ namespace WebAdmin.Migrations
                     { 580, "0", "07", "09", "005", "07201", "09", "Loma La Palma", "Ciudad de México", "07160", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1034" },
                     { 662, "0", "07", "09", "005", "07001", "09", "Torres Lindavista", "Ciudad de México", "07708", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1150" },
                     { 592, "0", "07", "09", "005", "07201", "09", "Ahuehuetes", "Ciudad de México", "07189", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1040" },
-                    { 594, "0", "07", "09", "005", "07201", "09", "Del Carmen", "Ciudad de México", "07199", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1042" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 594, "0", "07", "09", "005", "07201", "09", "Del Carmen", "Ciudad de México", "07199", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1042" },
                     { 614, "0", "07", "09", "005", "07051", "09", "Lindavista Sur", "Ciudad de México", "07300", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2888" },
                     { 613, "0", "07", "09", "005", "07051", "09", "Lindavista Norte", "Ciudad de México", "07300", "07051", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1072" },
                     { 612, "0", "07", "09", "005", "07201", "09", "La Pastora", "Ciudad de México", "07290", "07201", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1071" },
@@ -2250,14 +2113,7 @@ namespace WebAdmin.Migrations
                     { 718, "0", "07", "09", "005", "07981", "09", "San Juan de Aragón III Sección", "Ciudad de México", "07970", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1217" },
                     { 717, "0", "07", "09", "005", "07981", "09", "San Juan de Aragón II Sección", "Ciudad de México", "07969", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1216" },
                     { 716, "0", "07", "09", "005", "07981", "09", "San Juan de Aragón I Sección", "Ciudad de México", "07969", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1215" },
-                    { 715, "0", "07", "09", "005", "07981", "09", "Fernando Casas Alemán", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1213" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 715, "0", "07", "09", "005", "07981", "09", "Fernando Casas Alemán", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1213" },
                     { 714, "0", "07", "09", "005", "07981", "09", "Ex Escuela de Tiro", "Ciudad de México", "07960", "07981", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1212" },
                     { 733, "0", "08", "09", "006", "08231", "02", "Santiago Norte", "Ciudad de México", "08240", "08231", "Ciudad de México", "Iztacalco", "Barrio", "Urbano", "1254" },
                     { 734, "0", "08", "09", "006", "08231", "09", "Santa Anita", "Ciudad de México", "08300", "08231", "Ciudad de México", "Iztacalco", "Colonia", "Urbano", "1255" },
@@ -2299,14 +2155,7 @@ namespace WebAdmin.Migrations
                     { 686, "0", "07", "09", "005", "07001", "09", "Guadalupe Tepeyac", "Ciudad de México", "07840", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1179" },
                     { 676, "0", "07", "09", "005", "07001", "09", "Héroe de Nacozari", "Ciudad de México", "07780", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1167" },
                     { 674, "0", "07", "09", "005", "07001", "09", "Ampliación Panamericana", "Ciudad de México", "07770", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1164" },
-                    { 673, "0", "07", "09", "005", "07001", "09", "Panamericana", "Ciudad de México", "07770", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1163" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 673, "0", "07", "09", "005", "07001", "09", "Panamericana", "Ciudad de México", "07770", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1163" },
                     { 672, "0", "07", "09", "005", "07001", "09", "Magdalena de las Salinas", "Ciudad de México", "07760", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1162" },
                     { 671, "0", "07", "09", "005", "07001", "09", "Lindavista Vallejo II Sección", "Ciudad de México", "07755", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2889" },
                     { 670, "0", "07", "09", "005", "07001", "09", "Lindavista Vallejo III Sección", "Ciudad de México", "07754", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "2890" },
@@ -2348,14 +2197,7 @@ namespace WebAdmin.Migrations
                     { 444, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección IX-B", "Ciudad de México", "04909", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "2814" },
                     { 443, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección IX-A", "Ciudad de México", "04909", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0715" },
                     { 442, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección VIII", "Ciudad de México", "04909", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0714" },
-                    { 441, "0", "04", "09", "003", "04831", "09", "El Parque de Coyoacán", "Ciudad de México", "04899", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0711" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 441, "0", "04", "09", "003", "04831", "09", "El Parque de Coyoacán", "Ciudad de México", "04899", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0711" },
                     { 440, "0", "04", "09", "003", "04831", "09", "Los Olivos", "Ciudad de México", "04890", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0709" },
                     { 439, "0", "04", "09", "003", "04831", "09", "Jardines de Coyoacán", "Ciudad de México", "04890", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0708" },
                     { 438, "0", "04", "09", "003", "04831", "09", "Espartaco", "Ciudad de México", "04870", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0706" },
@@ -2397,14 +2239,7 @@ namespace WebAdmin.Migrations
                     { 426, "0", "04", "09", "003", "14391", "09", "Joyas del Pedregal", "Ciudad de México", "04660", "14391", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0677" },
                     { 425, "0", "04", "09", "003", "14391", "28", "Santa Úrsula Coapa", "Ciudad de México", "04650", "14391", "Ciudad de México", "Coyoacán", "Pueblo", "Urbano", "0676" },
                     { 400, "0", "04", "09", "003", "04831", "09", "Petrolera Taxqueña", "Ciudad de México", "04410", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0646" },
-                    { 399, "0", "04", "09", "003", "04831", "09", "Educación", "Ciudad de México", "04400", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0645" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 399, "0", "04", "09", "003", "04831", "09", "Educación", "Ciudad de México", "04400", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0645" },
                     { 398, "0", "04", "09", "003", "04831", "09", "Nueva Díaz Ordaz", "Ciudad de México", "04390", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0644" },
                     { 397, "0", "04", "09", "003", "04831", "09", "Huayamilpas", "Ciudad de México", "04390", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0643" },
                     { 396, "0", "04", "09", "003", "04831", "28", "La Candelaria", "Ciudad de México", "04380", "04831", "Ciudad de México", "Coyoacán", "Pueblo", "Urbano", "0641" },
@@ -2446,14 +2281,7 @@ namespace WebAdmin.Migrations
                     { 408, "0", "04", "09", "003", "04831", "09", "Presidentes Ejidales 2a Sección", "Ciudad de México", "04470", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "2805" },
                     { 407, "0", "04", "09", "003", "04831", "09", "Presidentes Ejidales 1a Sección", "Ciudad de México", "04470", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0655" },
                     { 406, "0", "04", "09", "003", "04831", "09", "Avante", "Ciudad de México", "04460", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0653" },
-                    { 405, "0", "04", "09", "003", "04831", "09", "El Centinela", "Ciudad de México", "04450", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0652" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 405, "0", "04", "09", "003", "04831", "09", "El Centinela", "Ciudad de México", "04450", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0652" },
                     { 414, "0", "04", "09", "003", "04831", "09", "Culhuacán CTM Sección Piloto", "Ciudad de México", "04490", "04831", "Ciudad de México", "Coyoacán", "Colonia", "Urbano", "0659" },
                     { 473, "0", "05", "09", "004", "05501", "09", "Granjas Navidad", "Ciudad de México", "05219", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "0768" },
                     { 464, "0", "05", "09", "004", "05501", "09", "La Manzanita", "Ciudad de México", "05030", "05501", "Ciudad de México", "Cuajimalpa de Morelos", "Colonia", "Urbano", "2867" },
@@ -2495,14 +2323,7 @@ namespace WebAdmin.Migrations
                     { 555, "0", "07", "09", "005", "07001", "09", "Triunfo de La República", "Ciudad de México", "07069", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1006" },
                     { 554, "0", "07", "09", "005", "07001", "09", "Estanzuela", "Ciudad de México", "07060", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1005" },
                     { 553, "0", "07", "09", "005", "07001", "09", "15 de Agosto", "Ciudad de México", "07058", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1003" },
-                    { 552, "0", "07", "09", "005", "07001", "09", "Villa Gustavo A. Madero", "Ciudad de México", "07050", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1001" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 552, "0", "07", "09", "005", "07001", "09", "Villa Gustavo A. Madero", "Ciudad de México", "07050", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "1001" },
                     { 551, "0", "07", "09", "005", "07001", "28", "Santiago Atzacoalco", "Ciudad de México", "07040", "07001", "Ciudad de México", "Gustavo A. Madero", "Pueblo", "Urbano", "0998" },
                     { 550, "0", "07", "09", "005", "07001", "09", "Tepeyac Insurgentes", "Ciudad de México", "07020", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0997" },
                     { 549, "0", "07", "09", "005", "07001", "09", "Tepetates", "Ciudad de México", "07010", "07001", "Ciudad de México", "Gustavo A. Madero", "Colonia", "Urbano", "0996" },
@@ -2544,14 +2365,7 @@ namespace WebAdmin.Migrations
                     { 514, "0", "06", "09", "015", "06002", "09", "Centro (Área 9)", "Ciudad de México", "06090", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0879" },
                     { 513, "0", "06", "09", "015", "06002", "09", "Centro (Área 8)", "Ciudad de México", "06080", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0875" },
                     { 512, "0", "06", "09", "015", "06002", "09", "Centro (Área 7)", "Ciudad de México", "06070", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0873" },
-                    { 511, "0", "06", "09", "015", "06002", "09", "Centro (Área 6)", "Ciudad de México", "06060", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0867" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CatCodigosPostales",
-                columns: new[] { "IdCodigosPostales", "Ccp", "CcveCiudad", "Cestado", "Cmnpio", "Coficina", "CtipoAsenta", "Dasenta", "Dciudad", "Dcodigo", "Dcp", "Destado", "Dmnpio", "DtipoAsenta", "Dzona", "IdAsentaCpcons" },
-                values: new object[,]
-                {
+                    { 511, "0", "06", "09", "015", "06002", "09", "Centro (Área 6)", "Ciudad de México", "06060", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0867" },
                     { 510, "0", "06", "09", "015", "06002", "09", "Centro (Área 5)", "Ciudad de México", "06050", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0863" },
                     { 518, "0", "06", "09", "015", "06401", "09", "Morelos", "Ciudad de México", "06200", "06401", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0891" },
                     { 508, "0", "06", "09", "015", "06002", "09", "Tabacalera", "Ciudad de México", "06030", "06002", "Ciudad de México", "Cuauhtémoc", "Colonia", "Urbano", "0853" },
@@ -2571,8 +2385,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdEstatusRegistro", "EstatusDesc", "FechaRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "ACTIVO", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "DESACTIVO", new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "ACTIVO", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "DESACTIVO", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2580,8 +2394,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdGenero", "FechaRegistro", "GeneroDesc", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), "HOMBRE", 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), "MUJER", 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), "HOMBRE", 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), "MUJER", 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2589,11 +2403,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdPerfil", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "PerfilDesc" },
                 values: new object[,]
                 {
-                    { 5, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCENTE" },
-                    { 4, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EJECUTIVO" },
-                    { 1, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DIRECTOR" },
-                    { 2, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
-                    { 3, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "GERENTE" }
+                    { 5, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCENTE" },
+                    { 4, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EJECUTIVO" },
+                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DIRECTOR" },
+                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "GERENTE" }
                 });
 
             migrationBuilder.InsertData(
@@ -2601,10 +2415,10 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdRol", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "RolDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DESARROLLADOR" },
-                    { 2, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
-                    { 3, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SUPERVISOR" },
-                    { 4, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "OPERADOR" }
+                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DESARROLLADOR" },
+                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SUPERVISOR" },
+                    { 4, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "OPERADOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -2612,8 +2426,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoCentro", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoCentroDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
-                    { 2, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA" }
+                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
+                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA" }
                 });
 
             migrationBuilder.InsertData(
@@ -2621,11 +2435,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoPago", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoPagoDesc" },
                 values: new object[,]
                 {
-                    { 4, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDC" },
-                    { 1, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EFECTIVO" },
-                    { 2, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TRANSFERENCIA" },
-                    { 3, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "CREDITO" },
-                    { 5, new DateTime(2022, 7, 5, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDD" }
+                    { 4, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDC" },
+                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EFECTIVO" },
+                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TRANSFERENCIA" },
+                    { 3, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "CREDITO" },
+                    { 5, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDD" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -2637,8 +2451,7 @@ namespace WebAdmin.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -2664,8 +2477,7 @@ namespace WebAdmin.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblUsuarios_CatNivelEscolarIdNivelEscolar",
@@ -2751,6 +2563,12 @@ namespace WebAdmin.Migrations
                 name: "FilesOnFileSystem");
 
             migrationBuilder.DropTable(
+                name: "RelVentaProducto");
+
+            migrationBuilder.DropTable(
+                name: "RelVentasPagos");
+
+            migrationBuilder.DropTable(
                 name: "TblCentros");
 
             migrationBuilder.DropTable(
@@ -2779,6 +2597,9 @@ namespace WebAdmin.Migrations
 
             migrationBuilder.DropTable(
                 name: "TblUsuarios");
+
+            migrationBuilder.DropTable(
+                name: "TblVenta");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

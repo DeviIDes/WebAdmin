@@ -29,11 +29,14 @@ namespace WebAdmin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<nDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("msql_connection")));
+            //services.AddDbContext<nDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("msql_connection")));
             // services.AddDbContext<nDbContext>(options =>
             //      options.UseMySQL(Configuration.GetConnectionString("MySQLDataSource")));
+            services.AddDbContext<nDbContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("pgSQLDataSource")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
