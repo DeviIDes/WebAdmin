@@ -105,7 +105,7 @@ namespace WebAdminHecsa.Controllers
             return Json(fProductos);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult FiltroProducto(int idA)
         {
             var fProductos = from a in _context.CatProductos

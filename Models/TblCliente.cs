@@ -41,13 +41,13 @@ namespace WebAdmin.Models
         public string CorreoAcceso { get; set; }
 
         [Display(Name = "Clave Acceso")]
-      
+
         public string ClaveAcceso { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
-[Display(Name = "Corporativo / Centro")]
+        [Display(Name = "Corporativo / Centro")]
         public Guid IdUCorporativoCentro { get; set; }
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
@@ -64,5 +64,14 @@ namespace WebAdmin.Models
 
         [Display(Name = "Estatus")]
         public int IdEstatusRegistro { get; set; }
+
+         [Display(Name = "Nombre Completo")]
+        public string FullName
+        {
+            get
+            {
+                return NombreCliente + ", " + ApellidoMaterno + " " + ApellidoMaterno;
+            }
+        }
     }
 }

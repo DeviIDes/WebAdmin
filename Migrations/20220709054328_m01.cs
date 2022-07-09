@@ -424,25 +424,6 @@ namespace WebAdmin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RelVentaProducto",
-                columns: table => new
-                {
-                    IdRelVentaProducto = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
-                    IdProducto = table.Column<int>(type: "integer", nullable: false),
-                    Cantidad = table.Column<int>(type: "integer", nullable: false),
-                    ProductoPrecioUno = table.Column<decimal>(type: "numeric", nullable: false),
-                    IdVenta = table.Column<Guid>(type: "uuid", nullable: false),
-                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RelVentaProducto", x => x.IdRelVentaProducto);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RelVentasPagos",
                 columns: table => new
                 {
@@ -685,10 +666,12 @@ namespace WebAdmin.Migrations
                     IdCliente = table.Column<Guid>(type: "uuid", nullable: false),
                     Descuento = table.Column<int>(type: "integer", nullable: false),
                     IdTipoPago = table.Column<int>(type: "integer", nullable: false),
+                    CodigoPago = table.Column<string>(type: "text", nullable: true),
                     FechaAlterna = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false)
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false),
+                    Total = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -835,19 +818,46 @@ namespace WebAdmin.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RelVentaProducto",
+                columns: table => new
+                {
+                    IdRelVentaProducto = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
+                    IdProducto = table.Column<int>(type: "integer", nullable: false),
+                    Cantidad = table.Column<int>(type: "integer", nullable: false),
+                    ProductoPrecioUno = table.Column<decimal>(type: "numeric", nullable: false),
+                    TotalCostoProducto = table.Column<double>(type: "double precision", nullable: false),
+                    IdUsuarioModifico = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    IdEstatusRegistro = table.Column<int>(type: "integer", nullable: false),
+                    IdVenta = table.Column<Guid>(type: "uuid", nullable: false),
+                    TblVentaIdVenta = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RelVentaProducto", x => x.IdRelVentaProducto);
+                    table.ForeignKey(
+                        name: "FK_RelVentaProducto_TblVenta_TblVentaIdVenta",
+                        column: x => x.TblVentaIdVenta,
+                        principalTable: "TblVenta",
+                        principalColumn: "IdVenta",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "CatAreas",
                 columns: new[] { "IdArea", "AreaDesc", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "DIRECCION", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "RECURSOS HUMANOS", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 3, "PRODUCCION DIGITAL", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 4, "FINANZAS/CONTABILIDAD", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 5, "MARKETING/VENTAS", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 6, "TIC", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 7, "SERVICIO AL CLIENTE", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 8, "OTRA", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "DIRECCION", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "RECURSOS HUMANOS", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 3, "PRODUCCION DIGITAL", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 4, "FINANZAS/CONTABILIDAD", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 5, "MARKETING/VENTAS", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 6, "TIC", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 7, "SERVICIO AL CLIENTE", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 8, "OTRA", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2385,8 +2395,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdEstatusRegistro", "EstatusDesc", "FechaRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, "ACTIVO", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, "DESACTIVO", new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, "ACTIVO", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, "DESACTIVO", new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2394,8 +2404,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdGenero", "FechaRegistro", "GeneroDesc", "IdEstatusRegistro", "IdUsuarioModifico" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), "HOMBRE", 1, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), "MUJER", 1, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { 1, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), "HOMBRE", 1, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), "MUJER", 1, new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -2403,11 +2413,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdPerfil", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "PerfilDesc" },
                 values: new object[,]
                 {
-                    { 5, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCENTE" },
-                    { 4, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EJECUTIVO" },
-                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DIRECTOR" },
-                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
-                    { 3, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "GERENTE" }
+                    { 5, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DOCENTE" },
+                    { 4, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EJECUTIVO" },
+                    { 1, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DIRECTOR" },
+                    { 2, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "GERENTE" }
                 });
 
             migrationBuilder.InsertData(
@@ -2415,10 +2425,10 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdRol", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "RolDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DESARROLLADOR" },
-                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
-                    { 3, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SUPERVISOR" },
-                    { 4, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "OPERADOR" }
+                    { 1, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "DESARROLLADOR" },
+                    { 2, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "ADMINISTRADOR" },
+                    { 3, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "SUPERVISOR" },
+                    { 4, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "OPERADOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -2426,8 +2436,8 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoCentro", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoCentroDesc" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
-                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA" }
+                    { 1, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "INTERNO" },
+                    { 2, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "LICENCIA" }
                 });
 
             migrationBuilder.InsertData(
@@ -2435,11 +2445,11 @@ namespace WebAdmin.Migrations
                 columns: new[] { "IdTipoPago", "FechaRegistro", "IdEstatusRegistro", "IdUsuarioModifico", "TipoPagoDesc" },
                 values: new object[,]
                 {
-                    { 4, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDC" },
-                    { 1, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EFECTIVO" },
-                    { 2, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TRANSFERENCIA" },
-                    { 3, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "CREDITO" },
-                    { 5, new DateTime(2022, 7, 7, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDD" }
+                    { 4, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDC" },
+                    { 1, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "EFECTIVO" },
+                    { 2, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TRANSFERENCIA" },
+                    { 3, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "CREDITO" },
+                    { 5, new DateTime(2022, 7, 9, 0, 0, 0, 0, DateTimeKind.Local), 1, new Guid("00000000-0000-0000-0000-000000000000"), "TDD" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -2478,6 +2488,11 @@ namespace WebAdmin.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RelVentaProducto_TblVentaIdVenta",
+                table: "RelVentaProducto",
+                column: "TblVentaIdVenta");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblUsuarios_CatNivelEscolarIdNivelEscolar",
@@ -2599,13 +2614,13 @@ namespace WebAdmin.Migrations
                 name: "TblUsuarios");
 
             migrationBuilder.DropTable(
-                name: "TblVenta");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "TblVenta");
 
             migrationBuilder.DropTable(
                 name: "CatNivelEscolar");

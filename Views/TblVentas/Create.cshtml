@@ -1,139 +1,224 @@
-﻿@model WebAdmin.Models.TblVenta
+﻿@model WebAdmin.ViewModels.VentasViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Create</h1>
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Ventas</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Venta</li>
+    </ol>
+</nav>
+<p>
+    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register"><i
+            class="fas fa-plus"></i> Nuevo</a>
+</p>
+<div class="row">
 
-<h4>TblVenta</h4>
-<hr />
-
-<form asp-action="Create">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label asp-for="IdCliente" class="control-label"></label>
-                <select id="IdCliente" class="form-select" asp-for="IdCliente"
-                    asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-            </div>
-            <span asp-validation-for="IdCliente" class="text-danger"></span>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="TblVentas.IdCliente" class="control-label"></label>
+            <select id="IdCliente" class="form-select" asp-for="TblVentas.IdCliente"
+                asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                <option value="">SELECCIONAR</option>
+            </select>
         </div>
-
-        <div class="col-md-1">
-            <div class="form-group">
-                <label asp-for="Descuento" class="control-label"></label>
-                <input id="iDescuento" asp-for="Descuento" class="form-control" type="number" min="0" max="100"
-                    value="0" />
-                <span asp-validation-for="Descuento" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <label asp-for="IdCategoria" class="control-label"></label>
-            <div class="input-group mb-3">
-                <select id="drpCategoria" class="form-select" asp-for="IdCategoria"
-                    asp-items="@(new SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-                <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
-            </div>
-            <span asp-validation-for="IdCategoria" class="text-danger"></span>
-        </div>
-        <div class="col-md-5">
-            <label asp-for="IdProducto" class="control-label"></label>
-            <div class="input-group mb-3">
-                <select id="drpProducto" class="form-select" asp-for="IdProducto">
-                    <option value="">SELECCIONAR</option>
-                </select>
-                <button id="btnAddProducto" class="btn btn-primary" type="button" onclick="AgregaProducto()"
-                    disabled>Agregar</button>
-            </div>
-            <span asp-validation-for="IdCategoria" class="text-danger"></span>
-        </div>
-
+        <span asp-validation-for="TblVentas.IdCliente" class="text-danger"></span>
     </div>
-
-    <div class="row">
-        <table class="table" id="tblProductos">
-            <thead>
-                <tr>
-
-                    <th style="text-align:center">
-                        @Html.DisplayNameFor(model => model.DescCategoria)
-                    </th>
-                    <th style="text-align:center">
-                        @Html.DisplayNameFor(model => model.DescProducto)
-                    </th>
-                    <th style="text-align:center">
-                        @Html.DisplayNameFor(model => model.Total)
-                    </th>
-                    <th style="text-align:center">
-                        @Html.DisplayNameFor(model => model.Costo)
-                    </th>
-                    <th style="text-align:center">
-                        @Html.DisplayNameFor(model => model.Descuento)
-                    </th>
-
-                    <th style="text-align:center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label asp-for="IdTipoPago" class="control-label"></label>
-                <select id="IdTipoPago" class="form-select" asp-for="IdCliente"
-                    asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
-                    <option value="">SELECCIONAR</option>
-                </select>
-                <span asp-validation-for="IdTipoPago" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group" hidden>
-                <label asp-for="CodigoPago" class="control-label"></label>
-                <input asp-for="CodigoPago" class="form-control" />
-                <span asp-validation-for="CodigoPago" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group" hidden>
-                <label asp-for="FechaAlterna" class="control-label"></label>
-                <input asp-for="FechaAlterna" class="form-control" />
-            </div>
+    <div class="col-md-1">
+        <div class="form-group">
+            <label asp-for="TblVentas.Descuento" class="control-label"></label>
+            <input id="iDescuento" asp-for="TblVentas.Descuento" class="form-control" type="number" min="0" max="100"
+                value="0" />
+            <span asp-validation-for="TblVentas.Descuento" class="text-danger"></span>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
+    <div class="col-md-3">
+        <label asp-for="@Model.RelVentaProductos[0].IdCategoria" class="control-label"></label>
+        <div class="input-group mb-3">
+            <select id="drpCategoria" class="form-select" asp-for="@Model.RelVentaProductos[0].IdCategoria" asp-items="@(new
+            SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
+                <option value="">SELECCIONAR</option>
+            </select>
+            <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
         </div>
-        <div class="col-md-4">
+        <span asp-validation-for="@Model.RelVentaProductos[0].IdCategoria" class="text-danger"></span>
+    </div>
+    <div class="col-md-5">
+
+        <label asp-for="@Model.RelVentaProductos[0].IdProducto" class="control-label"></label>
+        <div class="input-group mb-3">
+            <select id="drpProducto" class="form-select" asp-for="@Model.RelVentaProductos[0].IdProducto">
+                <option value="">SELECCIONAR</option>
+            </select>
+
+            <button id="btnAddProducto" class="btn btn-primary" type="button" disabled>Agregar</button>
         </div>
-        <div class="col-md-3">
-            <dt class="col-sm-4">
-                <label class="control-label">Total Venta</label>
-            </dt>
-            <dd class="col-sm-12">
-                <input id="ivTotal" class="form-control" />
-            </dd>
+        <span asp-validation-for="@Model.RelVentaProductos[0].IdProducto" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <table class="table" id="tbProducto">
+        <thead>
+            <tr>
+                <th style="text-align:center">
+                <th>IdCategoria</th>
+                </th>
+                <th style="text-align:center">
+                <th>IdProducto</th>
+                </th>
+                <th style="text-align:center">
+                <th>Total</th>
+                </th>
+                <th style="text-align:center">
+                <th>Descuento</th>
+                </th>
+                <th style="text-align:center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
+            <select id="IdTipoPago" class="form-select" asp-for="TblVentas.IdTipoPago"
+                asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
+                <option value="">SELECCIONAR</option>
+            </select>
+            <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
         </div>
     </div>
-    <input type="submit" value="Create" class="btn btn-primary" />
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-
-</form>
-
+    <div class="col-md-4">
+        <div class="form-group" hidden>
+            <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
+            <input asp-for="TblVentas.CodigoPago" class="form-control" />
+            <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group" hidden>
+            <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
+            <input asp-for="TblVentas.FechaAlterna" class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-3">
+        <dt class="col-sm-4">
+            <label class="control-label">Total Venta</label>
+        </dt>
+        <dd class="col-sm-12">
+            <input id="ivTotal" class="form-control" />
+        </dd>
+    </div>
+</div>
+<button class="btn btn-primary" id="btnTerminar">Guardar</button>
+<a asp-action="Index" class="btn btn-secondary">Regresar</a>
 
 @section Scripts {
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
+    $("#btnAddProducto").on("click", function () {
+
+        var TotalCostoProducto = parseFloat($("#iDescuento").val()) * parseFloat($("#iDescuento").val())
+
+        $("#tbProducto tbody").append(
+            $("<tr>").append(
+                $("<td>").text($("#drpCategoria").val()),
+                $("<td>").text($("#drpProducto").val()),
+                $("<td>").text(TotalCostoProducto),
+                $("<td>").text($("#iDescuento").val()),
+            )
+        )
+    })
+
+    $("#btnTerminar").on("click", function () {
+
+        var RelVenta_Productos = []
+        var total = 0;
+
+        $("#tbProducto > tbody > tr").each(function (i, tr) {
+
+            RelVenta_Productos.push(
+                {
+                    IdCategoria: $(tr).find('td:eq(0)').text(),
+                    IdProducto: $(tr).find('td:eq(1)').text(),
+                    Total: $(tr).find('td:eq(2)').text(),
+                    Descuento: $(tr).find('td:eq(3)').text()
+
+                }
+            )
+
+        })
+
+        var oCompraVM = {
+            TblVentas: {
+                IdCliente: $("#IdCliente").val(),
+                Descuento: $("#iDescuento").val(),
+                IdTipoPago: $("#IdTipoPago").val(),
+            },
+            RelVentaProductos: RelVenta_Productos
+        }
+
+        jQuery.ajax({
+            url: '@Url.Action("Index","TblVentas")',
+            type: "POST",
+            data: JSON.stringify(oCompraVM),
+            datatype: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                if (data.respuesta) {
+                    alert("Venta Registrada")
+
+                    location.reload();
+                }
+
+            }
+
+        })
+
+    })
+    $(function () {
+        $('#btnSave').on('click', function () {
+            var generation = {};
+            var membersDetails = new Array();
+            $("#tblProductos TBODY TR").each(function () {
+                var row = $(this);
+                var memberDetails = {};
+                memberDetails.MemberType = row.find("TD").eq(0).html();
+                memberDetails.MemberCategory = row.find("TD").eq(1).html();
+                memberDetails.TotalSum = row.find("TD").eq(2).html();
+                memberDetails.MemberCount = row.find("TD").eq(3).html();
+                membersDetails.push(memberDetails);
+            });
+
+            generation.Memberdetails = membersDetails;
+
+            //Send the JSON array to Controller using AJAX.
+            $.ajax({
+                type: "POST",
+                url: "/Home/Save",
+                data: JSON.stringify(generation),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                }
+            });
+        });
+    });
     $('#IdCliente').select2({
         theme: "bootstrap-5",
         width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
@@ -182,9 +267,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         });
         return false;
     }
-    function DProducto(ctl) {
-        $(ctl).parents("tr").remove();
-    }
     function AgregaProducto() {
         var vProducto = document.getElementById("drpProducto").value;
         var vPorcentaje = document.getElementById("iDescuento").value;
@@ -207,10 +289,10 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     var rows =
                         "<tr>" +
                         "<td style='text-align:center'>" +
-                        item.descCategoria +
+                        item.DescCategoria +
                         "</td>" +
                         "<td style='text-align:center'>" +
-                        item.descProducto +
+                        item.DescProducto +
                         "</td>" +
                         "<td style='text-align:center'>" +
                         vCosto +
@@ -232,12 +314,13 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                     $("#tblProductos tbody").append(rows);
                 });
             },
-    error: function (ex) {
+            error: function (ex) {
             },
         });
     }
     function subtotal() {
         var table = document.getElementById("tblProductos");
     }
+
 </script>
 }

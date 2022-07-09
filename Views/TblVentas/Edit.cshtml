@@ -5,10 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h4>TblVenta</h4>
-<hr />
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Ventas</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Ventas</li>
+    </ol>
+</nav>
+<p>
+    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register" ><i class="fas fa-plus"></i> Nuevo</a>
+    @* <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus"></i> Nuevo</a> *@
+</p>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">

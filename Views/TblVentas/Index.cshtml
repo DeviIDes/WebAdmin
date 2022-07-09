@@ -4,23 +4,22 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
 
-<h1>Index</h1>
-
+        <li class="breadcrumb-item">Información</li>
+        <li class="breadcrumb-item">Ventas</li>
+        <li class="breadcrumb-item active" aria-current="page">Control Ventas</li>
+    </ol>
+</nav>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus" hidden></i> Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NumeroVenta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuarioVenta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCentro)
+                @Html.DisplayNameFor(model => model.IdVenta)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdCliente)
@@ -28,14 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descuento)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.IdTipoPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaAlterna)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuarioModifico)
+                @Html.DisplayNameFor(model => model.IdCentro)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -50,13 +44,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NumeroVenta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuarioVenta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCentro)
+                @Html.DisplayFor(modelItem => item.IdVenta)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdCliente)
@@ -64,14 +52,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Descuento)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTipoPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaAlterna)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuarioModifico)
+             <td>
+                @Html.DisplayFor(modelItem => item.IdCentro)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaRegistro)
@@ -79,12 +61,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdEstatusRegistro)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVenta">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVenta">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVenta">Delete</a>
-            </td>
-        </tr>
+           <td id="iAcciones" >
+                    <a id="iEditaUsuario" asp-action="Edit" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary" title="Editar"><i class="far fa-edit" style="font-size: 1em; color: #FFC300; "></i></a>
+                    <a id="iDetalleUsuario" asp-action="Details" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary" title="Detalles"><i class="far fa-list-alt" style="font-size: 1em; color: #67C5C4 ; "></i></a>
+                    <a id="iDesactivaUsuario" asp-action="Delete" asp-route-id="@item.IdVenta" class="btn btn-outline-secondary" title="Desactivar"><i class="far fa-stop-circle" style="font-size: 1em; color: #FF9333; "></i></a>
+                </td>
+            </tr>
+        
 }
     </tbody>
 </table>
