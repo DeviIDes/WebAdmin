@@ -11,20 +11,28 @@ namespace WebAdmin.Models
         [Display(Name = "ID Ventas Productos")]
         [Key]
         public Guid IdRelVentaProducto { get; set; }
-        [Display(Name = "ID Categoria")]
-        public int IdCategoria { get; set; }
-        [Display(Name = "ID Producto")]
-        public int IdProducto { get; set; }
 
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }
 
-        [Display(Name = "Precio")]
-        public decimal ProductoPrecioUno { get; set; }
-        [Display(Name = "Total")]
+        [Display(Name = "Categoria")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string Categoria { get; set; }
+        [Display(Name = "Producto")]
+        [Required(ErrorMessage = "Campo Requerido")]
+        public string Producto { get; set; }
 
-        public double TotalCostoProducto { get; set; }
-        [Display(Name = "Usuario")]
+        [Display(Name = "Precio")]
+        public double Precio { get; set; }
+        [Display(Name = "Total Costo Producto")]
+
+        public double TotalPrecio { get; set; }
+        [Display(Name = "Descuento %")]
+        public int Descuento { get; set; }
+        [Display(Name = "Total Precio Producto")]
+
+        public double Total { get; set; }
+        [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
         [Display(Name = "Fecha Registro")]
         [DataType(DataType.Date)]

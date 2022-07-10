@@ -1,5 +1,4 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using iText.Html2pdf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,7 +30,7 @@ namespace WebAdmin.Controllers
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                HtmlConverter.ConvertToPdf(GridHtml, stream);
+              
                 return File(stream.ToArray(), "application/pdf", "Grid.pdf");
             }
         }

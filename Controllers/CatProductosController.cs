@@ -104,6 +104,22 @@ namespace WebAdminHecsa.Controllers
                              };
             return Json(fProductos);
         }
+        [HttpGet]
+        public ActionResult fFiltroProducto(int idA)
+        {
+            var fProductos = from a in _context.CatProductos
+                             join b in _context.CatCategorias on a.IdCategoria equals b.IdCategoria
+                             where a.IdProducto == idA
+                             select new
+                             {
+                                 DescCategoria = b.CategoriaDesc,
+                                 DescProducto = a.DescProducto,
+                                 TotalPrecioProducto = a.ProductoPrecioUno,
+                                 IdProducto = a.IdProducto,
+                             };
+            return Json(fProductos);
+        }
+
 
         [HttpPost]
         public ActionResult FiltroProducto(int idA)

@@ -29887,16 +29887,17 @@ namespace WebAdmin.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Descuento")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("IdCategoria")
-                        .HasColumnType("integer");
-
                     b.Property<int>("IdEstatusRegistro")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IdProducto")
                         .HasColumnType("integer");
 
                     b.Property<Guid>("IdUsuarioModifico")
@@ -29905,13 +29906,20 @@ namespace WebAdmin.Migrations
                     b.Property<Guid>("IdVenta")
                         .HasColumnType("uuid");
 
-                    b.Property<decimal>("ProductoPrecioUno")
-                        .HasColumnType("numeric");
+                    b.Property<double>("Precio")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Producto")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("TblVentaIdVenta")
                         .HasColumnType("uuid");
 
-                    b.Property<double>("TotalCostoProducto")
+                    b.Property<double>("Total")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("TotalPrecio")
                         .HasColumnType("double precision");
 
                     b.HasKey("IdRelVentaProducto");
@@ -30488,9 +30496,6 @@ namespace WebAdmin.Migrations
 
                     b.Property<string>("CodigoPago")
                         .HasColumnType("text");
-
-                    b.Property<int>("Descuento")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("FechaAlterna")
                         .HasColumnType("timestamp without time zone");

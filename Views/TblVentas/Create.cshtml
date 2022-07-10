@@ -13,8 +13,9 @@
     </ol>
 </nav>
 <p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register"><i
-            class="fas fa-plus"></i> Nuevo</a>
+    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register">
+        <i class="fas fa-plus"></i> Nuevo
+    </a>
 </p>
 <div class="row">
 
@@ -30,56 +31,80 @@
     </div>
     <div class="col-md-1">
         <div class="form-group">
-            <label asp-for="TblVentas.Descuento" class="control-label"></label>
-            <input id="iDescuento" asp-for="TblVentas.Descuento" class="form-control" type="number" min="0" max="100"
-                value="0" />
-            <span asp-validation-for="TblVentas.Descuento" class="text-danger"></span>
+            <label asp-for="TblVentas.RelVentaProductos[0].Descuento" class="control-label"></label>
+            <input id="iDescuento" asp-for="TblVentas.RelVentaProductos[0].Descuento" class="form-control" type="number"
+                min="0" max="100" value="0" />
         </div>
     </div>
     <div class="col-md-3">
-        <label asp-for="@Model.RelVentaProductos[0].IdCategoria" class="control-label"></label>
+        <label asp-for="@Model.RelVentaProductos[0].Categoria" class="control-label"></label>
         <div class="input-group mb-3">
-            <select id="drpCategoria" class="form-select" asp-for="@Model.RelVentaProductos[0].IdCategoria" asp-items="@(new
+            <select id="drpCategoria" class="form-select" asp-for="@Model.RelVentaProductos[0].Categoria" asp-items="@(new
             SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
                 <option value="">SELECCIONAR</option>
             </select>
             <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
         </div>
-        <span asp-validation-for="@Model.RelVentaProductos[0].IdCategoria" class="text-danger"></span>
+        <span asp-validation-for="@Model.RelVentaProductos[0].Categoria" class="text-danger"></span>
     </div>
     <div class="col-md-5">
 
-        <label asp-for="@Model.RelVentaProductos[0].IdProducto" class="control-label"></label>
+        <label asp-for="@Model.RelVentaProductos[0].Producto" class="control-label"></label>
         <div class="input-group mb-3">
-            <select id="drpProducto" class="form-select" asp-for="@Model.RelVentaProductos[0].IdProducto">
+            <select id="drpProducto" class="form-select" asp-for="@Model.RelVentaProductos[0].Producto">
                 <option value="">SELECCIONAR</option>
             </select>
-
-            <button id="btnAddProducto" class="btn btn-primary" type="button" disabled>Agregar</button>
         </div>
-        <span asp-validation-for="@Model.RelVentaProductos[0].IdProducto" class="text-danger"></span>
+        <span asp-validation-for="@Model.RelVentaProductos[0].Producto" class="text-danger"></span>
     </div>
+
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="control-label">Categoria</label>
+            <input id="iCategoria" class="form-control" type="text" readonly />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="control-label">Producto</label>
+            <input id="iProducto" class="form-control" type="text" readonly />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="control-label">Precio $</label>
+            <input id="iPrecio" class="form-control" min="1" step="any" readonly />
+        </div>
+    </div>
+    <div class="form-group">
+        <button id="btnAddProducto" class="btn btn-primary" type="button" disabled>Agregar</button>
+    </div>
+
 </div>
 <div class="row">
     <table class="table" id="tbProducto">
-        <thead>
-            <tr>
-                <th style="text-align:center">
-                <th>IdCategoria</th>
-                </th>
-                <th style="text-align:center">
-                <th>IdProducto</th>
-                </th>
-                <th style="text-align:center">
-                <th>Total</th>
-                </th>
-                <th style="text-align:center">
-                <th>Descuento</th>
-                </th>
-                <th style="text-align:center">Acciones</th>
-            </tr>
-        </thead>
         <tbody>
+            <thead>
+                </th>
+                <th style="text-align:center">
+                    CATEGORIA
+                </th>
+                <th style="text-align:center">
+                    PRODUCTO
+                </th>
+                <th style="text-align:center">
+                    TOTAL
+                </th>
+                <th style="text-align:center">
+                    PRECIO
+                </th>
+                <th style="text-align:center">
+                    DESCUENTO
+                </th>
+                <th style="text-align:center">ACCIONES</th>
+            </thead>
         </tbody>
     </table>
 </div>
@@ -114,34 +139,95 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-3">
-        <dt class="col-sm-4">
+        <div class="col-sm-4">
             <label class="control-label">Total Venta</label>
-        </dt>
-        <dd class="col-sm-12">
+        </div>
+        <div class="col-sm-12">
             <input id="ivTotal" class="form-control" />
-        </dd>
+        </div>
     </div>
 </div>
-<button class="btn btn-primary" id="btnTerminar">Guardar</button>
+<button class="btn btn-primary" id="btnTerminar"  href="#" data-toggle="modal" data-target="#logoutModal">Guardar</button>
 <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Listo/a para salir?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión
+                    actual.</div>
+                <div class="modal-footer">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                        asp-route-returnUrl="@Url.Action("CreatePdf", "TblVentas", new { area = "" })">
+                        <button type="submit" class="btn btn-primary">Imprimir</button>
+                    </form>
 
+                </div>
+            </div>
+        </div>
+    </div>
 @section Scripts {
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
-    $("#btnAddProducto").on("click", function () {
 
-        var TotalCostoProducto = parseFloat($("#iDescuento").val()) * parseFloat($("#iDescuento").val())
+    function RemoveRow(o) {
+        //no clue what to put here?
+        var p = o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+    }
+
+    $('#drpProducto').change(function () {
+        var SelectedText = $('option:selected', this).text();
+        var SelectedValue = $('option:selected', this).val();
+
+        mProductos();
+
+
+    });
+    $('#drpCategoria').change(function () {
+
+        @* var $select_colonias = $('#drpProducto');
+                $("#drpProducto").empty();
+
+
+                $select_colonias.append('<option value="">SELECCIONAR</option>');
+                $select_colonias.attr('required', true);
+                $("#btnMostrar").setAttribute("disabled"); *@
+
+    });
+    $("#btnAddProducto").on("click", function () {
+        var _desc = parseFloat($("#iDescuento").val())
+        var _prec = parseFloat($("#iPrecio").val())
+        var _tprecio = _prec - (100 * (_desc / 100))
+
 
         $("#tbProducto tbody").append(
             $("<tr>").append(
-                $("<td>").text($("#drpCategoria").val()),
-                $("<td>").text($("#drpProducto").val()),
-                $("<td>").text(TotalCostoProducto),
-                $("<td>").text($("#iDescuento").val()),
-            )
+                $("<td style='text-align:center'>").text($("#iCategoria").val()),
+                $("<td style='text-align:center'>").text($("#iProducto").val()),
+                $("<td style='text-align:center'>").text(_tprecio),
+                $("<td style='text-align:center'>").text($("#iPrecio").val()),
+                $("<td style='text-align:center'>").text($("#iDescuento").val()),
+                $("<td style='text-align:center'><a id='iDesactivaUsuario' class='btn btn-outline-secondary' title='Desactivar' onclick ='RemoveRow(this)'><i class='far fa-stop-circle' style='font-size: 1em; color: #FF9333;''></i></a></td>"))
         )
+
+        var receivables = $("#tbProducto tbody tr>td:nth-child(2)").map(function () {
+            return parseFloat($(this).text().replace(/,/g, ""));
+        }).get().reduce(sum).toFixed(2);
+
+        $("#ivTotal").text(receivables);
+
+
+        function sum(a, b) {
+            return a + b
+        }
     })
 
     $("#btnTerminar").on("click", function () {
@@ -153,10 +239,11 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
 
             RelVenta_Productos.push(
                 {
-                    IdCategoria: $(tr).find('td:eq(0)').text(),
-                    IdProducto: $(tr).find('td:eq(1)').text(),
-                    Total: $(tr).find('td:eq(2)').text(),
-                    Descuento: $(tr).find('td:eq(3)').text()
+                    Categoria: $(tr).find('td:eq(0)').text(),
+                    Producto: $(tr).find('td:eq(1)').text(),
+                    TotalPrecio: $(tr).find('td:eq(2)').text(),
+                    Precio: $(tr).find('td:eq(3)').text(),
+                    Descuento: $(tr).find('td:eq(4)').text()
 
                 }
             )
@@ -166,7 +253,6 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
         var oCompraVM = {
             TblVentas: {
                 IdCliente: $("#IdCliente").val(),
-                Descuento: $("#iDescuento").val(),
                 IdTipoPago: $("#IdTipoPago").val(),
             },
             RelVentaProductos: RelVenta_Productos
@@ -250,13 +336,43 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 if (list.length == 0) {
                     $select_colonias.append('<option value="">SELECCIONAR</option>');
                     $select_colonias.attr('required', false);
-                    $("#btnAddProducto").setAttribute("disabled");
+                    $("#btnMostrar").setAttribute("disabled");
                 }
                 else {
                     $select_colonias.append('<option value="">SELECCIONAR</option>');
                     for (var i = 0, len = list.length; i < len; i++) {
                         $select_colonias.append('<option value=' + list[i].idProducto + '>' + list[i].descProducto + '</option>');
                         $select_colonias.attr('required', true);
+                    }
+                    $("#btnMostrar").removeAttr("disabled");
+                }
+            },
+            error: function () {
+                alert("Error!!")
+            }
+        });
+        return false;
+    }
+    function mProductos() {
+        var vProducto = document.getElementById("drpProducto").value;
+        $.ajax({
+            type: "GET",
+            url: "/CatProductos/fFiltroProducto/",
+            data: { idA: vProducto },
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (list) {
+                if (list.length == 0) {
+                    document.getElementById("iCategoria").value = null;
+                    document.getElementById("iProducto").value = null;
+                    document.getElementById("iPrecio").value = null;
+                }
+                else {
+
+                    for (var i = 0, len = list.length; i < len; i++) {
+                        document.getElementById("iCategoria").value = list[i].descCategoria;
+                        document.getElementById("iProducto").value = list[i].descProducto;
+                        document.getElementById("iPrecio").value = list[i].totalPrecioProducto;
                     }
                     $("#btnAddProducto").removeAttr("disabled");
                 }

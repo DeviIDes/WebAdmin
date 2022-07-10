@@ -17,17 +17,14 @@ namespace WebAdmin.Models
         [Display(Name = "Numero Cotización")]
         public int NumeroVenta { get; set; }
         [Display(Name = "Usuario")]
-        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdUsuarioVenta { get; set; }
         [Display(Name = "Centro")]
-        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCentro { get; set; }
         [Display(Name = "Alumno")]
         [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCliente { get; set; }
 
-        [Display(Name = "Descuento %")]
-        public int Descuento { get; set; }
+   
         [Display(Name = "Tipo de Pago")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdTipoPago { get; set; }

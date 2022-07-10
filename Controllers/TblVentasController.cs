@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAdmin.Data;
 using WebAdmin.Models;
 using WebAdmin.Services;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using WebAdmin.ViewModels;
+using System.IO;
+using System.Text;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 
 namespace WebAdmin.Controllers
 {
@@ -18,12 +21,14 @@ namespace WebAdmin.Controllers
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
+        private IConverter _converter;
 
-        public TblVentasController(nDbContext context, INotyfService notyf, IUserService userService)
+        public TblVentasController(nDbContext context, INotyfService notyf, IUserService userService, IConverter iconverte)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
+            _converter = iconverte;
         }
 
         // GET: TblVentas
@@ -32,6 +37,34 @@ namespace WebAdmin.Controllers
             var fVentas = _context.TblVenta.Include(u => u.RelVentaProductos);
             return View(await fVentas.ToListAsync());
         }
+        public FileResult CreatePdf()
+        {
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = "PDF Report"
+            };
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                //Page = "https://iides.tech"
+                HtmlContent = TemplateGenerator.GetHTMLString(),
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
+                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
+
+            };
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+            var file = _converter.Convert(pdf);
+            return File(file, "application/pdf");
+        }
         [HttpPost]
         public IActionResult Index([FromBody] VentasViewModel oVentaVM)
         {
@@ -39,36 +72,55 @@ namespace WebAdmin.Controllers
             var isLoggedIn = _userService.IsAuthenticated();
             var idCorporativos = _context.TblCorporativos.FirstOrDefault();
             var nVenta = Guid.NewGuid();
+            bool respuesta = false;
 
-            foreach (var item in oVentaVM.RelVentaProductos)
+            if (oVentaVM != null)
             {
-                item.IdRelVentaProducto = Guid.NewGuid();
-                item.Cantidad = 1;
-                item.ProductoPrecioUno = 0;
-                item.TotalCostoProducto = 0;
-                item.IdUsuarioModifico = Guid.Parse(fuser);
-                item.FechaRegistro = DateTime.Now;
-                item.IdEstatusRegistro = 1;
-                item.IdVenta = nVenta;
-                _context.RelVentaProducto.Add(item);
+                try
+                {
+                    foreach (var item in oVentaVM.RelVentaProductos)
+                    {
+                        item.IdRelVentaProducto = Guid.NewGuid();
+                        item.Cantidad = 1;
+                        item.Precio = 0;
+                        item.Total = 0;
+                        item.IdUsuarioModifico = Guid.Parse(fuser);
+                        item.FechaRegistro = DateTime.Now;
+                        item.IdEstatusRegistro = 1;
+                        item.IdVenta = nVenta;
+                        _context.RelVentaProducto.Add(item);
+                    }
+
+                    TblVenta oVenta = oVentaVM.TblVentas;
+
+                    oVenta.FechaRegistro = DateTime.Now;
+                    oVenta.IdEstatusRegistro = 1;
+                    oVenta.IdVenta = nVenta;
+                    oVenta.NumeroVenta = _context.TblVenta.Count();
+                    oVenta.IdUsuarioVenta = Guid.Parse(fuser);
+                    oVenta.IdCentro = idCorporativos.IdCorporativo;
+                    oVenta.IdUsuarioModifico = Guid.Parse(fuser);
+                    oVenta.FechaRegistro = DateTime.Now;
+                    oVenta.IdEstatusRegistro = 1;
+                    oVenta.CodigoPago = "Generar";
+                    _context.TblVenta.Add(oVenta);
+                    _context.SaveChanges();
+
+                    respuesta = true;
+                    _notyf.Success("Venta creada con éxito", 5);
+
+                }
+                catch (Exception)
+                {
+                    respuesta = false;
+                    _notyf.Success("Err.", 5);
+
+                }
             }
-           
-            TblVenta oVenta = oVentaVM.TblVentas;
 
-            oVenta.FechaRegistro = DateTime.Now;
-            oVenta.IdEstatusRegistro = 1;
-            oVenta.IdVenta = nVenta;
-            oVenta.NumeroVenta = _context.TblVenta.Count();
-            oVenta.IdUsuarioVenta = Guid.Parse(fuser);
-            oVenta.IdCentro = idCorporativos.IdCorporativo;
-            oVenta.IdUsuarioModifico = Guid.Parse(fuser);
-            oVenta.FechaRegistro = DateTime.Now;
-            oVenta.IdEstatusRegistro = 1;
-            oVenta.CodigoPago = "Generar";
-            _context.TblVenta.Add(oVenta);
-            _context.SaveChanges();
 
-            return Json(new { respuesta = true });
+
+            return Json(new { respuesta });
         }
         // GET: TblVentas/Details/5
         public async Task<IActionResult> Details(Guid? id)
