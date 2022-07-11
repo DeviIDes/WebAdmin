@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +8,6 @@ namespace WebAdmin.Models
 {
     public partial class TblCliente
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid IdCliente { get; set; }
@@ -37,11 +35,13 @@ namespace WebAdmin.Models
         public int IdRol { get; set; }
 
         [Display(Name = "Correo Electronico")]
-
+        [Required(ErrorMessage = "Campo Requerido")]
         public string CorreoAcceso { get; set; }
 
-        [Display(Name = "Clave Acceso")]
+        [Display(Name = "Telefono")]
+        public string Telefono { get; set; }
 
+        [Display(Name = "Clave Acceso")]
         public string ClaveAcceso { get; set; }
 
         [Display(Name = "Usuario Modifico")]
@@ -49,6 +49,7 @@ namespace WebAdmin.Models
 
         [Display(Name = "Corporativo / Centro")]
         public Guid IdUCorporativoCentro { get; set; }
+
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Registro")]
@@ -63,9 +64,10 @@ namespace WebAdmin.Models
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Estatus")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }
 
-         [Display(Name = "Nombre Completo")]
+        [Display(Name = "Nombre Completo")]
         public string FullName
         {
             get

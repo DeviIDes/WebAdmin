@@ -143,8 +143,6 @@ namespace WebAdmin.Controllers
                     catArea.FechaRegistro = DateTime.Now;
                     catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
                     catArea.IdEstatusRegistro = catArea.IdEstatusRegistro;
-
-                    _context.SaveChanges();
                     _context.Update(catArea);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
@@ -190,7 +188,6 @@ namespace WebAdmin.Controllers
         {
             var catArea = await _context.CatAreas.FindAsync(id);
             catArea.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

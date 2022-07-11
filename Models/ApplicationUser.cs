@@ -42,6 +42,7 @@ namespace WebAdmin.Models
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }
         [Display(Name = "Estatus")]
-        public int IdEstatusRegistro { get; set; }
+[Required(ErrorMessage = "Campo Requerido")]       
+public int IdEstatusRegistro { get; set; }
     }
 }

@@ -37,6 +37,7 @@ namespace WebAdmin.Models
         public int Cantidad { get; set; }
 
         [Display(Name = "Precio")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public decimal ProductoPrecioUno { get; set; }
 
         [Display(Name = "Porcentaje")]
@@ -54,6 +55,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }
     }
 }

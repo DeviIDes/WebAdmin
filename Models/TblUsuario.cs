@@ -49,6 +49,9 @@ namespace WebAdmin.Models
         [Display(Name = "Correo de Acceso")]
         public string CorreoAcceso { get; set; }
 
+        [Display(Name = "Telefono")]
+        public string Telefono { get; set; }
+
         [Display(Name = "Profile Picture")]
         public byte[] ImagenPErfil { get; set; }
 
@@ -60,6 +63,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }
     }
 }

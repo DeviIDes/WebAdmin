@@ -86,8 +86,6 @@ namespace WebAdmin.Controllers
                     catTipoDireccion.FechaRegistro = DateTime.Now;
                     catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper();
                     catTipoDireccion.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catTipoDireccion);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -143,7 +141,6 @@ namespace WebAdmin.Controllers
                     catTipoDireccion.FechaRegistro = DateTime.Now;
                     catTipoDireccion.TipoDireccionDesc = catTipoDireccion.TipoDireccionDesc.ToString().ToUpper();
                     catTipoDireccion.IdEstatusRegistro = catTipoDireccion.IdEstatusRegistro;
-                    _context.SaveChanges();
                     _context.Update(catTipoDireccion);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
@@ -189,7 +186,6 @@ namespace WebAdmin.Controllers
         {
             var catTipoDireccion = await _context.CatTipoDirecciones.FindAsync(id);
             catTipoDireccion.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

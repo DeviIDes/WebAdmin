@@ -83,19 +83,15 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPago.IdUsuarioModifico = Guid.Parse(fuser);
-
                     catTipoPago.FechaRegistro = DateTime.Now;
                     catTipoPago.TipoPagoDesc = catTipoPago.TipoPagoDesc.ToString().ToUpper();
                     catTipoPago.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catTipoPago);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Information("Favor de validar, existe una Estatus con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
@@ -127,7 +123,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoPago,TipoPagoDesc,FechaRegistro,IdEstatusRegistro")] CatTipoPago catTipoPago)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoPago,TipoPagoDesc,IdEstatusRegistro")] CatTipoPago catTipoPago)
         {
             if (id != catTipoPago.IdTipoPago)
             {
@@ -141,6 +137,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPago.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoPago.FechaRegistro = DateTime.Now;
+                    catTipoPago.TipoPagoDesc = catTipoPago.TipoPagoDesc.ToString().ToUpper();
+                    catTipoPago.IdEstatusRegistro = catTipoPago.IdEstatusRegistro;
                     _context.Update(catTipoPago);
                     await _context.SaveChangesAsync();
                 }
@@ -184,8 +183,9 @@ namespace WebAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var catTipoPago = await _context.CatTipoPago.FindAsync(id);
-            _context.CatTipoPago.Remove(catTipoPago);
+            catTipoPago.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

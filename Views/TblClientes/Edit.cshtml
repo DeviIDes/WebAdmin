@@ -22,19 +22,33 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="IdCliente" />
         <div class="row">
-            <div class="col-md-4">
+               <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="NombreCliente" class="control-label"></label>
                     <input style="text-transform:uppercase" asp-for="NombreCliente" class="form-control" />
                     <span asp-validation-for="NombreCliente" class="text-danger"></span>
                 </div>
             </div>
+       <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="ApellidoPaterno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="ApellidoPaterno" class="form-control" />
+                <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="ApellidoMaterno" class="control-label"></label>
+                <input style="text-transform:uppercase" asp-for="ApellidoMaterno" class="form-control" />
+                <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+            </div>
+        </div>
   
             <div class="col-md-2">
                 <div class="form-group">
                     <label asp-for="IdEstatusRegistro" class="control-label"></label>
                     <select id="idEstatusLista" class="form-select" asp-for="IdEstatusRegistro" asp-items="@(new SelectList(ViewBag.ListaEstatus,"IdEstatusRegistro","EstatusDesc"))">
-                        <option value="">Seleccionar Estatus</option>
+                        <option value="">SELECCIONAR</option>
                     </select>
                     <span asp-validation-for="IdEstatusRegistro" class="text-danger"></span>
                 </div>

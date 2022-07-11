@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoAlumno,TipoAlumnoDesc,FechaRegistro,IdEstatusRegistro")] CatTipoAlumno catTipoAlumno)
+        public async Task<IActionResult> Create([Bind("IdTipoAlumno,TipoAlumnoDesc")] CatTipoAlumno catTipoAlumno)
         {
             if (ModelState.IsValid)
             {
@@ -83,19 +83,15 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoAlumno.IdUsuarioModifico = Guid.Parse(fuser);
-
-                    catTipoAlumno.FechaRegistro = DateTime.Now;
                     catTipoAlumno.TipoAlumnoDesc = catTipoAlumno.TipoAlumnoDesc.ToString().ToUpper();
+                    catTipoAlumno.FechaRegistro = DateTime.Now;
                     catTipoAlumno.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catTipoAlumno);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Information("Favor de validar, existe una Estatus con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
@@ -127,7 +123,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoAlumno,TipoAlumnoDesc,FechaRegistro,IdEstatusRegistro")] CatTipoAlumno catTipoAlumno)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoAlumno,TipoAlumnoDesc,IdEstatusRegistro")] CatTipoAlumno catTipoAlumno)
         {
             if (id != catTipoAlumno.IdTipoAlumno)
             {
@@ -141,6 +137,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoAlumno.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoAlumno.TipoAlumnoDesc = catTipoAlumno.TipoAlumnoDesc.ToString().ToUpper();
+                    catTipoAlumno.FechaRegistro = DateTime.Now;
+                    catTipoAlumno.IdEstatusRegistro = catTipoAlumno.IdEstatusRegistro;
                     _context.Update(catTipoAlumno);
                     await _context.SaveChangesAsync();
                 }
@@ -184,8 +183,9 @@ namespace WebAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var catTipoAlumno = await _context.CatTipoAlumno.FindAsync(id);
-            _context.CatTipoAlumno.Remove(catTipoAlumno);
+            catTipoAlumno.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

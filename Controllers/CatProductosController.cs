@@ -104,6 +104,7 @@ namespace WebAdminHecsa.Controllers
                              };
             return Json(fProductos);
         }
+
         [HttpGet]
         public ActionResult fFiltroProducto(int idA)
         {
@@ -119,7 +120,6 @@ namespace WebAdminHecsa.Controllers
                              };
             return Json(fProductos);
         }
-
 
         [HttpPost]
         public ActionResult FiltroProducto(int idA)
@@ -182,24 +182,19 @@ namespace WebAdminHecsa.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catProductos.IdUsuarioModifico = Guid.Parse(fuser);
-
                     var fCategoria = (from c in _context.CatCategorias where c.IdCategoria == catProductos.IdCategoria select c).Distinct().ToList();
                     catProductos.FechaRegistro = DateTime.Now;
                     catProductos.IdEstatusRegistro = 1;
-
                     catProductos.CategoriaDesc = fCategoria[0].CategoriaDesc;
                     catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper() : catProductos.DescProducto;
                     catProductos.CodigoInterno = GeneraCodigoInterno();
                     catProductos.SubCosto = catProductos.ProductoPrecioUno * (catProductos.PorcentajePrecioUno / 100);
-
-                    _context.SaveChanges();
                     _context.Add(catProductos);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Warning("Favor de validar, existe una Producto con la misma marca y misma categoria", 5);
                 }
                 return RedirectToAction(nameof(Index));
@@ -252,14 +247,11 @@ namespace WebAdminHecsa.Controllers
                     catProductos.IdUsuarioModifico = Guid.Parse(fuser);
                     var fCategoria = (from c in _context.CatCategorias where c.IdCategoria == catProductos.IdCategoria select c).Distinct().ToList();
                     catProductos.FechaRegistro = DateTime.Now;
-                    catProductos.IdEstatusRegistro = 1;
-
+                    catProductos.IdEstatusRegistro = catProductos.IdEstatusRegistro;
                     catProductos.CategoriaDesc = fCategoria[0].CategoriaDesc;
                     catProductos.DescProducto = !string.IsNullOrEmpty(catProductos.DescProducto) ? catProductos.DescProducto.ToUpper() : catProductos.DescProducto;
                     //catProductos.SubCosto = catProductos.ProductoPrecioUno * (1 + (catProductos.PorcentajePrecioUno / 100));
                     catProductos.SubCosto = catProductos.ProductoPrecioUno;
-
-                    _context.SaveChanges();
                     _context.Update(catProductos);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
@@ -305,7 +297,6 @@ namespace WebAdminHecsa.Controllers
         {
             var catProductos = await _context.CatProductos.FindAsync(id);
             catProductos.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
@@ -326,12 +317,12 @@ namespace WebAdminHecsa.Controllers
             if (lProductos == 0)
             {
                 Cuenta = 1;
-                strCodigoInterno = "H-p" + Cuenta.ToString(fmt);
+                strCodigoInterno = "im-p" + Cuenta.ToString(fmt);
             }
             else
             {
                 Cuenta = lProductos + 1;
-                strCodigoInterno = "H-p" + Cuenta.ToString(fmt);
+                strCodigoInterno = "im-p" + Cuenta.ToString(fmt);
             }
 
             return strCodigoInterno;

@@ -55,7 +55,8 @@ namespace WebAdmin.Models
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
-  [Required(ErrorMessage = "Campo Requerido")]
+
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Usuario Control")]
         public Guid IdUsuarioControl { get; set; }
 
@@ -65,6 +66,7 @@ namespace WebAdmin.Models
         public DateTime FechaRegistro { get; set; }
 
         [Display(Name = "Estatus")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }
     }
 }

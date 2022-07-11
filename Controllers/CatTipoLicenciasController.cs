@@ -107,7 +107,7 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoLicencia,LicenciaDesc,IdMarca,FechaRegistro,IdEstatusRegistro")] CaTipotLicencia CaTipotLicencia)
+        public async Task<IActionResult> Create([Bind("IdTipoLicencia,LicenciaDesc")] CaTipotLicencia CaTipotLicencia)
         {
             if (ModelState.IsValid)
             {
@@ -121,18 +121,14 @@ namespace WebAdminHecsa.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
+                    CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper();
                     CaTipotLicencia.IdEstatusRegistro = 1;
-                    //CaTipotLicencia.MarcaDesc = fMarca[0].MarcaDesc;
-                    CaTipotLicencia.LicenciaDesc = !string.IsNullOrEmpty(CaTipotLicencia.LicenciaDesc) ? CaTipotLicencia.LicenciaDesc.ToUpper() : CaTipotLicencia.LicenciaDesc;
-
-                    _context.SaveChanges();
                     _context.Add(CaTipotLicencia);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Warning("Favor de validar, existe una Categoria con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
@@ -147,8 +143,6 @@ namespace WebAdminHecsa.Controllers
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
             ListaCatEstatus = (from c in _context.CatEstatus select c).Distinct().ToList();
             ViewBag.ListaCatEstatus = ListaCatEstatus;
-
-        
 
             if (id == null)
             {
@@ -168,7 +162,7 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoLicencia,LicenciaDesc,IdMarca,MarcaDesc,FechaRegistro,IdEstatusRegistro")] CaTipotLicencia CaTipotLicencia)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoLicencia,LicenciaDesc,IdEstatusRegistro")] CaTipotLicencia CaTipotLicencia)
         {
             if (id != CaTipotLicencia.IdTipoLicencia)
             {
@@ -183,11 +177,8 @@ namespace WebAdminHecsa.Controllers
                     var isLoggedIn = _userService.IsAuthenticated();
                     CaTipotLicencia.IdUsuarioModifico = Guid.Parse(fuser);
                     CaTipotLicencia.FechaRegistro = DateTime.Now;
-                    CaTipotLicencia.IdEstatusRegistro = 1;
-                    CaTipotLicencia.LicenciaDesc = !string.IsNullOrEmpty(CaTipotLicencia.LicenciaDesc) ? CaTipotLicencia.LicenciaDesc.ToUpper() : CaTipotLicencia.LicenciaDesc;
-
-                    _context.SaveChanges();
-                    _context.Add(CaTipotLicencia);
+                    CaTipotLicencia.LicenciaDesc = CaTipotLicencia.LicenciaDesc.ToUpper();
+                    CaTipotLicencia.IdEstatusRegistro = CaTipotLicencia.IdEstatusRegistro;
                     _context.Update(CaTipotLicencia);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
@@ -233,7 +224,6 @@ namespace WebAdminHecsa.Controllers
         {
             var CaTipotLicencia = await _context.CaTipotLicencias.FindAsync(id);
             CaTipotLicencia.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

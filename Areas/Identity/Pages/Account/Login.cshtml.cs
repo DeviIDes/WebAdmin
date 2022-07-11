@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using WebAdmin.Models;
 using WebAdmin.Services;
 using System.Net.Mail;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace WebAdmin.Areas.Identity.Pages.Account
 {
@@ -23,14 +24,16 @@ namespace WebAdmin.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly INotyfService _notyf;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager, INotyfService notyf)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+             _notyf = notyf;
         }
 
         [BindProperty]
@@ -45,14 +48,15 @@ namespace WebAdmin.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            
             [EmailAddress]
             [Display(Name = "Correo electrónico")]
+            [Required(ErrorMessage = "Campo Requerido")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Campo Requerido")]
             [DataType(DataType.Password)]
-            [Display(Name = "Clave")]
+            [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
             [Display(Name = "Recordarme?")]
@@ -113,7 +117,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Intento de inicio de sesión no válido.");
+                    _notyf.Warning("Intento de inicio de sesión no válido, revisar credenciales", 5);
                     return Page();
                 }
             }

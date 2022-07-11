@@ -86,8 +86,6 @@ namespace WebAdmin.Controllers
                     catGenero.FechaRegistro = DateTime.Now;
                     catGenero.GeneroDesc = catGenero.GeneroDesc.ToString().ToUpper();
                     catGenero.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catGenero);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);

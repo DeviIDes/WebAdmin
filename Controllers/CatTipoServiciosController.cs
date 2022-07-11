@@ -92,7 +92,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoServicio,TipoServicioDesc,FechaRegistro,IdEstatusRegistro")] CatTipoServicio catTipoServicio)
+        public async Task<IActionResult> Create([Bind("IdTipoServicio,TipoServicioDesc")] CatTipoServicio catTipoServicio)
         {
             if (ModelState.IsValid)
             {
@@ -105,12 +105,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoServicio.IdUsuarioModifico = Guid.Parse(fuser);
-
                     catTipoServicio.FechaRegistro = DateTime.Now;
                     catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper();
                     catTipoServicio.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catTipoServicio);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -163,6 +160,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoServicio.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoServicio.FechaRegistro = DateTime.Now;
+                    catTipoServicio.TipoServicioDesc = catTipoServicio.TipoServicioDesc.ToString().ToUpper();
+                    catTipoServicio.IdEstatusRegistro = catTipoServicio.IdEstatusRegistro;
                     _context.Update(catTipoServicio);
                     await _context.SaveChangesAsync();
                 }
@@ -206,8 +206,9 @@ namespace WebAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var catTipoServicio = await _context.CatTipoServicio.FindAsync(id);
-            _context.CatTipoServicio.Remove(catTipoServicio);
+            catTipoServicio.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

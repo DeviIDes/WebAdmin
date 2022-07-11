@@ -86,8 +86,6 @@ namespace WebAdmin.Controllers
                     catPerfil.FechaRegistro = DateTime.Now;
                     catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper();
                     catPerfil.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catPerfil);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -143,7 +141,6 @@ namespace WebAdmin.Controllers
                     catPerfil.FechaRegistro = DateTime.Now;
                     catPerfil.PerfilDesc = catPerfil.PerfilDesc.ToString().ToUpper();
                     catPerfil.IdEstatusRegistro = catPerfil.IdEstatusRegistro;
-                    _context.SaveChanges();
                     _context.Update(catPerfil);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
@@ -189,7 +186,6 @@ namespace WebAdmin.Controllers
         {
             var catPerfil = await _context.CatPerfiles.FindAsync(id);
             catPerfil.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

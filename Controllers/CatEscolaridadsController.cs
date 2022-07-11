@@ -86,8 +86,6 @@ namespace WebAdmin.Controllers
                     catEscolaridad.FechaRegistro = DateTime.Now;
                     catEscolaridad.EscolaridadDesc = catEscolaridad.EscolaridadDesc.ToString().ToUpper();
                     catEscolaridad.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catEscolaridad);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -140,6 +138,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catEscolaridad.IdUsuarioModifico = Guid.Parse(fuser);
+                    catEscolaridad.FechaRegistro = DateTime.Now;
+                    catEscolaridad.EscolaridadDesc = catEscolaridad.EscolaridadDesc.ToString().ToUpper();
+                    catEscolaridad.IdEstatusRegistro = catEscolaridad.IdEstatusRegistro;
                     _context.Update(catEscolaridad);
                     await _context.SaveChangesAsync();
                 }
@@ -183,8 +184,9 @@ namespace WebAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var catEscolaridad = await _context.CatEscolaridad.FindAsync(id);
-            _context.CatEscolaridad.Remove(catEscolaridad);
+            catEscolaridad.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

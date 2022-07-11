@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoContratacion,TipoContratacionDesc,FechaRegistro,IdEstatusRegistro")] CatTipoContratacion catTipoContratacion)
+        public async Task<IActionResult> Create([Bind("IdTipoContratacion,TipoContratacionDesc")] CatTipoContratacion catTipoContratacion)
         {
             if (ModelState.IsValid)
             {
@@ -83,12 +83,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoContratacion.IdUsuarioModifico = Guid.Parse(fuser);
-
                     catTipoContratacion.FechaRegistro = DateTime.Now;
                     catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper();
                     catTipoContratacion.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catTipoContratacion);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -141,6 +138,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoContratacion.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoContratacion.FechaRegistro = DateTime.Now;
+                    catTipoContratacion.TipoContratacionDesc = catTipoContratacion.TipoContratacionDesc.ToString().ToUpper();
+                    catTipoContratacion.IdEstatusRegistro = catTipoContratacion.IdEstatusRegistro;
                     _context.Update(catTipoContratacion);
                     await _context.SaveChangesAsync();
                 }
@@ -184,8 +184,9 @@ namespace WebAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var catTipoContratacion = await _context.CatTipoContratacion.FindAsync(id);
-            _context.CatTipoContratacion.Remove(catTipoContratacion);
+            catTipoContratacion.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

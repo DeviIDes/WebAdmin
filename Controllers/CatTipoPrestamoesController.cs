@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoPrestamo,TipoPrestamoDesc,FechaRegistro,IdEstatusRegistro")] CatTipoPrestamo catTipoPrestamo)
+        public async Task<IActionResult> Create([Bind("IdTipoPrestamo,TipoPrestamoDesc")] CatTipoPrestamo catTipoPrestamo)
         {
             if (ModelState.IsValid)
             {
@@ -83,12 +83,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
-
                     catTipoPrestamo.FechaRegistro = DateTime.Now;
                     catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper();
                     catTipoPrestamo.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catTipoPrestamo);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -141,6 +138,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoPrestamo.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoPrestamo.FechaRegistro = DateTime.Now;
+                    catTipoPrestamo.TipoPrestamoDesc = catTipoPrestamo.TipoPrestamoDesc.ToString().ToUpper();
+                    catTipoPrestamo.IdEstatusRegistro = catTipoPrestamo.IdEstatusRegistro;
                     _context.Update(catTipoPrestamo);
                     await _context.SaveChangesAsync();
                 }
@@ -184,8 +184,9 @@ namespace WebAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var catTipoPrestamo = await _context.CatTipoPrestamo.FindAsync(id);
-            _context.CatTipoPrestamo.Remove(catTipoPrestamo);
+            catTipoPrestamo.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

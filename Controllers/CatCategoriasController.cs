@@ -103,7 +103,7 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCategoria,CategoriaDesc,IdMarca,FechaRegistro,IdEstatusRegistro")] CatCategoria catCategoria)
+        public async Task<IActionResult> Create([Bind("IdCategoria,CategoriaDesc")] CatCategoria catCategoria)
         {
             if (ModelState.IsValid)
             {
@@ -116,20 +116,15 @@ namespace WebAdminHecsa.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    //var fMarca = (from c in _context.CatMarca where c.IdMarca == catCategoria.IdMarca select c).Distinct().ToList();
+                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
                     catCategoria.FechaRegistro = DateTime.Now;
                     catCategoria.IdEstatusRegistro = 1;
-                    //catCategoria.MarcaDesc = fMarca[0].MarcaDesc;
-                    catCategoria.CategoriaDesc = !string.IsNullOrEmpty(catCategoria.CategoriaDesc) ? catCategoria.CategoriaDesc.ToUpper() : catCategoria.CategoriaDesc;
-
-                    _context.SaveChanges();
                     _context.Add(catCategoria);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Warning("Favor de validar, existe una Categoria con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
@@ -163,7 +158,7 @@ namespace WebAdminHecsa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,CategoriaDesc,IdMarca,MarcaDesc,FechaRegistro,IdEstatusRegistro")] CatCategoria catCategoria)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,CategoriaDesc,IdEstatusRegistro")] CatCategoria catCategoria)
         {
             if (id != catCategoria.IdCategoria)
             {
@@ -177,13 +172,9 @@ namespace WebAdminHecsa.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catCategoria.IdUsuarioModifico = Guid.Parse(fuser);
-                    //var fMarca = (from c in _context.CatMarca where c.IdMarca == catCategoria.IdMarca select c).Distinct().ToList();
+                    catCategoria.CategoriaDesc = catCategoria.CategoriaDesc.ToString().ToUpper();
                     catCategoria.FechaRegistro = DateTime.Now;
-                    catCategoria.IdEstatusRegistro = 1;
-                    //catCategoria.MarcaDesc = fMarca[0].MarcaDesc;
-                    catCategoria.CategoriaDesc = !string.IsNullOrEmpty(catCategoria.CategoriaDesc) ? catCategoria.CategoriaDesc.ToUpper() : catCategoria.CategoriaDesc;
-
-                    _context.SaveChanges();
+                    catCategoria.IdEstatusRegistro = catCategoria.IdEstatusRegistro;
                     _context.Add(catCategoria);
                     _context.Update(catCategoria);
                     await _context.SaveChangesAsync();
@@ -230,7 +221,6 @@ namespace WebAdminHecsa.Controllers
         {
             var catCategoria = await _context.CatCategorias.FindAsync(id);
             catCategoria.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

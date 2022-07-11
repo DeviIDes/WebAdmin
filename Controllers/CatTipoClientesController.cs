@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoCliente,TipoClienteDesc,FechaRegistro,IdEstatusRegistro")] CatTipoCliente CatTipoClientes)
+        public async Task<IActionResult> Create([Bind("IdTipoCliente,TipoClienteDesc")] CatTipoCliente CatTipoClientes)
         {
             if (ModelState.IsValid)
             {
@@ -83,12 +83,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     CatTipoClientes.IdUsuarioModifico = Guid.Parse(fuser);
-
                     CatTipoClientes.FechaRegistro = DateTime.Now;
                     CatTipoClientes.TipoClienteDesc = CatTipoClientes.TipoClienteDesc.ToString().ToUpper();
                     CatTipoClientes.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(CatTipoClientes);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
@@ -127,7 +124,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCliente,TipoClienteDesc,FechaRegistro,IdEstatusRegistro")] CatTipoCliente CatTipoClientes)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCliente,TipoClienteDesc,IdEstatusRegistro")] CatTipoCliente CatTipoClientes)
         {
             if (id != CatTipoClientes.IdTipoCliente)
             {
@@ -141,6 +138,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     CatTipoClientes.IdUsuarioModifico = Guid.Parse(fuser);
+                    CatTipoClientes.FechaRegistro = DateTime.Now;
+                    CatTipoClientes.TipoClienteDesc = CatTipoClientes.TipoClienteDesc.ToString().ToUpper();
+                    CatTipoClientes.IdEstatusRegistro = CatTipoClientes.IdEstatusRegistro;
                     _context.Update(CatTipoClientes);
                     await _context.SaveChangesAsync();
                 }
@@ -183,9 +183,10 @@ namespace WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var CatTipoClientes = await _context.CatTipoClientes.FindAsync(id);
-            _context.CatTipoClientes.Remove(CatTipoClientes);
+            var CatTipoClientes = await _context.TblCentros.FindAsync(id);
+            CatTipoClientes.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

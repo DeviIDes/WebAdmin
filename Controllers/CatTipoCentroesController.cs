@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoCentro,TipoCentroDesc,FechaRegistro,IdEstatusRegistro")] CatTipoCentro catTipoCentro)
+        public async Task<IActionResult> Create([Bind("IdTipoCentro,TipoCentroDesc")] CatTipoCentro catTipoCentro)
         {
             if (ModelState.IsValid)
             {
@@ -83,19 +83,15 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoCentro.IdUsuarioModifico = Guid.Parse(fuser);
-
                     catTipoCentro.FechaRegistro = DateTime.Now;
                     catTipoCentro.TipoCentroDesc = catTipoCentro.TipoCentroDesc.ToString().ToUpper();
                     catTipoCentro.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catTipoCentro);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Information("Favor de validar, existe una Estatus con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
@@ -127,7 +123,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCentro,TipoCentroDesc,FechaRegistro,IdEstatusRegistro")] CatTipoCentro catTipoCentro)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCentro,TipoCentroDesc,IdEstatusRegistro")] CatTipoCentro catTipoCentro)
         {
             if (id != catTipoCentro.IdTipoCentro)
             {
@@ -141,6 +137,9 @@ namespace WebAdmin.Controllers
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
                     catTipoCentro.IdUsuarioModifico = Guid.Parse(fuser);
+                    catTipoCentro.FechaRegistro = DateTime.Now;
+                    catTipoCentro.TipoCentroDesc = catTipoCentro.TipoCentroDesc.ToString().ToUpper();
+                    catTipoCentro.IdEstatusRegistro = catTipoCentro.IdEstatusRegistro;
                     _context.Update(catTipoCentro);
                     await _context.SaveChangesAsync();
                 }
@@ -184,8 +183,9 @@ namespace WebAdmin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var catTipoCentro = await _context.CatTipoCentros.FindAsync(id);
-            _context.CatTipoCentros.Remove(catTipoCentro);
+            catTipoCentro.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
+            _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 

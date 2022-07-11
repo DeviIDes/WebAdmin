@@ -86,15 +86,12 @@ namespace WebAdmin.Controllers
                     catRole.FechaRegistro = DateTime.Now;
                     catRole.RolDesc = catRole.RolDesc.ToString().ToUpper();
                     catRole.IdEstatusRegistro = 1;
-                    _context.SaveChanges();
-
                     _context.Add(catRole);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
                 else
                 {
-                    //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
                 }
                 return RedirectToAction(nameof(Index));
@@ -189,7 +186,6 @@ namespace WebAdmin.Controllers
         {
             var catRole = await _context.CatRoles.FindAsync(id);
             catRole.IdEstatusRegistro = 2;
-            _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));

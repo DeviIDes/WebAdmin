@@ -30,7 +30,6 @@ namespace WebAdmin.Controllers
         {
             using (MemoryStream stream = new MemoryStream())
             {
-              
                 return File(stream.ToArray(), "application/pdf", "Grid.pdf");
             }
         }
@@ -103,9 +102,6 @@ namespace WebAdmin.Controllers
                         CatEstatus.IdUsuarioModifico = Guid.Parse(fuser);
                         CatEstatus.FechaRegistro = DateTime.Now;
                         CatEstatus.EstatusDesc = CatEstatus.EstatusDesc.ToString().ToUpper();
-
-                        _context.SaveChanges();
-
                         _context.Add(CatEstatus);
                         await _context.SaveChangesAsync();
                         _notyf.Success("Registro creado con éxito", 5);
