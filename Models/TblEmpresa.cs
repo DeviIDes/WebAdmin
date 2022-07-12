@@ -51,10 +51,6 @@ namespace WebAdmin.Models
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
-
-        [NotMapped]
-        public string FiltroUserName { get; set; }
-
         [Column("FechaRegistro")]
         [DataType(DataType.Date)]
         public DateTime FechaRegistro { get; set; }

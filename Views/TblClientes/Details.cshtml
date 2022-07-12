@@ -1,25 +1,25 @@
-﻿@model WebAdmin.Models.TblCliente
+﻿@model WebAdmin.Models.TblAlumno
 @{
-    ViewData["Title"] = "Detalles Cliente";
+    ViewData["Title"] = "Detalles Alumno";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     
     <li class="breadcrumb-item">Información</li>
-    <li class="breadcrumb-item">Cliente</li>
-    <li class="breadcrumb-item">Control de Cliente</li>
-    <li class="breadcrumb-item active" aria-current="page">Detalles Cliente</li>
+    <li class="breadcrumb-item">Alumno</li>
+    <li class="breadcrumb-item">Control de Alumno</li>
+    <li class="breadcrumb-item active" aria-current="page">Detalles Alumno</li>
   </ol>
 </nav>
 <hr />
 <div>
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCliente)
+            @Html.DisplayNameFor(model => model.NombreAlumno)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NombreCliente)
+            @Html.DisplayFor(model => model.NombreAlumno)
         </dd>
 
         <dt class = "col-sm-2">

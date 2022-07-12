@@ -6,19 +6,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public partial class TblCliente
+    public partial class TblAlumno
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid IdCliente { get; set; }
+        public Guid IdAlumno { get; set; }
 
-        [Display(Name = "Tipo Cliente")]
+        [Display(Name = "Tipo Alumno")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public int IdTipoCliente { get; set; }
+        public int IdTipoAlumno { get; set; }
 
-        [Display(Name = "Nombre Cliente")]
+        [Display(Name = "Nombre Alumno")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public string NombreCliente { get; set; }
+        public string NombreAlumno { get; set; }
 
         [Display(Name = "Apellido Paterno")]
         public string ApellidoPaterno { get; set; }
@@ -42,12 +41,14 @@ namespace WebAdmin.Models
         public string Telefono { get; set; }
 
         [Display(Name = "Clave Acceso")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public string ClaveAcceso { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }
 
         [Display(Name = "Corporativo / Centro")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdUCorporativoCentro { get; set; }
 
         [Column("FechaRegistro")]
@@ -60,19 +61,16 @@ namespace WebAdmin.Models
         [Display(Name = "Fecha Acceso")]
         public DateTime FechaAcceso { get; set; }
 
-        [NotMapped]
-        public string ReturnUrl { get; set; }
-
         [Display(Name = "Estatus")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int IdEstatusRegistro { get; set; }
 
         [Display(Name = "Nombre Completo")]
-        public string FullName
+        public string NombreCompleto
         {
             get
             {
-                return NombreCliente + ", " + ApellidoMaterno + " " + ApellidoMaterno;
+                return NombreAlumno + ", " + ApellidoMaterno + " " + ApellidoMaterno;
             }
         }
     }

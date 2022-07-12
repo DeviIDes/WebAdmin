@@ -11,20 +11,20 @@ using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-    public class CatTipoClientesController : Controller
+    public class CatTipoAlumnosController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatTipoClientesController(nDbContext context, INotyfService notyf, IUserService userService)
+        public CatTipoAlumnosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
 
-        // GET: CatTipoClienteses
+        // GET: CatTipoAlumnoses
         public async Task<IActionResult> Index()
         {
             var ValidaEstatus = _context.CatEstatus.ToList();
@@ -38,10 +38,10 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatTipoClientes.ToListAsync());
+            return View(await _context.CatTipoAlumnos.ToListAsync());
         }
 
-        // GET: CatTipoClienteses/Details/5
+        // GET: CatTipoAlumnoses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,44 +49,44 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var CatTipoClientes = await _context.CatTipoClientes
-                .FirstOrDefaultAsync(m => m.IdTipoCliente == id);
-            if (CatTipoClientes == null)
+            var CatTipoAlumnos = await _context.CatTipoAlumnos
+                .FirstOrDefaultAsync(m => m.IdTipoAlumno == id);
+            if (CatTipoAlumnos == null)
             {
                 return NotFound();
             }
 
-            return View(CatTipoClientes);
+            return View(CatTipoAlumnos);
         }
 
-        // GET: CatTipoClienteses/Create
+        // GET: CatTipoAlumnoses/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CatTipoClienteses/Create
+        // POST: CatTipoAlumnoses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoCliente,TipoClienteDesc")] CatTipoCliente CatTipoClientes)
+        public async Task<IActionResult> Create([Bind("IdTipoAlumno,TipoAlumnoDesc")] CatTipoAlumno CatTipoAlumnos)
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatTipoClientes
-                       .Where(s => s.TipoClienteDesc == CatTipoClientes.TipoClienteDesc)
+                var DuplicadosEstatus = _context.CatTipoAlumnos
+                       .Where(s => s.TipoAlumnoDesc == CatTipoAlumnos.TipoAlumnoDesc)
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    CatTipoClientes.IdUsuarioModifico = Guid.Parse(fuser);
-                    CatTipoClientes.FechaRegistro = DateTime.Now;
-                    CatTipoClientes.TipoClienteDesc = CatTipoClientes.TipoClienteDesc.ToString().ToUpper();
-                    CatTipoClientes.IdEstatusRegistro = 1;
-                    _context.Add(CatTipoClientes);
+                    CatTipoAlumnos.IdUsuarioModifico = Guid.Parse(fuser);
+                    CatTipoAlumnos.FechaRegistro = DateTime.Now;
+                    CatTipoAlumnos.TipoAlumnoDesc = CatTipoAlumnos.TipoAlumnoDesc.ToString().ToUpper();
+                    CatTipoAlumnos.IdEstatusRegistro = 1;
+                    _context.Add(CatTipoAlumnos);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -97,10 +97,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(CatTipoClientes);
+            return View(CatTipoAlumnos);
         }
 
-        // GET: CatTipoClienteses/Edit/5
+        // GET: CatTipoAlumnoses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
@@ -111,22 +111,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var CatTipoClientes = await _context.CatTipoClientes.FindAsync(id);
-            if (CatTipoClientes == null)
+            var CatTipoAlumnos = await _context.CatTipoAlumnos.FindAsync(id);
+            if (CatTipoAlumnos == null)
             {
                 return NotFound();
             }
-            return View(CatTipoClientes);
+            return View(CatTipoAlumnos);
         }
 
-        // POST: CatTipoClienteses/Edit/5
+        // POST: CatTipoAlumnoses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoCliente,TipoClienteDesc,IdEstatusRegistro")] CatTipoCliente CatTipoClientes)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoAlumno,TipoAlumnoDesc,IdEstatusRegistro")] CatTipoAlumno CatTipoAlumnos)
         {
-            if (id != CatTipoClientes.IdTipoCliente)
+            if (id != CatTipoAlumnos.IdTipoAlumno)
             {
                 return NotFound();
             }
@@ -137,16 +137,16 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    CatTipoClientes.IdUsuarioModifico = Guid.Parse(fuser);
-                    CatTipoClientes.FechaRegistro = DateTime.Now;
-                    CatTipoClientes.TipoClienteDesc = CatTipoClientes.TipoClienteDesc.ToString().ToUpper();
-                    CatTipoClientes.IdEstatusRegistro = CatTipoClientes.IdEstatusRegistro;
-                    _context.Update(CatTipoClientes);
+                    CatTipoAlumnos.IdUsuarioModifico = Guid.Parse(fuser);
+                    CatTipoAlumnos.FechaRegistro = DateTime.Now;
+                    CatTipoAlumnos.TipoAlumnoDesc = CatTipoAlumnos.TipoAlumnoDesc.ToString().ToUpper();
+                    CatTipoAlumnos.IdEstatusRegistro = CatTipoAlumnos.IdEstatusRegistro;
+                    _context.Update(CatTipoAlumnos);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatTipoClientesExists(CatTipoClientes.IdTipoCliente))
+                    if (!CatTipoAlumnosExists(CatTipoAlumnos.IdTipoAlumno))
                     {
                         return NotFound();
                     }
@@ -157,10 +157,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(CatTipoClientes);
+            return View(CatTipoAlumnos);
         }
 
-        // GET: CatTipoClienteses/Delete/5
+        // GET: CatTipoAlumnoses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -168,31 +168,31 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var CatTipoClientes = await _context.CatTipoClientes
-                .FirstOrDefaultAsync(m => m.IdTipoCliente == id);
-            if (CatTipoClientes == null)
+            var CatTipoAlumnos = await _context.CatTipoAlumnos
+                .FirstOrDefaultAsync(m => m.IdTipoAlumno == id);
+            if (CatTipoAlumnos == null)
             {
                 return NotFound();
             }
 
-            return View(CatTipoClientes);
+            return View(CatTipoAlumnos);
         }
 
-        // POST: CatTipoClienteses/Delete/5
+        // POST: CatTipoAlumnoses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var CatTipoClientes = await _context.TblCentros.FindAsync(id);
-            CatTipoClientes.IdEstatusRegistro = 2;
+            var CatTipoAlumnos = await _context.TblCentros.FindAsync(id);
+            CatTipoAlumnos.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CatTipoClientesExists(int id)
+        private bool CatTipoAlumnosExists(int id)
         {
-            return _context.CatTipoClientes.Any(e => e.IdTipoCliente == id);
+            return _context.CatTipoAlumnos.Any(e => e.IdTipoAlumno == id);
         }
     }
 }

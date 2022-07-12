@@ -29,7 +29,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly INotyfService _notyf;
- private readonly nDbContext _context;
+        private readonly nDbContext _context;
 
 
         public RegisterModel(
@@ -43,7 +43,7 @@ namespace WebAdmin.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-             _context = context;
+            _context = context;
             _notyf = notyf;
         }
 
@@ -56,21 +56,21 @@ namespace WebAdmin.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-             [Required(ErrorMessage = "Campo Requerido")]
+            [Required(ErrorMessage = "Campo Requerido")]
             [Display(Name = "Nombres")]
             public string Nombres { get; set; }
-             [Required(ErrorMessage = "Campo Requerido")]
+            [Required(ErrorMessage = "Campo Requerido")]
             [Display(Name = "Apellido Paterno")]
             public string ApellidoPaterno { get; set; }
-             [Required(ErrorMessage = "Campo Requerido")]
+            [Required(ErrorMessage = "Campo Requerido")]
             [Display(Name = "Apellido Materno")]
             public string ApellidoMaterno { get; set; }
-             [Required(ErrorMessage = "Campo Requerido")]
+            [Required(ErrorMessage = "Campo Requerido")]
             [EmailAddress]
             [Display(Name = "Correo electrónico")]
             public string Email { get; set; }
 
-             [Required(ErrorMessage = "Campo Requerido")]
+            [Required(ErrorMessage = "Campo Requerido")]
             [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} y un máximo de {1} caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Clave")]
@@ -114,20 +114,23 @@ namespace WebAdmin.Areas.Identity.Pages.Account
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
- 
-  var addUsuarios = new TblUsuario
+
+                var addUsuarios = new TblUsuario
                 {
                     IdUsuario = Guid.Parse(user.Id),
                     Nombres = Input.Nombres.ToUpper(),
                     ApellidoPaterno = Input.ApellidoPaterno.ToUpper(),
                     ApellidoMaterno = Input.ApellidoMaterno.ToUpper(),
+                    NombreUsuario = "Null",
+                    FechaNacimiento = DateTime.Now,
+                    IdUsuarioModifico = Guid.Empty,
                     CorreoAcceso = user.Email,
                     FechaRegistro = DateTime.Now,
                     IdEstatusRegistro = 1
                 };
-                    _context.SaveChanges();
-                    _context.Add(addUsuarios);
-                    await _context.SaveChangesAsync();
+                _context.SaveChanges();
+                _context.Add(addUsuarios);
+                await _context.SaveChangesAsync();
 
                 if (result.Succeeded)
                 {

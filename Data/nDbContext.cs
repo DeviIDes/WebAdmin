@@ -33,9 +33,9 @@ namespace WebAdmin.Data
 
         public DbSet<CatTipoDireccion> CatTipoDirecciones { get; set; }
 
-        public DbSet<TblCliente> TblClientes { get; set; }
-        public DbSet<TblClienteContacto> TblClienteContactos { get; set; }
-        public DbSet<TblClienteDireccion> TblClienteDirecciones { get; set; }
+        public DbSet<TblAlumno> TblAlumnos { get; set; }
+        public DbSet<TblAlumnoContacto> TblAlumnoContactos { get; set; }
+        public DbSet<TblAlumnoDireccion> TblAlumnoDirecciones { get; set; }
 
         public DbSet<TblEmpresa> TblEmpresas { get; set; }
         public DbSet<TblProveedor> TblProveedores { get; set; }
@@ -53,7 +53,7 @@ namespace WebAdmin.Data
         public DbSet<CatTipoPago> CatTipoPago { get; set; }
         public DbSet<CatTipoPrestamo> CatTipoPrestamo { get; set; }
         public DbSet<CatTipoServicio> CatTipoServicio { get; set; }
-        public DbSet<CatTipoCliente> CatTipoClientes { get; set; }
+        public DbSet<CatTipoAlumno> CatTipoAlumnos { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -116,7 +116,7 @@ namespace WebAdmin.Data
              new CatArea { IdArea = 4, AreaDesc = "FINANZAS/CONTABILIDAD", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
              new CatArea { IdArea = 5, AreaDesc = "MARKETING/VENTAS", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
              new CatArea { IdArea = 6, AreaDesc = "TIC", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
-             new CatArea { IdArea = 7, AreaDesc = "SERVICIO AL CLIENTE", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
+             new CatArea { IdArea = 7, AreaDesc = "SERVICIO AL Alumno", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 },
              new CatArea { IdArea = 8, AreaDesc = "OTRA", FechaRegistro = DateTime.Today, IdEstatusRegistro = 1 }
          );
             modelBuilder.Entity<CatTipoPago>().HasData(

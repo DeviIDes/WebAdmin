@@ -1,7 +1,7 @@
-﻿@model WebAdmin.Models.TblClienteContacto
+﻿@model WebAdmin.Models.TblAlumnoContacto
 
 @{
-    ViewData["Title"] = "Editar Cliente Contacto";
+    ViewData["Title"] = "Editar Alumno Contacto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,9 +10,9 @@
     <ol class="breadcrumb">
 
         <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Cliente</li>
-        <li class="breadcrumb-item">Control de Cliente</li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Cliente Contacto</li>
+        <li class="breadcrumb-item">Alumno</li>
+        <li class="breadcrumb-item">Control de Alumno</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Alumno Contacto</li>
     </ol>
 </nav>
 <hr />
@@ -20,15 +20,15 @@
 
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="IdClienteContacto" />
+        <input type="hidden" asp-for="IdAlumnoContacto" />
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label asp-for="IdCliente" class="control-label"></label>
-                    <select id="idListaCliente" class="form-select statesSelect" asp-for="IdCliente" asp-items="@(new SelectList(ViewBag.ListaCliente,"IdCliente","NombreCliente"))">
+                    <label asp-for="IdAlumno" class="control-label"></label>
+                    <select id="idListaAlumno" class="form-select statesSelect" asp-for="IdAlumno" asp-items="@(new SelectList(ViewBag.ListaAlumno,"IdAlumno","NombreAlumno"))">
                         <option value="">SELECCIONAR</option>
                     </select>
-                    <span asp-validation-for="IdCliente" class="text-danger"></span>
+                    <span asp-validation-for="IdAlumno" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-2">
@@ -37,14 +37,14 @@
                     <select id="idListaPerfil" class="form-select statesSelect" asp-for="IdPerfil" asp-items="@(new SelectList(ViewBag.ListaPerfil,"IdPerfil","PerfilDesc"))">
                         <option value="">SELECCIONAR</option>
                     </select>
-                    <span asp-validation-for="IdCliente" class="text-danger"></span>
+                    <span asp-validation-for="IdAlumno" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="NombreClienteContacto" class="control-label"></label>
-                    <input style="text-transform:uppercase" asp-for="NombreClienteContacto" class="form-control" />
-                    <span asp-validation-for="NombreClienteContacto" class="text-danger"></span>
+                    <label asp-for="NombreAlumnoContacto" class="control-label"></label>
+                    <input style="text-transform:uppercase" asp-for="NombreAlumnoContacto" class="form-control" />
+                    <span asp-validation-for="NombreAlumnoContacto" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">

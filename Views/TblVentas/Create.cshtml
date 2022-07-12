@@ -176,7 +176,9 @@
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
-
+    function GetClientReport() {  
+    window.open('/{TblVentas}/CreatePdf, "_blank");  
+}; 
     function RemoveRow(o) {
         //no clue what to put here?
         var p = o.parentNode.parentNode;

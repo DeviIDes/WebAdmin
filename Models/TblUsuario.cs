@@ -9,44 +9,48 @@ namespace WebAdmin.Models
     public partial class TblUsuario
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid IdUsuario { get; set; }
 
         [Display(Name = "Nombres")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public string Nombres { get; set; }
-
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Apellido Paterno")]
         public string ApellidoPaterno { get; set; }
+        [Required(ErrorMessage = "Campo Requerido")]
 
         [Display(Name = "ApellidoMaterno")]
         public string ApellidoMaterno { get; set; }
-
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Nombre Usuario")]
         public string NombreUsuario { get; set; }
 
-        [ForeignKey("TblCorporativo")]
+        [Display(Name = "Corporativo")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCorporativo { get; set; }
 
-        [Display(Name = "Nombre Empresa")]
-        public string NombreEmpresa { get; set; }
-
         [Display(Name = "Area")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdArea { get; set; }
 
         [Display(Name = "Genero")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdGenero { get; set; }
 
         [Display(Name = "Perfil")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdPerfil { get; set; }
 
         [Display(Name = "Rol")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int IdRol { get; set; }
 
-        [Column("Fecha de Nacimiento")]
+        [Display(Name = "Fecha de Nacimiento")]
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
 
         [Display(Name = "Correo de Acceso")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public string CorreoAcceso { get; set; }
 
         [Display(Name = "Telefono")]

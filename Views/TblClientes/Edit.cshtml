@@ -1,8 +1,8 @@
-﻿@model WebAdmin.Models.TblCliente
+﻿@model WebAdmin.Models.TblAlumno
 
 
 @{
-    ViewData["Title"] = "Editar Cliente";
+    ViewData["Title"] = "Editar Alumno";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -10,8 +10,8 @@
         
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Empresa</li>
-        <li class="breadcrumb-item">Control de Cliente</li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Cliente</li>
+        <li class="breadcrumb-item">Control de Alumno</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Alumno</li>
     </ol>
 </nav>
 <hr />
@@ -20,13 +20,13 @@
 
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="IdCliente" />
+        <input type="hidden" asp-for="IdAlumno" />
         <div class="row">
                <div class="col-md-2">
                 <div class="form-group">
-                    <label asp-for="NombreCliente" class="control-label"></label>
-                    <input style="text-transform:uppercase" asp-for="NombreCliente" class="form-control" />
-                    <span asp-validation-for="NombreCliente" class="text-danger"></span>
+                    <label asp-for="NombreAlumno" class="control-label"></label>
+                    <input style="text-transform:uppercase" asp-for="NombreAlumno" class="form-control" />
+                    <span asp-validation-for="NombreAlumno" class="text-danger"></span>
                 </div>
             </div>
        <div class="col-md-2">
