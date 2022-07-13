@@ -4,187 +4,351 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
 
-        <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Ventas</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Venta</li>
-    </ol>
-</nav>
-<p>
-    <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-area="Identity" asp-page="/Account/Register">
-        <i class="fas fa-plus"></i> Nuevo
-    </a>
-</p>
-<div class="row">
 
-    <div class="col-md-3">
-        <div class="form-group">
-            <label asp-for="TblVentas.IdCliente" class="control-label"></label>
-            <select id="IdCliente" class="form-select" asp-for="TblVentas.IdCliente"
-                asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
-                <option value="">SELECCIONAR</option>
-            </select>
+    <nav aria-label="breadcrumb no-print">
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">Información</li>
+            <li class="breadcrumb-item">Ventas</li>
+            <li class="breadcrumb-item active" aria-current="page">Crear Venta</li>
+        </ol>
+    </nav>
+    <p>
+        <a id="iNuevo" type="submit" class="btn btn-outline-primary no-print" asp-area="Identity" asp-page="/Account/Register">
+            <i class="fas fa-plus"></i> Nuevo
+        </a>
+    </p>
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="TblVentas.IdCliente" class="control-label"></label>
+                <select id="IdCliente" class="form-select" asp-for="TblVentas.IdCliente"
+                    asp-items="@(new SelectList(ViewBag.ListaUsuariosCentros,"IdUsuario","NombreUsuario"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+            </div>
+            <span asp-validation-for="TblVentas.IdCliente" class="text-danger"></span>
         </div>
-        <span asp-validation-for="TblVentas.IdCliente" class="text-danger"></span>
-    </div>
-    <div class="col-md-1">
-        <div class="form-group">
-            <label asp-for="TblVentas.RelVentaProductos[0].Descuento" class="control-label"></label>
-            <input id="iDescuento" asp-for="TblVentas.RelVentaProductos[0].Descuento" class="form-control" type="number"
-                min="0" max="100" value="0" />
+        <div class="col-md-1">
+            <div class="form-group">
+                <label asp-for="TblVentas.RelVentaProductos[0].Descuento" class="control-label"></label>
+                <input id="iDescuento" asp-for="TblVentas.RelVentaProductos[0].Descuento" class="form-control"
+                    type="number" min="0" max="100" value="0" />
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <label asp-for="@Model.RelVentaProductos[0].Categoria" class="control-label"></label>
-        <div class="input-group mb-3">
-            <select id="drpCategoria" class="form-select" asp-for="@Model.RelVentaProductos[0].Categoria" asp-items="@(new
+        <div class="col-md-3">
+            <label asp-for="@Model.RelVentaProductos[0].Categoria" class="control-label"></label>
+            <div class="input-group mb-3">
+                <select id="drpCategoria" class="form-select" asp-for="@Model.RelVentaProductos[0].Categoria" asp-items="@(new
             SelectList(ViewBag.ListaCategoria,"IdCategoria","CategoriaDesc"))">
-                <option value="">SELECCIONAR</option>
-            </select>
-            <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <button class="btn btn-primary" type="button" onclick="DatosProductos()">Ver</button>
+            </div>
+            <span asp-validation-for="@Model.RelVentaProductos[0].Categoria" class="text-danger"></span>
         </div>
-        <span asp-validation-for="@Model.RelVentaProductos[0].Categoria" class="text-danger"></span>
-    </div>
-    <div class="col-md-5">
+        <div class="col-md-5">
 
-        <label asp-for="@Model.RelVentaProductos[0].Producto" class="control-label"></label>
-        <div class="input-group mb-3">
-            <select id="drpProducto" class="form-select" asp-for="@Model.RelVentaProductos[0].Producto">
-                <option value="">SELECCIONAR</option>
-            </select>
+            <label asp-for="@Model.RelVentaProductos[0].Producto" class="control-label"></label>
+            <div class="input-group mb-3">
+                <select id="drpProducto" class="form-select" asp-for="@Model.RelVentaProductos[0].Producto">
+                    <option value="">SELECCIONAR</option>
+                </select>
+            </div>
+            <span asp-validation-for="@Model.RelVentaProductos[0].Producto" class="text-danger"></span>
         </div>
-        <span asp-validation-for="@Model.RelVentaProductos[0].Producto" class="text-danger"></span>
+
+    </div>
+    <div class="row no-print">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label">Categoria</label>
+                <input id="iCategoria" class="form-control" type="text" readonly />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label">Producto</label>
+                <input id="iProducto" class="form-control" type="text" readonly />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label">Precio $</label>
+                <input id="iPrecio" class="form-control" min="1" step="any" readonly />
+            </div>
+        </div>
+        <div class="form-group">
+            <button id="btnAddProducto" class="btn btn-primary" type="button" disabled>Agregar</button>
+        </div>
+
     </div>
 
-</div>
-<div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            <label class="control-label">Categoria</label>
-            <input id="iCategoria" class="form-control" type="text" readonly />
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label class="control-label">Producto</label>
-            <input id="iProducto" class="form-control" type="text" readonly />
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            <label class="control-label">Precio $</label>
-            <input id="iPrecio" class="form-control" min="1" step="any" readonly />
-        </div>
-    </div>
-    <div class="form-group">
-        <button id="btnAddProducto" class="btn btn-primary" type="button" disabled>Agregar</button>
-    </div>
-
-</div>
-<div class="row">
-    <table class="table" id="tbProducto">
-        <tbody>
-            <thead>
-                </th>
-                <th style="text-align:center">
-                    CATEGORIA
-                </th>
-                <th style="text-align:center">
-                    PRODUCTO
-                </th>
-                <th style="text-align:center">
-                    TOTAL
-                </th>
-                <th style="text-align:center">
-                    PRECIO
-                </th>
-                <th style="text-align:center">
-                    DESCUENTO
-                </th>
-                <th style="text-align:center">ACCIONES</th>
-            </thead>
-        </tbody>
-    </table>
-</div>
-<div class="row">
-    <div class="col-md-2">
-        <div class="form-group">
-            <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
-            <select id="IdTipoPago" class="form-select" asp-for="TblVentas.IdTipoPago"
-                asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
-                <option value="">SELECCIONAR</option>
-            </select>
-            <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group" hidden>
-            <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
-            <input asp-for="TblVentas.CodigoPago" class="form-control" />
-            <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group" hidden>
-            <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
-            <input asp-for="TblVentas.FechaAlterna" class="form-control" />
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-3">
-        <div class="col-sm-4">
-            <label class="control-label">Total Venta</label>
-        </div>
-        <div class="col-sm-12">
-            <input id="ivTotal" class="form-control" />
-        </div>
-    </div>
-</div>
-<button class="btn btn-primary" id="btnTerminar"  href="#" data-toggle="modal" data-target="#logoutModal">Guardar</button>
-<a asp-action="Index" class="btn btn-secondary">Regresar</a>
-   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿Listo/a para salir?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Cerrar">
-                        <span aria-hidden="true">×</span>
-                    </button>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Invoice</h1>
                 </div>
-                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión
-                    actual.</div>
-                <div class="modal-footer">
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
-                        asp-route-returnUrl="@Url.Action("CreatePdf", "TblVentas", new { area = "" })">
-                        <button type="submit" class="btn btn-primary">Imprimir</button>
-                    </form>
-
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Invoice</li>
+                    </ol>
                 </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="callout callout-info">
+                        <h5><i class="fas fa-info"></i> Note:</h5>
+                        This page has been enhanced for printing. Click the print button at the bottom of the
+                        invoice to test.
+                    </div>
+
+
+                    <!-- Main content -->
+                    <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    <i class="fas fa-globe"></i> AdminLTE, Inc.
+                                    <small class="float-right">Date: 2/10/2014</small>
+                                </h4>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- info row -->
+                        <div class="row invoice-info">
+                            <div class="col-sm-4 invoice-col">
+                                From
+                                <address>
+                                    <strong>Admin, Inc.</strong><br>
+                                    795 Folsom Ave, Suite 600<br>
+                                    San Francisco, CA 94107<br>
+                                    Phone: (804) 123-5432<br>
+                                    Email: info@almasaeedstudio.com
+                                </address>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 invoice-col">
+                                To
+                                <address>
+                                    <strong>John Doe</strong><br>
+                                    795 Folsom Ave, Suite 600<br>
+                                    San Francisco, CA 94107<br>
+                                    Phone: (555) 539-1037<br>
+                                    Email: john.doe@example.com
+                                </address>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 invoice-col">
+                                <b>Invoice #007612</b><br>
+                                <br>
+                                <b>Order ID:</b> 4F3S8J<br>
+                                <b>Payment Due:</b> 2/22/2014<br>
+                                <b>Account:</b> 968-34567
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <!-- Table row -->
+                        <div class="row">
+                            <div class="col-12 table-responsive">
+                              
+                                    <table class="table" id="tbProducto">
+                                        <tbody>
+                                            <thead>
+                                                </th>
+                                                <th style="text-align:center">
+                                                    CATEGORIA
+                                                </th>
+                                                <th style="text-align:center">
+                                                    PRODUCTO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    TOTAL
+                                                </th>
+                                                <th style="text-align:center">
+                                                    PRECIO
+                                                </th>
+                                                <th style="text-align:center">
+                                                    DESCUENTO
+                                                </th>
+                                                <th style="text-align:center">ACCIONES</th>
+                                            </thead>
+                                        </tbody>
+                                    </table>
+                            
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-6">
+                                <p class="lead">Payment Methods:</p>
+                                <img src="../../dist/img/credit/visa.png" alt="Visa">
+                                <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+                                <img src="../../dist/img/credit/american-express.png" alt="American Express">
+                                <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+
+                                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning
+                                    heekya handango imeem
+                                    plugg
+                                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                                </p>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-6">
+                                <p class="lead">Amount Due 2/22/2014</p>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width:50%">Subtotal:</th>
+                                            <td>$250.30</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tax (9.3%)</th>
+                                            <td>$10.34</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping:</th>
+                                            <td>$5.80</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td>$265.24</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <!-- this row will not appear when printing -->
+                        <div class="row no-print">
+                            <div class="col-12">
+                                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i
+                                        class="fas fa-print"></i> Print</a>
+                                <button type="button" class="btn btn-success float-right">
+                                    <i class="far fa-credit-card"></i> Submit
+                                    Payment
+                                </button>
+                                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                    <i class="fas fa-download"></i> Generate PDF
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.invoice -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="TblVentas.IdTipoPago" class="control-label"></label>
+                <select id="IdTipoPago" class="form-select" asp-for="TblVentas.IdTipoPago"
+                    asp-items="@(new SelectList(ViewBag.ListaTipoPago,"IdTipoPago","TipoPagoDesc"))">
+                    <option value="">SELECCIONAR</option>
+                </select>
+                <span asp-validation-for="TblVentas.IdTipoPago" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group" hidden>
+                <label asp-for="TblVentas.CodigoPago" class="control-label"></label>
+                <input asp-for="TblVentas.CodigoPago" class="form-control" />
+                <span asp-validation-for="TblVentas.CodigoPago" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group" hidden>
+                <label asp-for="TblVentas.FechaAlterna" class="control-label"></label>
+                <input asp-for="TblVentas.FechaAlterna" class="form-control" />
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-3">
+            <div class="col-sm-4">
+                <label class="control-label">Total Venta</label>
+            </div>
+            <div class="col-sm-12">
+                <input id="ivTotal" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" id="btnTerminar" href="#" data-toggle="modal"
+        data-target="#logoutModal">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    <button class="btn btn-primary" id="btnTerminar2" onclick="GetClientReport()">Imprimir</button>
+
+    <div id="printThis">
+
+    </div>
+
+</div>
+<div class="modal fade-modal-xl" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog-modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿Listo/a para salir?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+            <div class="modal-footer">
+                <form class="form-inline">
+                    <button type="submit" class="btn btn-primary">Imprimir</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
 @{
 await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 <script>
-    function GetClientReport() {  
-    window.open('/{TblVentas}/CreatePdf, "_blank");  
-}; 
-    function RemoveRow(o) {
-        //no clue what to put here?
-        var p = o.parentNode.parentNode;
-        p.parentNode.removeChild(p);
-    }
+    @* function GetClientReport() {
+            window.open('/TblVentas/CreatePdf', '_blank');
+            }; *@
 
+        function RemoveRow(o) {
+            //no clue what to put here?
+            var p = o.parentNode.parentNode;
+            p.parentNode.removeChild(p);
+        }
+    $('#btnTerminar2').click(function () {
+        window.print();
+    });
     $('#drpProducto').change(function () {
         var SelectedText = $('option:selected', this).text();
         var SelectedValue = $('option:selected', this).val();
@@ -203,7 +367,7 @@ await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 $select_colonias.attr('required', true);
                 $("#btnMostrar").setAttribute("disabled"); *@
 
-    });
+            });
     $("#btnAddProducto").on("click", function () {
         var _desc = parseFloat($("#iDescuento").val())
         var _prec = parseFloat($("#iPrecio").val())

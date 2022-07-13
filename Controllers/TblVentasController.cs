@@ -63,7 +63,7 @@ namespace WebAdmin.Controllers
                 Objects = { objectSettings }
             };
             var file = _converter.Convert(pdf);
-            return File(file, "application/pdf");
+            return File(file, contentType: "application/pdf");
         }
         [HttpPost]
         public IActionResult Index([FromBody] VentasViewModel oVentaVM)

@@ -1,0 +1,105 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+using WebAdmin.Data;
+using System.Linq;
+using WebAdmin.Models;
+namespace WebAdmin.Controllers
+{
+    public class ReporteVentasController : Controller
+    {
+        private readonly nDbContext _context;
+     
+
+        public ReporteVentasController(nDbContext context)
+        {
+            _context = context;
+
+        }
+
+        // GET: ReporteVentasController
+        public ActionResult Index()
+        {
+            var rVP = from a in _context.TblVenta
+
+                        select new TblVenta
+                        {
+                            IdVenta = a.IdVenta,
+                            NumeroVenta = a.NumeroVenta,
+                            FechaRegistro = a.FechaRegistro,
+                            IdEstatusRegistro = a.IdEstatusRegistro
+                        };
+
+            return View(rVP);         
+        }
+
+        // GET: ReporteVentasController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: ReporteVentasController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: ReporteVentasController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ReporteVentasController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: ReporteVentasController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ReporteVentasController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: ReporteVentasController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+}
