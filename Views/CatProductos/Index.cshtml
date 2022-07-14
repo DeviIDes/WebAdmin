@@ -15,7 +15,7 @@
 <p>
     <a id="iNuevo" type="submit" class="btn btn-outline-primary" asp-action="Create" value="Nuevo" title="Nuevo"><i class="fas fa-plus"></i> Nuevo</a>
 </p>
-<table class="table" id="tblProductos">
+<table  id="tblProductos" class="table" style="width:100%">
     <thead>
         <tr>
             <th style="text-align:center">
@@ -90,7 +90,30 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#tblProductos').DataTable();
+              $('#tblAlumnos ').DataTable({
+        initComplete: function () {
+            this.api()
+                .columns()
+                .every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
+ 
+                            column.search(val ? '^' + val + '$' : '', true, false).draw();
+                        });
+ 
+                    column
+                        .data()
+                        .unique()
+                        .sort()
+                        .each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                });
+        },
+    });
 
             var vEstatusFlag = '@ViewBag.EstatusFlag'
             var vEmpresaFlag = '@ViewBag.EmpresaFlag'
