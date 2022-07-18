@@ -1,4 +1,4 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,20 +11,20 @@ using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-    public class CatAreasController : Controller
+    public class CatTipoDevolucionesController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public CatAreasController(nDbContext context, INotyfService notyf, IUserService userService)
+        public CatTipoDevolucionesController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
 
-        // GET: CatAreas
+        // GET: CatTipoDevoluciones
         public async Task<IActionResult> Index()
         {
             var ValidaEstatus = _context.CatEstatus.ToList();
@@ -38,10 +38,10 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.CatAreas.ToListAsync());
+            return View(await _context.CatTipoDevoluciones.ToListAsync());
         }
 
-        // GET: CatAreas/Details/5
+        // GET: CatTipoDevoluciones/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,46 +49,44 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catArea = await _context.CatAreas
-                .FirstOrDefaultAsync(m => m.IdArea == id);
-            if (catArea == null)
+            var CatTipoDevoluciones = await _context.CatTipoDevoluciones
+                .FirstOrDefaultAsync(m => m.IdTipoDevolucion == id);
+            if (CatTipoDevoluciones == null)
             {
                 return NotFound();
             }
 
-            return View(catArea);
+            return View(CatTipoDevoluciones);
         }
 
-        // GET: CatAreas/Create
+        // GET: CatTipoDevoluciones/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CatAreas/Create
+        // POST: CatTipoDevoluciones/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdArea,AreaDesc")] CatArea catArea)
+        public async Task<IActionResult> Create([Bind("IdTipoDevolucion,TipoDevolucionDesc")] CatTipoDevolucion CatTipoDevoluciones)
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.CatAreas
-                       .Where(s => s.AreaDesc == catArea.AreaDesc)
+                var DuplicadosEstatus = _context.CatTipoDevoluciones
+                       .Where(s => s.TipoDevolucionDesc == CatTipoDevoluciones.TipoDevolucionDesc)
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catArea.FechaRegistro = DateTime.Now;
-                    catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
-                    catArea.IdEstatusRegistro = 1;
-                    catArea.IdUsuarioModifico = Guid.Parse(fuser);
-                    _context.SaveChanges();
-
-                    _context.Add(catArea);
+                    CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    CatTipoDevoluciones.FechaRegistro = DateTime.Now;
+                    CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper();
+                    CatTipoDevoluciones.IdEstatusRegistro = 1;
+                    _context.Add(CatTipoDevoluciones);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -96,13 +94,13 @@ namespace WebAdmin.Controllers
                 {
                     //_notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
                     _notyf.Information("Favor de validar, existe una Estatus con el mismo nombre", 5);
-                } 
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catArea);
+            return View(CatTipoDevoluciones);
         }
 
-        // GET: CatAreas/Edit/5
+        // GET: CatTipoDevoluciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
@@ -113,22 +111,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catArea = await _context.CatAreas.FindAsync(id);
-            if (catArea == null)
+            var CatTipoDevoluciones = await _context.CatTipoDevoluciones.FindAsync(id);
+            if (CatTipoDevoluciones == null)
             {
                 return NotFound();
             }
-            return View(catArea);
+            return View(CatTipoDevoluciones);
         }
 
-        // POST: CatAreas/Edit/5
+        // POST: CatTipoDevoluciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdArea,AreaDesc,IdEstatusRegistro")] CatArea catArea)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTipoDevolucion,TipoDevolucionDesc,FechaRegistro,IdEstatusRegistro")] CatTipoDevolucion CatTipoDevoluciones)
         {
-            if (id != catArea.IdArea)
+            if (id != CatTipoDevoluciones.IdTipoDevolucion)
             {
                 return NotFound();
             }
@@ -139,17 +137,16 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    catArea.IdUsuarioModifico = Guid.Parse(fuser);
-                    catArea.FechaRegistro = DateTime.Now;
-                    catArea.AreaDesc = catArea.AreaDesc.ToString().ToUpper();
-                    catArea.IdEstatusRegistro = catArea.IdEstatusRegistro;
-                    _context.Update(catArea);
+                    CatTipoDevoluciones.IdUsuarioModifico = Guid.Parse(fuser);
+                    CatTipoDevoluciones.FechaRegistro = DateTime.Now;
+                    CatTipoDevoluciones.TipoDevolucionDesc = CatTipoDevoluciones.TipoDevolucionDesc.ToString().ToUpper();
+                    CatTipoDevoluciones.IdEstatusRegistro = CatTipoDevoluciones.IdEstatusRegistro;
+                    _context.Update(CatTipoDevoluciones);
                     await _context.SaveChangesAsync();
-                    _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CatAreaExists(catArea.IdArea))
+                    if (!CatTipoDevolucionesExists(CatTipoDevoluciones.IdTipoDevolucion))
                     {
                         return NotFound();
                     }
@@ -160,10 +157,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(catArea);
+            return View(CatTipoDevoluciones);
         }
 
-        // GET: CatAreas/Delete/5
+        // GET: CatTipoDevolucioness/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -171,31 +168,31 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var catArea = await _context.CatAreas
-                .FirstOrDefaultAsync(m => m.IdArea == id);
-            if (catArea == null)
+            var CatTipoDevoluciones = await _context.CatTipoDevoluciones
+                .FirstOrDefaultAsync(m => m.IdTipoDevolucion == id);
+            if (CatTipoDevoluciones == null)
             {
                 return NotFound();
             }
 
-            return View(catArea);
+            return View(CatTipoDevoluciones);
         }
 
-        // POST: CatAreas/Delete/5
+        // POST: CatTipoDevoluciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var catArea = await _context.CatAreas.FindAsync(id);
-            catArea.IdEstatusRegistro = 2;
+            var CatTipoDevoluciones = await _context.CatTipoDevoluciones.FindAsync(id);
+            CatTipoDevoluciones.IdEstatusRegistro = 2;
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CatAreaExists(int id)
+        private bool CatTipoDevolucionesExists(int id)
         {
-            return _context.CatAreas.Any(e => e.IdArea == id);
+            return _context.CatTipoDevoluciones.Any(e => e.IdTipoDevolucion == id);
         }
     }
 }

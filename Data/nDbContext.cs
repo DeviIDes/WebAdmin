@@ -50,6 +50,7 @@ namespace WebAdmin.Data
         public DbSet<CatNivelEscolar> CatNivelEscolar { get; set; }
         public DbSet<CatTipoAlumno> CatTipoAlumno { get; set; }
         public DbSet<CatTipoContratacion> CatTipoContratacion { get; set; }
+        public DbSet<CatTipoDevolucion> CatTipoDevoluciones { get; set; }
         public DbSet<CatTipoPago> CatTipoPago { get; set; }
         public DbSet<CatTipoPrestamo> CatTipoPrestamo { get; set; }
         public DbSet<CatTipoServicio> CatTipoServicio { get; set; }

@@ -107,6 +107,8 @@
                                 de Cliente</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatTipoLicencias"
                             asp-action="Index">Licencias</a>
+                            <a class="collapse-item" asp-area="" asp-controller="CatTipoDevoluciones"
+                            asp-action="Index">Tipos Devoluciones</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatAreas" asp-action="Index">Áreas</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatGeneroes" asp-action="Index">Géneros</a>
                             <a class="collapse-item" asp-area="" asp-controller="CatRoles" asp-action="Index">Roles</a>
@@ -322,6 +324,9 @@
                         }
                         else
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registro</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-user-lock"> Acceso</i> </a>
                             </li>
