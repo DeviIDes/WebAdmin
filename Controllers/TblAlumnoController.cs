@@ -11,20 +11,20 @@ using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-    public class TblClientesController : Controller
+    public class TblAlumnosController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblClientesController(nDbContext context, INotyfService notyf, IUserService userService)
+        public TblAlumnosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
 
-        // GET: TblClientes
+        // GET: TblAlumnos
         public async Task<IActionResult> Index()
         {
             var ValidaEstatus = _context.CatEstatus.ToList();
@@ -49,33 +49,33 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            return View(await _context.TblClientes.ToListAsync());
+            return View(await _context.TblAlumnos.ToListAsync());
         }
 
         [HttpGet]
-        public ActionResult FiltroCliente(Guid id)
+        public ActionResult FiltroAlumno(Guid id)
         {
-            var fCliente = (from a in _context.TblClientes
-                            join b in _context.TblClienteDirecciones on a.IdCliente equals b.IdCliente
-                            where a.IdCliente == id && b.IdTipoDireccion == 1
+            var fAlumno = (from a in _context.TblAlumnos
+                            join b in _context.TblAlumnoDirecciones on a.IdAlumno equals b.IdAlumno
+                            where a.IdAlumno == id && b.IdTipoDireccion == 1
                             select new
                             {
-                                IdCliente = a.IdCliente,
-                                NombreCliente = a.NombreCliente,
+                                IdAlumno = a.IdAlumno,
+                                NombreAlumno = a.NombreAlumno,
 
-                                CalleCliente = b.Calle,
-                                CodigoPostalCliente = b.CodigoPostal,
-                                ColoniaCliente = b.Colonia,
-                                CiudadCliente = b.Ciudad,
-                                EstadoCliente = b.Estado,
-                                CorreoElectronicoCliente = b.CorreoElectronico,
-                                TelefonoCliente = b.Telefono
+                                CalleAlumno = b.Calle,
+                                CodigoPostalAlumno = b.CodigoPostal,
+                                ColoniaAlumno = b.Colonia,
+                                CiudadAlumno = b.Ciudad,
+                                EstadoAlumno = b.Estado,
+                                CorreoElectronicoAlumno = b.CorreoElectronico,
+                                TelefonoAlumno = b.Telefono
                             }).Distinct().ToList();
 
-            return Json(fCliente);
+            return Json(fAlumno);
         }
 
-        // GET: TblClientes/Details/5
+        // GET: TblAlumnos/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -83,44 +83,44 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblCliente = await _context.TblClientes
-                .FirstOrDefaultAsync(m => m.IdCliente == id);
-            if (tblCliente == null)
+            var tblAlumno = await _context.TblAlumnos
+                .FirstOrDefaultAsync(m => m.IdAlumno == id);
+            if (tblAlumno == null)
             {
                 return NotFound();
             }
 
-            return View(tblCliente);
+            return View(tblAlumno);
         }
 
-        // GET: TblClientes/Create
+        // GET: TblAlumnos/Create
         public IActionResult Create()
         {
-            List<CatTipoCliente> ListaTipoClientes = new List<CatTipoCliente>();
-            ListaTipoClientes = (from c in _context.CatTipoClientes select c).Distinct().ToList();
-            ViewBag.ListaTipoClientes = ListaTipoClientes;
+            List<CatTipoAlumno> ListaTipoAlumnos = new List<CatTipoAlumno>();
+            ListaTipoAlumnos = (from c in _context.CatTipoAlumnos select c).Distinct().ToList();
+            ViewBag.ListaTipoAlumnos = ListaTipoAlumnos;
 
             return View();
         }
 
-        // POST: TblClientes/Create
+        // POST: TblAlumnos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCliente,NombreCliente,ApellidoPaterno,ApellidoMaterno,IdTipoCliente")] TblCliente tblCliente)
+        public async Task<IActionResult> Create([Bind("IdAlumno,NombreAlumno,ApellidoPaterno,ApellidoMaterno,IdTipoAlumno")] TblAlumno tblAlumno)
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblClientes
-                                          .Where(s => s.NombreCliente == tblCliente.NombreCliente)
+                var DuplicadosEstatus = _context.TblAlumnos
+                                          .Where(s => s.NombreAlumno == tblAlumno.NombreAlumno)
                                           .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblCliente.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
                     var fCentro = Guid.Empty;
 
                     var vCentro = _context.TblCentros
@@ -130,35 +130,37 @@ namespace WebAdmin.Controllers
                     if (vCentro.Count == 0)
                     {
                         var fcorporativo = _context.TblCorporativos.FirstOrDefault();
-                        tblCliente.IdUCorporativoCentro = fcorporativo.IdCorporativo;
-                        
+                        tblAlumno.IdUCorporativoCentro = fcorporativo.IdCorporativo;
+
                     }
                     else
                     {
                         fCentro = vCentro[0].IdCentro;
-                        tblCliente.IdUCorporativoCentro = fCentro;
+                        tblAlumno.IdUCorporativoCentro = fCentro;
                     }
-                  
 
-                    tblCliente.FechaRegistro = DateTime.Now;
-                    tblCliente.ApellidoPaterno = !string.IsNullOrEmpty(tblCliente.ApellidoPaterno) ? tblCliente.ApellidoPaterno.ToUpper() : tblCliente.ApellidoPaterno;
-                    tblCliente.ApellidoPaterno = !string.IsNullOrEmpty(tblCliente.ApellidoMaterno) ? tblCliente.ApellidoMaterno.ToUpper() : tblCliente.ApellidoMaterno;
-                    tblCliente.IdEstatusRegistro = 1;
-                 
-                    _context.Add(tblCliente);
+
+                    tblAlumno.FechaRegistro = DateTime.Now;
+                    tblAlumno.ApellidoPaterno = !string.IsNullOrEmpty(tblAlumno.ApellidoPaterno) ? tblAlumno.ApellidoPaterno.ToUpper() : tblAlumno.ApellidoPaterno;
+                    tblAlumno.ApellidoPaterno = !string.IsNullOrEmpty(tblAlumno.ApellidoMaterno) ? tblAlumno.ApellidoMaterno.ToUpper() : tblAlumno.ApellidoMaterno;
+                    tblAlumno.IdEstatusRegistro = 1;
+
+                    _context.Add(tblAlumno);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
+                    return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     _notyf.Warning("Favor de validar, existe una Estatus con el mismo nombre", 5);
+
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(tblCliente);
+            return View(tblAlumno);
         }
 
-        // GET: TblClientes/Edit/5
+        // GET: TblAlumnos/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             List<CatEstatus> ListaCatEstatus = new List<CatEstatus>();
@@ -178,22 +180,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblCliente = await _context.TblClientes.FindAsync(id);
-            if (tblCliente == null)
+            var tblAlumno = await _context.TblAlumnos.FindAsync(id);
+            if (tblAlumno == null)
             {
                 return NotFound();
             }
-            return View(tblCliente);
+            return View(tblAlumno);
         }
 
-        // POST: TblClientes/Edit/5
+        // POST: TblAlumnos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdCliente,NombreCliente,IdTipoCliente, IdPerfil, IdRol,IdEstatusRegistro")] TblCliente tblCliente)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdAlumno,NombreAlumno,IdTipoAlumno, IdPerfil, IdRol,IdEstatusRegistro")] TblAlumno tblAlumno)
         {
-            if (id != tblCliente.IdCliente)
+            if (id != tblAlumno.IdAlumno)
             {
                 return NotFound();
             }
@@ -204,18 +206,18 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblCliente.IdUsuarioModifico = Guid.Parse(fuser);
+                    tblAlumno.IdUsuarioModifico = Guid.Parse(fuser);
                     var idCorporativos = _context.TblCorporativos.FirstOrDefault();
-                    tblCliente.FechaRegistro = DateTime.Now;
-                    tblCliente.NombreCliente = tblCliente.NombreCliente.ToString().ToUpper();
+                    tblAlumno.FechaRegistro = DateTime.Now;
+                    tblAlumno.NombreAlumno = tblAlumno.NombreAlumno.ToString().ToUpper();
 
-                    _context.Update(tblCliente);
+                    _context.Update(tblAlumno);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblClienteExists(tblCliente.IdCliente))
+                    if (!TblAlumnoExists(tblAlumno.IdAlumno))
                     {
                         return NotFound();
                     }
@@ -226,10 +228,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblCliente);
+            return View(tblAlumno);
         }
 
-        // GET: TblClientes/Delete/5
+        // GET: TblAlumnos/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -237,32 +239,32 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblCliente = await _context.TblClientes
-                .FirstOrDefaultAsync(m => m.IdCliente == id);
-            if (tblCliente == null)
+            var tblAlumno = await _context.TblAlumnos
+                .FirstOrDefaultAsync(m => m.IdAlumno == id);
+            if (tblAlumno == null)
             {
                 return NotFound();
             }
 
-            return View(tblCliente);
+            return View(tblAlumno);
         }
 
-        // POST: TblClientes/Delete/5
+        // POST: TblAlumnos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var tblCliente = await _context.TblClientes.FindAsync(id);
-            tblCliente.IdEstatusRegistro = 2;
+            var tblAlumno = await _context.TblAlumnos.FindAsync(id);
+            tblAlumno.IdEstatusRegistro = 2;
             _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblClienteExists(Guid id)
+        private bool TblAlumnoExists(Guid id)
         {
-            return _context.TblClientes.Any(e => e.IdCliente == id);
+            return _context.TblAlumnos.Any(e => e.IdAlumno == id);
         }
     }
 }

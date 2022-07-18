@@ -1,16 +1,16 @@
-﻿@model WebAdmin.Models.TblClienteDireccion
+﻿@model WebAdmin.Models.TblAlumnoDireccion
 
 @{
-    ViewData["Title"] = "Desactivar Cliente Direccion";
+    ViewData["Title"] = "Desactivar Alumno Direccion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         
         <li class="breadcrumb-item">Información</li>
-        <li class="breadcrumb-item">Cliente</li>
-        <li class="breadcrumb-item">Control de Cliente</li>
-        <li class="breadcrumb-item active" aria-current="page">Desactivar Cliente Direccion</li>
+        <li class="breadcrumb-item">Alumno</li>
+        <li class="breadcrumb-item">Control de Alumno</li>
+        <li class="breadcrumb-item active" aria-current="page">Desactivar Alumno Direccion</li>
     </ol>
 </nav>
 <hr />
@@ -81,7 +81,7 @@
         </dd>
     </dl>
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdClienteDirecciones" />
+        <input type="hidden" asp-for="IdAlumnoDirecciones" />
         <input type="submit" value="Desactivar" class="btn btn-danger" />
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>

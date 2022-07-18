@@ -11,20 +11,20 @@ using WebAdmin.Services;
 
 namespace WebAdmin.Controllers
 {
-    public class TblClienteContactosController : Controller
+    public class TblAlumnoContactosController : Controller
     {
         private readonly nDbContext _context;
         private readonly INotyfService _notyf;
         private readonly IUserService _userService;
 
-        public TblClienteContactosController(nDbContext context, INotyfService notyf, IUserService userService)
+        public TblAlumnoContactosController(nDbContext context, INotyfService notyf, IUserService userService)
         {
             _context = context;
             _notyf = notyf;
             _userService = userService;
         }
 
-        // GET: TblClienteContactoes
+        // GET: TblAlumnoContactoes
         public async Task<IActionResult> Index()
         {
             var ValidaEstatus = _context.CatEstatus.ToList();
@@ -37,11 +37,11 @@ namespace WebAdmin.Controllers
                 if (ValidaEmpresa.Count == 1)
                 {
                     ViewBag.EmpresaFlag = 1;
-                    var ValidaCliente = _context.TblClientes.ToList();
+                    var ValidaAlumno = _context.TblAlumnos.ToList();
 
-                    if (ValidaCliente.Count >= 1)
+                    if (ValidaAlumno.Count >= 1)
                     {
-                        ViewBag.ClienteFlag = 1;
+                        ViewBag.AlumnoFlag = 1;
                         var ValidaPerfil = _context.CatPerfiles.ToList();
 
                         if (ValidaPerfil.Count >= 1)
@@ -56,7 +56,7 @@ namespace WebAdmin.Controllers
                     }
                     else
                     {
-                        ViewBag.ClienteFlag = 0;
+                        ViewBag.AlumnoFlag = 0;
                         _notyf.Information("Favor de registrar los datos de la Proveedor para la Aplicación", 5);
                     }
                 }
@@ -71,58 +71,58 @@ namespace WebAdmin.Controllers
                 ViewBag.EstatusFlag = 0;
                 _notyf.Information("Favor de registrar los Estatus para la Aplicación", 5);
             }
-            var fTblClienteContacto = from a in _context.TblClienteContactos
+            var fTblAlumnoContacto = from a in _context.TblAlumnoContactos
                                       join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
-                                      join c in _context.TblClientes on a.IdCliente equals c.IdCliente
-                                      select new TblClienteContacto
+                                      join c in _context.TblAlumnos on a.IdAlumno equals c.IdAlumno
+                                      select new TblAlumnoContacto
                                       {
-                                          IdClienteContacto = a.IdClienteContacto,
-                                          NombreCliente = c.NombreCliente,
-                                          NombreClienteContacto = a.NombreClienteContacto,
+                                          IdAlumnoContacto = a.IdAlumnoContacto,
+                                          NombreAlumno = c.NombreAlumno,
+                                          NombreAlumnoContacto = a.NombreAlumnoContacto,
                                           PerfilDesc = b.PerfilDesc,
                                           FechaRegistro = a.FechaRegistro,
                                           IdEstatusRegistro = a.IdEstatusRegistro
                                       };
 
-            return View(await fTblClienteContacto.ToListAsync());
-            //return View(await _context.TblClienteDirecciones.ToListAsync());
+            return View(await fTblAlumnoContacto.ToListAsync());
+            //return View(await _context.TblAlumnoDirecciones.ToListAsync());
         }
 
         [HttpGet]
         public ActionResult FiltroContactos(Guid id)
         {
-            var fClienteContacto = (from a in _context.TblClienteContactos
+            var fAlumnoContacto = (from a in _context.TblAlumnoContactos
                                     join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
-                                    where a.IdCliente == id
+                                    where a.IdAlumno == id
                                     select new
                                     {
-                                        IdClienteContacto = a.IdClienteContacto,
-                                        NombreClienteContacto = a.NombreClienteContacto,
+                                        IdAlumnoContacto = a.IdAlumnoContacto,
+                                        NombreAlumnoContacto = a.NombreAlumnoContacto,
                                     }).Distinct().ToList();
 
-            return Json(fClienteContacto);
+            return Json(fAlumnoContacto);
         }
 
         [HttpGet]
         public ActionResult FiltroDatosContactos(int id)
         {
-            var fClienteContacto = (from a in _context.TblClienteContactos
+            var fAlumnoContacto = (from a in _context.TblAlumnoContactos
                                     join b in _context.CatPerfiles on a.IdPerfil equals b.IdPerfil
-                                    where a.IdClienteContacto == id
+                                    where a.IdAlumnoContacto == id
                                     select new
                                     {
-                                        IdClienteContacto = a.IdClienteContacto,
+                                        IdAlumnoContacto = a.IdAlumnoContacto,
                                         PerfilDesc = b.PerfilDesc,
-                                        NombreClienteContacto = a.NombreClienteContacto,
-                                        CorreoElectronicoClienteContacto = a.CorreoElectronico,
-                                        TelefonoClienteContacto = a.Telefono,
-                                        TelefonoMovilClienteContacto = a.TelefonoMovil
+                                        NombreAlumnoContacto = a.NombreAlumnoContacto,
+                                        CorreoElectronicoAlumnoContacto = a.CorreoElectronico,
+                                        TelefonoAlumnoContacto = a.Telefono,
+                                        TelefonoMovilAlumnoContacto = a.TelefonoMovil
                                     }).Distinct().ToList();
 
-            return Json(fClienteContacto);
+            return Json(fAlumnoContacto);
         }
 
-        // GET: TblClienteContactoes/Details/5
+        // GET: TblAlumnoContactoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -130,22 +130,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblClienteContacto = await _context.TblClienteContactos
-                .FirstOrDefaultAsync(m => m.IdClienteContacto == id);
-            if (tblClienteContacto == null)
+            var tblAlumnoContacto = await _context.TblAlumnoContactos
+                .FirstOrDefaultAsync(m => m.IdAlumnoContacto == id);
+            if (tblAlumnoContacto == null)
             {
                 return NotFound();
             }
 
-            return View(tblClienteContacto);
+            return View(tblAlumnoContacto);
         }
 
-        // GET: TblClienteContactoes/Create
+        // GET: TblAlumnoContactoes/Create
         public IActionResult Create()
         {
-            List<TblCliente> ListaCliente = new List<TblCliente>();
-            ListaCliente = (from c in _context.TblClientes select c).Distinct().ToList();
-            ViewBag.ListaCliente = ListaCliente;
+            List<TblAlumno> ListaAlumno = new List<TblAlumno>();
+            ListaAlumno = (from c in _context.TblAlumnos select c).Distinct().ToList();
+            ViewBag.ListaAlumno = ListaAlumno;
 
             List<CatPerfil> ListaPerfil = new List<CatPerfil>();
             ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
@@ -154,32 +154,32 @@ namespace WebAdmin.Controllers
             return View();
         }
 
-        // POST: TblClienteContactoes/Create
+        // POST: TblAlumnoContactoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdClienteContacto,NombreClienteContacto,CorreoElectronico,Telefono,TelefonoMovil,IdCliente,IdPerfil")] TblClienteContacto tblClienteContacto)
+        public async Task<IActionResult> Create([Bind("IdAlumnoContacto,NombreAlumnoContacto,CorreoElectronico,Telefono,TelefonoMovil,IdAlumno,IdPerfil")] TblAlumnoContacto tblAlumnoContacto)
         {
             if (ModelState.IsValid)
             {
-                var DuplicadosEstatus = _context.TblClienteContactos
-                       .Where(s => s.NombreClienteContacto == tblClienteContacto.NombreClienteContacto)
+                var DuplicadosEstatus = _context.TblAlumnoContactos
+                       .Where(s => s.NombreAlumnoContacto == tblAlumnoContacto.NombreAlumnoContacto)
                        .ToList();
 
                 if (DuplicadosEstatus.Count == 0)
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblClienteContacto.IdUsuarioModifico = Guid.Parse(fuser);
-                    var fCliente = (from c in _context.TblClientes where c.IdCliente == tblClienteContacto.IdCliente select c).Distinct().ToList();
-                    var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblClienteContacto.IdPerfil select c).Distinct().ToList();
-                    tblClienteContacto.NombreClienteContacto = tblClienteContacto.NombreClienteContacto.ToString().ToUpper();
-                    tblClienteContacto.FechaRegistro = DateTime.Now;
-                    tblClienteContacto.IdEstatusRegistro = 1;
+                    tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(fuser);
+                    var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoContacto.IdAlumno select c).Distinct().ToList();
+                    var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblAlumnoContacto.IdPerfil select c).Distinct().ToList();
+                    tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper();
+                    tblAlumnoContacto.FechaRegistro = DateTime.Now;
+                    tblAlumnoContacto.IdEstatusRegistro = 1;
 
                     _context.SaveChanges();
-                    _context.Add(tblClienteContacto);
+                    _context.Add(tblAlumnoContacto);
                     await _context.SaveChangesAsync();
                     _notyf.Success("Registro creado con éxito", 5);
                 }
@@ -190,15 +190,15 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblClienteContacto);
+            return View(tblAlumnoContacto);
         }
 
-        // GET: TblClienteContactoes/Edit/5
+        // GET: TblAlumnoContactoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            List<TblCliente> ListaCliente = new List<TblCliente>();
-            ListaCliente = (from c in _context.TblClientes select c).Distinct().ToList();
-            ViewBag.ListaCliente = ListaCliente;
+            List<TblAlumno> ListaAlumno = new List<TblAlumno>();
+            ListaAlumno = (from c in _context.TblAlumnos select c).Distinct().ToList();
+            ViewBag.ListaAlumno = ListaAlumno;
 
             List<CatPerfil> ListaPerfil = new List<CatPerfil>();
             ListaPerfil = (from c in _context.CatPerfiles select c).Distinct().ToList();
@@ -213,22 +213,22 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblClienteContacto = await _context.TblClienteContactos.FindAsync(id);
-            if (tblClienteContacto == null)
+            var tblAlumnoContacto = await _context.TblAlumnoContactos.FindAsync(id);
+            if (tblAlumnoContacto == null)
             {
                 return NotFound();
             }
-            return View(tblClienteContacto);
+            return View(tblAlumnoContacto);
         }
 
-        // POST: TblClienteContactoes/Edit/5
+        // POST: TblAlumnoContactoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdClienteContacto,NombreClienteContacto,CorreoElectronico,Telefono,TelefonoMovil,IdCliente,IdPerfil,IdEstatusRegistro")] TblClienteContacto tblClienteContacto)
+        public async Task<IActionResult> Edit(int id, [Bind("IdAlumnoContacto,NombreAlumnoContacto,CorreoElectronico,Telefono,TelefonoMovil,IdAlumno,IdPerfil,IdEstatusRegistro")] TblAlumnoContacto tblAlumnoContacto)
         {
-            if (id != tblClienteContacto.IdClienteContacto)
+            if (id != tblAlumnoContacto.IdAlumnoContacto)
             {
                 return NotFound();
             }
@@ -239,20 +239,20 @@ namespace WebAdmin.Controllers
                 {
                     var fuser = _userService.GetUserId();
                     var isLoggedIn = _userService.IsAuthenticated();
-                    tblClienteContacto.IdUsuarioModifico = Guid.Parse(fuser);
-                    var fCliente = (from c in _context.TblClientes where c.IdCliente == tblClienteContacto.IdCliente select c).Distinct().ToList();
-                    var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblClienteContacto.IdPerfil select c).Distinct().ToList();
-                    tblClienteContacto.NombreClienteContacto = tblClienteContacto.NombreClienteContacto.ToString().ToUpper();
-                    tblClienteContacto.FechaRegistro = DateTime.Now;
-                    tblClienteContacto.IdEstatusRegistro = 1;
+                    tblAlumnoContacto.IdUsuarioModifico = Guid.Parse(fuser);
+                    var fAlumno = (from c in _context.TblAlumnos where c.IdAlumno == tblAlumnoContacto.IdAlumno select c).Distinct().ToList();
+                    var fPerfil = (from c in _context.CatPerfiles where c.IdPerfil == tblAlumnoContacto.IdPerfil select c).Distinct().ToList();
+                    tblAlumnoContacto.NombreAlumnoContacto = tblAlumnoContacto.NombreAlumnoContacto.ToString().ToUpper();
+                    tblAlumnoContacto.FechaRegistro = DateTime.Now;
+                    tblAlumnoContacto.IdEstatusRegistro = 1;
 
-                    _context.Update(tblClienteContacto);
+                    _context.Update(tblAlumnoContacto);
                     await _context.SaveChangesAsync();
                     _notyf.Warning("Registro actualizado con éxito", 5);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblClienteContactoExists(tblClienteContacto.IdClienteContacto))
+                    if (!TblAlumnoContactoExists(tblAlumnoContacto.IdAlumnoContacto))
                     {
                         return NotFound();
                     }
@@ -263,10 +263,10 @@ namespace WebAdmin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblClienteContacto);
+            return View(tblAlumnoContacto);
         }
 
-        // GET: TblClienteContactoes/Delete/5
+        // GET: TblAlumnoContactoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -274,32 +274,32 @@ namespace WebAdmin.Controllers
                 return NotFound();
             }
 
-            var tblClienteContacto = await _context.TblClienteContactos
-                .FirstOrDefaultAsync(m => m.IdClienteContacto == id);
-            if (tblClienteContacto == null)
+            var tblAlumnoContacto = await _context.TblAlumnoContactos
+                .FirstOrDefaultAsync(m => m.IdAlumnoContacto == id);
+            if (tblAlumnoContacto == null)
             {
                 return NotFound();
             }
 
-            return View(tblClienteContacto);
+            return View(tblAlumnoContacto);
         }
 
-        // POST: TblClienteContactoes/Delete/5
+        // POST: TblAlumnoContactoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblClienteContacto = await _context.TblClienteContactos.FindAsync(id);
-            tblClienteContacto.IdEstatusRegistro = 2;
+            var tblAlumnoContacto = await _context.TblAlumnoContactos.FindAsync(id);
+            tblAlumnoContacto.IdEstatusRegistro = 2;
             _context.SaveChanges();
             await _context.SaveChangesAsync();
             _notyf.Error("Registro desactivado con éxito", 5);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TblClienteContactoExists(int id)
+        private bool TblAlumnoContactoExists(int id)
         {
-            return _context.TblClienteContactos.Any(e => e.IdClienteContacto == id);
+            return _context.TblAlumnoContactos.Any(e => e.IdAlumnoContacto == id);
         }
     }
 }

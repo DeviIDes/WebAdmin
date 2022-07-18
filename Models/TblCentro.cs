@@ -50,7 +50,8 @@ namespace WebAdmin.Models
 
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
-
+        [Display(Name = "Corporativo")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCorporativo { get; set; }
 
         [Display(Name = "Usuario Modifico")]

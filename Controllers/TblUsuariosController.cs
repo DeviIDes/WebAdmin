@@ -174,7 +174,7 @@ namespace WebAdmin.Controllers
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
                     tblUsuario.IdCorporativo = idCorporativos.IdCorporativo;
-                    tblUsuario.NombreEmpresa = idCorporativos.NombreCorporativo;
+                    tblUsuario.NombreUsuario = idCorporativos.NombreCorporativo;
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();
@@ -252,7 +252,7 @@ namespace WebAdmin.Controllers
                     tblUsuario.FechaRegistro = DateTime.Now;
                     tblUsuario.IdEstatusRegistro = 1;
                     tblUsuario.IdCorporativo = idCorporativos.IdCorporativo;
-                    tblUsuario.NombreEmpresa = idCorporativos.NombreCorporativo;
+                    tblUsuario.NombreUsuario = idCorporativos.NombreCorporativo;
                     tblUsuario.Nombres = tblUsuario.Nombres.ToUpper();
                     tblUsuario.ApellidoPaterno = tblUsuario.ApellidoPaterno.ToUpper();
                     tblUsuario.ApellidoMaterno = tblUsuario.ApellidoMaterno.ToUpper();

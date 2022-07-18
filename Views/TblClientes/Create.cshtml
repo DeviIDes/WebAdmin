@@ -1,4 +1,4 @@
-﻿@model WebAdmin.Models.TblCliente
+﻿@model WebAdmin.Models.TblAlumno
 
 @{
     ViewData["Title"] = "Crear Proveedor";
@@ -9,8 +9,8 @@
         
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Empresa</li>
-        <li class="breadcrumb-item">Control de Cliente</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Cliente</li>
+        <li class="breadcrumb-item">Control de Alumno</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Alumno</li>
     </ol>
 </nav>
 <hr />
@@ -22,44 +22,36 @@
 
         <div class="col-md-2">
             <div class="form-group">
-                <label asp-for="IdTipoCliente" class="control-label"></label>
-                <select id="drpTipoCliente" class="form-select" asp-for="IdTipoCliente" asp-items="@(new SelectList(ViewBag.ListaTipoClientes,"IdTipoCliente","TipoClienteDesc"))">
+                <label asp-for="IdTipoAlumno" class="control-label"></label>
+                <select id="drpTipoAlumno" class="form-select" required asp-for="IdTipoAlumno" asp-items="@(new SelectList(ViewBag.ListaTipoAlumnos,"IdTipoAlumno","TipoAlumnoDesc"))">
                     <option value="">SELECCIONAR</option>
                 </select>
-                <span asp-validation-for="IdTipoCliente" class="text-danger"></span>
             </div>
-            
         </div>
              <div class="col-md-2">
                 <div class="form-group">
-                    <label asp-for="NombreCliente" class="control-label"></label>
-                    <input style="text-transform:uppercase" asp-for="NombreCliente" class="form-control" />
-                    <span asp-validation-for="NombreCliente" class="text-danger"></span>
+                    <label asp-for="NombreAlumno" class="control-label"></label>
+                    <input style="text-transform:uppercase" asp-for="NombreAlumno" class="form-control" required />
                 </div>
             </div>
        <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoPaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="ApellidoPaterno" class="form-control" />
+                <input style="text-transform:uppercase" asp-for="ApellidoPaterno" class="form-control" required />
                 <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
                 <label asp-for="ApellidoMaterno" class="control-label"></label>
-                <input style="text-transform:uppercase" asp-for="ApellidoMaterno" class="form-control" />
-                <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+                <input style="text-transform:uppercase" asp-for="ApellidoMaterno" class="form-control" required/>
             </div>
         </div>
          <div class="col-md-3">
             <label asp-for="CorreoAcceso" class="control-label"></label>
             <div class="input-group">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" onclick="">Generar</button>
-                </div>
                 <input type="email" asp-for="CorreoAcceso" class="form-control" id="iCorreoAcceso" aria-describedby="basic-addon2">
             </div>
-            <span asp-validation-for="CorreoAcceso" class="text-danger"></span>
         </div>
     </div>
         <br />

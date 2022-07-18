@@ -1,6 +1,6 @@
-﻿@model WebAdmin.Models.TblClienteDireccion
+﻿@model WebAdmin.Models.TblAlumnoDireccion
 @{
-    ViewData["Title"] = "Crear Cliente Direcciones";
+    ViewData["Title"] = "Crear Alumno Direcciones";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <nav aria-label="breadcrumb">
@@ -9,7 +9,7 @@
         <li class="breadcrumb-item">Información</li>
         <li class="breadcrumb-item">Empresa</li>
         <li class="breadcrumb-item">Control de Proveedor</li>
-        <li class="breadcrumb-item active" aria-current="page">Crear Cliente Direcciones</li>
+        <li class="breadcrumb-item active" aria-current="page">Crear Alumno Direcciones</li>
     </ol>
 </nav>
 <hr />
@@ -22,11 +22,11 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="IdCliente" class="control-label"></label>
-                    <select id="idListaProveedor" class="form-select statesSelect" asp-for="IdCliente" asp-items="@(new SelectList(ViewBag.ListaCliente,"IdCliente","NombreCliente"))">
+                    <label asp-for="IdAlumno" class="control-label"></label>
+                    <select id="idListaProveedor" class="form-select statesSelect" asp-for="IdAlumno" asp-items="@(new SelectList(ViewBag.ListaAlumno,"IdAlumno","NombreAlumno"))">
                         <option value="">SELECCIONAR</option>
                     </select>
-                    <span asp-validation-for="IdCliente" class="text-danger"></span>
+                    <span asp-validation-for="IdAlumno" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">

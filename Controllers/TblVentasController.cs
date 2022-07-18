@@ -150,12 +150,12 @@ namespace WebAdmin.Controllers
             List<CatTipoPago> ListaTipoPago = new List<CatTipoPago>();
             ListaTipoPago = (from c in _context.CatTipoPago select c).Distinct().ToList();
             ViewBag.ListaTipoPago = ListaTipoPago;
-            var fUsuariosCentros = from a in _context.TblClientes
+            var fUsuariosCentros = from a in _context.TblAlumnos
                                        //    where a.IdPerfil == 3 && a.IdRol == 2
                                    select new TblUsuario
                                    {
-                                       IdUsuario = a.IdCliente,
-                                       NombreUsuario = a.NombreCliente + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
+                                       IdUsuario = a.IdAlumno,
+                                       NombreUsuario = a.NombreAlumno + " " + a.ApellidoPaterno + " " + a.ApellidoMaterno,
 
                                    };
             TempData["Mpps"] = fUsuariosCentros.ToList();
@@ -169,7 +169,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdVenta,IdUsuarioVenta,IdCliente,Descuento,IdTipoPago,FechaAlterna")] TblVenta tblVenta, RelVentaProducto[] VentaProductos)
+        public async Task<IActionResult> Create([Bind("IdVenta,IdUsuarioVenta,IdAlumno,Descuento,IdTipoPago,FechaAlterna")] TblVenta tblVenta, RelVentaProducto[] VentaProductos)
         {
             if (ModelState.IsValid)
             {
@@ -231,7 +231,7 @@ namespace WebAdmin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdVenta,NumeroVenta,IdUsuarioVenta,IdCentro,IdCliente,Descuento,IdTipoPago,FechaAlterna,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] TblVenta tblVenta)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdVenta,NumeroVenta,IdUsuarioVenta,IdCentro,IdAlumno,Descuento,IdTipoPago,FechaAlterna,IdUsuarioModifico,FechaRegistro,IdEstatusRegistro")] TblVenta tblVenta)
         {
             if (id != tblVenta.IdVenta)
             {

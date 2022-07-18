@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public partial class TblClienteDireccion
+    public partial class TblAlumnoDireccion
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdClienteDirecciones { get; set; }
+        public int IdAlumnoDirecciones { get; set; }
 
         [ForeignKey("CatTipoDireccion")]
         [Display(Name = "Tipo Direccion")]
@@ -49,13 +49,13 @@ namespace WebAdmin.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-        [ForeignKey("TblCliente")]
-        [Display(Name = "Cliente")]
-        public Guid IdCliente { get; set; }
+        [ForeignKey("TblAlumno")]
+        [Display(Name = "Alumno")]
+        public Guid IdAlumno { get; set; }
 
         [NotMapped]
-        [Display(Name = "Nombre Cliente")]
-        public string NombreCliente { get; set; }
+        [Display(Name = "Nombre Alumno")]
+        public string NombreAlumno { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }

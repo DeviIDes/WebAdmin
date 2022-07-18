@@ -43,7 +43,7 @@ namespace WebAdmin.Models
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
 
-        [ForeignKey("TblEmpresa")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdEmpresa { get; set; }
 
         [Display(Name = "Usuario Modifico")]

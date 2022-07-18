@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAdmin.Models
 {
-    public partial class TblClienteContacto
+    public partial class TblAlumnoContacto
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdClienteContacto { get; set; }
+        public int IdAlumnoContacto { get; set; }
 
         [Display(Name = "Perfil")]
         [Required(ErrorMessage = "Campo Requerido")]
@@ -22,7 +22,7 @@ namespace WebAdmin.Models
 
         [Display(Name = "Nombre Contacto")]
         [Required(ErrorMessage = "Campo Requerido")]
-        public string NombreClienteContacto { get; set; }
+        public string NombreAlumnoContacto { get; set; }
 
         [Display(Name = "Correo Electronico")]
         [Required(ErrorMessage = "Campo Requerido")]
@@ -34,12 +34,12 @@ namespace WebAdmin.Models
         [Display(Name = "Telefono Movil")]
         public string TelefonoMovil { get; set; }
 
-        [ForeignKey("TblCliente")]
-        public Guid IdCliente { get; set; }
+        [ForeignKey("TblAlumno")]
+        public Guid IdAlumno { get; set; }
 
         [NotMapped]
-        [Display(Name = "Nombre Cliente")]
-        public string NombreCliente { get; set; }
+        [Display(Name = "Nombre Alumno")]
+        public string NombreAlumno { get; set; }
 
         [Display(Name = "Usuario Modifico")]
         public Guid IdUsuarioModifico { get; set; }

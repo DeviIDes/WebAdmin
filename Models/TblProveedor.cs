@@ -22,7 +22,8 @@ namespace WebAdmin.Models
         [Display(Name = "Giro Comercial")]
         public string GiroComercial { get; set; }
 
-        [ForeignKey("TblCorporativo")]
+        [Display(Name = "Corporativo / Centro")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public Guid IdCorporativo { get; set; }
 
         [Display(Name = "Usuario Modifico")]
